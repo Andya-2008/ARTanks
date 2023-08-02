@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 using TMPro;
+using UnityEngine.Rendering;
+using UnityEngine.UIElements;
+
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class ImageTracking : MonoBehaviour
 {
@@ -14,9 +17,13 @@ public class ImageTracking : MonoBehaviour
 
     private ARTrackedImageManager trackedImageManager;
 
+    float startTime;
+    bool started;
+    GameObject prefab;
+
+    ARTrackedImage trackImage;
     private void Awake()
     {
-        DebugTxt("S");
         trackedImageManager = FindFirstObjectByType<ARTrackedImageManager>();
         /*
         foreach (GameObject prefab in placeablePrefabs)
@@ -27,7 +34,9 @@ public class ImageTracking : MonoBehaviour
         }
         */
     }
-
+    private void Update()
+    {
+    }
     private void OnEnable()
     {
         trackedImageManager.trackedImagesChanged += ImageChanged;
@@ -44,59 +53,33 @@ public class ImageTracking : MonoBehaviour
         {
             UpdateImage(trackedImage);
         }
-        /*
-        foreach (ARTrackedImage trackedImage in eventArgs.updated)
-        {
-            UpdateImage(trackedImage);
-        }
-        */
-        /*
-        foreach (ARTrackedImage trackedImage in eventArgs.removed)
-        {
-            spawnedPrefabs[trackedImage.name].SetActive(false);
-        }
-        */
     }
 
     private void UpdateImage(ARTrackedImage trackedImage)
     {
-        DebugTxt("1");
+        trackImage = trackedImage;
         string name = trackedImage.referenceImage.name;
         if (!spawnedPrefabs.ContainsKey(name))
         {
-            DebugTxt("2");
             Vector3 position = trackedImage.transform.position;
             GameObject pf = new GameObject();
-            DebugTxt("3");
             foreach (GameObject go in placeablePrefabs)
             {
                 if (go.name == name)
                 {
-                    DebugTxt("4");
                     pf = go;
                 }
             }
-                DebugTxt("5");
-                GameObject prefab = Instantiate(pf.gameObject, Vector3.zero, Quaternion.identity);
-                DebugTxt("6");
-                prefab.name = pf.name;
-                DebugTxt("7");
-                spawnedPrefabs.Add(pf.name, prefab);
-                prefab.transform.position = position;
-                DebugTxt("8");
-                prefab.SetActive(true);
-                DebugTxt("9");
-            
-            /*
-            foreach(GameObject go in spawnedPrefabs.Values)
-            {
-                if (go.name != name)
-                {
-                    go.SetActive(false);
-                }
-            }
-            */
+            prefab = Instantiate(pf.gameObject, Vector3.zero, Quaternion.identity);
+            prefab.name = pf.name;
+            spawnedPrefabs.Add(pf.name, prefab);
+            prefab.SetActive(true);
+            prefab.transform.position = trackedImage.transform.position;
+            DebugTxt(prefab.transform.position.ToString() + "\n\n");
+            DebugTxt(trackedImage.transform.position.ToString());
+
         }
+        
     }
     public void DebugTxt(string txt)
     {
