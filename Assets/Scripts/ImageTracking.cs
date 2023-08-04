@@ -6,6 +6,7 @@ using UnityEngine.XR.ARFoundation;
 using TMPro;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
+using Unity.Netcode;
 
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class ImageTracking : MonoBehaviour
@@ -20,8 +21,10 @@ public class ImageTracking : MonoBehaviour
     float startTime;
     bool started;
     GameObject prefab;
+    private string strDebug = "";
 
     ARTrackedImage trackImage;
+    private GameObject battleField;
     private void Awake()
     {
         trackedImageManager = FindFirstObjectByType<ARTrackedImageManager>();
@@ -62,6 +65,7 @@ public class ImageTracking : MonoBehaviour
         if (!spawnedPrefabs.ContainsKey(name))
         {
             Vector3 position = trackedImage.transform.position;
+            
             GameObject pf = new GameObject();
             foreach (GameObject go in placeablePrefabs)
             {
@@ -70,14 +74,30 @@ public class ImageTracking : MonoBehaviour
                     pf = go;
                 }
             }
-            prefab = Instantiate(pf.gameObject, Vector3.zero, Quaternion.identity);
+            if (pf.tag != "Battlefield")
+            {
+
+                Vector3 pos = trackedImage.transform.position - battleField.transform.position;
+                prefab = Instantiate(pf, pos, Quaternion.identity, battleField.transform);
+                prefab.GetComponent<NetworkObject>().Spawn();
+                strDebug += "\n" + name + ":" + position.ToString() + "\n" + "pos:" + pos.ToString() + "\nTrackedImage:" + trackedImage.transform.position.ToString() + "\nBattlefield: " + battleField.transform.position.ToString();
+
+            }
+            if (pf.tag == "Battlefield")
+            {
+                
+                prefab = Instantiate(pf, trackedImage.transform.position, Quaternion.identity);
+                battleField = prefab;
+                strDebug += "\n" + name + ":" + position.ToString() + "\nTrackedImage:" + trackedImage.transform.position.ToString() + "\nBattlefield: " + battleField.transform.position.ToString();
+
+            }
+
             prefab.name = pf.name;
             spawnedPrefabs.Add(pf.name, prefab);
             prefab.SetActive(true);
-            prefab.transform.position = trackedImage.transform.position;
-            DebugTxt(prefab.transform.position.ToString() + "\n\n");
-            DebugTxt(trackedImage.transform.position.ToString());
-
+            //prefab.transform.position = trackedImage.transform.position;
+            DebugTxt(strDebug);
+            
         }
         
     }

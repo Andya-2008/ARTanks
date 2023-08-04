@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tank
   - Rock
+  - Battlefield
   layers:
   - Default
   - TransparentFX

@@ -5188,9 +5188,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7103461460280297824}
   - component: {fileID: 3675624731335750132}
+  - component: {fileID: 1838712513813817727}
   m_Layer: 0
   m_Name: Battlefield
-  m_TagString: Untagged
+  m_TagString: Battlefield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5223,6 +5224,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3dbf7aaf852bf4e976399660af07df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1838712513813817727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7140008214666741525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb898793194e03f4bb10dba03ec2cb70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DestroyOnRemoval: 1
 --- !u!1 &7158934665041227628
 GameObject:
   m_ObjectHideFlags: 0
