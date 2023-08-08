@@ -43,6 +43,7 @@ namespace Complete
             {
                 m_particleSystems[i].Play();
             }
+           
         }
 
 
@@ -75,7 +76,7 @@ namespace Complete
             // Store the value of both input axes.
             m_MovementInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Vertical;
             m_TurnInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Horizontal;
-            Debug.Log(m_MovementInputValue);
+
             EngineAudio ();
         }
 
