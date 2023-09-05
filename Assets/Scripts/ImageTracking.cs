@@ -37,9 +37,7 @@ public class ImageTracking : NetworkBehaviour
     }
     private void Update()
     {
-
-        
-        DebugTxt(strDebug);
+        DebugTxt("Prefab Local Pos: " + prefab.transform.localPosition.ToString());
     }
     private void OnEnable()
     {
@@ -151,8 +149,8 @@ public class ImageTracking : NetworkBehaviour
         GameObject pf = placeablePrefabs[prefabId];
         Debug.Log("spsr Instantiate:" + name);
         prefab = Instantiate(pf, trackedImagePos, Quaternion.identity);
-        Vector3 prefabLocalPos = trackedImagePos - battleField.transform.position;
-        
+        //Vector3 prefabLocalPos = trackedImagePos - battleField.transform.position;
+
         prefab.name = pf.name;
         prefab.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
 
@@ -165,7 +163,8 @@ public class ImageTracking : NetworkBehaviour
         Debug.Log("Added to SpawnedPrefabs:" + name);
         spawnedPrefabs.Add(name, prefab);
         prefab.transform.parent = GameObject.Find("Battlefield1").transform;
-        prefab.transform.localPosition = prefabLocalPos;
+        //prefab.transform.localPosition = prefabLocalPos;
+        //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
         Vector3 pos = trackedImagePos - battleField.transform.position;
         Debug.Log(name + ":" + trackedImagePos.ToString() + "\n" + "pos:" + pos.ToString() + "\nTrackedImage:" + trackedImagePos.ToString() + "\nBattlefield:" + battleField.transform.position.ToString());
     }
