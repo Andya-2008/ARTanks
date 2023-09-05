@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 7103461460280297824}
   - component: {fileID: 3675624731335750132}
   - component: {fileID: 1838712513813817727}
+  - component: {fileID: -1781091014970908334}
   m_Layer: 0
   m_Name: Battlefield1
   m_TagString: Battlefield
@@ -336,6 +337,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DestroyOnRemoval: 1
+--- !u!114 &-1781091014970908334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7140008214666741525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 1
+  AutoObjectParentSync: 1
 --- !u!1 &7420329257489707699
 GameObject:
   m_ObjectHideFlags: 0

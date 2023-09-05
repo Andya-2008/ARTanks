@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class TankPlayer : MonoBehaviour
+using Unity.Netcode;
+public class TankPlayer : NetworkBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,12 @@ public class TankPlayer : MonoBehaviour
     void Update()
     {
 
+    }
+    public override void OnNetworkSpawn()
+    {
+        if(NetworkObject.IsOwner)
+        {
+            this.gameObject.tag = "MyTank";
+        }
     }
 }

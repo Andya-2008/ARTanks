@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Complete;
+using Unity.Netcode;
 public class ShootButton : MonoBehaviour
 {
+    public GameObject myTank;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,6 @@ public class ShootButton : MonoBehaviour
 
     public void TankShootButton()
     {
-        GameObject.FindGameObjectWithTag("Tank").GetComponent<TankShooting>().Fire();
+        GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankShooting>().Fire();
     }
 }

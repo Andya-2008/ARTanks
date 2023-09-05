@@ -55,6 +55,7 @@ namespace Complete
             if (m_CurrentHealth <= 0f && !m_Dead)
             {
                 OnDeath ();
+                GameObject.Find("GameManager").GetComponent<GameManager>().GameOverInitiate(GetComponent<TankMovement>().m_PlayerNumber);
             }
         }
 

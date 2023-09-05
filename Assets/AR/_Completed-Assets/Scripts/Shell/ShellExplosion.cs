@@ -11,7 +11,7 @@ namespace Complete
         public float m_ExplosionForce = 1000f;              // The amount of force added to a tank at the centre of the explosion.
         public float m_MaxLifeTime = 2f;                    // The time in seconds before the shell is removed.
         public float m_ExplosionRadius = 5f;                // The maximum distance away from the explosion tanks can be and are still affected.
-
+        [SerializeField] int player;
 
         private void Start ()
         {
@@ -22,7 +22,7 @@ namespace Complete
 
         private void OnTriggerEnter (Collider other)
         {
-            if (other.gameObject.tag != "Tank")
+            if (!other.gameObject.tag.Contains(player.ToString()))
             {
                 Debug.Log("Bullet collided with " + other.name);
                 // Collect all the colliders in a sphere from the shell's current position to a radius of the explosion radius.
@@ -37,6 +37,7 @@ namespace Complete
                     // If they don't have a rigidbody, go on to the next collider.
                     if (!targetRigidbody)
                         continue;
+
 
                     // Add an explosion force.
                     targetRigidbody.AddExplosionForce(m_ExplosionForce, transform.position, m_ExplosionRadius);
@@ -70,12 +71,12 @@ namespace Complete
 
                 // Destroy the shell.
                 Destroy(gameObject);
-                if(other.gameObject.tag == "Rock")
+
+                if (other.gameObject.tag == "Rock")
                 {
                     Destroy(other.gameObject);
                 }
             }
-            
         }
 
 

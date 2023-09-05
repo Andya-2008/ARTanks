@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Tank
   - Rock
   - Battlefield
+  - Tank
+  - MyTank
   layers:
   - Default
   - TransparentFX
