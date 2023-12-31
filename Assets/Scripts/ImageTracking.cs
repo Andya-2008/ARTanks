@@ -55,15 +55,12 @@ public class ImageTracking : NetworkBehaviour
        
         foreach (ARTrackedImage trackedImage in eventArgs.added)
         { 
-            Debug.Log("add TrackedImage:" + trackedImage.referenceImage.name);
             if (spawnedPrefabs.ContainsKey(trackedImage.referenceImage.name)) { return; }
-            Debug.Log("adding TrackedImage:" + trackedImage.referenceImage.name);
             StartCoroutine(CreateObject(trackedImage));
         }
 
         foreach (ARTrackedImage trackedImage in eventArgs.updated)
         {
-            Debug.Log("update TrackedImage:" + trackedImage.referenceImage.name);
             if (trackedImage.referenceImage.name.Contains("Battlefield"))
             {
                 updateObject(trackedImage);
@@ -77,9 +74,7 @@ public class ImageTracking : NetworkBehaviour
     }
 
     private void updateObject(ARTrackedImage trackedImage) {
-        Debug.Log("updateObject");
         if (GameObject.FindGameObjectWithTag("Battlefield")) {
-            Debug.Log("Found Battlefield");
             battleField = GameObject.FindGameObjectWithTag("Battlefield");
             battleField.transform.position = trackedImage.transform.position;
             battleField.transform.rotation = trackedImage.transform.rotation;
@@ -87,7 +82,6 @@ public class ImageTracking : NetworkBehaviour
         }
     }
     IEnumerator CreateObject(ARTrackedImage trackedImage) {
-        Debug.Log("CreateObject");
         while (trackedImage.trackingState != TrackingState.Tracking) {
             yield return null;
         }
@@ -108,7 +102,6 @@ public class ImageTracking : NetworkBehaviour
                 prefabId = placeablePrefabs.IndexOf(go);
             }
         }
-        Debug.Log(name + ":" + trackedImage.transform.position);
         if (pf.tag != "Battlefield")
         {
             SpawnPlayerServerRpc(name, trackedImage.transform.position, prefabId);
@@ -120,12 +113,10 @@ public class ImageTracking : NetworkBehaviour
             {
                 Quaternion worldRotation = new Quaternion(trackedImage.transform.localRotation.x, trackedImage.transform.localRotation.y, trackedImage.transform.localRotation.z, trackedImage.transform.localRotation.w);
                 //worldRotation *= Quaternion.Euler(90, 0, 0);
-                Debug.Log("Instantiate:" + name);
                 prefab = Instantiate(pf, trackedImage.transform.position, worldRotation);
                 battleField = prefab;
 
                 prefab.name = pf.name;
-                Debug.Log("Added to SpawnedPrefabs:" + name);
                 spawnedPrefabs.Add(name, prefab);
                 prefab.SetActive(true);
 
@@ -144,10 +135,8 @@ public class ImageTracking : NetworkBehaviour
     {
         if (!IsServer) { return; }
         if (battleField == null) { return; }
-        Debug.Log("SpawnPlayerServerRpc");
         var clientId = serverRpcParams.Receive.SenderClientId;
         GameObject pf = placeablePrefabs[prefabId];
-        Debug.Log("spsr Instantiate:" + name);
         prefab = Instantiate(pf, trackedImagePos, Quaternion.identity);
         //Vector3 prefabLocalPos = trackedImagePos - battleField.transform.position;
 
@@ -160,12 +149,10 @@ public class ImageTracking : NetworkBehaviour
         netObj.SpawnWithOwnership(clientId, true);
         // netObj.SpawnAsPlayerObject(clientId, true);
 
-        Debug.Log("Added to SpawnedPrefabs:" + name);
         spawnedPrefabs.Add(name, prefab);
         prefab.transform.parent = GameObject.Find("Battlefield1").transform;
         //prefab.transform.localPosition = prefabLocalPos;
         //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
         Vector3 pos = trackedImagePos - battleField.transform.position;
-        Debug.Log(name + ":" + trackedImagePos.ToString() + "\n" + "pos:" + pos.ToString() + "\nTrackedImage:" + trackedImagePos.ToString() + "\nBattlefield:" + battleField.transform.position.ToString());
     }
 }

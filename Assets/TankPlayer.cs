@@ -20,6 +20,7 @@ public class TankPlayer : NetworkBehaviour
         if(NetworkObject.IsOwner)
         {
             this.gameObject.tag = "MyTank";
+            this.gameObject.layer = 6;
         }
     }
 }

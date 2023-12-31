@@ -1976,7 +1976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugText: {fileID: 854074442}
   placeablePrefabs:
-  - {fileID: 7140008214666741525, guid: 0a581d50cb381ee4b8befba4836cf7ff, type: 3}
+  - {fileID: 6477736626050748578, guid: 0a581d50cb381ee4b8befba4836cf7ff, type: 3}
   - {fileID: 3938917339462676585, guid: f06c51a171f70b04b9d61acacc57a40b, type: 3}
   - {fileID: 5536479652835100992, guid: 61cbcfe8623a0a342990e91a82104806, type: 3}
   - {fileID: 4870150185352478298, guid: db5d1aaef0b848b46adf62a1a43003c3, type: 3}

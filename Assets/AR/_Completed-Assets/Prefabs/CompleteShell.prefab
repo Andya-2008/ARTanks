@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4263594564915871736}
   - component: {fileID: 7358023210643773766}
   - component: {fileID: -9109623744721852732}
-  - component: {fileID: -7040101714024276079}
+  - component: {fileID: -4976625162778081343}
   m_Layer: 0
   m_Name: CompleteShell
   m_TagString: Untagged
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_ExplosionForce: 10
   m_MaxLifeTime: 10
   m_ExplosionRadius: 5
+  player: 0
 --- !u!114 &7358023210643773766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,13 +262,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 951099334
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
+  SynchronizeTransform: 0
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-7040101714024276079
+--- !u!114 &-4976625162778081343
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,9 +280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
+  SyncPositionX: 0
+  SyncPositionY: 0
+  SyncPositionZ: 0
   SyncRotAngleX: 0
   SyncRotAngleY: 0
   SyncRotAngleZ: 0
@@ -294,7 +295,7 @@ MonoBehaviour:
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
-  InLocalSpace: 0
+  InLocalSpace: 1
   Interpolate: 1
   SlerpPosition: 0
 --- !u!1 &1323183458184705707

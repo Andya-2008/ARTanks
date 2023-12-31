@@ -55,7 +55,7 @@ namespace Complete
             if (m_CurrentHealth <= 0f && !m_Dead)
             {
                 OnDeath ();
-                GameObject.Find("GameManager").GetComponent<GameManager>().GameOverInitiate(GetComponent<TankMovement>().m_PlayerNumber);
+                
             }
         }
 
@@ -75,6 +75,7 @@ namespace Complete
             // Set the flag so that this function is only called once.
             m_Dead = true;
 
+            GameObject.Find("GameManager").GetComponent<GameManager>().GameOverInitiate(GetComponent<TankMovement>().m_PlayerNumber);
             // Move the instantiated explosion prefab to the tank's position and turn it on.
             m_ExplosionParticles.transform.position = transform.position;
             m_ExplosionParticles.gameObject.SetActive (true);
