@@ -22,5 +22,6 @@ public class TankPlayer : NetworkBehaviour
             this.gameObject.tag = "MyTank";
             this.gameObject.layer = 6;
         }
+        this.gameObject.transform.parent = GameObject.Find("Battlefield1").transform;
     }
 }
