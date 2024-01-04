@@ -38,7 +38,24 @@ public class ImageTracking : NetworkBehaviour
     }
     private void Update()
     {
-        DebugTxt("Prefab Local Pos: " + prefab.transform.localPosition.ToString());
+        string strDebug = "";
+        if ( battleField!=null)
+        {
+            strDebug += "battlefield:" + battleField.transform.position + "\n";
+        }
+
+        GameObject mytank = GameObject.FindGameObjectWithTag("MyTank");
+        if ( mytank!=null)
+        {
+            strDebug += "MyTank:" + mytank.transform.position + "\n";
+        }
+
+        GameObject[] gotanks = GameObject.FindGameObjectsWithTag("Tank");
+        foreach (GameObject go in gotanks) {
+            strDebug += "Tank:" + go.transform.position + "\n";
+        }
+
+        DebugTxt(strDebug);
     }
     private void OnEnable()
     {
