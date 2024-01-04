@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 public class TankPlayer : NetworkBehaviour
 {
+    Vector3 origLocalPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +24,8 @@ public class TankPlayer : NetworkBehaviour
             this.gameObject.layer = 6;
         }
         this.gameObject.transform.parent = GameObject.Find("Battlefield1").transform;
+        origLocalPos = GameObject.Find("XR Origin").GetComponent<ImageTracking>().localpos;
+        this.gameObject.transform.localPosition = origLocalPos;
+        this.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 }

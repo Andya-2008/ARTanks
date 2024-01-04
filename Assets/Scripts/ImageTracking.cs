@@ -28,6 +28,7 @@ public class ImageTracking : NetworkBehaviour
     GameObject prefab;
     private string strDebug = "";
     private string tiDebug = "";
+    public Vector3 localpos;
 
     ARTrackedImage trackImage;
     public GameObject battleField;
@@ -104,6 +105,7 @@ public class ImageTracking : NetworkBehaviour
         }
         if (pf.tag != "Battlefield")
         {
+            localpos =  worldToLocal(trackedImage.transform.position, battleField.transform);
             SpawnPlayerServerRpc(name, trackedImage.transform.position, prefabId);
  
         }
@@ -154,5 +156,14 @@ public class ImageTracking : NetworkBehaviour
         //prefab.transform.localPosition = prefabLocalPos;
         //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
         Vector3 pos = trackedImagePos - battleField.transform.position;
+    }
+
+    private Vector3 worldToLocal(Vector3 worldpos, Transform battlefield) {
+        return battleField.transform.InverseTransformPoint(worldpos);
+    }
+
+    private Vector3 localToWorld(Vector3 localpos, Transform battlefield)
+    {
+        return battleField.transform.TransformPoint(localpos);
     }
 }
