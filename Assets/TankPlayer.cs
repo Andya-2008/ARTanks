@@ -24,7 +24,7 @@ public class TankPlayer : NetworkBehaviour
             this.gameObject.layer = 6;
         }
         this.gameObject.transform.parent = GameObject.Find("Battlefield1").transform;
-        origLocalPos = GameObject.Find("XR Origin").GetComponent<ImageTracking>().localpos;
+        origLocalPos = GameObject.Find("XR Origin").GetComponent<ImageTracking>().localpos + new Vector3(0,1,0);
         this.gameObject.transform.localPosition = origLocalPos;
         this.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
