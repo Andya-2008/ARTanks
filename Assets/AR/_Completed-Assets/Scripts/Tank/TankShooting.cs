@@ -14,7 +14,7 @@ namespace Complete
         public AudioClip m_ChargingClip;            // Audio that plays when each shot is charging up.
         public AudioClip m_FireClip;                // Audio that plays when each shot is fired.
         public float m_MinLaunchForce = 1f;        // The force given to the shell if the fire button is not held.
-        public float m_MaxLaunchForce = 30f;        // The force given to the shell if the fire button is held for the max charge time.
+        public float m_MaxLaunchForce = 50f;        // The force given to the shell if the fire button is held for the max charge time.
         public float m_MaxChargeTime = 0.75f;       // How long the shell can charge for before it is fired at max force.
 
 
@@ -86,29 +86,28 @@ namespace Complete
         {
             // Set the fired flag so only Fire is only called once.
             m_Fired = true;
-            ShootServerRpc();
-            
+            ShootRpc(this.GetComponent<NetworkObject>().NetworkObjectId);
         }
-        [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
-        public void ShootServerRpc(ServerRpcParams serverRpcParams = default)
+        [Rpc(SendTo.Everyone)] //server owns this object but client can request a spawn
+        public void ShootRpc(ulong objectId)
         {
-            var clientId = serverRpcParams.Receive.SenderClientId;
             Debug.Log("1");
+            Transform tankPos = FindNetworkObject(objectId).gameObject.GetComponent<TankShooting>().m_FireTransform;
             Rigidbody shellInstance =
-                Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
-            Debug.Log("2");
-            shellInstance.GetComponent<NetworkObject>().SpawnWithOwnership(clientId, true);
-            Debug.Log("3");
-            shellInstance.gameObject.layer = 7;
-            // Set the shell's velocity to the launch force in the fire position's forward direction.
-            shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
-            Debug.Log("4");
-            // Change the clip to the firing clip and play it.
-            m_ShootingAudio.clip = m_FireClip;
-            m_ShootingAudio.Play();
+                Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation, GameObject.Find("Battlefield1").transform) as Rigidbody;
+            shellInstance.AddForce(transform.forward * m_MaxLaunchForce * 100 * Time.deltaTime);
+        }
 
-            // Reset the launch force.  This is a precaution in case of missing button events.
-            m_CurrentLaunchForce = m_MinLaunchForce;
+
+        public NetworkObject FindNetworkObject(ulong networkObjectId)
+        {
+            if (NetworkManager.Singleton != null)
+            {
+                NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkObjectId, out NetworkObject networkObject);
+                return networkObject;
+            }
+            return null;
         }
     }
+
 }
