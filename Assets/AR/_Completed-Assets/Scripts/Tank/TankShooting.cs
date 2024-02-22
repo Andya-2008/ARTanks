@@ -95,7 +95,11 @@ namespace Complete
             Transform tankPos = FindNetworkObject(objectId).gameObject.GetComponent<TankShooting>().m_FireTransform;
             Rigidbody shellInstance =
                 Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation, GameObject.Find("Battlefield1").transform) as Rigidbody;
-            shellInstance.AddForce(transform.forward * m_MaxLaunchForce * 100 * Time.deltaTime);
+            if (FindNetworkObject(objectId).gameObject.tag == "MyTank")
+            {
+                m_Shell.gameObject.tag = "MyBullet";
+            }
+                shellInstance.AddForce(transform.forward * m_MaxLaunchForce * 100 * Time.deltaTime);
         }
 
 

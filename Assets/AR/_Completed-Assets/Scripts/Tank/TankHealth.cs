@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
 namespace Complete
 {
-    public class TankHealth : MonoBehaviour
+    public class TankHealth : NetworkBehaviour
     {
         public float m_StartingHealth = 100f;               // The amount of health each tank starts with.
         public Slider m_Slider;                             // The slider to represent how much health the tank currently has.
@@ -43,22 +45,25 @@ namespace Complete
         }
 
 
-        public void TakeDamage (float amount)
+        public void TakeDamage ()
+        {
+            TakeDamageRPC(this.GetComponent<NetworkObject>().NetworkObjectId);
+        }
+        [Rpc(SendTo.Everyone)] //server owns this object but client can request a spawn
+        public void TakeDamageRPC(ulong objectId)
         {
             // Reduce current health by the amount of damage done.
-            m_CurrentHealth -= amount;
+            FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().m_CurrentHealth -= 30f;
 
             // Change the UI elements appropriately.
-            SetHealthUI ();
+            FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().SetHealthUI();
 
             // If the current health is at or below zero and it has not yet been registered, call OnDeath.
-            if (m_CurrentHealth <= 0f && !m_Dead)
+            if (FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().m_CurrentHealth <= 0f && !FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().m_Dead)
             {
-                OnDeath ();
-                
+                FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().OnDeath();
             }
         }
-
 
         private void SetHealthUI ()
         {
@@ -68,7 +73,7 @@ namespace Complete
             // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
             m_FillImage.color = Color.Lerp (m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
         }
-
+        
 
         private void OnDeath ()
         {
@@ -88,6 +93,15 @@ namespace Complete
 
             // Turn the tank off.
             gameObject.SetActive (false);
+        }
+        public NetworkObject FindNetworkObject(ulong networkObjectId)
+        {
+            if (NetworkManager.Singleton != null)
+            {
+                NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkObjectId, out NetworkObject networkObject);
+                return networkObject;
+            }
+            return null;
         }
     }
 }

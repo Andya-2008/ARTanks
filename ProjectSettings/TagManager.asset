@@ -8,6 +8,8 @@ TagManager:
   - Battlefield
   - Tank
   - MyTank
+  - Bullet
+  - MyBullet
   layers:
   - Default
   - TransparentFX
