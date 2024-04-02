@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1902,9 +1902,9 @@ GameObject:
   - component: {fileID: 1809286835}
   - component: {fileID: 1809286834}
   - component: {fileID: 1809286833}
+  - component: {fileID: 1809286838}
   - component: {fileID: 1809286836}
   - component: {fileID: 1809286837}
-  - component: {fileID: 1809286838}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -1983,7 +1983,8 @@ MonoBehaviour:
   - {fileID: 3649103687539561955, guid: 0a60564f5f0869e4bbdd3fad146008c8, type: 3}
   - {fileID: 1210043398161530487, guid: cb54abc339919ae4580335dd1b5a1c96, type: 3}
   - {fileID: 3526172974039210955, guid: c7ef1c0fe6501fe4aab998f960a70765, type: 3}
-  - {fileID: 3599394887167854414, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+  - {fileID: 2902148299265367279, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+  localpos: {x: 0, y: 0, z: 0}
   battleField: {fileID: 0}
 --- !u!114 &1809286837
 MonoBehaviour:
@@ -2013,6 +2014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 2958617082
+  InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
