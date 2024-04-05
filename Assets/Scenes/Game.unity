@@ -1984,6 +1984,7 @@ MonoBehaviour:
   - {fileID: 1210043398161530487, guid: cb54abc339919ae4580335dd1b5a1c96, type: 3}
   - {fileID: 3526172974039210955, guid: c7ef1c0fe6501fe4aab998f960a70765, type: 3}
   - {fileID: 2902148299265367279, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+  - {fileID: 5407763058290175562, guid: 4c6e2d1f9645c594797a39d8d2443ff2, type: 3}
   localpos: {x: 0, y: 0, z: 0}
   battleField: {fileID: 0}
 --- !u!114 &1809286837

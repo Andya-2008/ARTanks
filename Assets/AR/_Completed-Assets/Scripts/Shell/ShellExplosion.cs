@@ -26,30 +26,24 @@ namespace Complete
         {
             if (NetworkManager.Singleton.IsServer)
             {
-                if (other.tag == "Tank")
-                {
-                    other.GetComponent<TankHealth>().TakeDamage();
-                }
+                other.GetComponent<TankHealth>().TakeDamage();
             }
             Debug.Log("Bullet collided with " + other.name);
-            if (other.gameObject.tag != "MyTank" && other.gameObject.tag != "MyBullet")
-            {
-                // Unparent the particles from the shell.
-                m_ExplosionParticles.transform.parent = null;
+            // Unparent the particles from the shell.
+            m_ExplosionParticles.transform.parent = null;
 
-                // Play the particle system.
-                m_ExplosionParticles.Play();
+            // Play the particle system.
+            m_ExplosionParticles.Play();
 
-                // Play the explosion sound effect.
-                m_ExplosionAudio.Play();
+            // Play the explosion sound effect.
+            m_ExplosionAudio.Play();
 
-                // Once the particles have finished, destroy the gameobject they are on.
-                ParticleSystem.MainModule mainModule = m_ExplosionParticles.main;
-                Destroy(m_ExplosionParticles.gameObject, mainModule.duration);
+            // Once the particles have finished, destroy the gameobject they are on.
+            ParticleSystem.MainModule mainModule = m_ExplosionParticles.main;
+            Destroy(m_ExplosionParticles.gameObject, mainModule.duration);
 
-                // Destroy the shell.
-                Destroy(gameObject);
-            }
+            // Destroy the shell.
+            Destroy(gameObject);
         }
         
     }

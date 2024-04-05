@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
             Player2UI.SetActive(true);
             Player1UI.SetActive(false);
         }
-        if(loser == 2)
+        else if(loser == 2)
         {
             Debug.Log("Player 1 won");
             Player1UI.SetActive(true);
