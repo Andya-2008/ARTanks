@@ -157,8 +157,8 @@ public class ImageTracking : NetworkBehaviour
         var clientId = serverRpcParams.Receive.SenderClientId;
         GameObject pf = placeablePrefabs[prefabId];
         prefab = Instantiate(pf, trackedImagePos, Quaternion.identity);
+        
         //Vector3 prefabLocalPos = trackedImagePos - battleField.transform.position;
-
         prefab.name = pf.name;
         prefab.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
 

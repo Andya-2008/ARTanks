@@ -99,7 +99,7 @@ namespace Complete
             {
                 m_Shell.gameObject.tag = "MyBullet";
             }
-                shellInstance.AddForce(transform.forward * m_MaxLaunchForce * 100 * Time.deltaTime);
+                //shellInstance.AddForce(transform.forward * m_MaxLaunchForce * 100 * Time.deltaTime);
         }
 
 
