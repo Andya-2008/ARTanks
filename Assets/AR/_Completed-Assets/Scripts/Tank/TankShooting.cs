@@ -22,8 +22,8 @@ namespace Complete
         private float m_CurrentLaunchForce;         // The force that will be given to the shell when the fire button is released.
         private float m_ChargeSpeed;                // How fast the launch force increases, based on the max charge time.
         private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
-
-
+        [SerializeField] public float m_ReloadTime = 1.5f; // Time to reload
+        public float startTime;
         private void OnEnable()
         {
             // When the tank is turned on, reset the launch force and the UI
@@ -39,6 +39,8 @@ namespace Complete
 
             // The rate that the launch force charges up is the range of possible forces by the max charge time.
             m_ChargeSpeed = (m_MaxLaunchForce - m_MinLaunchForce) / m_MaxChargeTime;
+            startTime = Time.time;
+            
         }
 
 
@@ -86,6 +88,7 @@ namespace Complete
         {
             // Set the fired flag so only Fire is only called once.
             m_Fired = true;
+            startTime = Time.time;
             ShootRpc(this.GetComponent<NetworkObject>().NetworkObjectId);
         }
         [Rpc(SendTo.Everyone)] //server owns this object but client can request a spawn

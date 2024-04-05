@@ -5568,7 +5568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerNumber: 2
   m_Speed: 0.5
-  m_TurnSpeed: 180
+  m_TurnSpeed: 400
   m_MovementAudio: {fileID: 6849979139445503249}
   m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
   m_EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}

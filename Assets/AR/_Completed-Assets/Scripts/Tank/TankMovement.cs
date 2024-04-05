@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Unity.Netcode;
+using TMPro;
 namespace Complete
 {
     public class TankMovement : NetworkBehaviour
@@ -68,6 +69,8 @@ namespace Complete
 
             // Store the original pitch of the audio source.
             m_OriginalPitch = m_MovementAudio.pitch;
+            GameObject.Find("PlayerText").GetComponent<TextMeshProUGUI>().enabled = true;
+            GameObject.Find("PlayerText").GetComponent<TextMeshProUGUI>().text = "Player " + m_PlayerNumber.ToString();
         }
 
 

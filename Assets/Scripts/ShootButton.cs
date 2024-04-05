@@ -19,6 +19,10 @@ public class ShootButton : MonoBehaviour
 
     public void TankShootButton()
     {
-        GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankShooting>().Fire();
+        TankShooting TankShoot = GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankShooting>();
+        if (Time.time - TankShoot.startTime >= TankShoot.m_ReloadTime)
+        {
+            TankShoot.Fire();
+        }
     }
 }
