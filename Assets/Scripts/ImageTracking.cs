@@ -161,7 +161,6 @@ public class ImageTracking : NetworkBehaviour
         
         //Vector3 prefabLocalPos = trackedImagePos - battleField.transform.position;
         prefab.name = pf.name;
-        prefab.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
 
 
         NetworkObject netObj = prefab.GetComponent<NetworkObject>();
@@ -170,7 +169,9 @@ public class ImageTracking : NetworkBehaviour
         // netObj.SpawnAsPlayerObject(clientId, true);
 
         spawnedPrefabs.Add(name, prefab);
+        Debug.Log("BeforeParenting");
         prefab.transform.parent = GameObject.Find("Battlefield1").transform;
+        Debug.Log("AfterParenting");
         //prefab.transform.localPosition = prefabLocalPos;
         //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
         Vector3 pos = trackedImagePos - battleField.transform.position;
