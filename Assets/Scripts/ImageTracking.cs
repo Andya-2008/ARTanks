@@ -28,6 +28,7 @@ public class ImageTracking : NetworkBehaviour
     GameObject prefab;
     private string strDebug = "";
     private string tiDebug = "";
+    //public NetworkVariable<Vector3> localpos = new NetworkVariable<Vector3>();
     public Vector3 localpos;
 
     ARTrackedImage trackImage;
@@ -48,12 +49,18 @@ public class ImageTracking : NetworkBehaviour
         GameObject mytank = GameObject.FindGameObjectWithTag("MyTank");
         if ( mytank!=null)
         {
-            strDebug += "MyTank:" + mytank.transform.position + "\n";
+            strDebug += "MyTank:" + mytank.transform.localPosition + "\n";
         }
 
         GameObject[] gotanks = GameObject.FindGameObjectsWithTag("Tank");
         foreach (GameObject go in gotanks) {
-            strDebug += "Tank:" + go.transform.position + "\n";
+            strDebug += "Tank:" + go.transform.localPosition + "\n";
+        }
+
+        GameObject[] goturrets = GameObject.FindGameObjectsWithTag("Turret");
+        foreach (GameObject go in goturrets)
+        {
+            strDebug += "Turret:" + go.transform.localPosition + "\n";
         }
 
         DebugTxt(strDebug);
@@ -124,6 +131,11 @@ public class ImageTracking : NetworkBehaviour
         if (pf.tag != "Battlefield")
         {
             localpos =  worldToLocal(trackedImage.transform.position, battleField.transform);
+            Debug.Log("Localpos - " + localpos.ToString());
+            if (!IsHost)
+            {
+                SetLocalPosServerRPC(localpos);
+            }
             SpawnPlayerServerRpc(name, trackedImage.transform.position, prefabId);
  
         }
@@ -149,7 +161,11 @@ public class ImageTracking : NetworkBehaviour
         //prefab.transform.position = trackedImage.transform.position;
         
     }
-
+    [ServerRpc(RequireOwnership = false)]
+    public void SetLocalPosServerRPC(Vector3 p_LocalPos)
+    {
+        localpos = p_LocalPos;
+    }
     [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
     public void SpawnPlayerServerRpc(string name, Vector3 trackedImagePos, int prefabId, ServerRpcParams serverRpcParams = default)
     {
@@ -165,16 +181,19 @@ public class ImageTracking : NetworkBehaviour
 
         NetworkObject netObj = prefab.GetComponent<NetworkObject>();
         prefab.SetActive(true);
-        netObj.SpawnWithOwnership(clientId, true);
+        
         // netObj.SpawnAsPlayerObject(clientId, true);
 
         spawnedPrefabs.Add(name, prefab);
         Debug.Log("BeforeParenting");
         prefab.transform.parent = GameObject.Find("Battlefield1").transform;
+        prefab.transform.localPosition = localpos;
+        Debug.Log("Localpos2 - " + prefab.transform.localPosition);
+        netObj.SpawnWithOwnership(clientId, true);
         Debug.Log("AfterParenting");
         //prefab.transform.localPosition = prefabLocalPos;
         //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
-        Vector3 pos = trackedImagePos - battleField.transform.position;
+        //Vector3 pos = trackedImagePos - battleField.transform.position;
     }
 
     private Vector3 worldToLocal(Vector3 worldpos, Transform battlefield) {

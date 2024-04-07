@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class TurretShoot : NetworkBehaviour, INetworkSerializeByMemcpy
+public class TurretShoot : NetworkBehaviour
 {
     Vector3 origLocalPos;
     [SerializeField] public List<Transform> Enemies = new List<Transform>();
     [SerializeField] float firingSpeed;
     Transform EnemyTarget;
     [SerializeField] GameObject PivotPoint;
+
+    private NetworkVariable<Vector3> localpos = new NetworkVariable<Vector3>();
+
     // Start is called before the first frame update
     void Start()
+    {
+        
+    }
+    
+    public override void OnNetworkSpawn()
     {
         if (NetworkObject.IsOwner)
         {
@@ -20,19 +28,24 @@ public class TurretShoot : NetworkBehaviour, INetworkSerializeByMemcpy
                 Enemies.Add(enemy.transform);
             }
         }
+        if(IsHost)
+        {
+            localpos.Value = this.transform.localPosition;
+        }
+        else
+        {
+            
+            Debug.Log("1");
+            this.gameObject.transform.parent = GameObject.Find("Battlefield1").transform;
+            //Debug.Log("2");
+            //origLocalPos = GameObject.Find("XR Origin").GetComponent<ImageTracking>().localpos;
+            Debug.Log("3");
+            this.gameObject.transform.localPosition = localpos.Value;
+            this.transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
+        
     }
-    /*
-    public override void OnNetworkSpawn()
-    {
-        Debug.Log("1");
-        this.gameObject.transform.parent = GameObject.Find("Battlefield1").transform;
-        Debug.Log("2");
-        origLocalPos = GameObject.Find("XR Origin").GetComponent<ImageTracking>().localpos;
-        Debug.Log("3");
-        this.gameObject.transform.localPosition = origLocalPos;
-        this.transform.rotation = new Quaternion(0, 0, 0, 0);
-    }
-    */
+    
     // Update is called once per frame
     void Update()
     {
@@ -45,7 +58,7 @@ public class TurretShoot : NetworkBehaviour, INetworkSerializeByMemcpy
                 ChangeNearestEnemyRPC(EnemyTarget.position);
             }
         }
-        PivotPoint.transform.rotation = new Quaternion(PivotPoint.transform.rotation.x, Mathf.Atan2(EnemyTarget.transform.position.y - this.transform.position.y, EnemyTarget.transform.position.x - this.transform.position.x), PivotPoint.transform.rotation.z, 0);
+        PivotPoint.transform.rotation = new Quaternion(Mathf.Atan2(EnemyTarget.transform.position.z - this.transform.position.z, EnemyTarget.transform.position.x - this.transform.position.x), PivotPoint.transform.rotation.y, PivotPoint.transform.rotation.z, 0);
     }
 
     public Transform FindNearestEnemy()

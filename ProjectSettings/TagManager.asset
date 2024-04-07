@@ -10,6 +10,7 @@ TagManager:
   - MyTank
   - Bullet
   - MyBullet
+  - Turret
   layers:
   - Default
   - TransparentFX
