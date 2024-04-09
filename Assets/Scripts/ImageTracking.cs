@@ -131,7 +131,6 @@ public class ImageTracking : NetworkBehaviour
         if (pf.tag != "Battlefield")
         {
             localpos =  worldToLocal(trackedImage.transform.position, battleField.transform);
-            Debug.Log("Localpos - " + localpos.ToString());
             if (!IsHost)
             {
                 SetLocalPosServerRPC(localpos);
@@ -185,12 +184,9 @@ public class ImageTracking : NetworkBehaviour
         // netObj.SpawnAsPlayerObject(clientId, true);
 
         spawnedPrefabs.Add(name, prefab);
-        Debug.Log("BeforeParenting");
         prefab.transform.parent = GameObject.Find("Battlefield1").transform;
         prefab.transform.localPosition = localpos;
-        Debug.Log("Localpos2 - " + prefab.transform.localPosition);
         netObj.SpawnWithOwnership(clientId, true);
-        Debug.Log("AfterParenting");
         //prefab.transform.localPosition = prefabLocalPos;
         //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
         //Vector3 pos = trackedImagePos - battleField.transform.position;

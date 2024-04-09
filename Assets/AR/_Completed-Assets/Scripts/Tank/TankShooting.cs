@@ -94,7 +94,6 @@ namespace Complete
         [Rpc(SendTo.Everyone)] //server owns this object but client can request a spawn
         public void ShootRpc(ulong objectId)
         {
-            Debug.Log("1");
             Transform tankPos = FindNetworkObject(objectId).gameObject.GetComponent<TankShooting>().m_FireTransform;
             Rigidbody shellInstance =
                 Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation, GameObject.Find("Battlefield1").transform) as Rigidbody;

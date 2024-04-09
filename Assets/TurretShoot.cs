@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Jobs;
+using UnityEngine.Rendering;
 
 public class TurretShoot : NetworkBehaviour
 {
@@ -12,6 +15,7 @@ public class TurretShoot : NetworkBehaviour
     [SerializeField] GameObject PivotPoint;
 
     private NetworkVariable<Vector3> localpos = new NetworkVariable<Vector3>();
+    bool firstEnemy = true;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +27,11 @@ public class TurretShoot : NetworkBehaviour
     {
         if (NetworkObject.IsOwner)
         {
-            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Tank"))
+            foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
             {
-                Enemies.Add(enemy.transform);
+                Enemies.Add(tank.transform);
             }
+            Enemies.Add(GameObject.FindGameObjectWithTag("MyTank").transform);
         }
         if(IsHost)
         {
@@ -34,12 +39,7 @@ public class TurretShoot : NetworkBehaviour
         }
         else
         {
-            
-            Debug.Log("1");
             this.gameObject.transform.parent = GameObject.Find("Battlefield1").transform;
-            //Debug.Log("2");
-            //origLocalPos = GameObject.Find("XR Origin").GetComponent<ImageTracking>().localpos;
-            Debug.Log("3");
             this.gameObject.transform.localPosition = localpos.Value;
             this.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
@@ -51,14 +51,30 @@ public class TurretShoot : NetworkBehaviour
     {
         if (NetworkObject.IsOwner)
         {
-            EnemyTarget = FindNearestEnemy();
-            Debug.Log(EnemyTarget.name);
+            if (firstEnemy)
+            {
+                Debug.Log("First Enemy");
+                firstEnemy = false;
+                EnemyTarget = FindNearestEnemy();
+                Debug.Log("EnemyName: " + EnemyTarget.name);
+                ChangeNearestEnemyRPC(EnemyTarget.name);
+            }
             if (FindNearestEnemy() != EnemyTarget)
             {
-                ChangeNearestEnemyRPC(EnemyTarget.position);
+                Debug.Log("Changing enemy in turret");
+                ChangeNearestEnemyRPC(EnemyTarget.name);
             }
+            EnemyTarget = FindNearestEnemy();
         }
-        PivotPoint.transform.rotation = new Quaternion(Mathf.Atan2(EnemyTarget.transform.position.z - this.transform.position.z, EnemyTarget.transform.position.x - this.transform.position.x), PivotPoint.transform.rotation.y, PivotPoint.transform.rotation.z, 0);
+        if (EnemyTarget != null)
+        {
+            Debug.Log(EnemyTarget.name);
+        }
+        else
+        {
+            Debug.Log("There is no enemy target!");
+        }
+            PivotPoint.transform.eulerAngles = new Vector3(0, -180/Mathf.PI*Mathf.Atan2(EnemyTarget.transform.position.z - this.transform.position.z, EnemyTarget.transform.position.x - this.transform.position.x), 0);
     }
 
     public Transform FindNearestEnemy()
@@ -67,7 +83,7 @@ public class TurretShoot : NetworkBehaviour
         Transform nearestEnemy = Enemies[0];
         foreach (Transform enemy in Enemies)
         {
-            float enemyDistance = Mathf.Pow(enemy.position.x, 2) + Mathf.Pow(enemy.position.z, 2);
+            float enemyDistance = Mathf.Pow(this.transform.position.x - enemy.position.x, 2) + Mathf.Pow(this.transform.position.z - enemy.position.z, 2);
             if (enemyDistance <= minEnemyDistance)
             {
                 minEnemyDistance = enemyDistance;
@@ -78,11 +94,25 @@ public class TurretShoot : NetworkBehaviour
     }
 
     [Rpc(SendTo.Everyone)]
-    public void ChangeNearestEnemyRPC(Vector3 newTargetPos)
+    public void ChangeNearestEnemyRPC(string playerName)
     {
-        Transform newTarget = this.transform;
-        newTarget.position = newTargetPos;
-        EnemyTarget = newTarget;
+        Debug.Log("Name:" + playerName.ToString() + " : Name[4]: " + playerName[4].ToString());
+        List<Transform> tanks = new List<Transform> ();
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Tank"))
+        {
+            tanks.Add(enemy.transform);
+        }
+        tanks.Add(GameObject.FindGameObjectWithTag("MyTank").transform);
+
+        foreach (Transform tank in tanks)
+        {
+            if (tank.name[4] == playerName[4])
+            {
+                
+                EnemyTarget = tank;
+                break;
+            }
+        }
     }
 
 }
