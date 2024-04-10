@@ -130,7 +130,6 @@ public class ImageTracking : NetworkBehaviour
         }
         if (pf.tag != "Battlefield")
         {
-            localpos =  worldToLocal(trackedImage.transform.position, battleField.transform);
             if (!IsHost)
             {
                 SetLocalPosServerRPC(localpos);
@@ -177,7 +176,7 @@ public class ImageTracking : NetworkBehaviour
         
         //Vector3 prefabLocalPos = trackedImagePos - battleField.transform.position;
         prefab.name = pf.name;
-
+        
 
         NetworkObject netObj = prefab.GetComponent<NetworkObject>();
         prefab.SetActive(true);
@@ -186,8 +185,14 @@ public class ImageTracking : NetworkBehaviour
         
         spawnedPrefabs.Add(name, prefab);
         prefab.transform.parent = GameObject.Find("Battlefield1").transform;
+        localpos = worldToLocal(trackedImagePos, battleField.transform);
         prefab.transform.localPosition = localpos;
+        
         netObj.SpawnWithOwnership(clientId, true);
+        if (prefab.tag.Contains("Turret"))
+        {
+            prefab.GetComponent<TurretTurn>().localpos.Value = prefab.transform.localPosition;
+        }
         //prefab.transform.localPosition = prefabLocalPos;
         //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
         //Vector3 pos = trackedImagePos - battleField.transform.position;
