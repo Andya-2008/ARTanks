@@ -69,9 +69,13 @@ namespace Complete
 
             // Store the original pitch of the audio source.
             m_OriginalPitch = m_MovementAudio.pitch;
-            GameObject.Find("PlayerText").GetComponent<TextMeshProUGUI>().enabled = true;
-            GameObject.Find("PlayerText").GetComponent<TextMeshProUGUI>().text = "Player " + m_PlayerNumber.ToString();
-        }
+            
+            if (NetworkObject.IsOwner)
+            {
+                GameObject.Find("PlayerText").GetComponent<TextMeshProUGUI>().enabled = true;
+                GameObject.Find("PlayerText").GetComponent<TextMeshProUGUI>().text = "Player " + m_PlayerNumber.ToString();
+            }
+            }
 
 
         private void Update ()

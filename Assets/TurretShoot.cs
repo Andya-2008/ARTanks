@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Jobs;
@@ -16,6 +17,8 @@ public class TurretShoot : NetworkBehaviour
 
     private NetworkVariable<Vector3> localpos = new NetworkVariable<Vector3>();
     bool firstEnemy = true;
+    [SerializeField] TextMeshProUGUI DebugText;
+    [SerializeField] ulong OwnerID;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +28,26 @@ public class TurretShoot : NetworkBehaviour
     
     public override void OnNetworkSpawn()
     {
-        if (NetworkObject.IsOwner)
+        if (IsOwner)
         {
-            foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+            Debug.Log("Sent Turret ID");
+            SendTurretIDRPC(NetworkManager.Singleton.LocalClientId);
+        }
+        foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+        {
+            Debug.Log("Tank: " + tank.name);
+            Enemies.Add(tank.transform);
+        }
+        Enemies.Add(GameObject.FindGameObjectWithTag("MyTank").transform);
+        foreach(Transform enemy in Enemies)
+        {
+            Debug.Log("EnemyID: " + enemy.GetComponent<TankPlayer>().TankID);
+            Debug.Log("OwnerID: " + OwnerID);
+            if(enemy.GetComponent<TankPlayer>().TankID == OwnerID)
             {
-                Enemies.Add(tank.transform);
+                Debug.Log("Removed owner tank: " + enemy.name);
+                Enemies.Remove(enemy);
             }
-            Enemies.Add(GameObject.FindGameObjectWithTag("MyTank").transform);
         }
         if(IsHost)
         {
@@ -49,23 +65,14 @@ public class TurretShoot : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (NetworkObject.IsOwner)
+        if (firstEnemy)
         {
-            if (firstEnemy)
-            {
-                Debug.Log("First Enemy");
-                firstEnemy = false;
-                EnemyTarget = FindNearestEnemy();
-                Debug.Log("EnemyName: " + EnemyTarget.name);
-                ChangeNearestEnemyRPC(EnemyTarget.name);
-            }
-            if (FindNearestEnemy() != EnemyTarget)
-            {
-                Debug.Log("Changing enemy in turret");
-                ChangeNearestEnemyRPC(EnemyTarget.name);
-            }
+            Debug.Log("First Enemy");
+            firstEnemy = false;
             EnemyTarget = FindNearestEnemy();
+            Debug.Log("EnemyName: " + EnemyTarget.name);
         }
+        EnemyTarget = FindNearestEnemy();
         if (EnemyTarget != null)
         {
             Debug.Log(EnemyTarget.name);
@@ -92,7 +99,7 @@ public class TurretShoot : NetworkBehaviour
         }
         return nearestEnemy;
     }
-
+    /*
     [Rpc(SendTo.Everyone)]
     public void ChangeNearestEnemyRPC(string playerName)
     {
@@ -113,6 +120,10 @@ public class TurretShoot : NetworkBehaviour
                 break;
             }
         }
+    }*/
+    [Rpc(SendTo.Everyone)]
+    public void SendTurretIDRPC(ulong ID)
+    {
+        OwnerID = ID;
     }
-
 }

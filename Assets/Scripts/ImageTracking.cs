@@ -135,6 +135,7 @@ public class ImageTracking : NetworkBehaviour
             {
                 SetLocalPosServerRPC(localpos);
             }
+            
             SpawnPlayerServerRpc(name, trackedImage.transform.position, prefabId);
  
         }
@@ -182,7 +183,7 @@ public class ImageTracking : NetworkBehaviour
         prefab.SetActive(true);
         
         // netObj.SpawnAsPlayerObject(clientId, true);
-
+        
         spawnedPrefabs.Add(name, prefab);
         prefab.transform.parent = GameObject.Find("Battlefield1").transform;
         prefab.transform.localPosition = localpos;
@@ -200,4 +201,6 @@ public class ImageTracking : NetworkBehaviour
     {
         return battleField.transform.TransformPoint(localpos);
     }
+
+    
 }
