@@ -48,6 +48,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.Services.Relay;
 --assembly-defines=Unity.Services.Wire.Internal;
 --assembly-defines=Unity.TextMeshPro;
+--assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.XR.ARCore;
 --assembly-defines=Unity.XR.ARFoundation;
 --assembly-defines=Unity.XR.ARFoundation.InternalUtils;
@@ -181,6 +182,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.Services.Relay;
 --assembly-defines=Unity.Services.Wire.Internal;
 --assembly-defines=Unity.TextMeshPro;
+--assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.XR.ARCore;
 --assembly-defines=Unity.XR.ARFoundation;
 --assembly-defines=Unity.XR.ARFoundation.InternalUtils;

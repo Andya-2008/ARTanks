@@ -29,6 +29,7 @@ public class TurretTurn : NetworkBehaviour
     
     public override void OnNetworkSpawn()
     {
+        /*
         if (IsOwner)
         {
             localpos.Value = this.transform.localPosition;
@@ -41,6 +42,7 @@ public class TurretTurn : NetworkBehaviour
             this.transform.rotation = new Quaternion(0, 0, 0, 0);
             Debug.Log("localposition: " + transform.localPosition);
         }
+        */
         if (IsOwner)
         {
             Debug.Log("Sent Turret ID");

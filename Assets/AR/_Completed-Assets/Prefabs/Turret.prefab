@@ -652,6 +652,7 @@ GameObject:
   - component: {fileID: 487196887740286510}
   - component: {fileID: 5032458682140631305}
   - component: {fileID: 6244417356598449513}
+  - component: {fileID: 1033015826005972021}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Turret
@@ -687,7 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3583122396
+  GlobalObjectIdHash: 3383644009
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -730,6 +731,18 @@ MonoBehaviour:
   m_Shell: {fileID: 5632292934972330825, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
   m_FireTransform: {fileID: 8648453724343541664}
   ShootInterval: 3
+--- !u!114 &1033015826005972021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094420545691623291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5957fa9df444534489cb5e88a4d114b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7001288999238526039
 GameObject:
   m_ObjectHideFlags: 0
