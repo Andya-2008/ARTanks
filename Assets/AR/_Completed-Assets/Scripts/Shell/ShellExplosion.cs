@@ -47,4 +47,10 @@ namespace Complete
         }
         
     }
+    /*
+    public float BulletDistance(float timeSinceLaunched, float )
+    {
+        return bulletDistance;
+    }
+    */
 }
