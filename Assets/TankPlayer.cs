@@ -26,6 +26,7 @@ public class TankPlayer : NetworkBehaviour
             SendTankIDRPC(NetworkManager.Singleton.LocalClientId);
             this.gameObject.layer = 6;
         }
+        GameObject.Find("GameManager").GetComponent<GameManager>().AddTank(this);
     }
 
     [Rpc(SendTo.Everyone)]

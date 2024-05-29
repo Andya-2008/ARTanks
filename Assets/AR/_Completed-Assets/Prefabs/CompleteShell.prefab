@@ -224,7 +224,7 @@ MonoBehaviour:
   m_ExplosionForce: 10
   m_MaxLifeTime: 10
   m_ExplosionRadius: 5
-  player: 0
+  maxBulletDist: 2
 --- !u!114 &7358023210643773766
 MonoBehaviour:
   m_ObjectHideFlags: 0
