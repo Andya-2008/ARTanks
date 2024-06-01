@@ -12,13 +12,23 @@ namespace Complete
         public float m_ExplosionForce = 1000f;              // The amount of force added to a tank at the centre of the explosion.
         public float m_MaxLifeTime = 2f;                    // The time in seconds before the shell is removed.
         public float m_ExplosionRadius = 5f;                // The maximum distance away from the explosion tanks can be and are still affected.
-        [SerializeField] int player;
+        [SerializeField] float maxBulletDist = 2f;
+        Transform originTrans;
 
-        private void Start ()
+        private void Start()
         {
             // If it isn't destroyed by then, destroy the shell after it's lifetime.
-            Destroy (gameObject, m_MaxLifeTime);
-            
+            Destroy(gameObject, m_MaxLifeTime);
+            originTrans = this.transform;
+
+        }
+
+        private void Update()
+        {
+            if (BulletDistance(originTrans) >= maxBulletDist)
+            {
+                ExplodeBullet();
+            }
         }
 
 
@@ -29,23 +39,36 @@ namespace Complete
                 other.GetComponent<TankHealth>().TakeDamage();
             }
             Debug.Log("Bullet collided with " + other.name);
-            // Unparent the particles from the shell.
-            m_ExplosionParticles.transform.parent = null;
-
-            // Play the particle system.
-            m_ExplosionParticles.Play();
-
-            // Play the explosion sound effect.
-            m_ExplosionAudio.Play();
-
-            // Once the particles have finished, destroy the gameobject they are on.
-            ParticleSystem.MainModule mainModule = m_ExplosionParticles.main;
-            Destroy(m_ExplosionParticles.gameObject, mainModule.duration);
-
-            // Destroy the shell.
-            Destroy(gameObject);
+            ExplodeBullet();
         }
-        
+
+        public void ExplodeBullet()
+            {
+                
+                // Unparent the particles from the shell.
+                m_ExplosionParticles.transform.parent = null;
+
+                // Play the particle system.
+                m_ExplosionParticles.Play();
+
+                // Play the explosion sound effect.
+                m_ExplosionAudio.Play();
+
+                // Once the particles have finished, destroy the gameobject they are on.
+                ParticleSystem.MainModule mainModule = m_ExplosionParticles.main;
+                Destroy(m_ExplosionParticles.gameObject, mainModule.duration);
+
+                // Destroy the shell.
+                Destroy(gameObject);
+            }
+
+        public float BulletDistance(Transform bulletOriginPos)
+        {
+            float bulletDistance;
+            bulletDistance = Vector3.Distance(bulletOriginPos.position, this.transform.position);
+            return bulletDistance;
+        }
+
     }
     /*
     public float BulletDistance(float timeSinceLaunched, float )
@@ -53,4 +76,5 @@ namespace Complete
         return bulletDistance;
     }
     */
+
 }
