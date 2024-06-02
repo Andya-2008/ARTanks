@@ -64,6 +64,59 @@ public class ImageTracking : NetworkBehaviour
         }
 
         DebugTxt(strDebug);
+
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Debug.Log("B");
+            ARTrackedImagePlus artip = new ARTrackedImagePlus();
+            artip.name = "Battlefield1";
+            GameObject go = new GameObject();
+            artip.transform = go.transform;
+            artip.transform.position = new Vector3(0, 0, 0);
+            artip.transform.rotation = Quaternion.identity;
+            StartCoroutine(CreateObject(artip));
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("T");
+            ARTrackedImagePlus artip = new ARTrackedImagePlus();
+            artip.name = "Tank1";
+            GameObject go = new GameObject();
+            artip.transform = go.transform;
+            artip.transform.position = new Vector3(0.2f, 0, 0);
+            artip.transform.rotation = Quaternion.identity;
+            StartCoroutine(CreateObject(artip));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Debug.Log("Y");
+            ARTrackedImagePlus artip = new ARTrackedImagePlus();
+            artip.name = "Tank2";
+            GameObject go = new GameObject();
+            artip.transform = go.transform;
+            artip.transform.position = new Vector3(-0.2f, 0, 0);
+            artip.transform.rotation = Quaternion.identity;
+            StartCoroutine(CreateObject(artip));
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Debug.Log("U");
+            ARTrackedImagePlus artip = new ARTrackedImagePlus();
+            artip.name = "Turret";
+            GameObject go = new GameObject();
+            artip.transform = go.transform;
+            artip.transform.position = new Vector3(-0.2f, 0, -0.2f);
+            artip.transform.rotation = Quaternion.identity;
+            StartCoroutine(CreateObject(artip));
+        }
+
+
+
+
     }
     private void OnEnable()
     {
@@ -82,7 +135,9 @@ public class ImageTracking : NetworkBehaviour
         foreach (ARTrackedImage trackedImage in eventArgs.added)
         { 
             if (spawnedPrefabs.ContainsKey(trackedImage.referenceImage.name)) { return; }
-            StartCoroutine(CreateObject(trackedImage));
+            ARTrackedImagePlus artip = new ARTrackedImagePlus();
+            artip.trackedImage = trackedImage;
+            StartCoroutine(CreateObject(artip));
         }
 
         foreach (ARTrackedImage trackedImage in eventArgs.updated)
@@ -106,22 +161,36 @@ public class ImageTracking : NetworkBehaviour
             battleField.transform.rotation = trackedImage.transform.rotation;
             
         }
-    }
-    IEnumerator CreateObject(ARTrackedImage trackedImage) {
-        while (trackedImage.trackingState != TrackingState.Tracking) {
-            yield return null;
+        }
+    IEnumerator CreateObject(ARTrackedImagePlus trackedImage)
+    {
+        string name = "";
+
+        if (trackedImage.trackedImage != null)
+        {
+            while (trackedImage.trackedImage.trackingState != TrackingState.Tracking)
+            {
+                yield return null;
+            }
+
+
+            name = trackedImage.trackedImage.referenceImage.name;
+            trackedImage.transform = trackedImage.trackedImage.transform;
+
+        }
+        else
+        {
+            // For desktop testing purposes
+            name = trackedImage.name;
+
         }
 
-
-        string name = trackedImage.referenceImage.name;
-
-        
         GameObject pf = new GameObject();
-        
+
         int prefabId = 0;
         foreach (GameObject go in placeablePrefabs)
         {
-            
+
             if (go.name == name)
             {
                 pf = go;
@@ -130,15 +199,11 @@ public class ImageTracking : NetworkBehaviour
         }
         if (pf.tag != "Battlefield")
         {
-            /*
-            if (!IsHost)
-            {
-                SetLocalPosServerRPC(localpos);
-            }*/
+
             Vector3 localpos = worldToLocal(trackedImage.transform.position, battleField.transform);
             Debug.Log(localpos);
             SpawnPlayerServerRpc(name, localpos, prefabId);
- 
+
         }
         if (pf.tag == "Battlefield")
         {
@@ -160,14 +225,16 @@ public class ImageTracking : NetworkBehaviour
 
         yield return null;
         //prefab.transform.position = trackedImage.transform.position;
-        
-    }/*
-    [ServerRpc(RequireOwnership = false)]
-    public void SetLocalPosServerRPC(Vector3 p_LocalPos)
-    {
-        localpos = p_LocalPos;
-    }*/
-    [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
+
+    }
+
+/*
+[ServerRpc(RequireOwnership = false)]
+public void SetLocalPosServerRPC(Vector3 p_LocalPos)
+{
+    localpos = p_LocalPos;
+}*/
+[ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
     public void SpawnPlayerServerRpc(string name, Vector3 localpos, int prefabId, ServerRpcParams serverRpcParams = default)
     {
         if (!IsServer) { return; }
@@ -207,4 +274,14 @@ public class ImageTracking : NetworkBehaviour
     }
 
     
+}
+
+
+public class ARTrackedImagePlus
+{
+    public ARTrackedImage trackedImage { get; set; }
+    public TrackingState trackingState { get; set; }
+    public string name { get; set; }
+    public Transform transform { get; set; }
+
 }

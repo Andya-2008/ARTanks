@@ -11,9 +11,42 @@ public class GameManager : MonoBehaviour
     [SerializeField] Canvas GameOverCanvas;
     [SerializeField] public List<TankMovement> tanks = new List<TankMovement>();
     [SerializeField] public List<TankMovement> aliveTanks = new List<TankMovement>();
+
+    [SerializeField] GameObject ARCamera;
+    [SerializeField] GameObject MainCamera;
+    [SerializeField] GameObject WinPlane;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+#if UNITY_STANDALONE_WIN
+Debug.Log("Unity Standalone Win");
+  ARCamera.SetActive(false);
+        MainCamera.SetActive(true);
+        WinPlane.SetActive(true);
+        Screen.SetResolution(1920, 1080, false);
+        //MainCamera.GetComponent<Camera>().aspect = 1;
+
+#endif
+
+
+#if UNITY_EDITOR_WIN
+        Debug.Log("Unity Editor Win");
+        ARCamera.SetActive(false);
+        MainCamera.SetActive(true);
+        WinPlane.SetActive(true);
+        Screen.SetResolution(1920, 1080, false);
+        //MainCamera.GetComponent<Camera>().aspect = 1;
+
+#endif
+
+
+
+
+
         Player1UI.SetActive(false);
         Player2UI.SetActive(false);
         Player3UI.SetActive(false);
