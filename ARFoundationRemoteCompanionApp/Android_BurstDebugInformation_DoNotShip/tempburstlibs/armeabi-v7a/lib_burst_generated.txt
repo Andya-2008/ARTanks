@@ -6,6 +6,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --meta-data-generation=False
 --dump=Function
 --float-precision=Standard
+--target-framework=NetFramework
 --assembly-defines=ARFoundationRemote.Meshing;
 --assembly-defines=ARFoundationRemote.Runtime.BugReports;
 --assembly-defines=ARFoundationRemote.Runtime;
@@ -22,6 +23,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=System.Runtime.Serialization;
 --assembly-defines=System.Xml;
 --assembly-defines=System.Xml.Linq;
+--assembly-defines=unity-websocket-sharp;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Unity.Collections;
@@ -35,6 +37,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Services.Authentication;
+--assembly-defines=Unity.Services.Authentication.PlayerAccounts;
 --assembly-defines=Unity.Services.Core.Configuration;
 --assembly-defines=Unity.Services.Core.Device;
 --assembly-defines=Unity.Services.Core;
@@ -48,7 +51,6 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.Services.Relay;
 --assembly-defines=Unity.Services.Wire.Internal;
 --assembly-defines=Unity.TextMeshPro;
---assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.XR.ARCore;
 --assembly-defines=Unity.XR.ARFoundation;
 --assembly-defines=Unity.XR.ARFoundation.InternalUtils;
@@ -62,11 +64,10 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.XR.OpenXR.Features.OculusQuestSupport;
 --assembly-defines=Unity.XR.OpenXR.Features.RuntimeDebugger;
 --assembly-defines=UnityEngine;
---assembly-defines=websocket-sharp;
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=C:\Users\andre\source\repos\ARTanks\Temp\Burst
 --debug=Full
---key-folder=C:/Program Files/Unity/Hub/Editor/2023.1.2f1/Editor/Data/PlaybackEngines/AndroidPlayer
+--key-folder=C:/Program Files/Unity/Hub/Editor/2023.1.15f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=C:\Users\andre\source\repos\ARTanks\Library\Burst
 --output=C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
@@ -139,6 +140,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --meta-data-generation=False
 --dump=Function
 --float-precision=Standard
+--target-framework=NetFramework
 --float-mode=Fast
 --assembly-defines=ARFoundationRemote.Meshing;
 --assembly-defines=ARFoundationRemote.Runtime.BugReports;
@@ -156,6 +158,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=System.Runtime.Serialization;
 --assembly-defines=System.Xml;
 --assembly-defines=System.Xml.Linq;
+--assembly-defines=unity-websocket-sharp;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Unity.Collections;
@@ -169,6 +172,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Services.Authentication;
+--assembly-defines=Unity.Services.Authentication.PlayerAccounts;
 --assembly-defines=Unity.Services.Core.Configuration;
 --assembly-defines=Unity.Services.Core.Device;
 --assembly-defines=Unity.Services.Core;
@@ -182,7 +186,6 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.Services.Relay;
 --assembly-defines=Unity.Services.Wire.Internal;
 --assembly-defines=Unity.TextMeshPro;
---assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.XR.ARCore;
 --assembly-defines=Unity.XR.ARFoundation;
 --assembly-defines=Unity.XR.ARFoundation.InternalUtils;
@@ -196,11 +199,10 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.XR.OpenXR.Features.OculusQuestSupport;
 --assembly-defines=Unity.XR.OpenXR.Features.RuntimeDebugger;
 --assembly-defines=UnityEngine;
---assembly-defines=websocket-sharp;
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=C:\Users\andre\source\repos\ARTanks\Temp\Burst
 --debug=Full
---key-folder=C:/Program Files/Unity/Hub/Editor/2023.1.2f1/Editor/Data/PlaybackEngines/AndroidPlayer
+--key-folder=C:/Program Files/Unity/Hub/Editor/2023.1.15f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=C:\Users\andre\source\repos\ARTanks\Library\Burst
 --output=C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/

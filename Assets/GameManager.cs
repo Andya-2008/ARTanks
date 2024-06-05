@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject ARCamera;
     [SerializeField] GameObject MainCamera;
     [SerializeField] GameObject WinPlane;
+    [SerializeField] bool PlayOnEditor = false;
 
 
 
@@ -23,23 +24,27 @@ public class GameManager : MonoBehaviour
     {
 
 #if UNITY_STANDALONE_WIN
+if (PlayOnEditor){
 Debug.Log("Unity Standalone Win");
   ARCamera.SetActive(false);
         MainCamera.SetActive(true);
         WinPlane.SetActive(true);
         Screen.SetResolution(1920, 1080, false);
         //MainCamera.GetComponent<Camera>().aspect = 1;
-
+        }
 #endif
 
 
 #if UNITY_EDITOR_WIN
-        Debug.Log("Unity Editor Win");
-        ARCamera.SetActive(false);
-        MainCamera.SetActive(true);
-        WinPlane.SetActive(true);
-        Screen.SetResolution(1920, 1080, false);
-        //MainCamera.GetComponent<Camera>().aspect = 1;
+        if (PlayOnEditor)
+        {
+            Debug.Log("Unity Editor Win");
+            ARCamera.SetActive(false);
+            MainCamera.SetActive(true);
+            WinPlane.SetActive(true);
+            Screen.SetResolution(1920, 1080, false);
+            //MainCamera.GetComponent<Camera>().aspect = 1;
+        }
 
 #endif
 
