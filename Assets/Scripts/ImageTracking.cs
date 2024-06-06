@@ -10,6 +10,7 @@ using Unity.Netcode;
 using UnityEngine.InputSystem.LowLevel;
 using Unity.XR.CoreUtils;
 using UnityEngine.XR.ARSubsystems;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class ImageTracking : NetworkBehaviour
@@ -133,7 +134,8 @@ public class ImageTracking : NetworkBehaviour
     {
        
         foreach (ARTrackedImage trackedImage in eventArgs.added)
-        { 
+        {
+            Debug.Log("-3: " + trackedImage.referenceImage.name);
             if (spawnedPrefabs.ContainsKey(trackedImage.referenceImage.name)) { return; }
             ARTrackedImagePlus artip = new ARTrackedImagePlus();
             artip.trackedImage = trackedImage;
@@ -164,6 +166,7 @@ public class ImageTracking : NetworkBehaviour
         }
     IEnumerator CreateObject(ARTrackedImagePlus trackedImage)
     {
+        Debug.Log("-2");
         string name = "";
 
         if (trackedImage.trackedImage != null)
@@ -197,14 +200,6 @@ public class ImageTracking : NetworkBehaviour
                 prefabId = placeablePrefabs.IndexOf(go);
             }
         }
-        if (pf.tag != "Battlefield")
-        {
-
-            Vector3 localpos = worldToLocal(trackedImage.transform.position, battleField.transform);
-            Debug.Log(localpos);
-            SpawnPlayerServerRpc(name, localpos, prefabId);
-
-        }
         if (pf.tag == "Battlefield")
         {
             if (!GameObject.FindGameObjectWithTag("Battlefield"))
@@ -222,6 +217,24 @@ public class ImageTracking : NetworkBehaviour
                 netObj.Spawn();
             }
         }
+        if (pf.tag == "Tank" || pf.tag == "MyTank")
+        {
+
+            Vector3 localpos = worldToLocal(trackedImage.transform.position, battleField.transform);
+            Debug.Log(localpos);
+            SpawnPlayerServerRpc(name, localpos, prefabId);
+        }
+        Debug.Log("-1");
+        if(pf.tag == "Powerup")
+        {
+            Debug.Log("0");
+            if (battleField != null)
+            {
+                Debug.Log("1");
+                GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name);
+            }
+        }
+        
 
         yield return null;
         //prefab.transform.position = trackedImage.transform.position;
@@ -234,6 +247,8 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
 {
     localpos = p_LocalPos;
 }*/
+
+
 [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
     public void SpawnPlayerServerRpc(string name, Vector3 localpos, int prefabId, ServerRpcParams serverRpcParams = default)
     {

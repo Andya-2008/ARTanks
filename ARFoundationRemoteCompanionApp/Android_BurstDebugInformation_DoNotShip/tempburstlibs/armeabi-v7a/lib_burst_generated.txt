@@ -33,6 +33,9 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.Netcode.Components;
 --assembly-defines=Unity.Netcode.Runtime;
 --assembly-defines=Unity.Networking.Transport;
+--assembly-defines=Unity.ProBuilder;
+--assembly-defines=Unity.ProBuilder.KdTree;
+--assembly-defines=Unity.ProBuilder.Poly2Tri;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
@@ -51,6 +54,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.Services.Relay;
 --assembly-defines=Unity.Services.Wire.Internal;
 --assembly-defines=Unity.TextMeshPro;
+--assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.XR.ARCore;
 --assembly-defines=Unity.XR.ARFoundation;
 --assembly-defines=Unity.XR.ARFoundation.InternalUtils;
@@ -168,6 +172,9 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.Netcode.Components;
 --assembly-defines=Unity.Netcode.Runtime;
 --assembly-defines=Unity.Networking.Transport;
+--assembly-defines=Unity.ProBuilder;
+--assembly-defines=Unity.ProBuilder.KdTree;
+--assembly-defines=Unity.ProBuilder.Poly2Tri;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
@@ -186,6 +193,7 @@ Library: C:\Users\andre\source\repos\ARTanks\Temp\BurstOutput\tempburstlibs\arme
 --assembly-defines=Unity.Services.Relay;
 --assembly-defines=Unity.Services.Wire.Internal;
 --assembly-defines=Unity.TextMeshPro;
+--assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.XR.ARCore;
 --assembly-defines=Unity.XR.ARFoundation;
 --assembly-defines=Unity.XR.ARFoundation.InternalUtils;
