@@ -37,7 +37,6 @@ public class ImageTracking : NetworkBehaviour
     private void Awake()
     {
         trackedImageManager = FindFirstObjectByType<ARTrackedImageManager>();
-        GetComponent<ARTrackedImageManager>().maxNumberOfMovingImages = 0;
     }
     private void Update()
     {

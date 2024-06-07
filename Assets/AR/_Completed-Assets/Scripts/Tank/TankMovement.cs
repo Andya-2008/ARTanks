@@ -129,7 +129,7 @@ public class TankMovement : NetworkBehaviour
 
     private void Move()
     {
-        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        this.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
         Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime;
 
