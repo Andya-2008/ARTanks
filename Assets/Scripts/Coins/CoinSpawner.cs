@@ -1,0 +1,152 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Netcode;
+using UnityEngine;
+
+public class CoinSpawner : NetworkBehaviour
+{
+    //[SerializeField] private RespawningCoin coinPrefab;
+    [SerializeField] private GameObject goCoin;
+
+    [SerializeField] private int maxCoins = 50;
+    [SerializeField] private int coinValue = 10;
+    [SerializeField] private Vector2 xSpawnRange;
+    [SerializeField] private Vector2 ySpawnRange;
+    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private float spawningInterval = 10;
+
+    private Collider[] coinBuffer = new Collider[1];
+    private float coinRadius;
+    private float lastSpawn = 0;
+    private bool spawnOn = false;
+    private GameObject battleField;
+
+	/*
+    public override void OnNetworkSpawn()
+    {
+        if (!IsServer) { return; }
+
+        coinRadius = coinPrefab.GetComponent<CapsuleCollider>().radius;
+
+        for (int i = 0; i < maxCoins; i++)
+        {
+            SpawnCoin();
+        }
+    }
+    */
+
+	private void Start()
+	{
+        Debug.Log("CoinSpawner:NetworkSpawn");
+        lastSpawn = Time.time;
+        battleField = this.gameObject;
+	}
+
+	private void Update()
+    {
+        if (!IsServer) { return; }
+        if (Time.time - lastSpawn > spawningInterval)
+        {
+            SpawnCoin();
+            lastSpawn = Time.time;
+        }
+
+
+    }
+    public void SpawnCoins()
+    {
+
+        Debug.Log("Spawn Coins (IsClient):" + IsClient);
+        Debug.Log("Spawn Coins (IsServer):" + IsServer);
+        Debug.Log("Spawn Coins (IsHost):" + IsHost);
+        Debug.Log("Spawn Coins (IsOwner):" + IsOwner);
+        Debug.Log("Spawn Coins (IsLocalPlayer):" + IsLocalPlayer);
+
+
+        if (!IsServer) { return; }
+        spawnOn = true;
+
+        coinRadius = goCoin.GetComponent<CapsuleCollider>().radius;
+
+
+
+        /*
+        for (int i = 0; i < maxCoins; i++)
+        {
+            Debug.Log("Spawn Coin");
+
+            SpawnCoin(battleField);
+        }
+        */
+
+    }
+
+
+
+
+    private void SpawnCoin()
+    {
+        //RespawningCoin coinInstance = Instantiate(coinPrefab,GetSpawnPoint(),Quaternion.identity);
+
+        Debug.Log("SpawnCoin");
+
+        GameObject coinInstance = Instantiate(goCoin, GetRandomPoint(), Quaternion.identity);
+        //GameObject coinInstance = Instantiate(goCoin, battleField.transform, false);
+        coinInstance.transform.localPosition = GetRandomPoint();
+        coinInstance.SetActive(false);
+
+
+
+        coinInstance.GetComponent<NetworkObject>().Spawn();
+        coinInstance.transform.parent = battleField.transform;
+        coinInstance.SetActive(true);
+        //coinInstance.transform.localPosition = GetRandomPoint();
+
+        /*
+        RespawningCoin rc = coinInstance.GetComponent<RespawningCoin>();
+        rc.SetValue(coinValue);
+
+        
+        
+        Debug.Log("NewPosition: " + GetSpawnPoint());
+        NetworkObject netObj = coinInstance.GetComponent<NetworkObject>();
+        //netObj.Spawn();
+        //coinInstance.GetComponent<NetworkObject>().Spawn();
+        rc.OnCollected += HandleCoinCollected;
+        */
+
+    }
+
+    private void HandleCoinCollected(RespawningCoin coin)
+    {
+        coin.transform.position = GetSpawnPoint();
+        //coin.Reset();
+    }
+
+    private Vector3 GetRandomPoint()
+    {
+        float x = 0;
+        float y = 0;
+        x = Random.Range(xSpawnRange.x, xSpawnRange.y);
+        y = Random.Range(ySpawnRange.x, ySpawnRange.y);
+        Vector3 spawnPoint = new Vector3(x, 0, y);
+        return spawnPoint;
+    }
+
+    private Vector3 GetSpawnPoint()
+    {
+        float x = 0;
+        float y = 0;
+        while (true)
+        {
+            x = Random.Range(xSpawnRange.x, xSpawnRange.y);
+            y = Random.Range(ySpawnRange.x, ySpawnRange.y);
+            Vector3 spawnPoint = new Vector3(x, 0, y);
+            int numColliders = Physics.OverlapSphereNonAlloc(spawnPoint, coinRadius, coinBuffer, layerMask);
+            if (numColliders == 0)
+            {
+                return spawnPoint;
+            }
+        }
+    }
+}
