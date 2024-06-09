@@ -19,9 +19,21 @@ public class TankPowerups : NetworkBehaviour
     }
 
     [Rpc(SendTo.Everyone)]
-    public void BulletSpeedRPC()
+    public void BulletReloadRPC()
     {
         Debug.Log("3");
         this.GetComponent<TankShooting>().m_ReloadTime -= .75f;
+    }
+    [Rpc(SendTo.Everyone)]
+    public void BulletSpeedRPC()
+    {
+        Debug.Log("3");
+        this.GetComponent<TankShooting>().m_BulletSpeed += .0025f;
+    }
+    [Rpc(SendTo.Everyone)]
+    public void BulletPowerRPC()
+    {
+        Debug.Log("3");
+        this.GetComponent<TankShooting>().m_BulletPower += 50;
     }
 }
