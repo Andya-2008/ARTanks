@@ -9,17 +9,23 @@ public class RespawningCoin : Coin
     public event Action<RespawningCoin> OnCollected;
 
     private Vector3 previousPosition;
+    private CoinSpawner cs;
+    private float lastMove = 0f;
+    [SerializeField] int MoveAfterSeconds = 30;
+
+    private void Start()
+    {
+        cs = GameObject.Find("Battlefield1").GetComponent<CoinSpawner>();
+        alreadyCollected = false;
+    }
 
     private void Update()
     {
-        /*
-        if (previousPosition != transform.position)
+        if (Time.time - lastMove > MoveAfterSeconds)
         {
-            Show(true);
+            lastMove = Time.time;
+            moveCoin();
         }
-
-        previousPosition = transform.position;
-        */
     }
 
     public override int Collect()
@@ -28,23 +34,37 @@ public class RespawningCoin : Coin
         if (!IsServer)
         {
             Show(false);
+            Debug.Log("Coin COllected Not Server!");
             return 0;
         }
-
-        if (alreadyCollected) { return 0; }
+        */
+        if (alreadyCollected)
+        {
+            Debug.Log("Coin Collected Already COllected");
+            moveCoin();
+            return 0;
+        }
 
         alreadyCollected = true;
 
         //OnCollected?.Invoke(this);
 
-        return coinValue;
-        */
+
+        moveCoin();
+        Debug.Log("Moved Coin");
+        //return coinValue;
         return 10;
     }
 
     public void Reset()
     {
-        //alreadyCollected = false;
+        alreadyCollected = false;
     }
 
+    private void moveCoin()
+    {
+        Vector3 newpos = cs.GetRandomPoint();
+        this.transform.position = newpos;
+        alreadyCollected = false;
+    }
 }

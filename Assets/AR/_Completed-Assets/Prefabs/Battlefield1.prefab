@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goCoin: {fileID: 4825307102613191828, guid: b6fa5a3c406f166439d2bdeb05592081, type: 3}
-  maxCoins: 20
+  maxCoins: 5
   coinValue: 10
   xSpawnRange: {x: 0.5, y: -0.5}
   ySpawnRange: {x: 0.5, y: -0.5}

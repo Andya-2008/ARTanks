@@ -230,6 +230,9 @@ public class ImageTracking : NetworkBehaviour
             if (battleField != null)
             {
                 Debug.Log("1");
+                Quaternion worldRotation = new Quaternion(trackedImage.transform.localRotation.x, trackedImage.transform.localRotation.y, trackedImage.transform.localRotation.z, trackedImage.transform.localRotation.w);
+                //worldRotation *= Quaternion.Euler(90, 0, 0);
+                prefab = Instantiate(pf, trackedImage.transform.position, worldRotation);
                 GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name);
             }
         }

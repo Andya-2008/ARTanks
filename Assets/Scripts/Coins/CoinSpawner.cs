@@ -20,8 +20,9 @@ public class CoinSpawner : NetworkBehaviour
     private float lastSpawn = 0;
     private bool spawnOn = false;
     private GameObject battleField;
+    private int coinCount = 0;
 
-	/*
+    /*
     public override void OnNetworkSpawn()
     {
         if (!IsServer) { return; }
@@ -35,20 +36,26 @@ public class CoinSpawner : NetworkBehaviour
     }
     */
 
-	private void Start()
-	{
+    private void Start()
+    {
         Debug.Log("CoinSpawner:NetworkSpawn");
         lastSpawn = Time.time;
         battleField = this.gameObject;
-	}
 
-	private void Update()
+    }
+
+    private void Update()
     {
+
         if (!IsServer) { return; }
-        if (Time.time - lastSpawn > spawningInterval)
+        if (coinCount < maxCoins)
         {
-            SpawnCoin();
-            lastSpawn = Time.time;
+            if (Time.time - lastSpawn > spawningInterval)
+            {
+                SpawnCoin();
+                coinCount += 1;
+                lastSpawn = Time.time;
+            }
         }
 
 
@@ -70,14 +77,13 @@ public class CoinSpawner : NetworkBehaviour
 
 
 
-        /*
+
         for (int i = 0; i < maxCoins; i++)
         {
             Debug.Log("Spawn Coin");
-
-            SpawnCoin(battleField);
+            SpawnCoin();
         }
-        */
+
 
     }
 
@@ -123,7 +129,7 @@ public class CoinSpawner : NetworkBehaviour
         //coin.Reset();
     }
 
-    private Vector3 GetRandomPoint()
+    public Vector3 GetRandomPoint()
     {
         float x = 0;
         float y = 0;
@@ -133,7 +139,7 @@ public class CoinSpawner : NetworkBehaviour
         return spawnPoint;
     }
 
-    private Vector3 GetSpawnPoint()
+    public Vector3 GetSpawnPoint()
     {
         float x = 0;
         float y = 0;
