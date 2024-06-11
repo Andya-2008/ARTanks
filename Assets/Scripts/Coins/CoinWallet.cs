@@ -19,23 +19,46 @@ public class CoinWallet : NetworkBehaviour
     {
         Debug.Log("Coin Trigger Enter");
         if (!col.TryGetComponent<Coin>(out Coin coin)) { return; }
-
+        if (!IsOwner) { return; }
 
         int coinValue = coin.Collect();
         Debug.Log("Collect:" + col.name + ":" + coinValue.ToString());
-        if (!IsServer) { return; }
+        UpdateCoinsServerRPC(coinValue);
+        //if (!IsServer) { return; }
+        /*
+        TotalCoins.Value += coinValue;
+        Debug.Log("Total Coin Value:" + TotalCoins.Value);
+        
+        ClientRpcParams rpcParams = default;
+        rpcParams.Send.TargetClientIds = new ulong[this.GetComponent<NetworkObject>().OwnerClientId];
+        UpdateWalletClientRPC(TotalCoins.Value, rpcParams);
+        */
+
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void UpdateCoinsServerRPC(int coinValue, ServerRpcParams serverRpcParams = default)
+    {
+        ulong clientId = serverRpcParams.Receive.SenderClientId;
+        ulong[] singleTarget = new ulong[1];
+        singleTarget[0] = clientId;
 
         TotalCoins.Value += coinValue;
         Debug.Log("Total Coin Value:" + TotalCoins.Value);
+
         ClientRpcParams rpcParams = default;
-        rpcParams.Send.TargetClientIds = new ulong[this.GetComponent<NetworkObject>().NetworkObjectId];
+        rpcParams.Send.TargetClientIds = singleTarget;
+
         UpdateWalletClientRPC(TotalCoins.Value, rpcParams);
+
     }
 
+
     [ClientRpc]
-    public void UpdateWalletClientRPC(int coinValue, ClientRpcParams rpcParams = default)
+    public void UpdateWalletClientRPC(int totalCoinValue, ClientRpcParams rpcParams = default)
     {
-        coinText.text = coinValue.ToString();
+        coinText.text = totalCoinValue.ToString();
     }
 
 }

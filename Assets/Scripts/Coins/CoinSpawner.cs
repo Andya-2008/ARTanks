@@ -89,19 +89,9 @@ public class CoinSpawner : NetworkBehaviour
 
     private void SpawnCoin()
     {
-        //RespawningCoin coinInstance = Instantiate(coinPrefab,GetSpawnPoint(),Quaternion.identity);
-
         Debug.Log("SpawnCoin");
-
         GameObject coinInstance = Instantiate(goCoin, GetRandomPoint(), Quaternion.identity);
-        //GameObject coinInstance = Instantiate(goCoin, battleField.transform, false);
-        //coinInstance.transform.localPosition = GetRandomPoint();
-
-
-        
         coinInstance.GetComponent<NetworkObject>().Spawn();
-
-
     }
 
     private void HandleCoinCollected(RespawningCoin coin)
@@ -116,7 +106,7 @@ public class CoinSpawner : NetworkBehaviour
         float y = 0;
         x = Random.Range(xSpawnRange.x, xSpawnRange.y);
         y = Random.Range(ySpawnRange.x, ySpawnRange.y);
-        Vector3 spawnPoint = new Vector3(x, 0, y);
+        Vector3 spawnPoint = new Vector3(x, this.gameObject.transform.position.y, y);
         return spawnPoint;
     }
 
