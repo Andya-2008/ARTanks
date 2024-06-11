@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 183185267
       objectReference: {fileID: 0}
+    - target: {fileID: -6306695118286108862, guid: 04f114b65050b954cb3b88a02e0917d8,
+        type: 3}
+      propertyPath: AutoObjectParentSync
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3300104726860740563, guid: 04f114b65050b954cb3b88a02e0917d8,
         type: 3}
       propertyPath: m_Name
@@ -80,6 +85,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -6771944639574563281}
+    - targetCorrespondingSourceObject: {fileID: 3300104726860740563, guid: 04f114b65050b954cb3b88a02e0917d8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6265860342517595959}
   m_SourcePrefab: {fileID: 100100000, guid: 04f114b65050b954cb3b88a02e0917d8, type: 3}
 --- !u!23 &4227999844472957059 stripped
 MeshRenderer:
@@ -106,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 4227999844472957059}
+  MoveAfterSeconds: 30
 --- !u!114 &-6771944639574563281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,5 +126,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7db96087b0ff774f9d5677c748fc675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6265860342517595959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4825307102613191828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5957fa9df444534489cb5e88a4d114b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

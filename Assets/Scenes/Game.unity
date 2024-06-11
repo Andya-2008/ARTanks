@@ -2100,7 +2100,7 @@ MonoBehaviour:
   ARCamera: {fileID: 201040072}
   MainCamera: {fileID: 330585543}
   WinPlane: {fileID: 1791898098}
-  PlayOnEditor: 0
+  PlayOnEditor: 1
 --- !u!1 &1073562573
 GameObject:
   m_ObjectHideFlags: 0

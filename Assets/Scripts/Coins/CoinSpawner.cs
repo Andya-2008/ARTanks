@@ -75,9 +75,6 @@ public class CoinSpawner : NetworkBehaviour
 
         coinRadius = goCoin.GetComponent<CapsuleCollider>().radius;
 
-
-
-
         for (int i = 0; i < maxCoins; i++)
         {
             Debug.Log("Spawn Coin");
@@ -98,28 +95,12 @@ public class CoinSpawner : NetworkBehaviour
 
         GameObject coinInstance = Instantiate(goCoin, GetRandomPoint(), Quaternion.identity);
         //GameObject coinInstance = Instantiate(goCoin, battleField.transform, false);
-        coinInstance.transform.localPosition = GetRandomPoint();
-        coinInstance.SetActive(false);
-
-
-
-        coinInstance.GetComponent<NetworkObject>().Spawn();
-        coinInstance.transform.parent = battleField.transform;
-        coinInstance.SetActive(true);
         //coinInstance.transform.localPosition = GetRandomPoint();
 
-        /*
-        RespawningCoin rc = coinInstance.GetComponent<RespawningCoin>();
-        rc.SetValue(coinValue);
 
         
-        
-        Debug.Log("NewPosition: " + GetSpawnPoint());
-        NetworkObject netObj = coinInstance.GetComponent<NetworkObject>();
-        //netObj.Spawn();
-        //coinInstance.GetComponent<NetworkObject>().Spawn();
-        rc.OnCollected += HandleCoinCollected;
-        */
+        coinInstance.GetComponent<NetworkObject>().Spawn();
+
 
     }
 

@@ -19,6 +19,9 @@ public class RespawningCoin : Coin
         alreadyCollected = false;
     }
 
+    public override void OnNetworkSpawn() {
+
+    }
     private void Update()
     {
         if (Time.time - lastMove > MoveAfterSeconds)
@@ -67,4 +70,8 @@ public class RespawningCoin : Coin
         this.transform.position = newpos;
         alreadyCollected = false;
     }
+
+
+    
+
 }
