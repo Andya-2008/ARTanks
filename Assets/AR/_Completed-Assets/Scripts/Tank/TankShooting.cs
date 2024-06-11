@@ -23,6 +23,8 @@ namespace Complete
         private float m_ChargeSpeed;                // How fast the launch force increases, based on the max charge time.
         private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
         [SerializeField] public float m_ReloadTime = 1.5f; // Time to reload
+        [SerializeField] public float m_BulletPower = 50f; // Time to reload
+        [SerializeField] public float m_BulletSpeed = .005f; // Time to reload
         public float startTime;
         private void OnEnable()
         {
@@ -40,7 +42,7 @@ namespace Complete
             // The rate that the launch force charges up is the range of possible forces by the max charge time.
             m_ChargeSpeed = (m_MaxLaunchForce - m_MinLaunchForce) / m_MaxChargeTime;
             startTime = Time.time;
-            
+
         }
 
 
@@ -96,11 +98,12 @@ namespace Complete
         {
             Rigidbody shellInstance =
                 Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation, GameObject.Find("Battlefield1").transform) as Rigidbody;
+            shellInstance.GetComponent<ShellExplosion>().m_MaxDamage = m_BulletPower;
             if (FindNetworkObject(objectId).gameObject.tag == "MyTank")
             {
                 m_Shell.gameObject.tag = "MyBullet";
             }
-                //shellInstance.AddForce(transform.forward * m_MaxLaunchForce * 100 * Time.deltaTime);
+            //shellInstance.AddForce(transform.forward * m_MaxLaunchForce * 100 * Time.deltaTime);
         }
 
 
