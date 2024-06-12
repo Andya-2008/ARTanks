@@ -454,6 +454,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCanvas: {fileID: 6546063511735644670}
   button3d: {fileID: 4485248747248339999}
+  cost: 20
+  costText: {fileID: 4763102281573679323}
 --- !u!1 &3157334597304263067
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +974,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cost: 10 coins'
+  m_text: 'Cost: 99 coins'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
