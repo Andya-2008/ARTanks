@@ -29,6 +29,9 @@ public class ImageTracking : NetworkBehaviour
     GameObject prefab;
     private string strDebug = "";
     private string tiDebug = "";
+    public GameObject BSP;
+    public GameObject BPP;
+    public GameObject BRP;
     //public NetworkVariable<Vector3> localpos = new NetworkVariable<Vector3>();
     //public Vector3 localpos;
 
@@ -145,7 +148,19 @@ public class ImageTracking : NetworkBehaviour
         {
             if (trackedImage.referenceImage.name.Contains("Battlefield"))
             {
-                updateObject(trackedImage);
+                updateObject(trackedImage, "Battlefield");
+            }
+            if (trackedImage.referenceImage.name.Contains("BulletSpeed"))
+            {
+                updateObject(trackedImage, "BSP");
+            }
+            if (trackedImage.referenceImage.name.Contains("BulletReload"))
+            {
+                updateObject(trackedImage, "BRP");
+            }
+            if (trackedImage.referenceImage.name.Contains("BulletPower"))
+            {
+                updateObject(trackedImage, "BPP");
             }
         }
     }
@@ -155,12 +170,31 @@ public class ImageTracking : NetworkBehaviour
         DebugText.text = txt;
     }
 
-    private void updateObject(ARTrackedImage trackedImage) {
-        if (GameObject.FindGameObjectWithTag("Battlefield")) {
-            battleField = GameObject.FindGameObjectWithTag("Battlefield");
-            battleField.transform.position = trackedImage.transform.position;
-            battleField.transform.rotation = trackedImage.transform.rotation;
-            
+    private void updateObject(ARTrackedImage trackedImage, string updatedImg) {
+        if (updatedImg == "Battlefield")
+        {
+            if (GameObject.FindGameObjectWithTag("Battlefield"))
+            {
+                battleField = GameObject.FindGameObjectWithTag("Battlefield");
+                battleField.transform.position = trackedImage.transform.position;
+                battleField.transform.rotation = trackedImage.transform.rotation;
+
+            }
+        }
+        else if(updatedImg == "BSP")
+        {
+            BSP.transform.position = trackedImage.transform.position;
+            BSP.transform.rotation = trackedImage.transform.rotation;
+        }
+        else if(updatedImg == "BRP")
+        {
+            BRP.transform.position = trackedImage.transform.position;
+            BRP.transform.rotation = trackedImage.transform.rotation;
+        }
+        else if(updatedImg == "BPP")
+        {
+            BPP.transform.position = trackedImage.transform.position;
+            BPP.transform.rotation = trackedImage.transform.rotation;
         }
         }
     IEnumerator CreateObject(ARTrackedImagePlus trackedImage)
@@ -233,7 +267,19 @@ public class ImageTracking : NetworkBehaviour
                 Quaternion worldRotation = new Quaternion(trackedImage.transform.localRotation.x, trackedImage.transform.localRotation.y, trackedImage.transform.localRotation.z, trackedImage.transform.localRotation.w);
                 //worldRotation *= Quaternion.Euler(90, 0, 0);
                 prefab = Instantiate(pf, trackedImage.transform.position, worldRotation);
-                GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name);
+                if(pf.name == "BulletSpeed_Powerup")
+                {
+                    BSP = prefab;
+                }
+                if(pf.name == "BulletPower_Powerup")
+                {
+                    BPP = prefab;
+                }
+                if(pf.name == "BulletReload_Powerup")
+                {
+                    BRP = prefab;
+                }
+                //GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name);
             }
         }
         
