@@ -49,6 +49,18 @@ Debug.Log("Unity Standalone Win");
 #endif
 
 
+#if UNITY_EDITOR_OSX
+        if (PlayOnEditor)
+        {
+            Debug.Log("Unity Editor Win");
+            ARCamera.SetActive(false);
+            MainCamera.SetActive(true);
+            WinPlane.SetActive(true);
+            Screen.SetResolution(1920, 1080, false);
+            //MainCamera.GetComponent<Camera>().aspect = 1;
+        }
+
+#endif
 
 
 
