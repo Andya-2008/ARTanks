@@ -4,7 +4,6 @@ using UnityEngine;
 public abstract class Coin : NetworkBehaviour
 {
     [SerializeField] private MeshRenderer meshRenderer;
-
     protected int coinValue = 10;
     protected bool alreadyCollected;
 

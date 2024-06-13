@@ -7,7 +7,8 @@ using TMPro;
 public class CoinWallet : NetworkBehaviour
 {
     public NetworkVariable<int> TotalCoins = new NetworkVariable<int>();
-
+    public AudioSource m_CoinAudio;         // Reference to the audio source used to play the shooting audio. NB: different to the movement audio source.
+    public AudioClip m_CoinClip;            // Audio that plays when each shot is charging up.
     private TMP_Text coinText;
     private void Start()
     {
@@ -19,11 +20,17 @@ public class CoinWallet : NetworkBehaviour
     {
         Debug.Log("Coin Trigger Enter");
         if (!col.TryGetComponent<Coin>(out Coin coin)) { return; }
-        if (!IsOwner) { return; }
+        
 
         int coinValue = coin.Collect();
         Debug.Log("Collect:" + col.name + ":" + coinValue.ToString());
+        
+        if (!IsOwner) { return; }
         UpdateCoinsServerRPC(coinValue);
+
+        m_CoinAudio.clip = m_CoinClip;
+        m_CoinAudio.Play();
+        
         //if (!IsServer) { return; }
         /*
         TotalCoins.Value += coinValue;
@@ -40,6 +47,7 @@ public class CoinWallet : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void UpdateCoinsServerRPC(int coinValue, ServerRpcParams serverRpcParams = default)
     {
+        Debug.Log("UpdateCoinsServerRPC");
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         ulong[] singleTarget = new ulong[1];
         singleTarget[0] = clientId;
@@ -58,6 +66,7 @@ public class CoinWallet : NetworkBehaviour
     [ClientRpc]
     public void UpdateWalletClientRPC(int totalCoinValue, ClientRpcParams rpcParams = default)
     {
+        Debug.Log("UpdateWalletClientRPC");
         coinText.text = totalCoinValue.ToString();
     }
 

@@ -10764,6 +10764,8 @@ MonoBehaviour:
   m_MaxLaunchForce: 2
   m_MaxChargeTime: 0.75
   m_ReloadTime: 1.5
+  m_BulletPower: 50
+  m_BulletSpeed: 0.005
   startTime: 0
 --- !u!114 &2146015601689436828
 MonoBehaviour:
@@ -10901,6 +10903,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalCoins:
     m_InternalValue: 0
+  m_CoinAudio: {fileID: 7152733778266410087}
+  m_CoinClip: {fileID: 8300000, guid: e897fffaea5b12f42a296aab9914e60d, type: 3}
 --- !u!1 &6000130663760585358
 GameObject:
   m_ObjectHideFlags: 0
