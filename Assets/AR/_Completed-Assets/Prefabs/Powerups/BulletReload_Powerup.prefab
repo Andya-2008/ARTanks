@@ -454,7 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCanvas: {fileID: 6546063511735644670}
   button3d: {fileID: 4485248747248339999}
-  cost: 20
+  cost: 10
   costText: {fileID: 4763102281573679323}
 --- !u!1 &3157334597304263067
 GameObject:
