@@ -23,6 +23,7 @@ public class ImageTracking : NetworkBehaviour
     private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
     //private List<ARTrackedImage> newImages = new List<ARTrackedImage>();
     private ARTrackedImageManager trackedImageManager;
+    private bool hasSpawnedTank = false;
 
     float startTime;
     bool started;
@@ -252,10 +253,12 @@ public class ImageTracking : NetworkBehaviour
         }
         if (pf.tag == "Tank" || pf.tag == "MyTank")
         {
-
-            Vector3 localpos = worldToLocal(trackedImage.transform.position, battleField.transform);
-            Debug.Log(localpos);
-            SpawnPlayerServerRpc(name, localpos, prefabId);
+            if (!hasSpawnedTank) {
+                hasSpawnedTank = true;
+                Vector3 localpos = worldToLocal(trackedImage.transform.position, battleField.transform);
+                Debug.Log(localpos);
+                SpawnPlayerServerRpc(name, localpos, prefabId);
+            }
         }
         Debug.Log("-1");
         if(pf.tag == "Powerup")
