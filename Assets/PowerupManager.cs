@@ -19,20 +19,25 @@ public class PowerupManager : MonoBehaviour
 
     public void SpawnPowerup(string powerup)
     {
-        if (powerup.Contains("BulletReload_Powerup"))
+        if (powerup.Contains("BulletReload"))
         {
             Debug.Log("2");
             GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().BulletReloadRPC();
         }
-        if (powerup.Contains("BulletSpeed_Powerup"))
+        if (powerup.Contains("BulletSpeed"))
         {
             Debug.Log("2");
             GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().BulletSpeedRPC();
         }
-        if (powerup.Contains("BulletPower_Powerup"))
+        if (powerup.Contains("BulletPower"))
         {
             Debug.Log("2");
             GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().BulletPowerRPC();
+        }
+        if (powerup.Contains("TankSpeed"))
+        {
+            Debug.Log("2");
+            GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().TankSpeedRPC();
         }
     }
 }

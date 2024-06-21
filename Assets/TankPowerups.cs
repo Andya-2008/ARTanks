@@ -36,4 +36,10 @@ public class TankPowerups : NetworkBehaviour
         Debug.Log("3");
         this.GetComponent<TankShooting>().m_BulletPower += 50;
     }
+    [Rpc(SendTo.Everyone)]
+    public void TankSpeedRPC()
+    {
+        Debug.Log("3");
+        this.GetComponent<TankMovement>().m_Speed *= 1.3f;
+    }
 }
