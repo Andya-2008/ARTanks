@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Unity.Netcode;
 using TMPro;
+using System;
 public class TankMovement : NetworkBehaviour
 {
     public int m_PlayerNumber = 1;              // Used to identify which tank belongs to which player.  This is set by this tank's manager.
@@ -14,8 +15,8 @@ public class TankMovement : NetworkBehaviour
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
     private string m_TurnAxisName;              // The name of the input axis for turning.
     private Rigidbody m_Rigidbody;              // Reference used to move the tank.
-    private float m_MovementInputValue;         // The current value of the movement input.
-    private float m_TurnInputValue;             // The current value of the turn input.
+    private float m_VerticalInputValue;         // The current value of the movement input.
+    private float m_HorizontalInputValue;             // The current value of the turn input.
     private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
     private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
     FixedJoystick joystick;
@@ -31,8 +32,8 @@ public class TankMovement : NetworkBehaviour
         m_Rigidbody.isKinematic = false;
 
         // Also reset the input values.
-        m_MovementInputValue = 0f;
-        m_TurnInputValue = 0f;
+        m_VerticalInputValue = 0f;
+        m_HorizontalInputValue = 0f;
 
         // We grab all the Particle systems child of that Tank to be able to Stop/Play them on Deactivate/Activate
         // It is needed because we move the Tank when spawning it, and if the Particle System is playing while we do that
@@ -81,25 +82,24 @@ public class TankMovement : NetworkBehaviour
         if (NetworkObject.IsOwner)
         {
             // Store the value of both input axes.
-            m_MovementInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Vertical;
-            m_TurnInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Horizontal;
+            m_VerticalInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Vertical;
+            m_HorizontalInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Horizontal;
 
             EngineAudio();
         }
     }
 
-
     private void EngineAudio()
     {
         // If there is no input (the tank is stationary)...
-        if (Mathf.Abs(m_MovementInputValue) < 0.1f && Mathf.Abs(m_TurnInputValue) < 0.1f)
+        if (Mathf.Abs(m_VerticalInputValue) < 0.1f && Mathf.Abs(m_HorizontalInputValue) < 0.1f)
         {
             // ... and if the audio source is currently playing the driving clip...
             if (m_MovementAudio.clip == m_EngineDriving)
             {
                 // ... change the clip to idling and play it.
                 m_MovementAudio.clip = m_EngineIdling;
-                m_MovementAudio.pitch = Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
+                m_MovementAudio.pitch = UnityEngine.Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
                 m_MovementAudio.Play();
             }
         }
@@ -110,7 +110,7 @@ public class TankMovement : NetworkBehaviour
             {
                 // ... change the clip to driving and play.
                 m_MovementAudio.clip = m_EngineDriving;
-                m_MovementAudio.pitch = Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
+                m_MovementAudio.pitch = UnityEngine.Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
                 m_MovementAudio.Play();
             }
         }
@@ -119,10 +119,13 @@ public class TankMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (NetworkObject.IsOwner)
+        if (Mathf.Abs(m_VerticalInputValue) >= 0.1f && Mathf.Abs(m_HorizontalInputValue) >= 0.1f)
         {
-            Move();
-            Turn();
+            if (NetworkObject.IsOwner)
+            {
+                Move();
+                Turn();
+            }
         }
     }
 
@@ -131,7 +134,8 @@ public class TankMovement : NetworkBehaviour
     {
         this.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
-        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime;
+        float stickSpeed = Mathf.Sqrt(Mathf.Pow(m_HorizontalInputValue,2) + Mathf.Pow(m_VerticalInputValue,2));
+        Vector3 movement = transform.forward * stickSpeed * m_Speed * Time.deltaTime;
 
         // Apply this movement to the rigidbody's position.
         m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
@@ -140,13 +144,18 @@ public class TankMovement : NetworkBehaviour
 
     private void Turn()
     {
+        /*
         // Determine the number of degrees to be turned based on the input, speed and time between frames.
         float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
-
+        */
         // Make this into a rotation in the y axis.
-        Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
+        //tan theta = y1-y2/x1-x2
+        float CameraAngle = 180 / Mathf.PI * Mathf.Atan2(Camera.main.transform.position.z - transform.position.z, Camera.main.transform.position.x - transform.position.x) + 90;
+        float stickAngle = -(180 / Mathf.PI * Mathf.Atan2(m_VerticalInputValue, m_HorizontalInputValue) - 90);
+        Debug.Log("CameraAngle: " + CameraAngle + " : stickAngle: " + stickAngle);
+        Quaternion turnRotation = Quaternion.Euler(0f, -CameraAngle + stickAngle, 0f);
 
         // Apply this rotation to the rigidbody's rotation.
-        m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
+        this.transform.rotation = turnRotation;
     }
 }
