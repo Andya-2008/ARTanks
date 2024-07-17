@@ -152,7 +152,7 @@ public class TankMovement : NetworkBehaviour
         //tan theta = y1-y2/x1-x2
         float CameraAngle = 180 / Mathf.PI * Mathf.Atan2(Camera.main.transform.position.z - transform.position.z, Camera.main.transform.position.x - transform.position.x) + 90;
         float stickAngle = -(180 / Mathf.PI * Mathf.Atan2(m_VerticalInputValue, m_HorizontalInputValue) - 90);
-        Debug.Log("CameraAngle: " + CameraAngle + " : stickAngle: " + stickAngle);
+        //Debug.Log("CameraAngle: " + CameraAngle + " : stickAngle: " + stickAngle);
         Quaternion turnRotation = Quaternion.Euler(0f, -CameraAngle + stickAngle, 0f);
 
         // Apply this rotation to the rigidbody's rotation.

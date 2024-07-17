@@ -40,4 +40,9 @@ public class PowerupManager : MonoBehaviour
             GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().TankSpeedRPC();
         }
     }
+
+    public void AddPowerup()
+    {
+        Debug.Log("Added powerup");
+    }
 }

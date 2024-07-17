@@ -7,28 +7,34 @@ public class PowerupPopup : MonoBehaviour
     [SerializeField] RectTransform sliderPos;
     [SerializeField] RawImage rightArrow;
     [SerializeField] RawImage leftArrow;
+    [SerializeField] float extendRadius = .74f;
+    [SerializeField] Transform realButtonPos;
     bool closing;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        slider.value = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.GetComponent<RectTransform>().position = sliderPos.position;
-        if (slider.value <= .5)
+        this.GetComponent<RectTransform>().position =   realButtonPos.position;
+        if (slider.value <= (1-extendRadius) / 2 + extendRadius)
         {
-            rightArrow.enabled = true;
-            leftArrow.enabled = false;
+            /*rightArrow.enabled = true;
+            leftArrow.enabled = false;*/
             closing = true;
         }
-        if (slider.value > .5)
+        if (slider.value > (1-extendRadius) / 2 + extendRadius)
         {
-            rightArrow.enabled = false;
-            leftArrow.enabled = true;
+            /*rightArrow.enabled = false;
+            leftArrow.enabled = true;*/
             closing = false;
+        }
+        if (slider.value < extendRadius)
+        {
+            slider.value = extendRadius;
         }
     }
 
@@ -40,7 +46,8 @@ public class PowerupPopup : MonoBehaviour
         }
         else
         {
-            slider.value = 0;
+            //Change slider value if there are more powerups...
+            slider.value = extendRadius;
         }
     }
 }
