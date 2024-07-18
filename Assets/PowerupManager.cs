@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PowerupManager : MonoBehaviour
 {
+    [SerializeField] List<GameObject> uiPowerupSlots = new List<GameObject>();
+    int powerupsInitialized;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,9 +42,16 @@ public class PowerupManager : MonoBehaviour
             GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().TankSpeedRPC();
         }
     }
-
-    public void AddPowerup()
+    public void AddPowerupSlot()
     {
         Debug.Log("Added powerup");
+    }
+
+    public void AddPowerup(string powerup)
+    {
+        Transform powerupSlot = uiPowerupSlots[powerupsInitialized].transform;
+        GameObject newPowerupUI = Instantiate(Resources.Load("UIPowerups/" + powerup), new Vector3(0,0,0), Quaternion.identity) as GameObject;
+        newPowerupUI.transform.parent = powerupSlot;
+        powerupsInitialized++; 
     }
 }

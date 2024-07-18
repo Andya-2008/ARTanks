@@ -266,7 +266,9 @@ public class ImageTracking : NetworkBehaviour
             Debug.Log("0");
             if (battleField != null)
             {
-                Debug.Log("1");
+                GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(pf.name);
+
+                /*Debug.Log("1");
                 Quaternion worldRotation = new Quaternion(trackedImage.transform.localRotation.x, trackedImage.transform.localRotation.y, trackedImage.transform.localRotation.z, trackedImage.transform.localRotation.w);
                 //worldRotation *= Quaternion.Euler(90, 0, 0);
                 prefab = Instantiate(pf, trackedImage.transform.position, worldRotation);
@@ -283,6 +285,7 @@ public class ImageTracking : NetworkBehaviour
                     BRP = prefab;
                 }
                 //GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name);
+                */
             }
         }
         
