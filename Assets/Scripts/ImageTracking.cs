@@ -30,9 +30,6 @@ public class ImageTracking : NetworkBehaviour
     GameObject prefab;
     private string strDebug = "";
     private string tiDebug = "";
-    public GameObject BSP;
-    public GameObject BPP;
-    public GameObject BRP;
     //public NetworkVariable<Vector3> localpos = new NetworkVariable<Vector3>();
     //public Vector3 localpos;
 
@@ -138,7 +135,6 @@ public class ImageTracking : NetworkBehaviour
        
         foreach (ARTrackedImage trackedImage in eventArgs.added)
         {
-            Debug.Log("-3: " + trackedImage.referenceImage.name);
             if (spawnedPrefabs.ContainsKey(trackedImage.referenceImage.name)) { return; }
             ARTrackedImagePlus artip = new ARTrackedImagePlus();
             artip.trackedImage = trackedImage;
@@ -150,18 +146,6 @@ public class ImageTracking : NetworkBehaviour
             if (trackedImage.referenceImage.name.Contains("Battlefield"))
             {
                 updateObject(trackedImage, "Battlefield");
-            }
-            if (trackedImage.referenceImage.name.Contains("BulletSpeed"))
-            {
-                updateObject(trackedImage, "BSP");
-            }
-            if (trackedImage.referenceImage.name.Contains("BulletReload"))
-            {
-                updateObject(trackedImage, "BRP");
-            }
-            if (trackedImage.referenceImage.name.Contains("BulletPower"))
-            {
-                updateObject(trackedImage, "BPP");
             }
         }
     }
@@ -182,25 +166,9 @@ public class ImageTracking : NetworkBehaviour
 
             }
         }
-        else if(updatedImg == "BSP")
-        {
-            BSP.transform.position = trackedImage.transform.position;
-            BSP.transform.rotation = trackedImage.transform.rotation;
-        }
-        else if(updatedImg == "BRP")
-        {
-            BRP.transform.position = trackedImage.transform.position;
-            BRP.transform.rotation = trackedImage.transform.rotation;
-        }
-        else if(updatedImg == "BPP")
-        {
-            BPP.transform.position = trackedImage.transform.position;
-            BPP.transform.rotation = trackedImage.transform.rotation;
-        }
         }
     IEnumerator CreateObject(ARTrackedImagePlus trackedImage)
     {
-        Debug.Log("-2");
         string name = "";
 
         if (trackedImage.trackedImage != null)
@@ -260,15 +228,15 @@ public class ImageTracking : NetworkBehaviour
                 SpawnPlayerServerRpc(name, localpos, prefabId);
             }
         }
-        Debug.Log("-1");
         if(pf.tag == "Powerup")
         {
             Debug.Log("0");
+            GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(pf.name);
+            /*
             if (battleField != null)
             {
-                GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(pf.name);
 
-                /*Debug.Log("1");
+                Debug.Log("1");
                 Quaternion worldRotation = new Quaternion(trackedImage.transform.localRotation.x, trackedImage.transform.localRotation.y, trackedImage.transform.localRotation.z, trackedImage.transform.localRotation.w);
                 //worldRotation *= Quaternion.Euler(90, 0, 0);
                 prefab = Instantiate(pf, trackedImage.transform.position, worldRotation);
@@ -285,9 +253,9 @@ public class ImageTracking : NetworkBehaviour
                     BRP = prefab;
                 }
                 //GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name);
-                */
-            }
-        }
+                
+        }*/
+    }
         
 
         yield return null;

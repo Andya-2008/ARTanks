@@ -38,7 +38,6 @@ namespace Complete
             {
                 other.GetComponent<TankHealth>().TakeDamage();
             }
-            Debug.Log("Bullet collided with " + other.name);
             ExplodeBullet();
         }
 

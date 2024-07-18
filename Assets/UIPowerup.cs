@@ -9,7 +9,6 @@ public class UIPowerup : MonoBehaviour
     [SerializeField] float initCoverupHeight = 200;
     [SerializeField] float initCoverupWidth = 133.3333f;
     [SerializeField] RectTransform myCoverup;
-    [SerializeField] string powerupName;
     [SerializeField] TextMeshProUGUI myText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,7 +33,7 @@ public class UIPowerup : MonoBehaviour
             {
                 Debug.Log("Pressed powerup button");
                 GameObject.FindGameObjectWithTag("MyTank").GetComponent<CoinWallet>().UpdateCoinsServerRPC(-1 * cost);
-                GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(powerupName);
+                GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name);
             }
             else
             {

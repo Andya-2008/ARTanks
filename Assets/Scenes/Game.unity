@@ -3054,7 +3054,7 @@ MonoBehaviour:
   ARCamera: {fileID: 201040072}
   MainCamera: {fileID: 330585543}
   WinPlane: {fileID: 1791898098}
-  PlayOnEditor: 1
+  PlayOnEditor: 0
 --- !u!1 &1073562573
 GameObject:
   m_ObjectHideFlags: 0
@@ -4370,7 +4370,7 @@ GameObject:
   - component: {fileID: 1787173647}
   - component: {fileID: 1787173646}
   m_Layer: 5
-  m_Name: Button
+  m_Name: DoneButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4439,7 +4439,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1787173647}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 880667427}
+        m_TargetAssemblyTypeName: PowerupManager, Assembly-CSharp
+        m_MethodName: ClosePowerupCanvas
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1787173647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4691,9 +4703,6 @@ MonoBehaviour:
   - {fileID: 3008120504894950882, guid: 3a862bb7254c2c04e9d8632c72e9c547, type: 3}
   - {fileID: 3008120504894950882, guid: d3ab39d2c62029848a58164ed8844147, type: 3}
   - {fileID: 3008120504894950882, guid: fdae9946aa95b624db4a17787523e1d1, type: 3}
-  BSP: {fileID: 0}
-  BPP: {fileID: 0}
-  BRP: {fileID: 0}
   battleField: {fileID: 0}
 --- !u!114 &1809286837
 MonoBehaviour:

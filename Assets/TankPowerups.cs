@@ -22,7 +22,7 @@ public class TankPowerups : NetworkBehaviour
     public void BulletReloadRPC()
     {
         Debug.Log("3");
-        this.GetComponent<TankShooting>().m_ReloadTime -= .75f;
+        this.GetComponent<TankShooting>().m_ReloadTime -= .5f;
     }
     [Rpc(SendTo.Everyone)]
     public void BulletSpeedRPC()
