@@ -10,10 +10,18 @@ public class UIPowerup : MonoBehaviour
     [SerializeField] float initCoverupWidth = 133.3333f;
     [SerializeField] RectTransform myCoverup;
     [SerializeField] TextMeshProUGUI myText;
+    [SerializeField] string powerupDisplayName;
+    [SerializeField] int numOfBulletsOrTime;
+
+    [SerializeField] public GameObject PowerupSlider;
+    [SerializeField] public bool thisPowerupActive = false;
+
+    [SerializeField] public bool bulletBased;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         myText.text = cost.ToString() + " coins";
+        PowerupSlider.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,18 +35,39 @@ public class UIPowerup : MonoBehaviour
 
     public void OnPressPowerupButton()
     {
-        if (GameObject.FindGameObjectWithTag("MyTank") != null)
+        if (!thisPowerupActive)
         {
-            if (GameObject.FindGameObjectWithTag("MyTank").GetComponent<CoinWallet>().TotalCoins.Value >= cost)
+            thisPowerupActive = true;
+            if (GameObject.FindGameObjectWithTag("MyTank") != null)
             {
-                Debug.Log("Pressed powerup button");
-                GameObject.FindGameObjectWithTag("MyTank").GetComponent<CoinWallet>().UpdateCoinsServerRPC(-1 * cost);
-                GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name);
+                if (GameObject.FindGameObjectWithTag("MyTank").GetComponent<CoinWallet>().TotalCoins.Value >= cost)
+                {
+                    
+                    Debug.Log("Pressed powerup button");
+                    GameObject.FindGameObjectWithTag("MyTank").GetComponent<CoinWallet>().UpdateCoinsServerRPC(-1 * cost);
+                    GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name, powerupDisplayName, numOfBulletsOrTime, bulletBased);
+                    Debug.Log("2");
+                    PowerupSlider.SetActive(true);
+
+                    PowerupSlider.GetComponent<PowerupSliderController>().powerup = name;
+                    PowerupSlider.GetComponent<PowerupSliderController>().bulletBased = bulletBased;
+                    PowerupSlider.GetComponent<PowerupSliderController>().totalBulletsOrTime = numOfBulletsOrTime;
+                    PowerupSlider.GetComponent<PowerupSliderController>().bulletsFired = 0;
+                    PowerupSlider.GetComponent<PowerupSliderController>().powerupCoverUp.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 211);
+                    if (!bulletBased)
+                    {
+                        PowerupSlider.GetComponent<PowerupSliderController>().startPowerupTime = Time.time;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Ur poor");
+                }
             }
-            else
-            {
-                Debug.Log("Ur poor");
-            }
+        }
+        else
+        {
+            Debug.Log("Powerup already active!");
         }
     }
 

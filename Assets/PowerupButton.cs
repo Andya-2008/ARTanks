@@ -23,6 +23,7 @@ public class PowerupButton : MonoBehaviour
 
     public void EngageButton()
     {
+        /*
         //if is able to purchase powerup
         if (GameObject.FindGameObjectWithTag("MyTank").GetComponent<CoinWallet>().TotalCoins.Value >= cost)
         {
@@ -30,5 +31,6 @@ public class PowerupButton : MonoBehaviour
             button3d.GetComponent<PlayableDirector>().Play();
             GameObject.FindGameObjectWithTag("MyTank").GetComponent<CoinWallet>().UpdateCoinsServerRPC(-1*cost);
         }
+        */
     }
 }

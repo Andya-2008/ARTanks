@@ -18,12 +18,10 @@ public class CoinWallet : NetworkBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Coin Trigger Enter");
         if (!col.TryGetComponent<Coin>(out Coin coin)) { return; }
         
 
         int coinValue = coin.Collect();
-        Debug.Log("Collect:" + col.name + ":" + coinValue.ToString());
         
         if (!IsOwner) { return; }
         UpdateCoinsServerRPC(coinValue);
@@ -47,13 +45,11 @@ public class CoinWallet : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void UpdateCoinsServerRPC(int coinValue, ServerRpcParams serverRpcParams = default)
     {
-        Debug.Log("UpdateCoinsServerRPC");
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         ulong[] singleTarget = new ulong[1];
         singleTarget[0] = clientId;
 
         TotalCoins.Value += coinValue;
-        Debug.Log("Total Coin Value:" + TotalCoins.Value);
 
         ClientRpcParams rpcParams = default;
         rpcParams.Send.TargetClientIds = singleTarget;
@@ -66,7 +62,6 @@ public class CoinWallet : NetworkBehaviour
     [ClientRpc]
     public void UpdateWalletClientRPC(int totalCoinValue, ClientRpcParams rpcParams = default)
     {
-        Debug.Log("UpdateWalletClientRPC");
         coinText.text = totalCoinValue.ToString();
     }
 

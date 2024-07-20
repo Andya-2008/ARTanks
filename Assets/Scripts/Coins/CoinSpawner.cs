@@ -89,7 +89,6 @@ public class CoinSpawner : NetworkBehaviour
 
     private void SpawnCoin()
     {
-        Debug.Log("SpawnCoin");
         GameObject coinInstance = Instantiate(goCoin, GetRandomPoint(), Quaternion.identity);
         coinInstance.GetComponent<NetworkObject>().Spawn();
     }

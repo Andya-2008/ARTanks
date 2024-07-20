@@ -92,13 +92,20 @@ namespace Complete
             m_Fired = true;
             startTime = Time.time;
             ShootRpc(this.GetComponent<NetworkObject>().NetworkObjectId);
+            foreach (GameObject powerupSlider in GameObject.FindGameObjectsWithTag("PowerupSlider"))
+            {
+                powerupSlider.GetComponent<PowerupSliderController>().BulletFired();
+            }
         }
+
+
         [Rpc(SendTo.Everyone)] //server owns this object but client can request a spawn
         public void ShootRpc(ulong objectId)
         {
             Rigidbody shellInstance =
                 Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation, GameObject.Find("Battlefield1").transform) as Rigidbody;
             shellInstance.GetComponent<ShellExplosion>().m_MaxDamage = m_BulletPower;
+            shellInstance.GetComponent<BulletMove>().bulletSpeed = m_BulletSpeed;
             if (FindNetworkObject(objectId).gameObject.tag == "MyTank")
             {
                 m_Shell.gameObject.tag = "MyBullet";

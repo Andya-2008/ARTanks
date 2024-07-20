@@ -18,28 +18,45 @@ public class TankPowerups : NetworkBehaviour
         
     }
 
+
     [Rpc(SendTo.Everyone)]
-    public void BulletReloadRPC()
+    public void ActivateTankPowerupRPC(string poweruptype)
     {
-        Debug.Log("3");
-        this.GetComponent<TankShooting>().m_ReloadTime -= .5f;
+        if (poweruptype.Contains("BulletReload"))
+        {
+            this.GetComponent<TankShooting>().m_ReloadTime -= .75f;
+        }
+        else if (poweruptype.Contains("BulletSpeed"))
+        {
+            this.GetComponent<TankShooting>().m_BulletSpeed += .005f;
+        }
+        else if (poweruptype.Contains("BulletPower"))
+        {
+            this.GetComponent<TankShooting>().m_BulletPower += 50;
+        }
+        else if (poweruptype.Contains("TankSpeed"))
+        {
+            this.GetComponent<TankMovement>().m_Speed += 6f;
+        }
     }
-    [Rpc(SendTo.Everyone)]
-    public void BulletSpeedRPC()
+    public void DeactivateTankPowerupRPC(string poweruptype)
     {
-        Debug.Log("3");
-        this.GetComponent<TankShooting>().m_BulletSpeed += .0025f;
-    }
-    [Rpc(SendTo.Everyone)]
-    public void BulletPowerRPC()
-    {
-        Debug.Log("3");
-        this.GetComponent<TankShooting>().m_BulletPower += 50;
-    }
-    [Rpc(SendTo.Everyone)]
-    public void TankSpeedRPC()
-    {
-        Debug.Log("3");
-        this.GetComponent<TankMovement>().m_Speed *= 1.3f;
+        if (poweruptype.Contains("BulletReload"))
+        {
+            this.GetComponent<TankShooting>().m_ReloadTime += .75f;
+        }
+        else if (poweruptype.Contains("BulletSpeed"))
+        {
+            this.GetComponent<TankShooting>().m_BulletSpeed -= .005f;
+        }
+        else if (poweruptype.Contains("BulletPower"))
+        {
+            this.GetComponent<TankShooting>().m_BulletPower -= 50;
+        }
+        else if (poweruptype.Contains("TankSpeed"))
+        {
+            this.GetComponent<TankMovement>().m_Speed -= 6f;
+        }
     }
 }
+

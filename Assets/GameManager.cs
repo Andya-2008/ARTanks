@@ -17,12 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject WinPlane;
     [SerializeField] bool PlayOnEditor = false;
 
-
+    [SerializeField] Canvas startCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
-
 #if UNITY_STANDALONE_WIN
 if (PlayOnEditor){
 Debug.Log("Unity Standalone Win");
@@ -54,16 +53,14 @@ Debug.Log("Unity Standalone Win");
         {
             Debug.Log("Unity Editor Win");
             ARCamera.SetActive(false);
-            MainCamera.SetActive(true);
+            MainCamera.SetActive(true); 
             WinPlane.SetActive(true);
             Screen.SetResolution(1920, 1080, false);
             //MainCamera.GetComponent<Camera>().aspect = 1;
         }
 
 #endif
-
-
-
+        startCanvas.enabled = true;
         Player1UI.SetActive(false);
         Player2UI.SetActive(false);
         Player3UI.SetActive(false);

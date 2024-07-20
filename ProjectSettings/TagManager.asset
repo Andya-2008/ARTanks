@@ -12,6 +12,7 @@ TagManager:
   - MyBullet
   - Turret
   - Powerup
+  - PowerupSlider
   layers:
   - Default
   - TransparentFX
