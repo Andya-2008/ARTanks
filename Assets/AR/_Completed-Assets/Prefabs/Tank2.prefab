@@ -10466,7 +10466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 822914375
+  GlobalObjectIdHash: 427589406
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -10741,6 +10741,7 @@ MonoBehaviour:
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_ExplosionPrefab: {fileID: 151086, guid: 6bc6d0dd8b8428e4ca316513f2cf13c6, type: 3}
+  m_CurrentHealth: 0
 --- !u!114 &8305147342148570455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10889,6 +10890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d028199f89ec72b44b13cbe6e023a956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  addHealth: 0
+  healthAdditionTime: 1.5
 --- !u!114 &-7605562719663097875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11567,7 +11570,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 1
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 200
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

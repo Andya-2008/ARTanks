@@ -13,6 +13,7 @@ TagManager:
   - Turret
   - Powerup
   - PowerupSlider
+  - UIPowerup
   layers:
   - Default
   - TransparentFX

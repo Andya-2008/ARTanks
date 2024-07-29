@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class TankPowerups : NetworkBehaviour
 {
+    public bool addHealth;
+    float timeSinceLastAddHealth;
+    public float healthAdditionTime = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,47 +18,94 @@ public class TankPowerups : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Time.time - timeSinceLastAddHealth >= healthAdditionTime && addHealth)
+        {
+            timeSinceLastAddHealth = Time.time;
+            PassiveAddHealth();
+        }
     }
 
 
     [Rpc(SendTo.Everyone)]
-    public void ActivateTankPowerupRPC(string poweruptype)
+    public void ActivateOrDeactivateTankPowerupRPC(string poweruptype, bool activate)
     {
+        
         if (poweruptype.Contains("BulletReload"))
         {
-            this.GetComponent<TankShooting>().m_ReloadTime -= .75f;
+            if (activate)
+            {
+                this.GetComponent<TankShooting>().m_ReloadTime -= .75f;
+            }
+            else
+            {
+                this.GetComponent<TankShooting>().m_ReloadTime += .75f;
+            }
         }
         else if (poweruptype.Contains("BulletSpeed"))
         {
-            this.GetComponent<TankShooting>().m_BulletSpeed += .005f;
+            if (activate)
+            {
+                this.GetComponent<TankShooting>().m_BulletSpeed += .005f;
+            }
+            else
+            {
+                this.GetComponent<TankShooting>().m_BulletSpeed -= .005f;
+            }
         }
         else if (poweruptype.Contains("BulletPower"))
         {
-            this.GetComponent<TankShooting>().m_BulletPower += 50;
+            if (activate)
+            {
+                this.GetComponent<TankShooting>().m_BulletPower += 50;
+            }
+            else
+            {
+                this.GetComponent<TankShooting>().m_BulletPower -= 50;
+            }
         }
         else if (poweruptype.Contains("TankSpeed"))
         {
-            this.GetComponent<TankMovement>().m_Speed += 6f;
+            if(activate)
+            {
+                this.GetComponent<TankMovement>().m_Speed += .3f;
+            }
+            else
+            {
+                this.GetComponent<TankMovement>().m_Speed -= .3f;
+            }
+        }
+        else if (poweruptype.Contains("Health"))
+        {
+            if(activate)
+            {
+                addHealth = true;
+            }
+            else
+            {
+                addHealth = false;
+            }
         }
     }
-    public void DeactivateTankPowerupRPC(string poweruptype)
+
+    public void PassiveAddHealth()
     {
-        if (poweruptype.Contains("BulletReload"))
+        this.GetComponent<TankHealth>().m_CurrentHealth += healthAdditionTime * this.GetComponent<TankHealth>().m_StartingHealth / 12;
+        if(this.GetComponent<TankHealth>().m_CurrentHealth >= this.GetComponent<TankHealth>().m_StartingHealth)
         {
-            this.GetComponent<TankShooting>().m_ReloadTime += .75f;
+            this.GetComponent<TankHealth>().m_CurrentHealth = this.GetComponent<TankHealth>().m_StartingHealth;
+            EndPowerupEarly();
         }
-        else if (poweruptype.Contains("BulletSpeed"))
+    }
+
+    public void EndPowerupEarly()
+    {
+        foreach (GameObject uiPowerup in GameObject.FindGameObjectsWithTag("UIPowerup"))
         {
-            this.GetComponent<TankShooting>().m_BulletSpeed -= .005f;
-        }
-        else if (poweruptype.Contains("BulletPower"))
-        {
-            this.GetComponent<TankShooting>().m_BulletPower -= 50;
-        }
-        else if (poweruptype.Contains("TankSpeed"))
-        {
-            this.GetComponent<TankMovement>().m_Speed -= 6f;
+            if (uiPowerup.name.Contains("Health"))
+            {
+                uiPowerup.GetComponent<UIPowerup>().PowerupSlider.GetComponent<PowerupSliderController>().EndPowerupEarly();
+                break;
+            }
         }
     }
 }

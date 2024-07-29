@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3718529085375855572}
   m_Layer: 5
   m_Name: BulletPower_Powerup
-  m_TagString: Untagged
+  m_TagString: UIPowerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,10 +96,10 @@ MonoBehaviour:
   myCoverup: {fileID: 3981028048589849751}
   myText: {fileID: 7217496073705907353}
   powerupDisplayName: Bullet Power
-  numOfBulletsOrTime: 10
+  numOfBulletsOrTime: 4
   PowerupSlider: {fileID: 6912582832094223911}
   thisPowerupActive: 0
-  bulletBased: 0
+  bulletBased: 1
 --- !u!1 &4634753144073536189
 GameObject:
   m_ObjectHideFlags: 0

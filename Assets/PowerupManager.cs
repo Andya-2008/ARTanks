@@ -22,13 +22,13 @@ public class PowerupManager : MonoBehaviour
 
     public void SpawnPowerup(string powerup, string powerupDisplayName, int numOfBullets, bool bulletbased)
     {
-        GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().ActivateTankPowerupRPC(powerup);
+        GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().ActivateOrDeactivateTankPowerupRPC(powerup, true);
 
     }
 
     public void DisablePowerup(string powerup)
     {
-        GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().DeactivateTankPowerupRPC(powerup);
+        GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().ActivateOrDeactivateTankPowerupRPC(powerup, false);
     }
     public void AddPowerupSlot()
     {

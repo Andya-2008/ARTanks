@@ -1,4 +1,4 @@
-using UnityEditor.Rendering;
+//using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +18,8 @@ public class PowerupSliderController : MonoBehaviour
 
     public float startPowerupTime;
 
+    public bool endPowerup;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,8 +29,9 @@ public class PowerupSliderController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(powerupCoverUp.GetComponent<RectTransform>().rect.height <= 0)
+        if(powerupCoverUp.GetComponent<RectTransform>().rect.height <= 0 || endPowerup)
         {
+            endPowerup = false;
             GameObject.Find("PowerupManager").GetComponent<PowerupManager>().DisablePowerup(powerup);
             PowerupParent.GetComponent<UIPowerup>().thisPowerupActive = false;
             powerupCoverUp.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 211);
@@ -50,5 +53,10 @@ public class PowerupSliderController : MonoBehaviour
     public void BulletFired()
     {
         bulletsFired++;
+    }
+
+    public void EndPowerupEarly()
+    {
+        endPowerup = true;
     }
 }
