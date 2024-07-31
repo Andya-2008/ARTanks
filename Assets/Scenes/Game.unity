@@ -4703,6 +4703,8 @@ MonoBehaviour:
   - {fileID: 3008120504894950882, guid: dc6daaab2b70ae6489771be4204b9207, type: 3}
   - {fileID: 3008120504894950882, guid: 3a862bb7254c2c04e9d8632c72e9c547, type: 3}
   - {fileID: 3008120504894950882, guid: d3ab39d2c62029848a58164ed8844147, type: 3}
+  - {fileID: 3008120504894950882, guid: 015f1ae151a3c394a8db66c622d8d6e9, type: 3}
+  - {fileID: 3008120504894950882, guid: 3786f564e9fd9644aaadeba2baf07af5, type: 3}
   - {fileID: 3008120504894950882, guid: fdae9946aa95b624db4a17787523e1d1, type: 3}
   battleField: {fileID: 0}
 --- !u!114 &1809286837

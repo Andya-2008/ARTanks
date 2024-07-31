@@ -9,10 +9,15 @@ public class TankPowerups : NetworkBehaviour
     public bool addHealth;
     float timeSinceLastAddHealth;
     public float healthAdditionTime = 1.5f;
+    TankMovement tankMovement;
+    TankHealth tankHealth;
+    TankShooting tankShooting;
     // Start is called before the first frame update
     void Start()
     {
-        
+        tankMovement = this.GetComponent<TankMovement>();
+        tankShooting = this.GetComponent<TankShooting>();
+        tankHealth = this.GetComponent<TankHealth>();
     }
 
     // Update is called once per frame
@@ -34,44 +39,44 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                this.GetComponent<TankShooting>().m_ReloadTime -= .75f;
+                tankShooting.m_ReloadTime -= .75f;
             }
             else
             {
-                this.GetComponent<TankShooting>().m_ReloadTime += .75f;
+                tankShooting.m_ReloadTime += .75f;
             }
         }
         else if (poweruptype.Contains("BulletSpeed"))
         {
             if (activate)
             {
-                this.GetComponent<TankShooting>().m_BulletSpeed += .005f;
+                tankShooting.m_BulletSpeed += .005f;
             }
             else
             {
-                this.GetComponent<TankShooting>().m_BulletSpeed -= .005f;
+                tankShooting.m_BulletSpeed -= .005f;
             }
         }
         else if (poweruptype.Contains("BulletPower"))
         {
             if (activate)
             {
-                this.GetComponent<TankShooting>().m_BulletPower += 50;
+                tankShooting.m_BulletPower += 50;
             }
             else
             {
-                this.GetComponent<TankShooting>().m_BulletPower -= 50;
+                tankShooting.m_BulletPower -= 50;
             }
         }
         else if (poweruptype.Contains("TankSpeed"))
         {
             if(activate)
             {
-                this.GetComponent<TankMovement>().m_Speed += .3f;
+                tankMovement.m_Speed += .3f;
             }
             else
             {
-                this.GetComponent<TankMovement>().m_Speed -= .3f;
+                tankMovement.m_Speed -= .3f;
             }
         }
         else if (poweruptype.Contains("Health"))
@@ -85,14 +90,39 @@ public class TankPowerups : NetworkBehaviour
                 addHealth = false;
             }
         }
+        else if (poweruptype.Contains("Overdrive"))
+        {
+            if (activate)
+            {
+                if (tankHealth.m_CurrentHealth - tankHealth.m_StartingHealth / 5 > 0)
+                {
+                    tankHealth.m_CurrentHealth -= tankHealth.m_StartingHealth / 5;
+                }
+                else if(tankHealth.m_CurrentHealth >= 5)
+                {
+                    tankHealth.m_CurrentHealth = 5;
+                }
+                tankMovement.m_Speed *= 1.4f;
+                tankShooting.m_BulletSpeed *= 1.3f;
+                tankShooting.m_BulletPower *= 1.3f;
+                tankShooting.m_ReloadTime /= 1.5f;
+            }
+            else
+            {
+                tankMovement.m_Speed /= 1.4f;
+                tankShooting.m_BulletSpeed /= 1.3f;
+                tankShooting.m_BulletPower /= 1.3f;
+                tankShooting.m_ReloadTime *= 1.5f;
+            }
+        }
     }
 
     public void PassiveAddHealth()
     {
-        this.GetComponent<TankHealth>().m_CurrentHealth += healthAdditionTime * this.GetComponent<TankHealth>().m_StartingHealth / 12;
-        if(this.GetComponent<TankHealth>().m_CurrentHealth >= this.GetComponent<TankHealth>().m_StartingHealth)
+        tankHealth.m_CurrentHealth += healthAdditionTime * tankHealth.m_StartingHealth / 12;
+        if(tankHealth.m_CurrentHealth >= tankHealth.m_StartingHealth)
         {
-            this.GetComponent<TankHealth>().m_CurrentHealth = this.GetComponent<TankHealth>().m_StartingHealth;
+            tankHealth.m_CurrentHealth = tankHealth.m_StartingHealth;
             EndPowerupEarly();
         }
     }

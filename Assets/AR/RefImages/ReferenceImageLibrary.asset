@@ -129,3 +129,23 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: TankSpeed_Powerup
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5157224156583043409
+      m_GuidHigh: 6537693569363288504
+    m_SerializedTextureGuid:
+      m_GuidLow: 2311487292410009036
+      m_GuidHigh: 17591968157726287657
+    m_Size: {x: 0.0615, y: 0.1019205}
+    m_SpecifySize: 1
+    m_Name: Health_Powerup
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5079929095381143210
+      m_GuidHigh: 11714130429209620400
+    m_SerializedTextureGuid:
+      m_GuidLow: 1919881850768153202
+      m_GuidHigh: 9759435896321010074
+    m_Size: {x: 0.062, y: 0.10123776}
+    m_SpecifySize: 1
+    m_Name: Overdrive_Powerup
+    m_Texture: {fileID: 0}

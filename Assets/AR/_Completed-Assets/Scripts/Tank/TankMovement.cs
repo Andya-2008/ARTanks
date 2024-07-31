@@ -119,7 +119,7 @@ public class TankMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (Mathf.Abs(m_VerticalInputValue) >= 0.1f && Mathf.Abs(m_HorizontalInputValue) >= 0.1f)
+        if (Mathf.Abs(m_VerticalInputValue) >= 0.001f && Mathf.Abs(m_HorizontalInputValue) >= 0.001f)
         {
             if (NetworkObject.IsOwner)
             {
