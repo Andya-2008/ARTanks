@@ -230,7 +230,7 @@ MonoBehaviour:
   m_ExplosionForce: 10
   m_MaxLifeTime: 10
   m_ExplosionRadius: 5
-  maxBulletDist: 2
+  maxBulletDist: 4
 --- !u!114 &7358023210643773766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +288,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 0.005
+  homing: 0
+  homingTurnSpeed: 0.0115
+  myTank: {fileID: 0}
+  Enemies: []
 --- !u!1 &1323183458184705707
 GameObject:
   m_ObjectHideFlags: 0

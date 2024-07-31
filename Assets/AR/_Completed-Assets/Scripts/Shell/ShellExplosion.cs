@@ -34,7 +34,7 @@ namespace Complete
 
         private void OnTriggerEnter(Collider other)
         {
-            if (NetworkManager.Singleton.IsServer && other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank")
+            if (NetworkManager.Singleton.IsServer && (other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank"))
             {
                 other.GetComponent<TankHealth>().TakeDamage();
             }

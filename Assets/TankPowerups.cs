@@ -115,6 +115,17 @@ public class TankPowerups : NetworkBehaviour
                 tankShooting.m_ReloadTime *= 1.5f;
             }
         }
+        else if (poweruptype.Contains("Homing"))
+        {
+            if (activate)
+            {
+                tankShooting.homing = true;
+            }
+            else
+            {
+                tankShooting.homing = false;
+            }
+        }
     }
 
     public void PassiveAddHealth()

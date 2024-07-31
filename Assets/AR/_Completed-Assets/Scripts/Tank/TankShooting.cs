@@ -26,6 +26,7 @@ namespace Complete
         [SerializeField] public float m_BulletPower = 50f; // Time to reload
         [SerializeField] public float m_BulletSpeed = .005f; // Time to reload
         public float startTime;
+        public bool homing;
         private void OnEnable()
         {
             // When the tank is turned on, reset the launch force and the UI
@@ -105,7 +106,17 @@ namespace Complete
             Rigidbody shellInstance =
                 Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation, GameObject.Find("Battlefield1").transform) as Rigidbody;
             shellInstance.GetComponent<ShellExplosion>().m_MaxDamage = m_BulletPower;
+
+            shellInstance.GetComponent<BulletMove>().myTank = this.gameObject;
             shellInstance.GetComponent<BulletMove>().bulletSpeed = m_BulletSpeed;
+            if(homing)
+            {
+                shellInstance.GetComponent<BulletMove>().homing = true;
+            }
+            else
+            {
+                shellInstance.GetComponent<BulletMove>().homing = false;
+            }
             if (FindNetworkObject(objectId).gameObject.tag == "MyTank")
             {
                 m_Shell.gameObject.tag = "MyBullet";

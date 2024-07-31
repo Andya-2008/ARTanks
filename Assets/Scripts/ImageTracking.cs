@@ -181,7 +181,6 @@ public class ImageTracking : NetworkBehaviour
 
             name = trackedImage.trackedImage.referenceImage.name;
             trackedImage.transform = trackedImage.trackedImage.transform;
-
         }
         else
         {
