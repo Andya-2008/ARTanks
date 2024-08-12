@@ -37,7 +37,6 @@ Debug.Log("Unity Standalone Win");
 #if UNITY_EDITOR_WIN
         if (PlayOnEditor)
         {
-            Debug.Log("Unity Editor Win");
             ARCamera.SetActive(false);
             MainCamera.SetActive(true);
             WinPlane.SetActive(true);
@@ -66,7 +65,6 @@ Debug.Log("Unity Standalone Win");
         Player3UI.SetActive(false);
         Player4UI.SetActive(false);
         GameOverCanvas.enabled = false;
-        Debug.Log("Initial aliveTanks count: " + aliveTanks.Count);
     }
 
     // Update is called once per frame

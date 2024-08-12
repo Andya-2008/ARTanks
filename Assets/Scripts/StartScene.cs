@@ -19,7 +19,7 @@ public static class DefaultSceneLoader
 
         if (state == PlayModeStateChange.EnteredPlayMode)
         {
-            EditorSceneManager.LoadScene(0);
+            //  EditorSceneManager.LoadScene(0);
         }
     }
 }

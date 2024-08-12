@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8521416267067514281}
   - component: {fileID: 8466348413309682564}
   - component: {fileID: 6304220203046878675}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankChassis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 2610405870727836260}
   - component: {fileID: 2532746127059300955}
   - component: {fileID: 6530253126975215303}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,6 +163,37 @@ MonoBehaviour:
   m_FillOrigin: 3
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2489862298518162604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 907607972028962044}
+  m_Layer: 3
+  m_Name: TacticalSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &907607972028962044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2489862298518162604}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.104}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8895890244251840420}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2634335800634924508
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +205,7 @@ GameObject:
   - component: {fileID: 6774528825990733594}
   - component: {fileID: 3733092284782434742}
   - component: {fileID: 4801029277792322198}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTracksRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +292,7 @@ GameObject:
   - component: {fileID: 7206237931594683834}
   - component: {fileID: 1860249750881459208}
   - component: {fileID: 2724911778206031276}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9170464989090411509}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankRenderers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +414,7 @@ GameObject:
   - component: {fileID: 4031540521283780896}
   - component: {fileID: 7864287229464973119}
   - component: {fileID: 2401678482406710270}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1214675854159039110}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 490905298452956797}
   - component: {fileID: 7369882911961292101}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AimSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,7 +613,7 @@ GameObject:
   - component: {fileID: 889375824742818634}
   - component: {fileID: 4801434095259860830}
   - component: {fileID: 5512964579635703603}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTracksRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -667,7 +698,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2103543163856868167}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FireTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +731,7 @@ GameObject:
   - component: {fileID: 4033849915778433097}
   - component: {fileID: 8482189357873157146}
   - component: {fileID: 1007242884761599906}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankChassis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -788,7 +819,7 @@ GameObject:
   - component: {fileID: 2551101643638846567}
   - component: {fileID: 35157865840719577}
   - component: {fileID: 2802051100950603237}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -873,7 +904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4894483504926101772}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Tank (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +938,7 @@ GameObject:
   - component: {fileID: 8768223030390951423}
   - component: {fileID: 4452633864516045331}
   - component: {fileID: 3969750128895501973}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTracksLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +1023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4529589333987228756}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1062,7 @@ GameObject:
   - component: {fileID: 8661330967663968949}
   - component: {fileID: 4367618900763510010}
   - component: {fileID: 5386539063967093164}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1131,7 +1162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6392984493603858765}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1167,7 +1198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6503709871495199657}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankRenderers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1219,7 +1250,7 @@ GameObject:
   - component: {fileID: 4170885358088817186}
   - component: {fileID: 12651849722485836}
   - component: {fileID: 5735429349159303551}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Tank1
   m_TagString: Tank
   m_Icon: {fileID: 0}
@@ -1241,6 +1272,7 @@ Transform:
   m_Children:
   - {fileID: 4529589333987228756}
   - {fileID: 4894483504926101772}
+  - {fileID: 907607972028962044}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1386479041453185957
@@ -1282,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3702198025
+  GlobalObjectIdHash: 926597096
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1585,6 +1617,7 @@ MonoBehaviour:
   m_BulletSpeed: 0.005
   startTime: 0
   homing: 0
+  explosive: 0
 --- !u!114 &3422605799074517064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1709,6 +1742,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addHealth: 0
   healthAdditionTime: 1.5
+  tacticalSpawnPos: {fileID: 907607972028962044}
+  omniWall: {fileID: 5879128814780562814, guid: 8be9571e38fea04479edcc1135c9d8f6,
+    type: 3}
 --- !u!114 &5735429349159303551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1736,7 +1772,7 @@ GameObject:
   - component: {fileID: 96447088234211513}
   - component: {fileID: 5901731309985608808}
   - component: {fileID: 1858605157236146697}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftDustTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6536,7 +6572,7 @@ GameObject:
   - component: {fileID: 472759710711647488}
   - component: {fileID: 5030204230994731394}
   - component: {fileID: 2281296247568436592}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6639,7 +6675,7 @@ GameObject:
   - component: {fileID: 332675830542075880}
   - component: {fileID: 6259278640394391328}
   - component: {fileID: 5569170295947083091}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTracksLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6726,7 +6762,7 @@ GameObject:
   - component: {fileID: 3787446792670860756}
   - component: {fileID: 3805129788281366857}
   - component: {fileID: 6668472151072307380}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6801,7 +6837,7 @@ GameObject:
   - component: {fileID: 2137262783246294000}
   - component: {fileID: 7198597712833872089}
   - component: {fileID: 5241627542181095859}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightDustTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

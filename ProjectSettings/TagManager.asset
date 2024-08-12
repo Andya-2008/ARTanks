@@ -14,19 +14,20 @@ TagManager:
   - Powerup
   - PowerupSlider
   - UIPowerup
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Tank
   - Water
   - UI
   - MyTank
   - MyBullet
   - PickUp
-  - 
-  - 
-  - 
+  - Wall
+  - WallSphere
+  - WallDeathCubes
   - 
   - 
   - 

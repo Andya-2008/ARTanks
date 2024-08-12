@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1501591437325643181}
   - component: {fileID: 3014504011079370480}
   - component: {fileID: 1663936346686385238}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2162442166751619128}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 8868022357690227733}
   - component: {fileID: 8378898814509667209}
   - component: {fileID: 1665282532815587048}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTracksLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 2755780789775796270}
   - component: {fileID: 6096669229474165627}
   - component: {fileID: 4469033869379787744}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightDustTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5010,7 +5010,7 @@ GameObject:
   - component: {fileID: 6883436872338814011}
   - component: {fileID: 2374365252359823522}
   - component: {fileID: 7503475697877334444}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5112,7 +5112,7 @@ GameObject:
   - component: {fileID: 1476887540440831648}
   - component: {fileID: 5249646151717523656}
   - component: {fileID: 9182978055308583214}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftDustTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9910,7 +9910,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1302269171532076460}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankRenderers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9945,7 +9945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6684885228113224386}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankRenderers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9980,7 +9980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8942185978984367052}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10017,7 +10017,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8465201121096153849}
   - component: {fileID: 7780109885555058942}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AimSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10104,7 +10104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 686256965520781025}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Tank (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10138,7 +10138,7 @@ GameObject:
   - component: {fileID: 4966330465139408890}
   - component: {fileID: 8895483627010252436}
   - component: {fileID: 7374257421857515857}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankChassis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10226,7 +10226,7 @@ GameObject:
   - component: {fileID: 4039477363611504534}
   - component: {fileID: 7701505321757526038}
   - component: {fileID: 2860534508083155244}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10301,7 +10301,7 @@ GameObject:
   - component: {fileID: 5172753763755087972}
   - component: {fileID: 9178116340812136392}
   - component: {fileID: 7777360729672244187}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTracksRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10403,7 +10403,7 @@ GameObject:
   - component: {fileID: 2484127322370228897}
   - component: {fileID: 6038495207518765643}
   - component: {fileID: -7605562719663097875}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Tank2
   m_TagString: Tank
   m_Icon: {fileID: 0}
@@ -10769,6 +10769,7 @@ MonoBehaviour:
   m_BulletSpeed: 0.005
   startTime: 0
   homing: 0
+  explosive: 0
 --- !u!114 &2146015601689436828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10918,7 +10919,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2814174406033367803}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10956,7 +10957,7 @@ GameObject:
   - component: {fileID: 3303674952623764927}
   - component: {fileID: 8034228961090154582}
   - component: {fileID: 2325297615245641510}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTracksRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11043,7 +11044,7 @@ GameObject:
   - component: {fileID: 498259135953338440}
   - component: {fileID: 1062786564381081650}
   - component: {fileID: 8016844189839252188}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11118,7 +11119,7 @@ GameObject:
   - component: {fileID: 3719599451344047293}
   - component: {fileID: 1977086892052262521}
   - component: {fileID: 7231831604615226581}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTracksLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11205,7 +11206,7 @@ GameObject:
   - component: {fileID: 5826250539132370037}
   - component: {fileID: 4286257006467193501}
   - component: {fileID: 2964403974686979824}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11292,7 +11293,7 @@ GameObject:
   - component: {fileID: 725471110393212205}
   - component: {fileID: 8450842136171198545}
   - component: {fileID: 5130475312220192536}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankChassis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11378,7 +11379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6956266287882802429}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FireTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11411,7 +11412,7 @@ GameObject:
   - component: {fileID: 6133580965477215554}
   - component: {fileID: 1959520739334197140}
   - component: {fileID: 565962525981327116}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TankTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11498,7 +11499,7 @@ GameObject:
   - component: {fileID: 1972548816907833431}
   - component: {fileID: 6055580209464161675}
   - component: {fileID: 1106945273877218779}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -41,6 +41,7 @@ public class ImageTracking : NetworkBehaviour
     }
     private void Update()
     {
+        /*
         string strDebug = "";
         if ( battleField!=null)
         {
@@ -66,7 +67,7 @@ public class ImageTracking : NetworkBehaviour
 
         DebugTxt(strDebug);
 
-
+        */
         if (Input.GetKeyDown(KeyCode.B))
         {
             Debug.Log("B");

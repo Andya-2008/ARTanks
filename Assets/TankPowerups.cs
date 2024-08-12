@@ -1,8 +1,11 @@
 using Complete;
 using System.Collections;
 using System.Collections.Generic;
+using Telepathy;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class TankPowerups : NetworkBehaviour
 {
@@ -12,6 +15,11 @@ public class TankPowerups : NetworkBehaviour
     TankMovement tankMovement;
     TankHealth tankHealth;
     TankShooting tankShooting;
+
+    [SerializeField] Transform tacticalSpawnPos;
+
+    GameObject battleField;
+    [SerializeField] GameObject omniWall;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +36,7 @@ public class TankPowerups : NetworkBehaviour
             timeSinceLastAddHealth = Time.time;
             PassiveAddHealth();
         }
+        battleField = GameObject.FindGameObjectWithTag("Battlefield");
     }
 
 
@@ -126,6 +135,25 @@ public class TankPowerups : NetworkBehaviour
                 tankShooting.homing = false;
             }
         }
+        else if (poweruptype.Contains("Explosive"))
+        {
+            if (activate)
+            {
+                tankShooting.explosive = true;
+            }
+            else
+            {
+                tankShooting.explosive = false;
+            }
+        }
+        else if (poweruptype.Contains("Omniwall"))
+        {
+            if (activate)
+            {
+                if(NetworkManager.IsServer)
+                SpawnWall(false);
+            }
+        }
     }
 
     public void PassiveAddHealth()
@@ -148,6 +176,41 @@ public class TankPowerups : NetworkBehaviour
                 break;
             }
         }
+    }
+
+    public void SpawnWall(bool allow)
+    {
+        if(!allow)
+        {
+            SpawnWallServerRPC(worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+        }
+        else
+        {
+            //Do allowall
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnWallServerRPC(Vector3 localpos, Quaternion spawnRot, ServerRpcParams serverRpcParams = default)
+    {
+        if (!IsServer) { return; }
+        var clientId = serverRpcParams.Receive.SenderClientId;
+        Vector3 newPos = new Vector3(localpos.x, 0, localpos.z);
+        GameObject newWall = Instantiate(omniWall, newPos, spawnRot, GameObject.FindGameObjectWithTag("Battlefield").transform);
+
+        newWall.transform.parent = battleField.transform;
+        newWall.transform.localPosition =  newPos;
+            
+        newWall.GetComponent<NetworkObject>().SpawnWithOwnership(clientId, false);
+    }
+    private Vector3 worldToLocal(Vector3 worldpos, Transform battlefield)
+    {
+        return battleField.transform.InverseTransformPoint(worldpos);
+    }
+
+    private Vector3 localToWorld(Vector3 localpos, Transform battlefield)
+    {
+        return battleField.transform.TransformPoint(localpos);
     }
 }
 

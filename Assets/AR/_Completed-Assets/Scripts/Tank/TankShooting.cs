@@ -23,10 +23,11 @@ namespace Complete
         private float m_ChargeSpeed;                // How fast the launch force increases, based on the max charge time.
         private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
         [SerializeField] public float m_ReloadTime = 1.5f; // Time to reload
-        [SerializeField] public float m_BulletPower = 50f; // Time to reload
-        [SerializeField] public float m_BulletSpeed = .005f; // Time to reload
+        [SerializeField] public float m_BulletPower = 50f; // Bullet damage
+        [SerializeField] public float m_BulletSpeed = .005f; // Bullet speed
         public float startTime;
         public bool homing;
+        public bool explosive;
         private void OnEnable()
         {
             // When the tank is turned on, reset the launch force and the UI
@@ -105,7 +106,7 @@ namespace Complete
         {
             Rigidbody shellInstance =
                 Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation, GameObject.Find("Battlefield1").transform) as Rigidbody;
-            shellInstance.GetComponent<ShellExplosion>().m_MaxDamage = m_BulletPower;
+            shellInstance.GetComponent<ShellExplosion>().m_damage = m_BulletPower;
 
             shellInstance.GetComponent<BulletMove>().myTank = this.gameObject;
             shellInstance.GetComponent<BulletMove>().bulletSpeed = m_BulletSpeed;
@@ -116,6 +117,14 @@ namespace Complete
             else
             {
                 shellInstance.GetComponent<BulletMove>().homing = false;
+            }
+            if(explosive)
+            {
+                shellInstance.GetComponent<ShellExplosion>().explosive = true;
+            }
+            else
+            {
+                shellInstance.GetComponent<ShellExplosion>().explosive = false;
             }
             if (FindNetworkObject(objectId).gameObject.tag == "MyTank")
             {

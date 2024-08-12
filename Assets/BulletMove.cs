@@ -17,13 +17,15 @@ public class BulletMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+        if (GameObject.FindGameObjectWithTag("MyTank") != null)
         {
-            Debug.Log("Tank: " + tank.name);
-            Enemies.Add(tank.transform);
+            foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+            {
+                Enemies.Add(tank.transform);
+            }
+            Enemies.Add(GameObject.FindGameObjectWithTag("MyTank").transform);
+            Enemies.Remove(myTank.transform);
         }
-        Enemies.Add(GameObject.FindGameObjectWithTag("MyTank").transform);
-        Enemies.Remove(myTank.transform);
     }
 
     // Update is called once per frame
@@ -33,15 +35,12 @@ public class BulletMove : MonoBehaviour
         {
             if (firstEnemy)
             {
-                Debug.Log("First Enemy");
                 firstEnemy = false;
                 EnemyTarget = FindNearestEnemy();
-                Debug.Log("EnemyName: " + EnemyTarget.name);
             }
             EnemyTarget = FindNearestEnemy();
             if (EnemyTarget != null)
             {
-                Debug.Log(EnemyTarget.name);
                 if (homing)
                 {
                     HomingTurn();

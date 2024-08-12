@@ -18,7 +18,7 @@ public class CardObjectSpawn : NetworkBehaviour
     }
     public override void OnNetworkSpawn()
     {
-        this.gameObject.transform.parent = GameObject.Find("Battlefield1").transform;
+        this.gameObject.transform.parent = GameObject.FindGameObjectWithTag("Battlefield").transform;
         if (!IsServer)
         {
             GetLocalPosServerRPC();
