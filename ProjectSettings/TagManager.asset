@@ -15,6 +15,7 @@ TagManager:
   - PowerupSlider
   - UIPowerup
   - Wall
+  - Allowall
   layers:
   - Default
   - TransparentFX

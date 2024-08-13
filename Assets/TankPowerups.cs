@@ -20,6 +20,7 @@ public class TankPowerups : NetworkBehaviour
 
     GameObject battleField;
     [SerializeField] GameObject omniWall;
+    [SerializeField] GameObject alloWall;
     // Start is called before the first frame update
     void Start()
     {
@@ -151,7 +152,15 @@ public class TankPowerups : NetworkBehaviour
             if (activate)
             {
                 if(NetworkManager.IsServer)
-                SpawnWall(false);
+                    SpawnWallServerRPC(false, worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+            }
+        }
+        else if(poweruptype.Contains("Allowall"))
+        {
+            if(activate)
+            {
+                if (NetworkManager.IsServer)
+                    SpawnWallServerRPC(true, worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
     }
@@ -178,25 +187,23 @@ public class TankPowerups : NetworkBehaviour
         }
     }
 
-    public void SpawnWall(bool allow)
-    {
-        if(!allow)
-        {
-            SpawnWallServerRPC(worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
-        }
-        else
-        {
-            //Do allowall
-        }
-    }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnWallServerRPC(Vector3 localpos, Quaternion spawnRot, ServerRpcParams serverRpcParams = default)
+    public void SpawnWallServerRPC(bool allow, Vector3 localpos, Quaternion spawnRot, ServerRpcParams serverRpcParams = default)
     {
         if (!IsServer) { return; }
         var clientId = serverRpcParams.Receive.SenderClientId;
         Vector3 newPos = new Vector3(localpos.x, 0, localpos.z);
-        GameObject newWall = Instantiate(omniWall, newPos, spawnRot, GameObject.FindGameObjectWithTag("Battlefield").transform);
+        GameObject instantiateWall;
+        if(allow)
+        {
+            instantiateWall = alloWall;
+        }
+        else
+        {
+            instantiateWall = omniWall;
+        }
+        GameObject newWall = Instantiate(instantiateWall, newPos, spawnRot, GameObject.FindGameObjectWithTag("Battlefield").transform);
 
         newWall.transform.parent = battleField.transform;
         newWall.transform.localPosition =  newPos;

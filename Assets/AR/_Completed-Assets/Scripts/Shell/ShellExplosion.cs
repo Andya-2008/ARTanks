@@ -1,4 +1,6 @@
-    using Unity.Netcode;
+using System.Net;
+using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Complete
@@ -17,8 +19,12 @@ namespace Complete
 
         public bool explosive;
 
+        TextMeshProUGUI debugText;
+
         private void Start()
         {
+
+            debugText = GameObject.Find("DebugText").GetComponent<TextMeshProUGUI>();
             // If it isn't destroyed by then, destroy the shell after it's lifetime.
             Destroy(gameObject, m_MaxLifeTime);
             originTrans = this.transform;
@@ -56,6 +62,21 @@ namespace Complete
                 else if(NetworkManager.Singleton.IsServer && other.gameObject.tag == "Wall")
                 {
                     other.GetComponent<Wall_Health>().TakeDamage(m_damage);
+                }
+                if (other.gameObject.tag == "Allowall")
+                {
+                    Debug.Log("Bullet Owner ID: " + GetComponent<NetworkObject>().OwnerClientId + " : Wall Owner ID: " + other.GetComponent<NetworkObject>().OwnerClientId);
+                    debugText.text = "Bullet Owner ID: " + GetComponent<NetworkObject>().OwnerClientId + " : Wall Owner ID: " + other.GetComponent<NetworkObject>().OwnerClientId;
+                    if (GetComponent<NetworkObject>().OwnerClientId != other.GetComponent<NetworkObject>().OwnerClientId)
+                    {
+                        ExplodeBullet();
+                        if (NetworkManager.Singleton.IsServer)
+                        {
+                            other.GetComponent<Wall_Health>().TakeDamage(m_damage);
+                        }
+                        
+                    }
+                    return;
                 }
                 ExplodeBullet();
             }

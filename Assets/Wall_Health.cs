@@ -22,20 +22,9 @@ namespace Complete
         [SerializeField] GameObject deathWallParent;
         [SerializeField] float timeToDeath;
         float deathTimer;
-        public NetworkVariable<Vector3> localpos = new NetworkVariable<Vector3>();
         TextMeshProUGUI debugText;
         private void Start()
         {
-        }
-
-        public override void OnNetworkSpawn()
-        {
-            /*
-            startTime = Time.time;
-            transform.localPosition = new Vector3(localpos.Value.x, 0, localpos.Value.z);
-            debugText = GameObject.Find("DebugText").GetComponent<TextMeshProUGUI>();
-            debugText.text = "LocalPos of Wall: " + localpos.Value.ToString();
-            */
         }
 
         private void Awake()

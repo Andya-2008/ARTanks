@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 926597096
+  GlobalObjectIdHash: 3702198025
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1744,6 +1744,8 @@ MonoBehaviour:
   healthAdditionTime: 1.5
   tacticalSpawnPos: {fileID: 907607972028962044}
   omniWall: {fileID: 5879128814780562814, guid: 8be9571e38fea04479edcc1135c9d8f6,
+    type: 3}
+  alloWall: {fileID: 5879128814780562814, guid: 7968bd539d6d10d458e9fc8b6b6bf517,
     type: 3}
 --- !u!114 &5735429349159303551
 MonoBehaviour:
