@@ -93,7 +93,7 @@ namespace Complete
             // Set the fired flag so only Fire is only called once.
             m_Fired = true;
             startTime = Time.time;
-            ShootRpc(this.GetComponent<NetworkObject>().NetworkObjectId);
+            ShootRpc(this.GetComponent<NetworkObject>().NetworkObjectId, NetworkObject.OwnerClientId);
             foreach (GameObject powerupSlider in GameObject.FindGameObjectsWithTag("PowerupSlider"))
             {
                 powerupSlider.GetComponent<PowerupSliderController>().BulletFired();
@@ -102,12 +102,12 @@ namespace Complete
 
 
         [Rpc(SendTo.Everyone)] //server owns this object but client can request a spawn
-        public void ShootRpc(ulong objectId)
+        public void ShootRpc(ulong objectId, ulong shooterClientID)
         {
             Rigidbody shellInstance =
                 Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation, GameObject.Find("Battlefield1").transform) as Rigidbody;
             shellInstance.GetComponent<ShellExplosion>().m_damage = m_BulletPower;
-
+            shellInstance.GetComponent<ShellExplosion>().myClientID = shooterClientID;
             shellInstance.GetComponent<BulletMove>().myTank = this.gameObject;
             shellInstance.GetComponent<BulletMove>().bulletSpeed = m_BulletSpeed;
             if(homing)

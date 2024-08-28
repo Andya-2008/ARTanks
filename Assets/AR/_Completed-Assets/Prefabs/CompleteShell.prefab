@@ -232,6 +232,7 @@ MonoBehaviour:
   m_ExplosionRadius: 0.19
   maxBulletDist: 4
   explosive: 0
+  myClientID: 0
 --- !u!114 &7358023210643773766
 MonoBehaviour:
   m_ObjectHideFlags: 0

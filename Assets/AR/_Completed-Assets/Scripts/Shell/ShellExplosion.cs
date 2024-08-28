@@ -21,6 +21,8 @@ namespace Complete
 
         TextMeshProUGUI debugText;
 
+        public ulong myClientID;
+
         private void Start()
         {
 
@@ -65,9 +67,9 @@ namespace Complete
                 }
                 if (other.gameObject.tag == "Allowall")
                 {
-                    Debug.Log("Bullet Owner ID: " + GetComponent<NetworkObject>().OwnerClientId + " : Wall Owner ID: " + other.GetComponent<NetworkObject>().OwnerClientId);
+                    Debug.Log("Bullet Client ID: " + myClientID + " : Wall Owner ID: " + other.GetComponent<NetworkObject>().OwnerClientId);
                     debugText.text = "Bullet Owner ID: " + GetComponent<NetworkObject>().OwnerClientId + " : Wall Owner ID: " + other.GetComponent<NetworkObject>().OwnerClientId;
-                    if (GetComponent<NetworkObject>().OwnerClientId != other.GetComponent<NetworkObject>().OwnerClientId)
+                    if (myClientID != other.GetComponent<NetworkObject>().OwnerClientId)
                     {
                         ExplodeBullet();
                         if (NetworkManager.Singleton.IsServer)
