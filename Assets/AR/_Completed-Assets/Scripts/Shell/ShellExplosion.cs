@@ -82,7 +82,6 @@ namespace Complete
                 }
                 ExplodeBullet();
             }
-            
         }
 
         public void ExplosiveBulletTrigger()
