@@ -177,3 +177,13 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: Allowall
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4927350119893914554
+      m_GuidHigh: 1910797007408792763
+    m_SerializedTextureGuid:
+      m_GuidLow: 16160278329314993721
+      m_GuidHigh: 3231497510081525739
+    m_Size: {x: 0.0615, y: 0.10293992}
+    m_SpecifySize: 1
+    m_Name: Invisbility
+    m_Texture: {fileID: 0}

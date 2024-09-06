@@ -8,6 +8,10 @@ public class TankPlayer : NetworkBehaviour
 {
     Vector3 origLocalPos;
     public ulong TankID;
+    public bool invisible;
+    [SerializeField] List<MeshRenderer> tankParts = new List<MeshRenderer>();
+
+    [SerializeField] Canvas tankCanvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,5 +40,27 @@ public class TankPlayer : NetworkBehaviour
     {
 
         TankID = ID;
+    }
+
+    public void ToggleInvisibility(bool on)
+    {
+        if(on)
+        {
+            foreach(MeshRenderer tankPart in tankParts)
+            {
+                //Make animation here
+                tankPart.enabled = false;
+            }
+            tankCanvas.enabled = false;
+        }
+        if(!on)
+        {
+            foreach (MeshRenderer tankPart in tankParts)
+            {
+                //Make animation here
+                tankPart.enabled = true;
+            }
+            tankCanvas.enabled = true;
+        }
     }
 }

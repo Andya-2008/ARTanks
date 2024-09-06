@@ -15,6 +15,7 @@ public class TankPowerups : NetworkBehaviour
     TankMovement tankMovement;
     TankHealth tankHealth;
     TankShooting tankShooting;
+    TankPlayer tankPlayer;
 
     [SerializeField] Transform tacticalSpawnPos;
 
@@ -27,6 +28,7 @@ public class TankPowerups : NetworkBehaviour
         tankMovement = this.GetComponent<TankMovement>();
         tankShooting = this.GetComponent<TankShooting>();
         tankHealth = this.GetComponent<TankHealth>();
+        tankPlayer = this.GetComponent<TankPlayer>();
     }
 
     // Update is called once per frame
@@ -145,6 +147,23 @@ public class TankPowerups : NetworkBehaviour
             else
             {
                 tankShooting.explosive = false;
+            }
+        }
+        else if (poweruptype.Contains("Invisibility"))
+        {
+            if (activate)
+            {
+                if (gameObject.tag != "MyTank")
+                {
+                    tankPlayer.ToggleInvisibility(true);
+                }
+            }
+            else
+            {
+                if (gameObject.tag != "MyTank")
+                {
+                    tankPlayer.ToggleInvisibility(false);
+                }
             }
         }
         else if (poweruptype.Contains("Omniwall"))

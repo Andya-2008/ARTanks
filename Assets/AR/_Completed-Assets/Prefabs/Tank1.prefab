@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3702198025
+  GlobalObjectIdHash: 926597096
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1675,6 +1675,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TankID: 0
+  invisible: 0
+  tankParts:
+  - {fileID: 1007242884761599906}
+  - {fileID: 5569170295947083091}
+  - {fileID: 4801029277792322198}
+  - {fileID: 2802051100950603237}
+  tankCanvas: {fileID: 8661330967663968949}
 --- !u!320 &1038048633720826149
 PlayableDirector:
   m_ObjectHideFlags: 0

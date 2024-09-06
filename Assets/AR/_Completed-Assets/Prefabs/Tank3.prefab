@@ -10828,6 +10828,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TankID: 0
+  invisible: 0
+  tankParts:
+  - {fileID: 5130475312220192536}
+  - {fileID: 1665282532815587048}
+  - {fileID: 7777360729672244187}
+  - {fileID: 565962525981327116}
+  tankCanvas: {fileID: 6883436872338814011}
 --- !u!320 &3586529660380658265
 PlayableDirector:
   m_ObjectHideFlags: 0
