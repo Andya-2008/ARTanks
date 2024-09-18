@@ -1,7 +1,6 @@
 using Complete;
 using System.Collections;
 using System.Collections.Generic;
-using Telepathy;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;

@@ -7,7 +7,7 @@ public class DisableParentalCanvas : MonoBehaviour
     [SerializeField] Canvas canvas;
     void Start()
     {
-        
+        DontDestroyOnLoad(canvas);
     }
 
     // Update is called once per frame
