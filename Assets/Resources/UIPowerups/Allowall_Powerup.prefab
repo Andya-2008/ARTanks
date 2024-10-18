@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2015779297856223414}
   - component: {fileID: 3718529085375855572}
   m_Layer: 5
-  m_Name: Allowall_Powerup 1
+  m_Name: Allowall_Powerup
   m_TagString: UIPowerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

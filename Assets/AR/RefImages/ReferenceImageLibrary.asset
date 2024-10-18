@@ -165,7 +165,7 @@ MonoBehaviour:
       m_GuidHigh: 2960829080599679192
     m_Size: {x: 0.061, y: 0.10210394}
     m_SpecifySize: 1
-    m_Name: Omniwall
+    m_Name: Omniwall_Powerup
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5186581561404899421
@@ -175,7 +175,7 @@ MonoBehaviour:
       m_GuidHigh: 18190907669256609322
     m_Size: {x: 0.0615, y: 0.10170318}
     m_SpecifySize: 1
-    m_Name: Allowall
+    m_Name: Allowall_Powerup
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 4927350119893914554
@@ -185,5 +185,5 @@ MonoBehaviour:
       m_GuidHigh: 3231497510081525739
     m_Size: {x: 0.0615, y: 0.10293992}
     m_SpecifySize: 1
-    m_Name: Invisbility
+    m_Name: Invisibility_Powerup
     m_Texture: {fileID: 0}

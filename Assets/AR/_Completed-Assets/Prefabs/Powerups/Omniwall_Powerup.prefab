@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 3472933116269611097}
   - component: {fileID: 2637078504188222567}
   m_Layer: 0
-  m_Name: Allowall
+  m_Name: Omniwall_Powerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
