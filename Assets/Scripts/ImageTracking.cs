@@ -11,6 +11,7 @@ using UnityEngine.InputSystem.LowLevel;
 using Unity.XR.CoreUtils;
 using UnityEngine.XR.ARSubsystems;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class ImageTracking : NetworkBehaviour
@@ -310,7 +311,12 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
         return battleField.transform.TransformPoint(localpos);
     }
 
-    
+    [Rpc(SendTo.Everyone)]
+    public void RestartSceneRpc()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
 }
 
 

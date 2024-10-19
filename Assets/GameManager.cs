@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject Player1UI;
@@ -150,4 +149,5 @@ Debug.Log("Unity Standalone Win");
         tanks.Add(Tank);
         aliveTanks.Add(Tank);
     }
+    
 }
