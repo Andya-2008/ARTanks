@@ -111,9 +111,9 @@ MonoBehaviour:
       m_GuidLow: 4991449843370833941
       m_GuidHigh: 17650377889615753148
     m_SerializedTextureGuid:
-      m_GuidLow: 8341843328738254403
-      m_GuidHigh: 12807189926631313195
-    m_Size: {x: 0.0615, y: 0.10163684}
+      m_GuidLow: 2316114508872604411
+      m_GuidHigh: 8677295819912525962
+    m_Size: {x: 0.0615, y: 0.101598}
     m_SpecifySize: 1
     m_Name: TankSpeed_Powerup
     m_Texture: {fileID: 0}
@@ -186,4 +186,24 @@ MonoBehaviour:
     m_Size: {x: 0.0615, y: 0.10293992}
     m_SpecifySize: 1
     m_Name: Invisibility_Powerup
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5428405670203710720
+      m_GuidHigh: 9286937337907604396
+    m_SerializedTextureGuid:
+      m_GuidLow: 7778881248263838087
+      m_GuidHigh: 14218828646331766443
+    m_Size: {x: 0.0615, y: 0.101208664}
+    m_SpecifySize: 1
+    m_Name: EMPBlast_Powerup
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4653925046193289142
+      m_GuidHigh: 214352755008174499
+    m_SerializedTextureGuid:
+      m_GuidLow: 5482079664345479224
+      m_GuidHigh: 3700449301243633883
+    m_Size: {x: 0.0615, y: 0.10250001}
+    m_SpecifySize: 1
+    m_Name: Tanksformation_Powerup
     m_Texture: {fileID: 0}

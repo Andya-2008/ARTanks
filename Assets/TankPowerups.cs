@@ -1,8 +1,10 @@
 using Complete;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.Netcode;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -21,6 +23,8 @@ public class TankPowerups : NetworkBehaviour
     GameObject battleField;
     [SerializeField] GameObject omniWall;
     [SerializeField] GameObject alloWall;
+
+    public List<GameObject> enemyTanks;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +49,11 @@ public class TankPowerups : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     public void ActivateOrDeactivateTankPowerupRPC(string poweruptype, bool activate)
     {
-        
+        enemyTanks.Clear();
+        foreach (GameObject enemyTank in GameObject.FindGameObjectsWithTag("Tank"))
+        {
+            enemyTanks.Add(enemyTank);
+        }
         if (poweruptype.Contains("BulletReload"))
         {
             if (activate)
@@ -163,6 +171,37 @@ public class TankPowerups : NetworkBehaviour
                 {
                     tankPlayer.ToggleInvisibility(false);
                 }
+            }
+        }
+        else if (poweruptype.Contains("EMPBlast"))
+        {
+            if (activate)
+            {
+                foreach (GameObject enemyTank in enemyTanks)
+                {
+                    enemyTank.GetComponent<TankShooting>().canShoot = false;
+                }
+                
+            }
+            else
+            {
+                foreach (GameObject enemyTank in enemyTanks)
+                {
+                    enemyTank.GetComponent<TankShooting>().canShoot = true;
+                }
+            }
+        }
+        else if (poweruptype.Contains("Tanksformation"))
+        {
+            if (activate)
+            {
+                transform.localScale = new Vector3(.6f,.6f,.6f);
+                tankMovement.m_Speed += .05f;
+            }
+            else
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+                tankMovement.m_Speed -= .05f;
             }
         }
         else if (poweruptype.Contains("Omniwall"))

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2015779297856223414}
   - component: {fileID: 3718529085375855572}
   m_Layer: 5
-  m_Name: TankSpeed_Powerup
+  m_Name: Tanksformation
   m_TagString: UIPowerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,8 +95,8 @@ MonoBehaviour:
   initCoverupWidth: 133.3333
   myCoverup: {fileID: 3981028048589849751}
   myText: {fileID: 7217496073705907353}
-  powerupDisplayName: Turbo Charger
-  numOfBulletsOrTime: 10
+  powerupDisplayName: Tanksformation
+  numOfBulletsOrTime: 15
   PowerupSlider: {fileID: 6912582832094223911}
   thisPowerupActive: 0
   bulletBased: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 530174b51fb57f043b5d47876a79e90c, type: 3}
+  m_Texture: {fileID: 2800000, guid: 11b95191d4342b9419c2c839bb6ffa61, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

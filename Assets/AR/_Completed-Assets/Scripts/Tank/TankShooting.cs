@@ -28,6 +28,7 @@ namespace Complete
         public float startTime;
         public bool homing;
         public bool explosive;
+        public bool canShoot = true;
         private void OnEnable()
         {
             // When the tank is turned on, reset the launch force and the UI
@@ -90,13 +91,16 @@ namespace Complete
 
         public void Fire()
         {
-            // Set the fired flag so only Fire is only called once.
-            m_Fired = true;
-            startTime = Time.time;
-            ShootRpc(this.GetComponent<NetworkObject>().NetworkObjectId, NetworkObject.OwnerClientId);
-            foreach (GameObject powerupSlider in GameObject.FindGameObjectsWithTag("PowerupSlider"))
+            if (canShoot)
             {
-                powerupSlider.GetComponent<PowerupSliderController>().BulletFired();
+                // Set the fired flag so only Fire is only called once.
+                m_Fired = true;
+                startTime = Time.time;
+                ShootRpc(this.GetComponent<NetworkObject>().NetworkObjectId, NetworkObject.OwnerClientId);
+                foreach (GameObject powerupSlider in GameObject.FindGameObjectsWithTag("PowerupSlider"))
+                {
+                    powerupSlider.GetComponent<PowerupSliderController>().BulletFired();
+                }
             }
         }
 
@@ -132,8 +136,6 @@ namespace Complete
             }
             //shellInstance.AddForce(transform.forward * m_MaxLaunchForce * 100 * Time.deltaTime);
         }
-
-
         public NetworkObject FindNetworkObject(ulong networkObjectId)
         {
             if (NetworkManager.Singleton != null)
