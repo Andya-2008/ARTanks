@@ -37,7 +37,7 @@ public class HostGameManager
 
     public Lobby activeLobby { get; private set; }
 
-    public async Task StartHostAsync()
+    public async Task<string> StartHostAsync()
     {
         try
         {
@@ -46,7 +46,7 @@ public class HostGameManager
         catch (Exception e)
         {
             Debug.Log(e);
-            return;
+            return "";
         }
 
         try
@@ -57,25 +57,27 @@ public class HostGameManager
         catch (Exception e)
         {
             Debug.Log(e);
-            return;
+            return "";
         }
 
-
+        string username = Crypto.DecryptString(PlayerPrefs.GetString("username"));
 
         var options = new CreateLobbyOptions();
         options.IsPrivate = false;
         options.Data = new Dictionary<string, DataObject>
                 {
-                    { k_HostNameKey, new DataObject(DataObject.VisibilityOptions.Public, joinCode) },
+                    { k_HostNameKey, new DataObject(DataObject.VisibilityOptions.Public,username ) },
                     { k_RelayJoinCodeKey, new DataObject(DataObject.VisibilityOptions.Public, joinCode) },
                 };
 
         options.Player = CreatePlayerData();
 
-        string lobbyName = joinCode;
+        string lobbyName = username;
         int maxPlayers = 4;
 
         activeLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+        //StartCoroutine(HeartbeatLobbyCoroutine(activeLobby.Id, 15));
+
 
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
 
@@ -86,9 +88,11 @@ public class HostGameManager
 
         NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
         GameObject.Find("RoomCodeCanvas").GetComponent<RoomCodeText>().RoomCode(joinCode);
+
+        return activeLobby.Id;
     }
 
-
+    
 
     Player CreatePlayerData()
     {

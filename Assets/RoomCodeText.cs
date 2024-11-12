@@ -10,7 +10,12 @@ public class RoomCodeText : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        DontDestroyOnLoad(this);
+        GameObject rcc = GameObject.Find("RoomCodeCanvas");
+        
+        if (rcc.scene.buildIndex!=-1)
+        {
+            DontDestroyOnLoad(this);
+        }
     }
 
     // Update is called once per frame

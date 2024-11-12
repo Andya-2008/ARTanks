@@ -5,15 +5,39 @@ using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using GameFuseCSharp;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private TMP_InputField joinCodeField;
     [SerializeField] private TMP_Dropdown joinCodeDropDown;
+    [SerializeField] private TMP_Text txtUsername;
+
+    private List<string> friends;
     private float lastCheck = 0;
-    public async void StartHost()
+    private Coroutine hbl;
+
+	public void Start()
+	{
+        txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
+        friends = new List<string>();
+
+        string strFriends = GameFuseUser.CurrentUser.GetAttributeValue("friends");
+        string[] aryFriends = strFriends.Split(',');
+
+	}
+	public async void StartHost()
     {
-        await HostSingleton.Instance.GameManager.StartHostAsync();
+        string lobbyId = await HostSingleton.Instance.GameManager.StartHostAsync();
+        GameObject appcontroller = GameObject.Find("ApplicationController");
+        hbl = StartCoroutine(appcontroller.GetComponent<ApplicationController>().HeartbeatLobbyCoroutine(lobbyId, 2.0f));
+        //StartCoroutine(HeartbeatLobbyCoroutine(lobbyId, 15));
+    }
+
+    public async void StopLobbyHeartBeat() {
+        StopCoroutine(hbl);
+        hbl = null;
     }
 
     public async void StartClient()
@@ -24,7 +48,8 @@ public class MainMenu : MonoBehaviour
             joincode = joinCodeField.text;
         }
         else {
-            joincode = joinCodeDropDown.options[joinCodeDropDown.value].text;
+            joincode = await ClientSingleton.Instance.GameManager.FindLobbyJoinCode(joinCodeDropDown.options[joinCodeDropDown.value].text);
+            //joincode = joinCodeDropDown.options[joinCodeDropDown.value].text.Split(":")[1];
         }
 
         await ClientSingleton.Instance.GameManager.StartClientAsync(joincode);
@@ -34,6 +59,18 @@ public class MainMenu : MonoBehaviour
 	{
 
 	}
+
+    public void LogOut() {
+        PlayerPrefs.DeleteKey("username");
+        PlayerPrefs.DeleteKey("userid");
+        PlayerPrefs.DeleteKey("email");
+        PlayerPrefs.DeleteKey("password");
+        GameObject.Destroy(GameObject.Find("NetworkManager"));
+        GameObject.Destroy(GameObject.Find("ApplicationController"));
+        SceneManager.LoadScene("NetBootstrap");
+    }
+
+
 
 	public async void UpdateLobbies() {
         Debug.Log("UpdateLobbies");
@@ -67,7 +104,7 @@ public class MainMenu : MonoBehaviour
             joinCodeDropDown.options.Clear();
             List<string> rooms = new List<string>();
             foreach (var l in lobbies.Results) {
-                Debug.Log(l.Name + ":" + l.LobbyCode);
+                Debug.Log(l.Name + ":" + l.Data["relayJoinCode"].Value);
                 rooms.Add(l.Name);
                 /*
                 foreach (var d in l.Data) {
@@ -83,4 +120,16 @@ public class MainMenu : MonoBehaviour
             Debug.Log(e);
         }
     }
+    /*
+    IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float waitTimeSeconds)
+    {
+        var delay = new WaitForSecondsRealtime(waitTimeSeconds);
+
+        while (true)
+        {
+            LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
+            yield return delay;
+        }
+    }
+    */
 }

@@ -13,6 +13,7 @@ public class HostSingleton : MonoBehaviour
     {
         get
         {
+            Debug.Log("Host Singleton: Instance");
             if (instance != null) { return instance; }
 
             instance = FindObjectOfType<HostSingleton>();
@@ -29,11 +30,13 @@ public class HostSingleton : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Start DontDestroyOnLoad Host Singleton");
         DontDestroyOnLoad(gameObject);
     }
 
     public void CreateHost()
     {
+        Debug.Log("Host Singleton: CreateHost()");
         GameManager = new HostGameManager();
     }
 }
