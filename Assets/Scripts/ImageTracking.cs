@@ -314,6 +314,7 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
     [Rpc(SendTo.Everyone)]
     public void RestartSceneRpc()
     {
+        GameObject.Find("AR Session").GetComponent<ResetSessionManager>().ResetARSession();
         SceneManager.LoadScene("Game");
     }
 }

@@ -10467,7 +10467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4072294713
+  GlobalObjectIdHash: 1274547100
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -10736,7 +10736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030896d0325fa3e4d8d7d4cfe2351cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 200
+  m_StartingHealth: 400
   m_Slider: {fileID: 6055580209464161675}
   m_FillImage: {fileID: 1663936346686385238}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
@@ -10771,6 +10771,7 @@ MonoBehaviour:
   startTime: 0
   homing: 0
   explosive: 0
+  canShoot: 1
 --- !u!114 &2146015601689436828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10907,6 +10908,7 @@ MonoBehaviour:
     type: 3}
   alloWall: {fileID: 5879128814780562814, guid: 7968bd539d6d10d458e9fc8b6b6bf517,
     type: 3}
+  enemyTanks: []
 --- !u!114 &-3509358221980274478
 MonoBehaviour:
   m_ObjectHideFlags: 0

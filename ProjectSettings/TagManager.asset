@@ -29,8 +29,8 @@ TagManager:
   - Wall
   - WallSphere
   - WallDeathCubes
-  - 
-  - 
+  - PhaseShiftedTank
+  - Ground
   - 
   - 
   - 

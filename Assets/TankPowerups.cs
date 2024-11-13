@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.Netcode;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -202,6 +201,25 @@ public class TankPowerups : NetworkBehaviour
             {
                 transform.localScale = new Vector3(1f, 1f, 1f);
                 tankMovement.m_Speed -= .05f;
+            }
+        }
+        else if (poweruptype.Contains("PhaseShift"))
+        {
+            if (activate)
+            {
+                this.gameObject.layer = 12;
+            }
+            else
+            {
+
+                if (NetworkObject.IsOwner)
+                {
+                    this.gameObject.layer = 6;
+                }
+                else
+                {
+                    this.gameObject.layer = 3;
+                }
             }
         }
         else if (poweruptype.Contains("Omniwall"))

@@ -207,3 +207,13 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: Tanksformation_Powerup
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4948505291823822191
+      m_GuidHigh: 7531701403119025042
+    m_SerializedTextureGuid:
+      m_GuidLow: 16331299419936206915
+      m_GuidHigh: 14786408878023581690
+    m_Size: {x: 0.0615, y: 0.10089401}
+    m_SpecifySize: 1
+    m_Name: PhaseShift_Powerup
+    m_Texture: {fileID: 0}
