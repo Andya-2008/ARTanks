@@ -15,10 +15,10 @@ MonoBehaviour:
   DevAccountEmail: dhyun@scalingwise.com
   DevAccountToken: bneb8ofes8a7itt5mpc6qmw9m3x9nf6boi4d76ccxnf15xeph687earxc7ci4rnyaja3h4ibk169poyqqu4g1xxgrapbczzx6ahy1gobqr1ebmpc9igbbwdhy63kxdmmumym31pydbcj8o19bbekmh11gcag7bqeessjzrjhb7xhdkwhbjjkboiprcy7wpkfyk4ciwbm
   AadAuthorization: 
-  SelectedStudio: 
+  SelectedStudio: _OVERRIDE_
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 0
+  curMainMenuIdx: 1
   curSubMenuIdx: 0

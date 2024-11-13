@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using GameFuseCSharp;
 using TMPro;
 using Unity.Services.Lobbies;
+using PlayFab;
+using PlayFab.ClientModels;
+
 
 public class ApplicationController : MonoBehaviour
 {
@@ -26,59 +28,42 @@ public class ApplicationController : MonoBehaviour
     [SerializeField] TMP_InputField signInPassword;
     [SerializeField] TextMeshProUGUI signInErrorText;
 
-
+    private string titleId = "3480A";
     private bool isConnected = false;
     public bool isAuthenticated = false;
+
+    public UserAccountInfo currentUser;
 
     private async void Start()
     {
         DontDestroyOnLoad(gameObject);
-        GameFuse.SetVerboseLogging(true);
-        GameFuse.SetUpGame(gameID, gameToken, this.GameSetUpCallback);
-    }
-    /*
-    private async void Awake()
-    {
         if (PlayerPrefs.HasKey("email") && PlayerPrefs.HasKey("password"))
         {
-            Debug.Log("Email:Password:" + PlayerPrefs.GetString("email") + PlayerPrefs.GetString("password"));
-        }
-        else {
-            GameFuse.SetVerboseLogging(true);
-            GameFuse.SetUpGame(gameID, gameToken, this.GameSetUpCallback);
-        }
-    }
-    */
-    async void GameSetUpCallback(string message, bool hasError)
-    {
-        if (!hasError)
-        {
-            Debug.Log("GameFuse setup success");
-            isConnected = true;
-
-            if (PlayerPrefs.HasKey("email") && PlayerPrefs.HasKey("password"))
+            string email = Crypto.DecryptString(PlayerPrefs.GetString("email"));
+            string password = Crypto.DecryptString(PlayerPrefs.GetString("password"));
+            Debug.Log(email + ":" + password);
+            if (email.Trim() != "" && password.Trim() != "")
             {
-                string email = Crypto.DecryptString(PlayerPrefs.GetString("email"));
-                string password = Crypto.DecryptString(PlayerPrefs.GetString("password"));
-                Debug.Log(email + ":" + password);
-                if (email.Trim() != "" && password.Trim() != "")
+
+                var request = new LoginWithEmailAddressRequest
                 {
-                    GameFuse.SignIn(email, password, this.SignInCallback);
-                }
-                else {
-                    TextLoading.SetActive(false);
-                    SignUpPanel.SetActive(true);
-                }
+
+                    Email = email.Trim(),
+                    Password = password.Trim(),
+                    TitleId = titleId
+                };
+                PlayFabClientAPI.LoginWithEmailAddress(request, this.pfSignInCallback, this.pfSignInErrorCallback);
             }
-            else {
+            else
+            {
                 TextLoading.SetActive(false);
                 SignUpPanel.SetActive(true);
             }
-
         }
         else
         {
-            Debug.Log("GameFuse setup failed: " + message);
+            TextLoading.SetActive(false);
+            SignUpPanel.SetActive(true);
         }
     }
 
@@ -98,9 +83,8 @@ public class ApplicationController : MonoBehaviour
 
             Debug.Log("ApplicationController: Instantiate Client");
             ClientSingleton clientSingleton = Instantiate(clientPrefab);
-            Debug.Log("ApplicationController: Create Client");
-            
-            bool unityAuthenticated = await clientSingleton.CreateClient(GameFuseUser.CurrentUser.GetUsername());
+            Debug.Log("ApplicationController: Create Client: " + currentUser.PlayFabId);
+            bool unityAuthenticated = await clientSingleton.CreateClient(currentUser.PlayFabId);
             Debug.Log("ApplicationController:  Authenticated:" + isAuthenticated);
             
 
@@ -135,36 +119,40 @@ public class ApplicationController : MonoBehaviour
             return;
         }
 
-        if (isConnected)
+        var request = new LoginWithEmailAddressRequest
         {
-            GameFuse.SignIn(email, password, this.SignInCallback);
-        }
-        else
-        {
-            signInErrorText.text = "Not connected with Server! Please try again later.";
-        }
+
+            Email = email.Trim(),
+            Password = password.Trim()
+        };
+        PlayFabClientAPI.LoginWithEmailAddress(request, this.pfSignInCallback, this.pfSignInErrorCallback);
+
+    }
+
+    void pfSignInErrorCallback(PlayFabError error)
+    {
+        Debug.Log("PlayFab sign in failed: " + error.ErrorMessage);
+        signInErrorText.text = error.ErrorMessage;
     }
 
     // Callback function for sign in
-    public async void SignInCallback(string message, bool hasError)
+    public async void pfSignInCallback(LoginResult result)
     {
-        if (!hasError)
-        {
-            Debug.Log("GameFuse sign in success");
+        Debug.Log("PlayFab sign in success");
+        PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), (result) => {
+            
+            currentUser = result.AccountInfo;
+            Debug.Log("username=" + currentUser.Username);
             isAuthenticated = true;
             saveUserInfo(signInEmail.text, signInPassword.text);
-            await LaunchInMode(SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null);
+            LaunchInMode(SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null);
+        }, error => {
+            Debug.Log("Error retrieving Account Info");
+        });
 
-        }
-        else
-        {
-            Debug.Log("GameFuse sign in failed: " + message);
-            signInErrorText.text = message;
-        }
+        
+
     }
-
-
-
 
     public void SignUpUser()
     {
@@ -183,46 +171,84 @@ public class ApplicationController : MonoBehaviour
             signUpErrorText.text = "Password and Confirm Password does not match!";
             return;
         }
+        var request = new RegisterPlayFabUserRequest
 
-        if (isConnected)
         {
-            GameFuse.SignUp(email, password, cpassword, username, this.SignUpCallback);
-        }
-        else
-        {
-            signUpErrorText.text = "Not connected with Server! Please try again later.";
-        }
+            Email = email,
+            Password = password,
+            Username = username,
+            DisplayName = username
+        };
+        Debug.Log("Playfab Sign Up:" + email + ":" + username + ":" + password);
+        PlayFabClientAPI.RegisterPlayFabUser(request, this.pfSignUpCallback, this.pfSignUpErrorCallback);
+
+    }
+
+
+    // Callback function for sign up
+    public async void pfSignUpCallback(RegisterPlayFabUserResult result)
+    {
+        Debug.Log("register success: " + result.PlayFabId);
+        PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), (result) => {
+            
+            currentUser = result.AccountInfo;
+            Debug.Log("username=" + currentUser.Username);
+            saveUserInfo(signUpEmail.text, signUpPassword.text);
+            LaunchInMode(SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null);
+        }, error => {
+            Debug.Log("Error retrieving Account Info");
+        });
+
+
+        isAuthenticated = true;
+        
+
+        
+
     }
 
     // Callback function for sign up
-    public async void SignUpCallback(string message, bool hasError)
+    public async void pfSignUpErrorCallback(PlayFabError error)
     {
-        if (!hasError)
+
+            Debug.Log("GameFuse sign up failed: " + error.ErrorMessage);
+            signUpErrorText.text = error.ErrorMessage;
+
+    }
+
+
+    public async void ForgotPassword()
+    {
+        if (signInEmail.text != null && signInEmail.text != "")
         {
-            Debug.Log(message);
-            Debug.Log("GameFuse sign up success");
-            isAuthenticated = true;
-            saveUserInfo(signUpEmail.text, signUpPassword.text);
-
-            await LaunchInMode(SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null);
-
+            var request = new SendAccountRecoveryEmailRequest
+            {
+                Email = signInEmail.text,
+                TitleId = titleId
+            };
+            PlayFabClientAPI.SendAccountRecoveryEmail(request, ForgotPasswordEmailSentCallback, ForgotPasswordEmailErrorCallback);
         }
         else
         {
-            Debug.Log("GameFuse sign up failed: " + message);
-            signUpErrorText.text = message;
-        }
-    }
-
-    public async void ForgotPassword() {
-        if (signInEmail.text != null && signInEmail.text != "")
-        {
-            GameFuse.Instance.SendPasswordResetEmail(signInEmail.text, ForgotPasswordEmailSent);
-        }
-        else {
             signInErrorText.text = "You must first fill out the email field.";
         }
     }
+    private void ForgotPasswordEmailSentCallback(SendAccountRecoveryEmailResult result)
+    {
+
+        signInErrorText.text = "Password Reset email has been sent.  Check your junk folder.";
+
+    }
+
+    private void ForgotPasswordEmailErrorCallback(PlayFabError error)
+    {
+
+            signInErrorText.text = error.ErrorMessage;
+
+    }
+
+
+
     private void ForgotPasswordEmailSent(string message, bool hasError)
     {
         if (hasError)
@@ -234,9 +260,10 @@ public class ApplicationController : MonoBehaviour
             signInErrorText.text = "Password Reset email has been sent.  Check your junk folder.";
         }
     }
+
     private void saveUserInfo(string email, string password) {
-        PlayerPrefs.SetString("username", Crypto.EncryptString(GameFuseUser.CurrentUser.GetUsername()));
-        PlayerPrefs.SetInt("userid", GameFuseUser.CurrentUser.GetID());
+        PlayerPrefs.SetString("username", Crypto.EncryptString(currentUser.Username));
+        PlayerPrefs.SetString("userid", currentUser.PlayFabId);
         PlayerPrefs.SetString("email", Crypto.EncryptString(email));
         PlayerPrefs.SetString("password", Crypto.EncryptString(password));
     }

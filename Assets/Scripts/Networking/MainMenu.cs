@@ -6,26 +6,30 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using GameFuseCSharp;
+using PlayFab;
+using PlayFab.ClientModels;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private TMP_InputField joinCodeField;
     [SerializeField] private TMP_Dropdown joinCodeDropDown;
     [SerializeField] private TMP_Text txtUsername;
+    [SerializeField] private TMP_Text txtError;
+    
 
-    private List<string> friends;
+    [SerializeField] private GameObject mainPanel;
+    [SerializeField] private GameObject friendsPanel;
+
+    
     private float lastCheck = 0;
     private Coroutine hbl;
+    
 
-	public void Start()
+    public void Start()
 	{
-        txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
-        friends = new List<string>();
-
-        string strFriends = GameFuseUser.CurrentUser.GetAttributeValue("friends");
-        string[] aryFriends = strFriends.Split(',');
-
+        //txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
+        txtUsername.text = GameObject.Find("ApplicationController").GetComponent<ApplicationController>().currentUser.Username;
+        
 	}
 	public async void StartHost()
     {
@@ -120,16 +124,16 @@ public class MainMenu : MonoBehaviour
             Debug.Log(e);
         }
     }
-    /*
-    IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float waitTimeSeconds)
-    {
-        var delay = new WaitForSecondsRealtime(waitTimeSeconds);
 
-        while (true)
-        {
-            LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
-            yield return delay;
-        }
+
+    public void ManageFriends() {
+        friendsPanel.SetActive(true);
+        mainPanel.SetActive(false);
     }
-    */
+
+    public void ManageGame()
+    {
+        friendsPanel.SetActive(false);
+        mainPanel.SetActive(true);
+    }
 }
