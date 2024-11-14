@@ -22,27 +22,27 @@ public class MainMenu : MonoBehaviour
 
     
     private float lastCheck = 0;
-    private Coroutine hbl;
-    
+
+    private List<FriendInfo> friendlist = null;
+
 
     public void Start()
 	{
         //txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
         txtUsername.text = GameObject.Find("ApplicationController").GetComponent<ApplicationController>().currentUser.Username;
-        
-	}
+        StartCoroutine(UpdateLobbyCoroutine(5.0f));
+    }
 	public async void StartHost()
     {
         string lobbyId = await HostSingleton.Instance.GameManager.StartHostAsync();
         GameObject appcontroller = GameObject.Find("ApplicationController");
-        hbl = StartCoroutine(appcontroller.GetComponent<ApplicationController>().HeartbeatLobbyCoroutine(lobbyId, 2.0f));
+        appcontroller.GetComponent<ApplicationController>().startHeartBeat(lobbyId);
+
+        
         //StartCoroutine(HeartbeatLobbyCoroutine(lobbyId, 15));
     }
 
-    public async void StopLobbyHeartBeat() {
-        StopCoroutine(hbl);
-        hbl = null;
-    }
+
 
     public async void StartClient()
     {
@@ -80,44 +80,14 @@ public class MainMenu : MonoBehaviour
         Debug.Log("UpdateLobbies");
         try
         {
-
+            PlayFabClientAPI.GetFriendsList(new GetFriendsListRequest
+            {
+            }, result => {
+                friendlist = result.Friends;
+                GetFriendLobbies(friendlist); // triggers your UI
+            }, DisplayPlayFabError);
             //await UnityServices.InitializeAsync();
-            QueryLobbiesOptions options = new QueryLobbiesOptions();
-            options.Count = 25;
-
-            // Filter for open lobbies only
-            options.Filters = new List<QueryFilter>()
-            {
-                new QueryFilter(
-                    field: QueryFilter.FieldOptions.AvailableSlots,
-                    op: QueryFilter.OpOptions.GT,
-                    value: "0")
-            };
-
-                    // Order by newest lobbies first
-                    options.Order = new List<QueryOrder>()
-            {
-                new QueryOrder(
-                    asc: false,
-                    field: QueryOrder.FieldOptions.Created)
-            };
-
-            QueryResponse lobbies = await LobbyService.Instance.QueryLobbiesAsync(options);
-            Debug.Log("Got Lobbies:" + lobbies.Results.Count);
-
-            joinCodeDropDown.options.Clear();
-            List<string> rooms = new List<string>();
-            foreach (var l in lobbies.Results) {
-                Debug.Log(l.Name + ":" + l.Data["relayJoinCode"].Value);
-                rooms.Add(l.Name);
-                /*
-                foreach (var d in l.Data) {
-                    Debug.Log(d.Key + ":" + d.Value);
-                }*/
-
-
-            }
-            joinCodeDropDown.AddOptions(rooms);
+            
         }
         catch (LobbyServiceException e)
         {
@@ -125,7 +95,56 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    async void GetFriendLobbies(List<FriendInfo> friends)
+    {
+        joinCodeDropDown.options.Clear();
+        QueryLobbiesOptions options = new QueryLobbiesOptions();
+        options.Count = 25;
 
+        foreach (FriendInfo fi in friends)
+        {
+            QueryFilter qf = new QueryFilter(
+                    field: QueryFilter.FieldOptions.Name,
+                    op: QueryFilter.OpOptions.EQ,
+                    value: fi.Username
+                    );
+            List<QueryFilter> queryFilters = new List<QueryFilter>();
+            queryFilters.Add(qf);
+
+
+            // Order by newest lobbies first
+            options.Order = new List<QueryOrder>()
+            {
+                new QueryOrder(
+                    asc: false,
+                    field: QueryOrder.FieldOptions.Name)
+            };
+
+            QueryResponse lobbies = await LobbyService.Instance.QueryLobbiesAsync(options);
+            Debug.Log("Got Lobbies:" + lobbies.Results.Count);
+
+            joinCodeDropDown.options.Clear();
+            List<string> rooms = new List<string>();
+            foreach (var l in lobbies.Results)
+            {
+                Debug.Log(l.Name + ":" + l.Data["relayJoinCode"].Value);
+                if (l.AvailableSlots > 0)
+                {
+                    rooms.Add(l.Name);
+                }
+
+
+            }
+            joinCodeDropDown.AddOptions(rooms);
+
+        }
+
+    }
+
+    void DisplayPlayFabError(PlayFabError error)
+    {
+        txtError.text = error.ErrorMessage;
+    }
     public void ManageFriends() {
         friendsPanel.SetActive(true);
         mainPanel.SetActive(false);
@@ -136,4 +155,18 @@ public class MainMenu : MonoBehaviour
         friendsPanel.SetActive(false);
         mainPanel.SetActive(true);
     }
+
+    public IEnumerator UpdateLobbyCoroutine(float waitTimeSeconds)
+    {
+        //var delay = new WaitForSecondsRealtime(waitTimeSeconds);
+
+        while (true)
+        {
+            UpdateLobbies();
+            yield return new WaitForSeconds(waitTimeSeconds);
+        }
+    }
+
+
+
 }

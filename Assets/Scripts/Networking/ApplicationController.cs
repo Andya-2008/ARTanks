@@ -34,6 +34,9 @@ public class ApplicationController : MonoBehaviour
 
     public UserAccountInfo currentUser;
 
+    private Coroutine hbl;
+
+
     private async void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -268,7 +271,17 @@ public class ApplicationController : MonoBehaviour
         PlayerPrefs.SetString("password", Crypto.EncryptString(password));
     }
 
-    public IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float waitTimeSeconds)
+
+    public void startHeartBeat(string lobbyId) {
+        hbl = StartCoroutine(HeartbeatLobbyCoroutine(lobbyId, 15.0f));
+    }
+    public void stopLobbyHeartBeat()
+    {
+        StopCoroutine(hbl);
+        hbl = null;
+    }
+
+    IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float waitTimeSeconds)
     {
         //var delay = new WaitForSecondsRealtime(waitTimeSeconds);
 
