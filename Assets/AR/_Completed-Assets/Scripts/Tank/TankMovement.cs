@@ -20,9 +20,13 @@ public class TankMovement : NetworkBehaviour
     private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
     private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
     FixedJoystick joystick;
+    TextMeshProUGUI debugText;
+    float timeSinceMoved;
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        debugText = GameObject.Find("DebugText").GetComponent<TextMeshProUGUI>();
+        timeSinceMoved = Time.time;
     }
 
 
@@ -77,18 +81,6 @@ public class TankMovement : NetworkBehaviour
     }
 
 
-    private void Update()
-    {
-        if (NetworkObject.IsOwner)
-        {
-            // Store the value of both input axes.
-            m_VerticalInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Vertical;
-            m_HorizontalInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Horizontal;
-
-            EngineAudio();
-        }
-    }
-
     private void EngineAudio()
     {
         // If there is no input (the tank is stationary)...
@@ -119,11 +111,24 @@ public class TankMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (NetworkObject.IsOwner)
+        {
+            // Store the value of both input axes.
+            m_VerticalInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Vertical;
+            m_HorizontalInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Horizontal;
+
+            EngineAudio();
+        }
         if (Mathf.Abs(m_VerticalInputValue) >= 0.001f && Mathf.Abs(m_HorizontalInputValue) >= 0.001f)
         {
             if (NetworkObject.IsOwner)
             {
-                Move();
+                /*
+                if (Time.time - timeSinceMoved > .01f)
+                {
+                    timeSinceMoved = Time.time;*/
+                    Move();
+                //}
                 Turn();
             }
         }
@@ -137,8 +142,11 @@ public class TankMovement : NetworkBehaviour
         float stickSpeed = Mathf.Sqrt(Mathf.Pow(m_HorizontalInputValue,2) + Mathf.Pow(m_VerticalInputValue,2));
         Vector3 movement = transform.forward * stickSpeed * m_Speed * Time.deltaTime;
 
+        //debugText.text = "Transform.forward: " + transform.forward + " : m_Speed: " + m_Speed + " : fixeddeltaTime: " + Math.Round(Time.fixedDeltaTime, 4) + "distance: " + stickSpeed * m_Speed * Time.deltaTime / Time.deltaTime;
+
         // Apply this movement to the rigidbody's position.
         m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
+        debugText.text = "movement: " + movement + "Movement magnitude: " + movement.magnitude + " : currentPos: " + m_Rigidbody.position + " : newPos: " + (m_Rigidbody.position + movement).ToString();
     }
 
 
