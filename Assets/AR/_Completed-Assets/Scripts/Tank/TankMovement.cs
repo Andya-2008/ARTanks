@@ -109,7 +109,7 @@ public class TankMovement : NetworkBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (NetworkObject.IsOwner)
         {
@@ -140,13 +140,14 @@ public class TankMovement : NetworkBehaviour
         this.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
         float stickSpeed = Mathf.Sqrt(Mathf.Pow(m_HorizontalInputValue,2) + Mathf.Pow(m_VerticalInputValue,2));
-        Vector3 movement = transform.forward * stickSpeed * m_Speed * Time.deltaTime;
+        float movementSpeed = stickSpeed * m_Speed * Time.deltaTime;
 
         //debugText.text = "Transform.forward: " + transform.forward + " : m_Speed: " + m_Speed + " : fixeddeltaTime: " + Math.Round(Time.fixedDeltaTime, 4) + "distance: " + stickSpeed * m_Speed * Time.deltaTime / Time.deltaTime;
 
         // Apply this movement to the rigidbody's position.
-        m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
-        debugText.text = "movement: " + movement + "Movement magnitude: " + movement.magnitude + " : currentPos: " + m_Rigidbody.position + " : newPos: " + (m_Rigidbody.position + movement).ToString();
+        //m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
+        transform.position += transform.forward * movementSpeed;
+        //debugText.text = "movement: " + movement + "Movement magnitude: " + movement.magnitude + " : currentPos: " + m_Rigidbody.position + " : newPos: " + (m_Rigidbody.position + movement).ToString();
     }
 
 
