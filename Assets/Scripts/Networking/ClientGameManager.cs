@@ -10,18 +10,20 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 public class ClientGameManager
 {
     private JoinAllocation allocation;
 
     private const string MenuSceneName = "Menu";
 
-    public async Task<bool> InitAsync()
+    public async Task<bool> InitAsync(string username)
     {
         await UnityServices.InitializeAsync();
 
-        AuthState authState = await AuthenticationWrapper.DoAuth();
+        
+        AuthState authState = await AuthenticationWrapper.DoAuth(username);
 
         if (authState == AuthState.Authenticated)
         {
@@ -29,6 +31,7 @@ public class ClientGameManager
         }
 
         return false;
+        
     }
 
     public void GoToMenu()
@@ -55,4 +58,38 @@ public class ClientGameManager
 
         NetworkManager.Singleton.StartClient();
     }
+    public async Task<string> FindLobbyJoinCode(string lobbyName) {
+		try { 
+            QueryLobbiesOptions options = new QueryLobbiesOptions();
+            options.Count = 1;
+
+            // Filter for open lobbies only
+            options.Filters = new List<QueryFilter>()
+            {
+                new QueryFilter(
+                    field: QueryFilter.FieldOptions.Name,
+                    op: QueryFilter.OpOptions.EQ,
+                    value: lobbyName)
+            };
+
+            // Order by newest lobbies first
+            options.Order = new List<QueryOrder>()
+                {
+                    new QueryOrder(
+                        asc: false,
+                        field: QueryOrder.FieldOptions.Created)
+                };
+
+            QueryResponse lobbies = await LobbyService.Instance.QueryLobbiesAsync(options);
+            Debug.Log("LobbyResults:" + lobbies.Results.Count);
+            Debug.Log("Lobbyjoincode:" + lobbies.Results[0].Data["relayJoinCode"].Value);
+            return lobbies.Results[0].Data["relayJoinCode"].Value;
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+            return "";
+        }
+    }
+
 }

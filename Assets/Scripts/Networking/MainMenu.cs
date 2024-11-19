@@ -5,16 +5,44 @@ using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using PlayFab;
+using PlayFab.ClientModels;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private TMP_InputField joinCodeField;
     [SerializeField] private TMP_Dropdown joinCodeDropDown;
+    [SerializeField] private TMP_Text txtUsername;
+    [SerializeField] private TMP_Text txtError;
+    
+
+    [SerializeField] private GameObject mainPanel;
+    [SerializeField] private GameObject friendsPanel;
+
+    
     private float lastCheck = 0;
-    public async void StartHost()
-    {
-        await HostSingleton.Instance.GameManager.StartHostAsync();
+
+    private List<FriendInfo> friendlist = null;
+
+
+    public void Start()
+	{
+        //txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
+        txtUsername.text = GameObject.Find("ApplicationController").GetComponent<ApplicationController>().currentUser.Username;
+        StartCoroutine(UpdateLobbyCoroutine(5.0f));
     }
+	public async void StartHost()
+    {
+        string lobbyId = await HostSingleton.Instance.GameManager.StartHostAsync();
+        GameObject appcontroller = GameObject.Find("ApplicationController");
+        appcontroller.GetComponent<ApplicationController>().startHeartBeat(lobbyId);
+
+        
+        //StartCoroutine(HeartbeatLobbyCoroutine(lobbyId, 15));
+    }
+
+
 
     public async void StartClient()
     {
@@ -24,7 +52,8 @@ public class MainMenu : MonoBehaviour
             joincode = joinCodeField.text;
         }
         else {
-            joincode = joinCodeDropDown.options[joinCodeDropDown.value].text;
+            joincode = await ClientSingleton.Instance.GameManager.FindLobbyJoinCode(joinCodeDropDown.options[joinCodeDropDown.value].text);
+            //joincode = joinCodeDropDown.options[joinCodeDropDown.value].text.Split(":")[1];
         }
 
         await ClientSingleton.Instance.GameManager.StartClientAsync(joincode);
@@ -35,30 +64,60 @@ public class MainMenu : MonoBehaviour
 
 	}
 
+    public void LogOut() {
+        PlayerPrefs.DeleteKey("username");
+        PlayerPrefs.DeleteKey("userid");
+        PlayerPrefs.DeleteKey("email");
+        PlayerPrefs.DeleteKey("password");
+        GameObject.Destroy(GameObject.Find("NetworkManager"));
+        GameObject.Destroy(GameObject.Find("ApplicationController"));
+        SceneManager.LoadScene("NetBootstrap");
+    }
+
+
+
 	public async void UpdateLobbies() {
         Debug.Log("UpdateLobbies");
         try
         {
-
-            //await UnityServices.InitializeAsync();
-            QueryLobbiesOptions options = new QueryLobbiesOptions();
-            options.Count = 25;
-
-            // Filter for open lobbies only
-            options.Filters = new List<QueryFilter>()
+            PlayFabClientAPI.GetFriendsList(new GetFriendsListRequest
             {
-                new QueryFilter(
-                    field: QueryFilter.FieldOptions.AvailableSlots,
-                    op: QueryFilter.OpOptions.GT,
-                    value: "0")
-            };
+            }, result => {
+                friendlist = result.Friends;
+                GetFriendLobbies(friendlist); // triggers your UI
+            }, DisplayPlayFabError);
+            //await UnityServices.InitializeAsync();
+            
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
 
-                    // Order by newest lobbies first
-                    options.Order = new List<QueryOrder>()
+    async void GetFriendLobbies(List<FriendInfo> friends)
+    {
+        joinCodeDropDown.options.Clear();
+        QueryLobbiesOptions options = new QueryLobbiesOptions();
+        options.Count = 25;
+
+        foreach (FriendInfo fi in friends)
+        {
+            QueryFilter qf = new QueryFilter(
+                    field: QueryFilter.FieldOptions.Name,
+                    op: QueryFilter.OpOptions.EQ,
+                    value: fi.Username
+                    );
+            List<QueryFilter> queryFilters = new List<QueryFilter>();
+            queryFilters.Add(qf);
+
+
+            // Order by newest lobbies first
+            options.Order = new List<QueryOrder>()
             {
                 new QueryOrder(
                     asc: false,
-                    field: QueryOrder.FieldOptions.Created)
+                    field: QueryOrder.FieldOptions.Name)
             };
 
             QueryResponse lobbies = await LobbyService.Instance.QueryLobbiesAsync(options);
@@ -66,21 +125,48 @@ public class MainMenu : MonoBehaviour
 
             joinCodeDropDown.options.Clear();
             List<string> rooms = new List<string>();
-            foreach (var l in lobbies.Results) {
-                Debug.Log(l.Name + ":" + l.LobbyCode);
-                rooms.Add(l.Name);
-                /*
-                foreach (var d in l.Data) {
-                    Debug.Log(d.Key + ":" + d.Value);
-                }*/
+            foreach (var l in lobbies.Results)
+            {
+                Debug.Log(l.Name + ":" + l.Data["relayJoinCode"].Value);
+                if (l.AvailableSlots > 0)
+                {
+                    rooms.Add(l.Name);
+                }
 
 
             }
             joinCodeDropDown.AddOptions(rooms);
+
         }
-        catch (LobbyServiceException e)
+
+    }
+
+    void DisplayPlayFabError(PlayFabError error)
+    {
+        txtError.text = error.ErrorMessage;
+    }
+    public void ManageFriends() {
+        friendsPanel.SetActive(true);
+        mainPanel.SetActive(false);
+    }
+
+    public void ManageGame()
+    {
+        friendsPanel.SetActive(false);
+        mainPanel.SetActive(true);
+    }
+
+    public IEnumerator UpdateLobbyCoroutine(float waitTimeSeconds)
+    {
+        //var delay = new WaitForSecondsRealtime(waitTimeSeconds);
+
+        while (true)
         {
-            Debug.Log(e);
+            UpdateLobbies();
+            yield return new WaitForSeconds(waitTimeSeconds);
         }
     }
+
+
+
 }

@@ -7,9 +7,10 @@ using UnityEngine;
 
 public static class AuthenticationWrapper
 {
+    
     public static AuthState AuthState { get; private set; } = AuthState.NotAuthenticated;
 
-    public static async Task<AuthState> DoAuth(int maxRetries = 5)
+    public static async Task<AuthState> DoAuth(string username, int maxRetries = 5)
     {
         if (AuthState == AuthState.Authenticated)
         {
@@ -23,7 +24,7 @@ public static class AuthenticationWrapper
             return AuthState;
         }
 
-        await SignInAnonymouslyAsync(maxRetries);
+        await SignInAnonymouslyAsync(username, maxRetries);
 
         return AuthState;
     }
@@ -38,7 +39,7 @@ public static class AuthenticationWrapper
         return AuthState;
     }
 
-    private static async Task SignInAnonymouslyAsync(int maxRetries)
+    private static async Task SignInAnonymouslyAsync(string username, int maxRetries)
     {
         AuthState = AuthState.Authenticating;
 
@@ -48,6 +49,46 @@ public static class AuthenticationWrapper
             try
             {
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                await AuthenticationService.Instance.UpdatePlayerNameAsync(username);
+                if (AuthenticationService.Instance.IsSignedIn && AuthenticationService.Instance.IsAuthorized)
+                {
+                    AuthState = AuthState.Authenticated;
+                    break;
+                }
+            }
+            catch (AuthenticationException authException)
+            {
+                Debug.LogError(authException);
+                AuthState = AuthState.Error;
+            }
+            catch (RequestFailedException requestException)
+            {
+                Debug.LogError(requestException);
+                AuthState = AuthState.Error;
+            }
+
+            retries++;
+            await Task.Delay(1000);
+        }
+
+        if (AuthState != AuthState.Authenticated)
+        {
+            Debug.LogWarning($"Player was not signed in successfully after {retries} retries");
+            AuthState = AuthState.TimeOut;
+        }
+    }
+
+
+    private static async Task SignInUsernameAsync(int maxRetries, string username, string password)
+    {
+        AuthState = AuthState.Authenticating;
+
+        int retries = 0;
+        while (AuthState == AuthState.Authenticating && retries < maxRetries)
+        {
+            try
+            {
+                await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
 
                 if (AuthenticationService.Instance.IsSignedIn && AuthenticationService.Instance.IsAuthorized)
                 {
@@ -76,6 +117,47 @@ public static class AuthenticationWrapper
             AuthState = AuthState.TimeOut;
         }
     }
+
+
+    private static async Task SignUpUsernameAsync(int maxRetries, string username, string password)
+    {
+        AuthState = AuthState.Authenticating;
+
+        int retries = 0;
+        while (AuthState == AuthState.Authenticating && retries < maxRetries)
+        {
+            try
+            {
+                await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
+
+                if (AuthenticationService.Instance.IsSignedIn && AuthenticationService.Instance.IsAuthorized)
+                {
+                    AuthState = AuthState.Authenticated;
+                    break;
+                }
+            }
+            catch (AuthenticationException authException)
+            {
+                Debug.LogError(authException);
+                AuthState = AuthState.Error;
+            }
+            catch (RequestFailedException requestException)
+            {
+                Debug.LogError(requestException);
+                AuthState = AuthState.Error;
+            }
+
+            retries++;
+            await Task.Delay(1000);
+        }
+
+        if (AuthState != AuthState.Authenticated)
+        {
+            Debug.LogWarning($"Player was not signed in successfully after {retries} retries");
+            AuthState = AuthState.TimeOut;
+        }
+    }
+    
 }
 
 public enum AuthState
