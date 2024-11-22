@@ -7,6 +7,10 @@ public class DisableParentalCanvas : MonoBehaviour
     [SerializeField] Canvas canvas;
     void Start()
     {
+        if (PlayerPrefs.GetInt("supervision") == 1)
+        {
+            canvas.gameObject.SetActive(false);
+        }
         DontDestroyOnLoad(canvas);
     }
 
@@ -17,7 +21,12 @@ public class DisableParentalCanvas : MonoBehaviour
     }
     public void DisableCanvas()
     {
-        Debug.Log("Hi");    
+        Debug.Log("Hi");
+        ChangeSupervisionPlayerPrefs();
         canvas.enabled = false;
+    }
+    public void ChangeSupervisionPlayerPrefs()
+    {
+        PlayerPrefs.SetInt("supervision", 1);
     }
 }

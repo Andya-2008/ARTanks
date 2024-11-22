@@ -16,6 +16,7 @@ TagManager:
   - UIPowerup
   - Wall
   - Allowall
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - WallDeathCubes
   - PhaseShiftedTank
   - Ground
-  - 
+  - ShieldSphere
   - 
   - 
   - 

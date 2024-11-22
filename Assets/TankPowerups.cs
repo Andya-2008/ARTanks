@@ -22,6 +22,7 @@ public class TankPowerups : NetworkBehaviour
     GameObject battleField;
     [SerializeField] GameObject omniWall;
     [SerializeField] GameObject alloWall;
+    [SerializeField] List<GameObject> shields = new List<GameObject>();
 
     public List<GameObject> enemyTanks;
     // Start is called before the first frame update
@@ -220,6 +221,18 @@ public class TankPowerups : NetworkBehaviour
                 {
                     this.gameObject.layer = 3;
                 }
+            }
+        }
+        else if (poweruptype.Contains("Shield"))
+        {
+            if (activate)
+            {
+                shields[0].SetActive(true);
+            }
+            else
+            {
+
+                shields[0].SetActive(false);
             }
         }
         else if (poweruptype.Contains("Omniwall"))

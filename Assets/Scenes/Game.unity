@@ -3089,7 +3089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &854074441
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5680,6 +5680,7 @@ MonoBehaviour:
   - {fileID: 3008120504894950882, guid: 03c172098cc2f3a41948b95f2561d149, type: 3}
   - {fileID: 3008120504894950882, guid: 5d291682cd7a20449a1b1b834dfbd0a0, type: 3}
   - {fileID: 3008120504894950882, guid: a37c30fef67e247449937b5938e58155, type: 3}
+  - {fileID: 3008120504894950882, guid: fae3652a825290f47abc857b7be4e030, type: 3}
   battleField: {fileID: 0}
 --- !u!114 &1809286837
 MonoBehaviour:

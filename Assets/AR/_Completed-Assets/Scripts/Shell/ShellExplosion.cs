@@ -51,13 +51,20 @@ namespace Complete
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("OnTriggerEnter Called: " + other.name.ToString());
+            Debug.Log("OnTriggerEnter tag: " + other.gameObject.tag);
             if (explosive)
             {
                 ExplosiveBulletTrigger();
             }
             else
             {
-                if (NetworkManager.Singleton.IsServer && (other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank"))
+                if (/*NetworkManager.Singleton.IsServer && */other.gameObject.tag == "Shield")
+                {
+                    Debug.Log("Added damage to shield");
+                    other.GetComponent<ShieldController>().TakeShieldDamage(m_damage);
+                }
+                else if (NetworkManager.Singleton.IsServer && (other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank"))
                 {
                     other.GetComponent<TankHealth>().TakeDamage(m_damage);
                 }
@@ -107,6 +114,10 @@ namespace Complete
 
                     targetHealth.TakeDamage(m_damage);
                     Debug.Log("Added damage to wall: " + targetHealth.gameObject.name);
+                }
+                else if(targetRigidbody.gameObject.tag == "Shield")
+                {
+                    targetRigidbody.GetComponent<ShieldController>().TakeShieldDamage(m_damage);
                 }
                 else
                 {
