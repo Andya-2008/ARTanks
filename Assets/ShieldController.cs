@@ -2,15 +2,21 @@ using Unity.Hierarchy;
 using UnityEngine;
 using UnityEngine.Playables;
 using Unity.Netcode;
+using System;
 
 public class ShieldController : MonoBehaviour
 {
     [SerializeField] float ShieldHealth = 200;
     [SerializeField] GameObject damageSphere;
+
+    [SerializeField] GameObject shieldParent;
+    public GameObject myTank;
+    [SerializeField] bool reg;
+    [SerializeField] bool golden;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        myTank = shieldParent.GetComponent<ShieldParent>().myTank;
     }
 
     // Update is called once per frame
@@ -21,6 +27,7 @@ public class ShieldController : MonoBehaviour
 
     public void TakeShieldDamage(float damage)
     {
+        ShieldSpecialAction();
         damageSphere.GetComponent<PlayableDirector>().Play();
         ShieldHealth -= damage;
         Debug.Log(ShieldHealth);
@@ -28,6 +35,19 @@ public class ShieldController : MonoBehaviour
         {
             Debug.Log("ShieldDeath");
             ShieldDeath();
+        }
+    }
+
+    private void ShieldSpecialAction()
+    {
+        if(reg)
+        {
+
+        }
+        if(golden)
+        {
+            myTank.GetComponent<CoinWallet>().UpdateCoinsServerRPC(40);
+            Debug.Log("Coin wallet updated!");
         }
     }
 

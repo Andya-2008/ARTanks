@@ -10942,6 +10942,7 @@ MonoBehaviour:
     type: 3}
   shields:
   - {fileID: 4041511447780960437}
+  shieldParent: {fileID: 1534617768954424894}
   enemyTanks: []
 --- !u!114 &-7605562719663097875
 MonoBehaviour:
@@ -11753,6 +11754,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shields
       objectReference: {fileID: 0}
+    - target: {fileID: 7272466894539209538, guid: 8e0468589e846354e9f748da332b0c38,
+        type: 3}
+      propertyPath: myTank
+      value: 
+      objectReference: {fileID: 5407763058290175562}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11761,6 +11767,12 @@ PrefabInstance:
 --- !u!224 &546730610973274704 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5223132270656770484, guid: 8e0468589e846354e9f748da332b0c38,
+    type: 3}
+  m_PrefabInstance: {fileID: 5758463144859313124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1534617768954424894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6531949002500558298, guid: 8e0468589e846354e9f748da332b0c38,
     type: 3}
   m_PrefabInstance: {fileID: 5758463144859313124}
   m_PrefabAsset: {fileID: 0}

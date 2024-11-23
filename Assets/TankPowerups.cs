@@ -23,11 +23,13 @@ public class TankPowerups : NetworkBehaviour
     [SerializeField] GameObject omniWall;
     [SerializeField] GameObject alloWall;
     [SerializeField] List<GameObject> shields = new List<GameObject>();
+    [SerializeField] GameObject shieldParent;
 
     public List<GameObject> enemyTanks;
     // Start is called before the first frame update
     void Start()
     {
+        shields = shieldParent.GetComponent<ShieldParent>().shields;
         tankMovement = this.GetComponent<TankMovement>();
         tankShooting = this.GetComponent<TankShooting>();
         tankHealth = this.GetComponent<TankHealth>();
@@ -223,7 +225,7 @@ public class TankPowerups : NetworkBehaviour
                 }
             }
         }
-        else if (poweruptype.Contains("Shield"))
+        else if (poweruptype.Contains("Basic_Shield"))
         {
             if (activate)
             {
@@ -233,6 +235,18 @@ public class TankPowerups : NetworkBehaviour
             {
 
                 shields[0].SetActive(false);
+            }
+        }
+        else if (poweruptype.Contains("Golden_Shield"))
+        {
+            if (activate)
+            {
+                shields[1].SetActive(true);
+            }
+            else
+            {
+
+                shields[1].SetActive(false);
             }
         }
         else if (poweruptype.Contains("Omniwall"))

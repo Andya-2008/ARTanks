@@ -223,9 +223,19 @@ MonoBehaviour:
       m_GuidLow: 4932532489580223355
       m_GuidHigh: 5623004210832776081
     m_SerializedTextureGuid:
-      m_GuidLow: 6941435205555255294
-      m_GuidHigh: 9955893701121011131
-    m_Size: {x: 0.0615, y: 0.10241734}
+      m_GuidLow: 9882126500523977185
+      m_GuidHigh: 34362247191428872
+    m_Size: {x: 0.0615, y: 0.10243144}
     m_SpecifySize: 1
     m_Name: Basic_Shield
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5718050775402594305
+      m_GuidHigh: 6641995575473551547
+    m_SerializedTextureGuid:
+      m_GuidLow: 16669038241311826952
+      m_GuidHigh: 5100747129268093914
+    m_Size: {x: 0.0615, y: 0.10195515}
+    m_SpecifySize: 1
+    m_Name: Golden_Shield
     m_Texture: {fileID: 0}
