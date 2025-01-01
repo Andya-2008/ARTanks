@@ -13,7 +13,7 @@ public class PowerupPopup : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        slider.value = 1;
+        slider.value = .74f;
     }
 
     // Update is called once per frame

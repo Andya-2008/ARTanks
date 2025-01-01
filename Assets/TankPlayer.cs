@@ -63,4 +63,8 @@ public class TankPlayer : NetworkBehaviour
             tankCanvas.enabled = true;
         }
     }
+    public void OnDespawnTank()
+    {
+        NetworkObject.Despawn(true);
+    }
 }

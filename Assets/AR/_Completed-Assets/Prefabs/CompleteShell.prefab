@@ -232,7 +232,10 @@ MonoBehaviour:
   m_ExplosionRadius: 0.19
   maxBulletDist: 4
   explosive: 0
+  vampire: 0
   myClientID: 0
+  myTank: {fileID: 0}
+  tankList: []
 --- !u!114 &7358023210643773766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 0.005
   homing: 0
+  phantom: 0
   homingTurnSpeed: 0.0115
   myTank: {fileID: 0}
   Enemies: []

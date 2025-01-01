@@ -8,6 +8,7 @@ public class BulletMove : MonoBehaviour
 {
     [SerializeField] public float bulletSpeed;
     public bool homing;
+    public bool phantom;
     [SerializeField] public float homingTurnSpeed = .1f;
     [SerializeField] public GameObject myTank;
     [SerializeField] public List<Transform> Enemies = new List<Transform>();
@@ -25,6 +26,10 @@ public class BulletMove : MonoBehaviour
             }
             Enemies.Add(GameObject.FindGameObjectWithTag("MyTank").transform);
             Enemies.Remove(myTank.transform);
+        }
+        if(phantom)
+        {
+            this.gameObject.layer = 15;
         }
     }
 

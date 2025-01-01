@@ -90,6 +90,7 @@ public class ImageTracking : NetworkBehaviour
             artip.transform = go.transform;
             artip.transform.position = new Vector3(0.2f, 0, 0);
             artip.transform.rotation = Quaternion.identity;
+            Debug.Log("1");
             StartCoroutine(CreateObject(artip));
         }
 
@@ -171,6 +172,7 @@ public class ImageTracking : NetworkBehaviour
         }
     IEnumerator CreateObject(ARTrackedImagePlus trackedImage)
     {
+        Debug.Log("2");
         string name = "";
 
         if (trackedImage.trackedImage != null)
@@ -222,7 +224,9 @@ public class ImageTracking : NetworkBehaviour
         }
         if (pf.tag == "Tank" || pf.tag == "MyTank")
         {
+            Debug.Log("3");
             if (!hasSpawnedTank) {
+                Debug.Log("4");
                 hasSpawnedTank = true;
                 Vector3 localpos = worldToLocal(trackedImage.transform.position, battleField.transform);
                 Debug.Log(localpos);
@@ -275,10 +279,14 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
 [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
     public void SpawnPlayerServerRpc(string name, Vector3 localpos, int prefabId, ServerRpcParams serverRpcParams = default)
     {
+        Debug.Log("6");
         if (!IsServer) { return; }
+        Debug.Log("7");
         if (battleField == null) { return; }
+        Debug.Log("8");
         var clientId = serverRpcParams.Receive.SenderClientId;
         GameObject pf = placeablePrefabs[prefabId];
+        Debug.Log("9");
         Debug.Log("Localpos2: " + localpos);
         Vector3 newPos = new Vector3(localpos.x, 0, localpos.z);
         prefab = Instantiate(pf, newPos, Quaternion.identity);
@@ -315,7 +323,15 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
     public void RestartSceneRpc()
     {
         GameObject.Find("AR Session").GetComponent<ResetSessionManager>().ResetARSession();
-        SceneManager.LoadScene("Game");
+        /*GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPlayer>().OnDespawnTank();
+        foreach(GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+        {
+            tank.GetComponent<TankPlayer>().OnDespawnTank();
+        }*/
+        hasSpawnedTank = false;
+        spawnedPrefabs.Clear();
+        Destroy(GameObject.FindGameObjectWithTag("Battlefield"));
+        NetworkManager.SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 }
 

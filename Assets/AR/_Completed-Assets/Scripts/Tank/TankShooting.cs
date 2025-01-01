@@ -25,9 +25,12 @@ namespace Complete
         [SerializeField] public float m_ReloadTime = 1.5f; // Time to reload
         [SerializeField] public float m_BulletPower = 50f; // Bullet damage
         [SerializeField] public float m_BulletSpeed = .005f; // Bullet speed
+        [SerializeField] public float m_BulletRange = 2f; // Bullet range time
         public float startTime;
         public bool homing;
         public bool explosive;
+        public bool vampire;
+        public bool phantom;
         public bool canShoot = true;
         private void OnEnable()
         {
@@ -114,22 +117,12 @@ namespace Complete
             shellInstance.GetComponent<ShellExplosion>().myClientID = shooterClientID;
             shellInstance.GetComponent<BulletMove>().myTank = this.gameObject;
             shellInstance.GetComponent<BulletMove>().bulletSpeed = m_BulletSpeed;
-            if(homing)
-            {
-                shellInstance.GetComponent<BulletMove>().homing = true;
-            }
-            else
-            {
-                shellInstance.GetComponent<BulletMove>().homing = false;
-            }
-            if(explosive)
-            {
-                shellInstance.GetComponent<ShellExplosion>().explosive = true;
-            }
-            else
-            {
-                shellInstance.GetComponent<ShellExplosion>().explosive = false;
-            }
+            shellInstance.GetComponent<ShellExplosion>().m_MaxLifeTime = m_BulletRange;
+            
+            shellInstance.GetComponent<BulletMove>().homing = homing;
+            shellInstance.GetComponent<ShellExplosion>().explosive = explosive;
+            shellInstance.GetComponent<ShellExplosion>().vampire = vampire;
+            shellInstance.GetComponent<BulletMove>().phantom = phantom;
             if (FindNetworkObject(objectId).gameObject.tag == "MyTank")
             {
                 m_Shell.gameObject.tag = "MyBullet";

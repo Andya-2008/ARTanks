@@ -147,7 +147,10 @@ public class ApplicationController : MonoBehaviour
             currentUser = result.AccountInfo;
             Debug.Log("username=" + currentUser.Username);
             isAuthenticated = true;
-            saveUserInfo(signInEmail.text, signInPassword.text);
+            if (signInEmail.text != "" && signInPassword.text != "")
+            {
+                saveUserInfo(signInEmail.text, signInPassword.text);
+            }
             LaunchInMode(SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null);
         }, error => {
             Debug.Log("Error retrieving Account Info");

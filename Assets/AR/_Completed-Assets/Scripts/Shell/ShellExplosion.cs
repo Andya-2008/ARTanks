@@ -1,4 +1,4 @@
-using System.Net;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -18,25 +18,40 @@ namespace Complete
         Transform originTrans;
 
         public bool explosive;
+        public bool vampire;
 
         TextMeshProUGUI debugText;
 
         public ulong myClientID;
 
+        public GameObject myTank;
+        public List<GameObject> tankList = new List<GameObject>();
+
         private void Start()
         {
-
-            debugText = GameObject.Find("DebugText").GetComponent<TextMeshProUGUI>();
+            tankList.Add(GameObject.FindGameObjectWithTag("MyTank"));
+            foreach(GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+            {
+                tankList.Add(tank);
+            }
+            //debugText = GameObject.Find("DebugText").GetComponent<TextMeshProUGUI>();
             // If it isn't destroyed by then, destroy the shell after it's lifetime.
             Destroy(gameObject, m_MaxLifeTime);
             originTrans = this.transform;
-
+            foreach(GameObject tank in tankList)
+            {
+                if(tank.GetComponent<NetworkObject>().OwnerClientId == myClientID)
+                {
+                    myTank = tank;
+                }
+            }
         }
 
         private void Update()
         {
             if (BulletDistance(originTrans) >= maxBulletDist)
             {
+                Debug.Log("Exploding bullet");
                 if (!explosive)
                 {
                     ExplodeBullet();
@@ -67,6 +82,10 @@ namespace Complete
                 else if (NetworkManager.Singleton.IsServer && (other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank"))
                 {
                     other.GetComponent<TankHealth>().TakeDamage(m_damage);
+                    if (vampire)
+                    {
+                        myTank.GetComponent<TankHealth>().AddHealth(m_damage);
+                    }
                 }
                 else if(NetworkManager.Singleton.IsServer && other.gameObject.tag == "Wall")
                 {
@@ -154,6 +173,7 @@ namespace Complete
         }
         public void ExplodeBullet()
         {
+            Debug.Log("2");
             // Unparent the particles from the shell.
             m_ExplosionParticles.transform.parent = null;
 

@@ -17,6 +17,7 @@ TagManager:
   - Wall
   - Allowall
   - Shield
+  - phantombullet
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - PhaseShiftedTank
   - Ground
   - ShieldSphere
-  - 
+  - phantombullet
   - 
   - 
   - 

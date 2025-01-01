@@ -65,6 +65,19 @@ namespace Complete
                 FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().OnDeath();
             }
         }
+        public void AddHealth(float healthAdded)
+        {
+            AddHealthRPC(this.GetComponent<NetworkObject>().NetworkObjectId, healthAdded);
+        }
+        [Rpc(SendTo.Everyone)] //server owns this object but client can request a spawn
+        public void AddHealthRPC(ulong objectId, float health)
+        {
+            // Reduce current health by the amount of damage done.
+            FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().m_CurrentHealth += health;
+
+            // Change the UI elements appropriately.
+            FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().SetHealthUI();
+        }
 
         private void SetHealthUI ()
         {

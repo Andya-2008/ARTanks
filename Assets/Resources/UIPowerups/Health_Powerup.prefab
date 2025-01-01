@@ -90,16 +90,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ee507445a554340b0821a41d0df4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 30
+  cost: 40
   initCoverupHeight: 200
   initCoverupWidth: 133.3333
   myCoverup: {fileID: 3981028048589849751}
   myText: {fileID: 7217496073705907353}
   powerupDisplayName: Health
-  numOfBulletsOrTime: 8
+  numOfBulletsOrTime: 4
   PowerupSlider: {fileID: 6912582832094223911}
   thisPowerupActive: 0
   bulletBased: 0
+  noTiming: 0
 --- !u!1 &4634753144073536189
 GameObject:
   m_ObjectHideFlags: 0

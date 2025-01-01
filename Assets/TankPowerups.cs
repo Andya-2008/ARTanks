@@ -1,4 +1,5 @@
 using Complete;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,11 +47,36 @@ public class TankPowerups : NetworkBehaviour
         }
         battleField = GameObject.FindGameObjectWithTag("Battlefield");
     }
-
+    public void ActivateOrDeactivateTankPowerup(string poweruptype, bool activate)
+    {
+        if (poweruptype.Contains("OilSpill"))
+        {
+            ActivateOrDeactivateOtherTankPowerupRPC(poweruptype, activate);
+             
+        }
+        else
+        {
+            ActivateOrDeactivateTankPowerupRPC(poweruptype, activate);
+        }
+    }
+    [Rpc(SendTo.NotMe)]
+    void ActivateOrDeactivateOtherTankPowerupRPC(string poweruptype, bool activate)
+    {
+        if (activate)
+        {
+            Debug.Log("2");
+            GameObject.Find("DisruptionCanvas").GetComponent<OilSpillManager>().StartOilSpill();
+        }
+        else
+        {
+            GameObject.Find("DisruptionCanvas").GetComponent<OilSpillManager>().StopOilSpill();
+        }
+    }
 
     [Rpc(SendTo.Everyone)]
     public void ActivateOrDeactivateTankPowerupRPC(string poweruptype, bool activate)
     {
+        Debug.Log("1");
         enemyTanks.Clear();
         foreach (GameObject enemyTank in GameObject.FindGameObjectsWithTag("Tank"))
         {
@@ -65,6 +91,17 @@ public class TankPowerups : NetworkBehaviour
             else
             {
                 tankShooting.m_ReloadTime += .75f;
+            }
+        }
+        if (poweruptype.Contains("BulletRange"))
+        {
+            if (activate)
+            {
+                tankShooting.m_BulletRange -= 1.5f;
+            }
+            else
+            {
+                tankShooting.m_BulletRange += 1.5f;
             }
         }
         else if (poweruptype.Contains("BulletSpeed"))
@@ -91,7 +128,7 @@ public class TankPowerups : NetworkBehaviour
         }
         else if (poweruptype.Contains("TankSpeed"))
         {
-            if(activate)
+            if (activate)
             {
                 tankMovement.m_Speed += .3f;
             }
@@ -102,7 +139,7 @@ public class TankPowerups : NetworkBehaviour
         }
         else if (poweruptype.Contains("Health"))
         {
-            if(activate)
+            if (activate)
             {
                 addHealth = true;
             }
@@ -119,7 +156,7 @@ public class TankPowerups : NetworkBehaviour
                 {
                     tankHealth.m_CurrentHealth -= tankHealth.m_StartingHealth / 5;
                 }
-                else if(tankHealth.m_CurrentHealth >= 5)
+                else if (tankHealth.m_CurrentHealth >= 5)
                 {
                     tankHealth.m_CurrentHealth = 5;
                 }
@@ -183,7 +220,7 @@ public class TankPowerups : NetworkBehaviour
                 {
                     enemyTank.GetComponent<TankShooting>().canShoot = false;
                 }
-                
+
             }
             else
             {
@@ -197,7 +234,7 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                transform.localScale = new Vector3(.6f,.6f,.6f);
+                transform.localScale = new Vector3(.6f, .6f, .6f);
                 tankMovement.m_Speed += .05f;
             }
             else
@@ -237,6 +274,28 @@ public class TankPowerups : NetworkBehaviour
                 shields[0].SetActive(false);
             }
         }
+        else if (poweruptype.Contains("VampireBullets"))
+        {
+            if(activate)
+            {
+                tankShooting.vampire = true;
+            }
+            else
+            {
+                tankShooting.vampire = false;
+            }
+        }
+        else if (poweruptype.Contains("PhantomRounds"))
+        {
+            if (activate)
+            {
+                tankShooting.phantom = true;
+            }
+            else
+            {
+                tankShooting.phantom = false;
+            }
+        }
         else if (poweruptype.Contains("Golden_Shield"))
         {
             if (activate)
@@ -253,19 +312,20 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                if(NetworkManager.IsServer)
+                if (NetworkManager.IsServer)
                     SpawnWallServerRPC(false, worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
-        else if(poweruptype.Contains("Allowall"))
+        else if (poweruptype.Contains("Allowall"))
         {
-            if(activate)
+            if (activate)
             {
                 if (NetworkManager.IsServer)
                     SpawnWallServerRPC(true, worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
     }
+    
 
     public void PassiveAddHealth()
     {
