@@ -4418,6 +4418,7 @@ MonoBehaviour:
   MainCamera: {fileID: 330585543}
   WinPlane: {fileID: 1791898098}
   PlayOnEditor: 1
+  battlefieldReadyNum: 0
   startCanvas: {fileID: 1249688833}
 --- !u!1 &1073562573
 GameObject:

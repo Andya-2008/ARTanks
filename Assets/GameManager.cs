@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject MainCamera;
     [SerializeField] GameObject WinPlane;
     [SerializeField] bool PlayOnEditor = false;
+
+    public int battlefieldReadyNum;
 
     [SerializeField] Canvas startCanvas;
 

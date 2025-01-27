@@ -309,7 +309,11 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
         //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
         //Vector3 pos = trackedImagePos - battleField.transform.position;
     }
-
+    [Rpc(SendTo.Server)]
+    public void SendBattleFieldStatRpc()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().battlefieldReadyNum += 1;
+    }
     private Vector3 worldToLocal(Vector3 worldpos, Transform battlefield) {
         return battleField.transform.InverseTransformPoint(worldpos);
     }
