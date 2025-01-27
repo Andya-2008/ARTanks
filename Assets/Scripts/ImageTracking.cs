@@ -233,7 +233,7 @@ public class ImageTracking : NetworkBehaviour
                 SpawnPlayerServerRpc(name, localpos, prefabId);
             }
         }
-        if(pf.tag == "Powerup")
+        if(pf.tag == "Powerup" || pf.tag == "UIPowerup")
         {
             Debug.Log("0");
             GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(pf.name);

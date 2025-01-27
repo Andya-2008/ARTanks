@@ -308,6 +308,195 @@ public class TankPowerups : NetworkBehaviour
                 shields[1].SetActive(false);
             }
         }
+        else if (poweruptype.Contains("Absorption_Shield"))
+        {
+            if(activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        else if (poweruptype.Contains("Annihilaser"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("Molotov"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        else if (poweruptype.Contains("EMPNet"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("Absorption_Shield"))
+        {
+            if(activate)
+            {
+
+            }
+            else
+            {
+                
+            }
+        }
+        else if (poweruptype.Contains("Hydraulic"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("Flame_Turret"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("Lightning_Turret"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("Sniper_Turret"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("Absorption_Shield"))
+        {
+            if(activate)
+            {
+
+            }
+            else
+            {
+                
+            }
+        }
+        else if (poweruptype.Contains("CoinFactory"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("MiniTank"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("RepairBot"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("RepairBot"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("Artillery"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("Decoy_Building"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (poweruptype.Contains("Infiltration"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
         else if (poweruptype.Contains("Omniwall"))
         {
             if (activate)
