@@ -342,6 +342,17 @@ public class TankPowerups : NetworkBehaviour
 
             }
         }
+        else if (poweruptype.Contains("Shock"))
+        {
+            if (activate)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
 
         else if (poweruptype.Contains("EMPNet"))
         {

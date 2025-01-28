@@ -7,9 +7,9 @@ public class PowerupPopup : MonoBehaviour
     [SerializeField] RectTransform sliderPos;
     [SerializeField] RawImage rightArrow;
     [SerializeField] RawImage leftArrow;
-    [SerializeField] float extendRadius = .74f;
+    public float extendRadius = .74f;
     [SerializeField] Transform realButtonPos;
-    bool closing;
+    public bool closing;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
