@@ -84,6 +84,7 @@ public class ImageTracking : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("T");
+            hasSpawnedTank = false;
             ARTrackedImagePlus artip = new ARTrackedImagePlus();
             artip.name = "Tank1";
             GameObject go = new GameObject();
@@ -97,6 +98,7 @@ public class ImageTracking : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Y))
         {
             Debug.Log("Y");
+            hasSpawnedTank = false;
             ARTrackedImagePlus artip = new ARTrackedImagePlus();
             artip.name = "Tank2";
             GameObject go = new GameObject();

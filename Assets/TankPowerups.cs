@@ -310,13 +310,14 @@ public class TankPowerups : NetworkBehaviour
         }
         else if (poweruptype.Contains("Absorption_Shield"))
         {
-            if(activate)
+            if (activate)
             {
-
+                shields[2].SetActive(true);
             }
             else
             {
-
+                shields[2].GetComponent<ShieldController>().ShieldHealth = 100f;
+                shields[2].SetActive(false);
             }
         }
 
@@ -324,11 +325,9 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-
             }
             else
             {
-
             }
         }
         else if (poweruptype.Contains("Molotov"))
@@ -336,9 +335,11 @@ public class TankPowerups : NetworkBehaviour
             if (activate)
             {
 
+                tankShooting.molotov = true;
             }
             else
             {
+                tankShooting.molotov = false;
 
             }
         }
@@ -346,11 +347,9 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-
             }
             else
             {
-
             }
         }
 
@@ -363,17 +362,6 @@ public class TankPowerups : NetworkBehaviour
             else
             {
 
-            }
-        }
-        else if (poweruptype.Contains("Absorption_Shield"))
-        {
-            if(activate)
-            {
-
-            }
-            else
-            {
-                
             }
         }
         else if (poweruptype.Contains("Hydraulic"))
@@ -418,17 +406,6 @@ public class TankPowerups : NetworkBehaviour
             else
             {
 
-            }
-        }
-        else if (poweruptype.Contains("Absorption_Shield"))
-        {
-            if(activate)
-            {
-
-            }
-            else
-            {
-                
             }
         }
         else if (poweruptype.Contains("CoinFactory"))

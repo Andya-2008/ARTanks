@@ -233,6 +233,7 @@ MonoBehaviour:
   maxBulletDist: 4
   explosive: 0
   vampire: 0
+  molotov: 0
   myClientID: 0
   myTank: {fileID: 0}
   tankList: []

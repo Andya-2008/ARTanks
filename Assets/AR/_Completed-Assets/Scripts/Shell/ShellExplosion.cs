@@ -19,6 +19,7 @@ namespace Complete
 
         public bool explosive;
         public bool vampire;
+        public bool molotov;
 
         TextMeshProUGUI debugText;
 
@@ -74,17 +75,22 @@ namespace Complete
             }
             else
             {
-                if (/*NetworkManager.Singleton.IsServer && */other.gameObject.tag == "Shield")
+                if (NetworkManager.Singleton.IsServer && other.gameObject.tag == "Shield")
                 {
                     Debug.Log("Added damage to shield");
                     other.GetComponent<ShieldController>().TakeShieldDamage(m_damage);
                 }
-                else if (NetworkManager.Singleton.IsServer && (other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank"))
+                else if (/*NetworkManager.Singleton.IsServer && */(other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank"))
                 {
                     other.GetComponent<TankHealth>().TakeDamage(m_damage);
                     if (vampire)
                     {
                         myTank.GetComponent<TankHealth>().AddHealth(m_damage);
+                    }
+                    if (molotov)
+                    {
+                        other.GetComponent<FireDamage>().startTime = Time.time;
+                        other.GetComponent<FireDamage>().takingFire = true;
                     }
                 }
                 else if(NetworkManager.Singleton.IsServer && other.gameObject.tag == "Wall")

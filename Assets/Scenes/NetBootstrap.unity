@@ -1444,8 +1444,6 @@ GameObject:
   m_Component:
   - component: {fileID: 256815530}
   - component: {fileID: 256815529}
-  - component: {fileID: 256815531}
-  - component: {fileID: 256815532}
   m_Layer: 0
   m_Name: ApplicationController
   m_TagString: Untagged
@@ -1557,30 +1555,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &256815531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256815528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a7f9ac901088df4baaa52505c903edb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &256815532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256815528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48f085df224ab094fb4f4ef16af662ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &264079264
 GameObject:
   m_ObjectHideFlags: 0

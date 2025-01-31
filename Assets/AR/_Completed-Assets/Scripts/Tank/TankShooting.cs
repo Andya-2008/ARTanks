@@ -31,6 +31,7 @@ namespace Complete
         public bool explosive;
         public bool vampire;
         public bool phantom;
+        public bool molotov;
         public bool canShoot = true;
         private void OnEnable()
         {
@@ -123,6 +124,7 @@ namespace Complete
             shellInstance.GetComponent<ShellExplosion>().explosive = explosive;
             shellInstance.GetComponent<ShellExplosion>().vampire = vampire;
             shellInstance.GetComponent<BulletMove>().phantom = phantom;
+            shellInstance.GetComponent<ShellExplosion>().molotov = molotov;
             if (FindNetworkObject(objectId).gameObject.tag == "MyTank")
             {
                 m_Shell.gameObject.tag = "MyBullet";

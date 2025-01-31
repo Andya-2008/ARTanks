@@ -5,8 +5,6 @@ public class PowerupPopup : MonoBehaviour
 {
     [SerializeField] Slider slider;
     [SerializeField] RectTransform sliderPos;
-    [SerializeField] RawImage rightArrow;
-    [SerializeField] RawImage leftArrow;
     public float extendRadius = .74f;
     [SerializeField] Transform realButtonPos;
     public bool closing;

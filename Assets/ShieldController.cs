@@ -3,16 +3,18 @@ using UnityEngine;
 using UnityEngine.Playables;
 using Unity.Netcode;
 using System;
+using Complete;
 
 public class ShieldController : MonoBehaviour
 {
-    [SerializeField] float ShieldHealth = 200;
+    public float ShieldHealth = 200;
     [SerializeField] GameObject damageSphere;
 
     [SerializeField] GameObject shieldParent;
     public GameObject myTank;
     [SerializeField] bool reg;
     [SerializeField] bool golden;
+    [SerializeField] bool absorption;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -48,6 +50,11 @@ public class ShieldController : MonoBehaviour
         {
             myTank.GetComponent<CoinWallet>().UpdateCoinsServerRPC(40);
             Debug.Log("Coin wallet updated!");
+        }
+        if (absorption)
+        {
+            Debug.Log("Adding health");
+            myTank.GetComponent<TankHealth>().AddHealth(35);
         }
     }
 
