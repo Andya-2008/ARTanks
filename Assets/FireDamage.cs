@@ -1,4 +1,5 @@
 using Complete;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -43,7 +44,11 @@ public class FireDamage : MonoBehaviour
 
     public void TakeFireDamage()
     {
-        this.GetComponent<TankHealth>().TakeDamage(Time.fixedDeltaTime * fireDamage/fireTime);
+        if (NetworkManager.Singleton.IsServer)
+        {
+            this.GetComponent<TankHealth>().TakeDamage(Time.fixedDeltaTime * fireDamage / fireTime);
+        }
+
         float m_VerticalInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Vertical;
         float m_HorizontalInputValue = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>().Horizontal;
 
