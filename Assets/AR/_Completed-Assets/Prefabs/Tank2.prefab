@@ -10808,6 +10808,7 @@ MonoBehaviour:
   explosive: 0
   vampire: 0
   phantom: 0
+  molotov: 0
   canShoot: 1
 --- !u!114 &2146015601689436828
 MonoBehaviour:
@@ -10944,6 +10945,8 @@ MonoBehaviour:
   omniWall: {fileID: 5879128814780562814, guid: 8be9571e38fea04479edcc1135c9d8f6,
     type: 3}
   alloWall: {fileID: 5879128814780562814, guid: 7968bd539d6d10d458e9fc8b6b6bf517,
+    type: 3}
+  CoinFactory: {fileID: 5879128814780562814, guid: 9bbe706aba3441649be0696d9a802df8,
     type: 3}
   shields:
   - {fileID: 4041511447780960437}

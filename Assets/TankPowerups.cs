@@ -23,6 +23,7 @@ public class TankPowerups : NetworkBehaviour
     GameObject battleField;
     [SerializeField] GameObject omniWall;
     [SerializeField] GameObject alloWall;
+    [SerializeField] GameObject CoinFactory;
     [SerializeField] List<GameObject> shields = new List<GameObject>();
     [SerializeField] GameObject shieldParent;
 
@@ -408,17 +409,6 @@ public class TankPowerups : NetworkBehaviour
 
             }
         }
-        else if (poweruptype.Contains("CoinFactory"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         else if (poweruptype.Contains("MiniTank"))
         {
             if (activate)
@@ -484,13 +474,14 @@ public class TankPowerups : NetworkBehaviour
             {
 
             }
+            
         }
         else if (poweruptype.Contains("Omniwall"))
         {
             if (activate)
             {
                 if (NetworkManager.IsServer)
-                    SpawnWallServerRPC(false, worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+                    SpawnBuildingServerRPC("omniwall", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
         else if (poweruptype.Contains("Allowall"))
@@ -498,7 +489,15 @@ public class TankPowerups : NetworkBehaviour
             if (activate)
             {
                 if (NetworkManager.IsServer)
-                    SpawnWallServerRPC(true, worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+                    SpawnBuildingServerRPC("allowall", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+            }
+        }
+        else if (poweruptype.Contains("CoinFactory"))
+        {
+            if (activate)
+            {
+                if (NetworkManager.IsServer)
+                    SpawnBuildingServerRPC("coinfactory", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
     }
@@ -528,15 +527,23 @@ public class TankPowerups : NetworkBehaviour
 
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnWallServerRPC(bool allow, Vector3 localpos, Quaternion spawnRot, ServerRpcParams serverRpcParams = default)
+    public void SpawnBuildingServerRPC(string building, Vector3 localpos, Quaternion spawnRot, ServerRpcParams serverRpcParams = default)
     {
         if (!IsServer) { return; }
         var clientId = serverRpcParams.Receive.SenderClientId;
         Vector3 newPos = new Vector3(localpos.x, 0, localpos.z);
         GameObject instantiateWall;
-        if(allow)
+        if(building == "allowall")
         {
             instantiateWall = alloWall;
+        }
+        else if(building == "omniwall")
+        {
+            instantiateWall = omniWall;
+        }
+        else if(building == "coinfactory")
+        {
+            instantiateWall = CoinFactory;
         }
         else
         {
