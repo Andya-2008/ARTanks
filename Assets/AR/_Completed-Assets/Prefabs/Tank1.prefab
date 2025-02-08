@@ -1764,6 +1764,8 @@ MonoBehaviour:
     type: 3}
   CoinFactory: {fileID: 5879128814780562814, guid: 9bbe706aba3441649be0696d9a802df8,
     type: 3}
+  repairFactory: {fileID: 5879128814780562814, guid: 3658e8540abe3664999d49059713c4f6,
+    type: 3}
   shields:
   - {fileID: 487814423576678341}
   - {fileID: 2121652698338261337}

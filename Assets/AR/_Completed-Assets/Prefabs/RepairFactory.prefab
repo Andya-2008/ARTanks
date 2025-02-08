@@ -186,8 +186,10 @@ GameObject:
   - component: {fileID: 8605734906499105019}
   - component: {fileID: 6670907350820569060}
   - component: {fileID: 8904690670533906358}
+  - component: {fileID: 6590163860651703681}
+  - component: {fileID: 2601822390710605726}
   m_Layer: 9
-  m_Name: CoinFactory
+  m_Name: RepairFactory
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,7 +230,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 2.04, y: 2, z: 2}
   m_Center: {x: -1, y: 1, z: 0.5}
 --- !u!114 &7736471424520485033
 MonoBehaviour:
@@ -242,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3313844289
+  GlobalObjectIdHash: 1874533797
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -312,6 +314,43 @@ MonoBehaviour:
   coinInterval: 0.5
   realWallParent: {fileID: 5759687357834719406}
   timeToDeath: 2
+--- !u!114 &6590163860651703681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879128814780562814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390ea2c93e423e545bd698bb6c0375f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHealth: 100
+  m_Slider: {fileID: 2556847637037696613}
+  m_FillImage: {fileID: 1234543130253749780}
+  m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
+  m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  m_CurrentHealth: 0
+  timedHealthReduction: 0
+  botInterval: 0.5
+  realWallParent: {fileID: 5759687357834719406}
+  timeToDeath: 2
+--- !u!114 &2601822390710605726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879128814780562814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7cbda2dbec7ae54fb8310600070faa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repairObj: {fileID: 8630890333667105030, guid: f07f53e1d2dcb664e9f15fc42e144e79,
+    type: 3}
+  tankObj: {fileID: 0}
 --- !u!1 &6503785780423935647
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +517,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c1e9a36202c499e4ea7f7835cf05c557, type: 2}
+  - {fileID: 2100000, guid: ff21ff0ea9b18924bb1fdfbb0e58f5cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

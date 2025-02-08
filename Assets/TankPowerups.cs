@@ -24,6 +24,7 @@ public class TankPowerups : NetworkBehaviour
     [SerializeField] GameObject omniWall;
     [SerializeField] GameObject alloWall;
     [SerializeField] GameObject CoinFactory;
+    [SerializeField] GameObject repairFactory;
     [SerializeField] List<GameObject> shields = new List<GameObject>();
     [SerializeField] GameObject shieldParent;
 
@@ -420,28 +421,6 @@ public class TankPowerups : NetworkBehaviour
 
             }
         }
-        else if (poweruptype.Contains("RepairBot"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
-        else if (poweruptype.Contains("RepairBot"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         else if (poweruptype.Contains("Artillery"))
         {
             if (activate)
@@ -500,6 +479,14 @@ public class TankPowerups : NetworkBehaviour
                     SpawnBuildingServerRPC("coinfactory", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
+        else if (poweruptype.Contains("RepairBot"))
+        {
+            if (activate)
+            {
+                if (NetworkManager.IsServer)
+                    SpawnBuildingServerRPC("repairfactory", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+            }
+        }
     }
     
 
@@ -533,17 +520,21 @@ public class TankPowerups : NetworkBehaviour
         var clientId = serverRpcParams.Receive.SenderClientId;
         Vector3 newPos = new Vector3(localpos.x, 0, localpos.z);
         GameObject instantiateWall;
-        if(building == "allowall")
+        if (building == "allowall")
         {
             instantiateWall = alloWall;
         }
-        else if(building == "omniwall")
+        else if (building == "omniwall")
         {
             instantiateWall = omniWall;
         }
-        else if(building == "coinfactory")
+        else if (building == "coinfactory")
         {
             instantiateWall = CoinFactory;
+        }
+        else if (building == "repairfactory")
+        {
+            instantiateWall = repairFactory;
         }
         else
         {

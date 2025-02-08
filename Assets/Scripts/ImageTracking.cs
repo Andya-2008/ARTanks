@@ -226,12 +226,9 @@ public class ImageTracking : NetworkBehaviour
         }
         if (pf.tag == "Tank" || pf.tag == "MyTank")
         {
-            Debug.Log("3");
             if (!hasSpawnedTank) {
-                Debug.Log("4");
                 hasSpawnedTank = true;
                 Vector3 localpos = worldToLocal(trackedImage.transform.position, battleField.transform);
-                Debug.Log(localpos);
                 SpawnPlayerServerRpc(name, localpos, prefabId);
             }
         }
@@ -281,15 +278,10 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
 [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
     public void SpawnPlayerServerRpc(string name, Vector3 localpos, int prefabId, ServerRpcParams serverRpcParams = default)
     {
-        Debug.Log("6");
         if (!IsServer) { return; }
-        Debug.Log("7");
         if (battleField == null) { return; }
-        Debug.Log("8");
         var clientId = serverRpcParams.Receive.SenderClientId;
         GameObject pf = placeablePrefabs[prefabId];
-        Debug.Log("9");
-        Debug.Log("Localpos2: " + localpos);
         Vector3 newPos = new Vector3(localpos.x, 0, localpos.z);
         prefab = Instantiate(pf, newPos, Quaternion.identity);
         
@@ -305,7 +297,6 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
         spawnedPrefabs.Add(name, prefab);
         prefab.transform.parent = battleField.transform;
         prefab.transform.localPosition = newPos;
-        Debug.Log("NewPosition: " + newPos);
         netObj.SpawnWithOwnership(clientId, false);
         //prefab.transform.localPosition = prefabLocalPos;
         //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
