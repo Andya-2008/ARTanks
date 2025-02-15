@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 89bd84ae2f254894dac75ff98d07d03c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308714
+  packageName: Sci-Fi Battle Scout
+  packageVersion: 1.0
+  assetPath: Assets/Sci-Fi_Battle_Scout/Materials/M_Sci-Fi_Battle_Scout_Desert.mat
+  uploadId: 727925

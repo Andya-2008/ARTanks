@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 926597096
+  GlobalObjectIdHash: 3702198025
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1106,6 +1106,9 @@ MonoBehaviour:
     m_InternalValue: 0
   m_CoinAudio: {fileID: 8891374502547643365}
   m_CoinClip: {fileID: 8300000, guid: e897fffaea5b12f42a296aab9914e60d, type: 3}
+  looterInterval: 2
+  looterCoinAmt: 1
+  looter: 1
 --- !u!114 &6937431575053694240
 MonoBehaviour:
   m_ObjectHideFlags: 0

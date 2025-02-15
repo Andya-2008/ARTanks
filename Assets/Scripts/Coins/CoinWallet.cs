@@ -10,6 +10,10 @@ public class CoinWallet : NetworkBehaviour
     public AudioSource m_CoinAudio;         // Reference to the audio source used to play the shooting audio. NB: different to the movement audio source.
     public AudioClip m_CoinClip;            // Audio that plays when each shot is charging up.
     private TMP_Text coinText;
+    float looterStartTime;
+    [SerializeField] float looterInterval;
+    [SerializeField] int looterCoinAmt = 5;
+    [SerializeField] bool looter;
     private void Start()
     {
         GameObject goCoinText = GameObject.Find("CoinValueText");
@@ -40,7 +44,18 @@ public class CoinWallet : NetworkBehaviour
         */
 
     }
-
+    private void FixedUpdate()
+    {
+        if(looter && Time.time - looterStartTime >= looterInterval)
+        {
+            looterStartTime = Time.time;
+            LooterAdded();
+        }
+    }
+    public void LooterAdded()
+    {
+        UpdateCoinsServerRPC(looterCoinAmt);
+    }
 
     [ServerRpc(RequireOwnership = false)]
     public void UpdateCoinsServerRPC(int coinValue, ServerRpcParams serverRpcParams = default)
