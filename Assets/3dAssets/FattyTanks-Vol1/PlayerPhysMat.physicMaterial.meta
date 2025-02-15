@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cbddc778c33b6e446a8886d683b4db3e
+timeCreated: 1433763285
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146893
+  packageName: Fatty Tanks
+  packageVersion: 1.0
+  assetPath: Assets/FattyTanks-Vol1/PlayerPhysMat.physicMaterial
+  uploadId: 312427

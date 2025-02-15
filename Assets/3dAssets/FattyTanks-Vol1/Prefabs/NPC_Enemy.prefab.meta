@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6f6323d58f2031e4ebc65bde7dda8f77
+timeCreated: 1433556960
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146893
+  packageName: Fatty Tanks
+  packageVersion: 1.0
+  assetPath: Assets/FattyTanks-Vol1/Prefabs/NPC_Enemy.prefab
+  uploadId: 312427

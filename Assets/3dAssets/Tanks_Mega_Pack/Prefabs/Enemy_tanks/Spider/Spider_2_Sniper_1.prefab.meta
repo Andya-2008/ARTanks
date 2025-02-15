@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cd90a25cbb417354bbfea6127c2c62f0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185678
+  packageName: TANKS Mega Pack
+  packageVersion: 1.0
+  assetPath: Assets/Tanks_Mega_Pack/Prefabs/Enemy_tanks/Spider/Spider_2_Sniper_1.prefab
+  uploadId: 463457

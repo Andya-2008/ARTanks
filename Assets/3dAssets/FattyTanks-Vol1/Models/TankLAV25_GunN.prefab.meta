@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d756e9147e20dff47a0e2a12e06ca42c
+timeCreated: 1557971944
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146893
+  packageName: Fatty Tanks
+  packageVersion: 1.0
+  assetPath: Assets/FattyTanks-Vol1/Models/TankLAV25_GunN.prefab
+  uploadId: 312427

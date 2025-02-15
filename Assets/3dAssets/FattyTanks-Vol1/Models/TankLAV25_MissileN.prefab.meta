@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 824d677ea143afa45a2274de858dcee3
+timeCreated: 1557971967
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146893
+  packageName: Fatty Tanks
+  packageVersion: 1.0
+  assetPath: Assets/FattyTanks-Vol1/Models/TankLAV25_MissileN.prefab
+  uploadId: 312427

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0dcc393c70397f24aaaf60d01c9efcf3
+timeCreated: 1433566005
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146893
+  packageName: Fatty Tanks
+  packageVersion: 1.0
+  assetPath: Assets/FattyTanks-Vol1/Materials/BulletMaterial.mat
+  uploadId: 312427

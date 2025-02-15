@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 42ec292904a1d7c4fabfafc6cac0a68d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185678
+  packageName: TANKS Mega Pack
+  packageVersion: 1.0
+  assetPath: Assets/Tanks_Mega_Pack/Prefabs/Enemy_tanks/Walker/Walker_2_Awl_2.prefab
+  uploadId: 463457

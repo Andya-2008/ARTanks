@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f3fa306571f66a04a8a61a526db441c5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 23800000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146893
+  packageName: Fatty Tanks
+  packageVersion: 1.0
+  assetPath: Assets/FattyTanks-Vol1/Scenes/TopDownAI/NavMesh.asset
+  uploadId: 312427

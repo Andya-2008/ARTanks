@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bdd5372057331a947bbed4f6a9c64a7e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185678
+  packageName: TANKS Mega Pack
+  packageVersion: 1.0
+  assetPath: Assets/Tanks_Mega_Pack/Prefabs/Enemy_tanks/Hedgehog/Hedgehog_Pierser_2.prefab
+  uploadId: 463457

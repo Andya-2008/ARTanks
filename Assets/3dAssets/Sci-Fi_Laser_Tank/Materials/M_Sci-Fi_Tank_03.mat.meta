@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8d1d429a1135c5e44a4203233b2b660f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307756
+  packageName: Sci-Fi Laser Tank
+  packageVersion: 1.0
+  assetPath: Assets/Sci-Fi_Laser_Tank/Materials/M_Sci-Fi_Tank_03.mat
+  uploadId: 723932

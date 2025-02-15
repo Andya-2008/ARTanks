@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a0fb313fc84e06e4ca08229082a66855
+timeCreated: 1557812176
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146893
+  packageName: Fatty Tanks
+  packageVersion: 1.0
+  assetPath: Assets/FattyTanks-Vol1/Models/TankLAV25.prefab
+  uploadId: 312427

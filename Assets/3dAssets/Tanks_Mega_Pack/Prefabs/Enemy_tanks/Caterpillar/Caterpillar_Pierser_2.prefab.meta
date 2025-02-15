@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8172e4f482ac5d14aa372e952aca86c7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185678
+  packageName: TANKS Mega Pack
+  packageVersion: 1.0
+  assetPath: Assets/Tanks_Mega_Pack/Prefabs/Enemy_tanks/Caterpillar/Caterpillar_Pierser_2.prefab
+  uploadId: 463457

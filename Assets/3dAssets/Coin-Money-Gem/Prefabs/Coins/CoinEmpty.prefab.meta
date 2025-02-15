@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2a8bfa3761367504e9b6e12bc5d84b92
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 283695
+  packageName: Coin & Money & Gem
+  packageVersion: 1.0
+  assetPath: Assets/Coin-Money-Gem/Prefabs/Coins/CoinEmpty.prefab
+  uploadId: 706802

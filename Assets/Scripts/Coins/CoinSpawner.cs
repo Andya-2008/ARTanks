@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class CoinSpawner : NetworkBehaviour
 {
     //[SerializeField] private RespawningCoin coinPrefab;
     [SerializeField] private GameObject goCoin;
+    [SerializeField] private GameObject stack;
 
     [SerializeField] private int maxCoins = 50;
     [SerializeField] private int coinValue = 10;
@@ -89,7 +91,18 @@ public class CoinSpawner : NetworkBehaviour
 
     private void SpawnCoin()
     {
-        GameObject coinInstance = Instantiate(goCoin, GetRandomPoint(), Quaternion.identity, transform.parent);
+        int stackChance = Random.Range(0, 7);
+        GameObject coinInstance;
+        if (stackChance == 0)
+        {
+            coinInstance = Instantiate(stack, GetRandomPoint(), Quaternion.identity, transform.parent);
+        }
+        else
+        {
+
+            coinInstance = Instantiate(goCoin, GetRandomPoint(), Quaternion.identity, transform.parent);
+        }
+
         coinInstance.GetComponent<NetworkObject>().Spawn();
     }
 
@@ -117,7 +130,7 @@ public class CoinSpawner : NetworkBehaviour
         {
             x = Random.Range(xSpawnRange.x, xSpawnRange.y);
             y = Random.Range(ySpawnRange.x, ySpawnRange.y);
-            Vector3 spawnPoint = new Vector3(x, 0, y);
+            Vector3 spawnPoint = new Vector3(x, 1, y);
             int numColliders = Physics.OverlapSphereNonAlloc(spawnPoint, coinRadius, coinBuffer, layerMask);
             if (numColliders == 0)
             {

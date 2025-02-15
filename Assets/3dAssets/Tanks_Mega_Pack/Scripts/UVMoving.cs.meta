@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0574a3521d4702b4aa121ebeeb3b0174
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185678
+  packageName: TANKS Mega Pack
+  packageVersion: 1.0
+  assetPath: Assets/Tanks_Mega_Pack/Scripts/UVMoving.cs
+  uploadId: 463457

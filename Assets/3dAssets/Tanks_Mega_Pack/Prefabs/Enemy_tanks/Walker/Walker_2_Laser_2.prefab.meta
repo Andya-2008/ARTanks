@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 03b8765868cf8374ab066a29aa5db2fa
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185678
+  packageName: TANKS Mega Pack
+  packageVersion: 1.0
+  assetPath: Assets/Tanks_Mega_Pack/Prefabs/Enemy_tanks/Walker/Walker_2_Laser_2.prefab
+  uploadId: 463457

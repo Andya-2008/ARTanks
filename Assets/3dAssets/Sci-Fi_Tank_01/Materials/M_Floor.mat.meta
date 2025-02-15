@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 41e2db54254728a42881a026c1bed9cc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304970
+  packageName: Sci-Fi Tank 01
+  packageVersion: 1.0
+  assetPath: Assets/Sci-Fi_Tank_01/Materials/M_Floor.mat
+  uploadId: 716283

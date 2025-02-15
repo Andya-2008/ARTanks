@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ea042b0a2fdbc0d4b934b80df0c8d584
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185678
+  packageName: TANKS Mega Pack
+  packageVersion: 1.0
+  assetPath: Assets/Tanks_Mega_Pack/Prefabs/Enemy_tanks/1Gun/Laser_t_1_LP.prefab
+  uploadId: 463457

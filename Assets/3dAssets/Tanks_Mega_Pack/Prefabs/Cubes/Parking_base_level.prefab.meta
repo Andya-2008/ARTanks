@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eae9e5f892d314d46b3e9dc2e3810cb0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185678
+  packageName: TANKS Mega Pack
+  packageVersion: 1.0
+  assetPath: Assets/Tanks_Mega_Pack/Prefabs/Cubes/Parking_base_level.prefab
+  uploadId: 463457

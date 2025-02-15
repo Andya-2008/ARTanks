@@ -902,7 +902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 280647908
+  GlobalObjectIdHash: 1299599164
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 0
@@ -924,6 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goCoin: {fileID: 4825307102613191828, guid: b6fa5a3c406f166439d2bdeb05592081, type: 3}
+  stack: {fileID: 4825307102613191828, guid: 12b3129067c583f43b83244c2f711d09, type: 3}
   maxCoins: 5
   coinValue: 10
   xSpawnRange: {x: 0.5, y: -0.5}

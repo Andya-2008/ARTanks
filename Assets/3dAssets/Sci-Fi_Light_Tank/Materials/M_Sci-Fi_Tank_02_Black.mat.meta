@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7eb4c319d3c9f4c4791d6e6538f89505
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306309
+  packageName: Sci-Fi Light Tank
+  packageVersion: 1.0
+  assetPath: Assets/Sci-Fi_Light_Tank/Materials/M_Sci-Fi_Tank_02_Black.mat
+  uploadId: 723933

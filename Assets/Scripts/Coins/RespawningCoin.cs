@@ -11,6 +11,7 @@ public class RespawningCoin : Coin
     private Vector3 previousPosition;
     private CoinSpawner cs;
     private float lastMove = 0f;
+    [SerializeField] bool Stack;
     [SerializeField] int MoveAfterSeconds = 30;
 
     private void Start()
@@ -38,8 +39,15 @@ public class RespawningCoin : Coin
     public override int Collect()
     {
         Debug.Log("Respawning Coin Collect");
-
-        int coinValue = 10;
+        int coinValue;
+        if (Stack)
+        {
+            coinValue = 25;
+        }
+        else
+        {
+           coinValue  = 10;
+        }
 
         if (!IsServer)
         {

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 970a25467cdbdb34789dafec9aa550be
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306309
+  packageName: Sci-Fi Light Tank
+  packageVersion: 1.0
+  assetPath: Assets/Sci-Fi_Light_Tank/Materials/M_Ammo.mat
+  uploadId: 723933

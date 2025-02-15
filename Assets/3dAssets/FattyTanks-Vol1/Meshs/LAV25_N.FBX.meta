@@ -1,0 +1,117 @@
+fileFormatVersion: 2
+guid: 80b8691d9ce08c246af968fc5f918bd1
+timeCreated: 1557901488
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: LAV25_BodyN
+    100002: //RootNode
+    100004: LAV25_TurretN
+    100006: LAV25_Wheels00Police
+    100008: LAV25_Wheels00Police001
+    100010: LAV25_WheelsN00
+    100012: LAV25_WheelsN01
+    400000: LAV25_BodyN
+    400002: //RootNode
+    400004: LAV25_TurretN
+    400006: LAV25_Wheels00Police
+    400008: LAV25_Wheels00Police001
+    400010: LAV25_WheelsN00
+    400012: LAV25_WheelsN01
+    2300000: LAV25_BodyN
+    2300002: LAV25_TurretN
+    2300004: LAV25_Wheels00Police
+    2300006: LAV25_Wheels00Police001
+    2300008: LAV25_WheelsN00
+    2300010: LAV25_WheelsN01
+    3300000: LAV25_BodyN
+    3300002: LAV25_TurretN
+    3300004: LAV25_Wheels00Police
+    3300006: LAV25_Wheels00Police001
+    3300008: LAV25_WheelsN00
+    3300010: LAV25_WheelsN01
+    4300000: LAV25_BodyN
+    4300002: LAV25_TurretN
+    4300004: LAV25_Wheels00Police
+    4300006: LAV25_Wheels00Police001
+    4300008: LAV25_WheelsN00
+    4300010: LAV25_WheelsN01
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146893
+  packageName: Fatty Tanks
+  packageVersion: 1.0
+  assetPath: Assets/FattyTanks-Vol1/Meshs/LAV25_N.FBX
+  uploadId: 312427

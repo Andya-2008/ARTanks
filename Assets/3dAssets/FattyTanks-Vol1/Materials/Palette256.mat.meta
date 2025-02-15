@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b233e3bfff5c95d429c314011714350b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 146893
+  packageName: Fatty Tanks
+  packageVersion: 1.0
+  assetPath: Assets/FattyTanks-Vol1/Materials/Palette256.mat
+  uploadId: 312427

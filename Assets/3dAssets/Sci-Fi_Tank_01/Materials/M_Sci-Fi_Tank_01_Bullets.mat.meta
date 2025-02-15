@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b2222a47c4b6fef4783297bc683a4ec7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304970
+  packageName: Sci-Fi Tank 01
+  packageVersion: 1.0
+  assetPath: Assets/Sci-Fi_Tank_01/Materials/M_Sci-Fi_Tank_01_Bullets.mat
+  uploadId: 716283

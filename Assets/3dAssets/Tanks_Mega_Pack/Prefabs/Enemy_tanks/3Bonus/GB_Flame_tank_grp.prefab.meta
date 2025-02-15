@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1c87605ffae273c43806360707781669
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185678
+  packageName: TANKS Mega Pack
+  packageVersion: 1.0
+  assetPath: Assets/Tanks_Mega_Pack/Prefabs/Enemy_tanks/3Bonus/GB_Flame_tank_grp.prefab
+  uploadId: 463457

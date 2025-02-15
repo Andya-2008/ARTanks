@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e0bc2af0f96d44947a1ae3072200c72a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306309
+  packageName: Sci-Fi Light Tank
+  packageVersion: 1.0
+  assetPath: Assets/Sci-Fi_Light_Tank/Materials/M_Floor.mat
+  uploadId: 723933
