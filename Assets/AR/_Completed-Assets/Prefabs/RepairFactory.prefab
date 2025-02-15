@@ -185,7 +185,6 @@ GameObject:
   - component: {fileID: 7736471424520485033}
   - component: {fileID: 8605734906499105019}
   - component: {fileID: 6670907350820569060}
-  - component: {fileID: 8904690670533906358}
   - component: {fileID: 6590163860651703681}
   - component: {fileID: 2601822390710605726}
   m_Layer: 9
@@ -244,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1874533797
+  GlobalObjectIdHash: 1343060821
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -292,28 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5957fa9df444534489cb5e88a4d114b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8904690670533906358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5879128814780562814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cc101ecf185619479ad4c7b04cf02cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StartingHealth: 60
-  m_Slider: {fileID: 2556847637037696613}
-  m_FillImage: {fileID: 1234543130253749780}
-  m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
-  m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  m_CurrentHealth: 0
-  timedHealthReduction: 0.02
-  coinInterval: 0.5
-  realWallParent: {fileID: 5759687357834719406}
-  timeToDeath: 2
 --- !u!114 &6590163860651703681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +310,7 @@ MonoBehaviour:
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_CurrentHealth: 0
   timedHealthReduction: 0
-  botInterval: 0.5
+  botInterval: 5
   realWallParent: {fileID: 5759687357834719406}
   timeToDeath: 2
 --- !u!114 &2601822390710605726

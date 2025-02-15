@@ -15,9 +15,9 @@ public class RepairBot : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (GetComponent<NetworkObject>().IsOwner)
         {
+            targetTank = GameObject.FindGameObjectWithTag("MyTank");
             FollowTank();
         }
     }
