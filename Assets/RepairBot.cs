@@ -11,7 +11,10 @@ public class RepairBot : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        if (GetComponent<NetworkObject>().IsOwner)
+        {
+            targetTank = GameObject.FindGameObjectWithTag("MyTank");
+        }
     }
 
     // Update is called once per frame
@@ -19,7 +22,8 @@ public class RepairBot : MonoBehaviour
     {
         if (GetComponent<NetworkObject>().IsOwner)
         {
-            targetTank = GameObject.FindGameObjectWithTag("MyTank");
+            if (!targetTank)
+                return;
             FollowTank();
         }
     }
@@ -29,10 +33,10 @@ public class RepairBot : MonoBehaviour
         transform.LookAt(targetTank.transform);
         transform.Translate(Vector3.Normalize(targetTank.transform.position - this.transform.position) * moveSpeed);
     }
-    private void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        Debug.Log(collision.gameObject.name.ToString());
-        if(collision.gameObject.name == targetTank.name)
+        Debug.Log(other.gameObject.name.ToString());
+        if(other.gameObject.name == targetTank.name)
         {
             targetTank.GetComponent<TankHealth>().AddHealth(repairHealth);
             Destroy(this.gameObject);
