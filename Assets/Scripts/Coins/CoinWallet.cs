@@ -26,6 +26,7 @@ public class CoinWallet : NetworkBehaviour
         
 
         int coinValue = coin.Collect();
+        coin.moveCoin();
         
         if (!IsOwner) { return; }
         UpdateCoinsServerRPC(coinValue);

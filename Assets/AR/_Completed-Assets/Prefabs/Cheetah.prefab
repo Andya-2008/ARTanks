@@ -33,7 +33,7 @@ RectTransform:
   m_Father: {fileID: 2162442166751619128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10138,7 +10138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1274547100
+  GlobalObjectIdHash: 4072294713
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -10607,6 +10607,9 @@ MonoBehaviour:
     m_InternalValue: 0
   m_CoinAudio: {fileID: 7152733778266410087}
   m_CoinClip: {fileID: 8300000, guid: e897fffaea5b12f42a296aab9914e60d, type: 3}
+  looterInterval: 0
+  looterCoinAmt: 5
+  looter: 0
 --- !u!114 &1591222738604313625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10814,7 +10817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1972548816907833431
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10824,7 +10827,7 @@ RectTransform:
   m_GameObject: {fileID: 8492751069580301405}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 498259135953338440}

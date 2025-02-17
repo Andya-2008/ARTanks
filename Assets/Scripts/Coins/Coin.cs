@@ -8,6 +8,7 @@ public abstract class Coin : NetworkBehaviour
     protected bool alreadyCollected;
 
     public abstract int Collect();
+    public abstract void moveCoin();
 
     public void SetValue(int value)
     {

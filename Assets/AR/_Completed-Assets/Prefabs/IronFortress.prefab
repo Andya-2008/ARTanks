@@ -10638,6 +10638,9 @@ MonoBehaviour:
     m_InternalValue: 0
   m_CoinAudio: {fileID: 7152733778266410087}
   m_CoinClip: {fileID: 8300000, guid: e897fffaea5b12f42a296aab9914e60d, type: 3}
+  looterInterval: 0
+  looterCoinAmt: 5
+  looter: 0
 --- !u!114 &6539112793547434988
 MonoBehaviour:
   m_ObjectHideFlags: 0

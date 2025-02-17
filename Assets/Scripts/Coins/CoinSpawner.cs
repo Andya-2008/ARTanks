@@ -8,7 +8,6 @@ public class CoinSpawner : NetworkBehaviour
 {
     //[SerializeField] private RespawningCoin coinPrefab;
     [SerializeField] private GameObject goCoin;
-    [SerializeField] private GameObject stack;
 
     [SerializeField] private int maxCoins = 50;
     [SerializeField] private int coinValue = 10;
@@ -93,14 +92,14 @@ public class CoinSpawner : NetworkBehaviour
     {
         int stackChance = Random.Range(0, 7);
         GameObject coinInstance;
+        coinInstance = Instantiate(goCoin, GetRandomPoint(), Quaternion.identity, transform.parent);
         if (stackChance == 0)
         {
-            coinInstance = Instantiate(stack, GetRandomPoint(), Quaternion.identity, transform.parent);
+            coinInstance.GetComponent<RespawningCoin>().SetStack();
         }
         else
         {
-
-            coinInstance = Instantiate(goCoin, GetRandomPoint(), Quaternion.identity, transform.parent);
+            coinInstance.GetComponent<RespawningCoin>().SetCoin();
         }
 
         coinInstance.GetComponent<NetworkObject>().Spawn();

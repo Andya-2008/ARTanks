@@ -11,8 +11,10 @@ public class RespawningCoin : Coin
     private Vector3 previousPosition;
     private CoinSpawner cs;
     private float lastMove = 0f;
-    [SerializeField] bool Stack;
     [SerializeField] int MoveAfterSeconds = 30;
+    [SerializeField] GameObject Coin;
+    [SerializeField] GameObject Stack;
+    public int coinValue;
 
     private void Start()
     {
@@ -39,15 +41,6 @@ public class RespawningCoin : Coin
     public override int Collect()
     {
         Debug.Log("Respawning Coin Collect");
-        int coinValue;
-        if (Stack)
-        {
-            coinValue = 25;
-        }
-        else
-        {
-           coinValue  = 10;
-        }
 
         if (!IsServer)
         {
@@ -64,20 +57,36 @@ public class RespawningCoin : Coin
         }
 
         alreadyCollected = true;
-        moveCoin();
         Debug.Log("Moved Coin");
         //return coinValue;
         return coinValue;
     }
 
-    public void moveCoin()
+    public override void moveCoin()
     { 
         Vector3 newpos = cs.GetRandomPoint();
+        int randomRoll = UnityEngine.Random.Range(0,7);
+        if(randomRoll == 0)
+        {
+            SetStack();
+        }
+        else
+        {
+            SetCoin();
+        }
         this.transform.position = newpos;
         alreadyCollected = false;
     }
-
-
-    
-
+    public void SetStack()
+    {
+        Stack.SetActive(true);
+        Coin.SetActive(false);
+        coinValue = 25;
+    }
+    public void SetCoin()
+    {
+        Stack.SetActive(false);
+        Coin.SetActive(true);
+        coinValue = 10;
+    }
 }

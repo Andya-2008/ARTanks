@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 6848007917750740905}
   - component: {fileID: 8713890933764559715}
   m_Layer: 0
-  m_Name: Tank_4
+  m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
