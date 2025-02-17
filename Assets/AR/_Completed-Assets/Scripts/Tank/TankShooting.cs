@@ -21,7 +21,7 @@ namespace Complete
         private string m_FireButton;                // The input axis that is used for launching shells.
         private float m_CurrentLaunchForce;         // The force that will be given to the shell when the fire button is released.
         private float m_ChargeSpeed;                // How fast the launch force increases, based on the max charge time.
-        private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
+        private bool m_Fired = true;                       // Whether or not the shell has been launched with this button press.
         [SerializeField] public float m_ReloadTime = 1.5f; // Time to reload
         [SerializeField] public float m_BulletPower = 50f; // Bullet damage
         [SerializeField] public float m_BulletSpeed = .005f; // Bullet speed
@@ -112,6 +112,7 @@ namespace Complete
         [Rpc(SendTo.Everyone)] //server owns this object but client can request a spawn
         public void ShootRpc(ulong objectId, ulong shooterClientID)
         {
+            
             Rigidbody shellInstance =
                 Instantiate(m_Shell, m_FireTransform.position, m_FireTransform.rotation, GameObject.Find("Battlefield1").transform) as Rigidbody;
             shellInstance.GetComponent<ShellExplosion>().m_damage = m_BulletPower;
