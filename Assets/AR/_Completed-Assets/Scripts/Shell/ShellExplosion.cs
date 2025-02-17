@@ -80,7 +80,7 @@ namespace Complete
                     Debug.Log("Added damage to shield");
                     other.GetComponent<ShieldController>().TakeShieldDamage(m_damage);
                 }
-                else if (/*NetworkManager.Singleton.IsServer && */(other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank"))
+                else if (NetworkManager.Singleton.IsServer && (other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank"))
                 {
                     other.GetComponent<TankHealth>().TakeDamage(m_damage);
                     if (vampire)

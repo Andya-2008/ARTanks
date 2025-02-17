@@ -10389,7 +10389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerNumber: 4
-  m_Speed: 0.4
+  m_Speed: 0.2
   m_TurnSpeed: 220
   m_MovementAudio: {fileID: 897170178001223614}
   m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
@@ -10407,7 +10407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030896d0325fa3e4d8d7d4cfe2351cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 400
+  m_StartingHealth: 300
   m_Slider: {fileID: 6055580209464161675}
   m_FillImage: {fileID: 1663936346686385238}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
@@ -10884,7 +10884,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 1
   m_MinValue: 0
-  m_MaxValue: 400
+  m_MaxValue: 300
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

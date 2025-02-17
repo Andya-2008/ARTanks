@@ -167,4 +167,15 @@ public class TankMovement : NetworkBehaviour
         // Apply this rotation to the rigidbody's rotation.
         this.transform.rotation = turnRotation;
     }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(IsServer && m_PlayerNumber == 4)
+        {
+            if (collision.gameObject.tag == "MyTank" || collision.gameObject.tag == "Tank")
+            {
+                collision.gameObject.GetComponent<FireDamage>().startTime = Time.time;
+                collision.gameObject.GetComponent<FireDamage>().takingFire = true;
+            }
+        }
+    }
 }

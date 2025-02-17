@@ -100,7 +100,7 @@ public class ImageTracking : NetworkBehaviour
             Debug.Log("Y");
             hasSpawnedTank = false;
             ARTrackedImagePlus artip = new ARTrackedImagePlus();
-            artip.name = "IronFortress";
+            artip.name = "Cheetah";
             GameObject go = new GameObject();
             artip.transform = go.transform;
             artip.transform.position = new Vector3(-0.2f, 0, 0);
