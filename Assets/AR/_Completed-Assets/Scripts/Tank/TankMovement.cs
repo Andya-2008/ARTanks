@@ -2,6 +2,7 @@
 using Unity.Netcode;
 using TMPro;
 using System;
+using Complete;
 public class TankMovement : NetworkBehaviour
 {
     public int m_PlayerNumber = 1;              // Used to identify which tank belongs to which player.  This is set by this tank's manager.
@@ -22,6 +23,7 @@ public class TankMovement : NetworkBehaviour
     FixedJoystick joystick;
     TextMeshProUGUI debugText;
     float timeSinceMoved;
+    public bool hydraulic;
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -169,12 +171,19 @@ public class TankMovement : NetworkBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
-        if(IsServer && m_PlayerNumber == 4)
+        if(IsServer)
         {
             if (collision.gameObject.tag == "MyTank" || collision.gameObject.tag == "Tank")
             {
-                collision.gameObject.GetComponent<FireDamage>().startTime = Time.time;
-                collision.gameObject.GetComponent<FireDamage>().takingFire = true;
+                if (m_PlayerNumber == 4)
+                {
+                    collision.gameObject.GetComponent<FireDamage>().startTime = Time.time;
+                    collision.gameObject.GetComponent<FireDamage>().takingFire = true;
+                }
+                if (hydraulic)
+                {
+                    collision.gameObject.GetComponent<TankHealth>().TakeDamage(40);
+                }
             }
         }
     }

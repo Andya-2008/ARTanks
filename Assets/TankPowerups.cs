@@ -370,11 +370,11 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-
+                tankMovement.hydraulic = true;
             }
             else
             {
-
+                tankMovement.hydraulic = false;
             }
         }
         else if (poweruptype.Contains("Flame_Turret"))
