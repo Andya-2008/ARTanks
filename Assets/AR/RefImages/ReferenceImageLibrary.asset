@@ -21,9 +21,9 @@ MonoBehaviour:
       m_GuidLow: 4675030949275116171
       m_GuidHigh: 14623875582879815043
     m_SerializedTextureGuid:
-      m_GuidLow: 6950437242020891042
-      m_GuidHigh: 15214472746958851832
-    m_Size: {x: 0.060714286, y: 0.10111353}
+      m_GuidLow: 1032451276362995262
+      m_GuidHigh: 2701080484111341384
+    m_Size: {x: 0.060714286, y: 0.10055205}
     m_SpecifySize: 1
     m_Name: Looter
     m_Texture: {fileID: 0}
@@ -41,29 +41,19 @@ MonoBehaviour:
       m_GuidLow: 4947335493758058108
       m_GuidHigh: 4317506882657460646
     m_SerializedTextureGuid:
-      m_GuidLow: 13385898447634629060
-      m_GuidHigh: 2575750029959581497
-    m_Size: {x: 0.060714, y: 0.10029999}
+      m_GuidLow: 7959092706054934762
+      m_GuidHigh: 9375551008567665323
+    m_Size: {x: 0.060714, y: 0.10172611}
     m_SpecifySize: 1
     m_Name: IronFortress
-    m_Texture: {fileID: 0}
-  - m_SerializedGuid:
-      m_GuidLow: 5443467601212327813
-      m_GuidHigh: 5390078849957326261
-    m_SerializedTextureGuid:
-      m_GuidLow: 10138912416891127533
-      m_GuidHigh: 17974588225978110251
-    m_Size: {x: 0.0607, y: 0.101012215}
-    m_SpecifySize: 1
-    m_Name: Turret
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5581376660822368025
       m_GuidHigh: 9235545868488543642
     m_SerializedTextureGuid:
-      m_GuidLow: 1523452608275359199
-      m_GuidHigh: 16007256180453110232
-    m_Size: {x: 0.0607, y: 0.10008755}
+      m_GuidLow: 11674717491108994014
+      m_GuidHigh: 1345051524970214442
+    m_Size: {x: 0.0607, y: 0.10136503}
     m_SpecifySize: 1
     m_Name: Cheetah
     m_Texture: {fileID: 0}
@@ -71,9 +61,9 @@ MonoBehaviour:
       m_GuidLow: 5184957731262043524
       m_GuidHigh: 7923062213918900410
     m_SerializedTextureGuid:
-      m_GuidLow: 2149376409167396358
-      m_GuidHigh: 3613258901180826107
-    m_Size: {x: 0.0615, y: 0.10051322}
+      m_GuidLow: 4698613256865767335
+      m_GuidHigh: 1831330153332276921
+    m_Size: {x: 0.0615, y: 0.10081968}
     m_SpecifySize: 1
     m_Name: Firestorm
     m_Texture: {fileID: 0}
@@ -161,9 +151,9 @@ MonoBehaviour:
       m_GuidLow: 4772106046875290767
       m_GuidHigh: 1114212732452265661
     m_SerializedTextureGuid:
-      m_GuidLow: 7810615272376743492
-      m_GuidHigh: 2960829080599679192
-    m_Size: {x: 0.061, y: 0.10210394}
+      m_GuidLow: 13593014123724790514
+      m_GuidHigh: 15014265758374618616
+    m_Size: {x: 0.061, y: 0.101357415}
     m_SpecifySize: 1
     m_Name: Omniwall_Powerup
     m_Texture: {fileID: 0}
@@ -171,9 +161,9 @@ MonoBehaviour:
       m_GuidLow: 5186581561404899421
       m_GuidHigh: 15204633906852114087
     m_SerializedTextureGuid:
-      m_GuidLow: 555301272873480289
-      m_GuidHigh: 18190907669256609322
-    m_Size: {x: 0.0615, y: 0.10170318}
+      m_GuidLow: 3973351730608484908
+      m_GuidHigh: 6178108752547519963
+    m_Size: {x: 0.0615, y: 0.10281298}
     m_SpecifySize: 1
     m_Name: Allowall_Powerup
     m_Texture: {fileID: 0}
@@ -301,9 +291,9 @@ MonoBehaviour:
       m_GuidLow: 4865668584547167196
       m_GuidHigh: 1395129441941543829
     m_SerializedTextureGuid:
-      m_GuidLow: 13638226392987175666
-      m_GuidHigh: 16321230053157448587
-    m_Size: {x: 0.0615, y: 0.10223377}
+      m_GuidLow: 18114658294617534642
+      m_GuidHigh: 5504469551270562920
+    m_Size: {x: 0.0615, y: 0.10149812}
     m_SpecifySize: 1
     m_Name: EMPNet_Building
     m_Texture: {fileID: 0}
@@ -331,9 +321,9 @@ MonoBehaviour:
       m_GuidLow: 5235580141371593381
       m_GuidHigh: 6039432735212160905
     m_SerializedTextureGuid:
-      m_GuidLow: 9008435494076639498
-      m_GuidHigh: 7789161697285242907
-    m_Size: {x: 0.0615, y: 0.10276452}
+      m_GuidLow: 9940730503048753478
+      m_GuidHigh: 16754067853093370744
+    m_Size: {x: 0.0615, y: 0.1033943}
     m_SpecifySize: 1
     m_Name: Flame_Turret
     m_Texture: {fileID: 0}
@@ -341,9 +331,9 @@ MonoBehaviour:
       m_GuidLow: 5066989883423953195
       m_GuidHigh: 829257862974989185
     m_SerializedTextureGuid:
-      m_GuidLow: 11035106543062448238
-      m_GuidHigh: 7802001316349968827
-    m_Size: {x: 0.0615, y: 0.10171154}
+      m_GuidLow: 2662855516106855650
+      m_GuidHigh: 15244417586953947400
+    m_Size: {x: 0.0615, y: 0.10430068}
     m_SpecifySize: 1
     m_Name: Lightning_Turret
     m_Texture: {fileID: 0}
@@ -351,9 +341,9 @@ MonoBehaviour:
       m_GuidLow: 4834290644201275384
       m_GuidHigh: 17404436207668970678
     m_SerializedTextureGuid:
-      m_GuidLow: 7445760029998376418
-      m_GuidHigh: 671490133623468617
-    m_Size: {x: 0.0615, y: 0.100923076}
+      m_GuidLow: 8648259540287080002
+      m_GuidHigh: 3469591041768499977
+    m_Size: {x: 0.0615, y: 0.10263576}
     m_SpecifySize: 1
     m_Name: Sniper_Turret
     m_Texture: {fileID: 0}
@@ -361,9 +351,9 @@ MonoBehaviour:
       m_GuidLow: 4994973654575785913
       m_GuidHigh: 11054677166697562524
     m_SerializedTextureGuid:
-      m_GuidLow: 5094778182815085795
-      m_GuidHigh: 10655245344046695257
-    m_Size: {x: 0.0615, y: 0.10223377}
+      m_GuidLow: 4874267361336067341
+      m_GuidHigh: 17473376614822774443
+    m_Size: {x: 0.0615, y: 0.103920795}
     m_SpecifySize: 1
     m_Name: RepairBotFactory_Building
     m_Texture: {fileID: 0}
@@ -371,9 +361,9 @@ MonoBehaviour:
       m_GuidLow: 5062516192177849971
       m_GuidHigh: 10459222531160716470
     m_SerializedTextureGuid:
-      m_GuidLow: 11584446651306344677
-      m_GuidHigh: 8551918003287476730
-    m_Size: {x: 0.0615, y: 0.101435065}
+      m_GuidLow: 14498221572583310837
+      m_GuidHigh: 12539744449768605562
+    m_Size: {x: 0.0615, y: 0.10304305}
     m_SpecifySize: 1
     m_Name: CoinFactory_Building
     m_Texture: {fileID: 0}
@@ -381,9 +371,9 @@ MonoBehaviour:
       m_GuidLow: 5664913904767256586
       m_GuidHigh: 10820360228783455386
     m_SerializedTextureGuid:
-      m_GuidLow: 12687775888063449372
-      m_GuidHigh: 9117160087009967931
-    m_Size: {x: 0.0615, y: 0.10303247}
+      m_GuidLow: 4982290664523610089
+      m_GuidHigh: 12729994537544413961
+    m_Size: {x: 0.0615, y: 0.10280944}
     m_SpecifySize: 1
     m_Name: HydraulicRams_Powerup
     m_Texture: {fileID: 0}
@@ -391,9 +381,9 @@ MonoBehaviour:
       m_GuidLow: 4935188025873774849
       m_GuidHigh: 7223092523708972943
     m_SerializedTextureGuid:
-      m_GuidLow: 5090231548019087157
-      m_GuidHigh: 8130557007474371129
-    m_Size: {x: 0.0615, y: 0.1010637}
+      m_GuidLow: 5311090476168327191
+      m_GuidHigh: 3549572954817254808
+    m_Size: {x: 0.0615, y: 0.10236379}
     m_SpecifySize: 1
     m_Name: MiniTankFactory_Building
     m_Texture: {fileID: 0}
@@ -401,9 +391,9 @@ MonoBehaviour:
       m_GuidLow: 5517386893538001820
       m_GuidHigh: 15013353148123898261
     m_SerializedTextureGuid:
-      m_GuidLow: 16912263483919276849
-      m_GuidHigh: 16109429262087467880
-    m_Size: {x: 0.0615, y: 0.10276452}
+      m_GuidLow: 13444521929643746145
+      m_GuidHigh: 9708085588503246520
+    m_Size: {x: 0.0615, y: 0.10331188}
     m_SpecifySize: 1
     m_Name: Artillery_Building
     m_Texture: {fileID: 0}

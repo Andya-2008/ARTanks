@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ee507445a554340b0821a41d0df4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 10
+  cost: 80
   initCoverupHeight: 200
   initCoverupWidth: 133.3333
   myCoverup: {fileID: 3981028048589849751}
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 6552cd57478b2fd4f8a6737cfde19e8b, type: 3}
+  m_Texture: {fileID: 2800000, guid: 56c2b81b897e4fb4baf156290db2cf48, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
