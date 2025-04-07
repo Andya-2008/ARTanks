@@ -234,6 +234,8 @@ MonoBehaviour:
   explosive: 0
   vampire: 0
   molotov: 0
+  shock: 0
+  shockForce: 60
   myClientID: 0
   myTank: {fileID: 0}
   tankList: []

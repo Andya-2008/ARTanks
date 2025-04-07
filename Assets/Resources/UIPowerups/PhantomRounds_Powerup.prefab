@@ -95,7 +95,7 @@ MonoBehaviour:
   initCoverupWidth: 133.3333
   myCoverup: {fileID: 3981028048589849751}
   myText: {fileID: 7217496073705907353}
-  powerupDisplayName: Phantom Rounds
+  powerupDisplayName: GhostShot
   numOfBulletsOrTime: 8
   PowerupSlider: {fileID: 6912582832094223911}
   thisPowerupActive: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: c805761fe0530a449b829f96eadfa85a, type: 3}
+  m_Texture: {fileID: 2800000, guid: fbf9133dc7153bd4e895dd22f94c8fd4, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

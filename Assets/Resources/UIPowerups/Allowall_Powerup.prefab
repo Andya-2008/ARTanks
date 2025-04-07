@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ee507445a554340b0821a41d0df4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 10
+  cost: 20
   initCoverupHeight: 200
   initCoverupWidth: 133.3333
   myCoverup: {fileID: 3981028048589849751}

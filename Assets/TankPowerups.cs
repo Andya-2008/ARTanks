@@ -17,6 +17,7 @@ public class TankPowerups : NetworkBehaviour
     TankHealth tankHealth;
     TankShooting tankShooting;
     TankPlayer tankPlayer;
+    TankLaser tankLaser;
 
     [SerializeField] Transform tacticalSpawnPos;
 
@@ -37,6 +38,7 @@ public class TankPowerups : NetworkBehaviour
         tankShooting = this.GetComponent<TankShooting>();
         tankHealth = this.GetComponent<TankHealth>();
         tankPlayer = this.GetComponent<TankPlayer>();
+        tankLaser = this.GetComponent<TankLaser>();
     }
 
     // Update is called once per frame
@@ -327,9 +329,13 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
+                tankMovement.canMove = false;
+                StartCoroutine(tankLaser.Shoot());
             }
             else
             {
+                tankMovement.canMove = true;
+                tankLaser.StopShoot();
             }
         }
         else if (poweruptype.Contains("Molotov"))
@@ -349,9 +355,11 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
+                tankShooting.shock = true;
             }
             else
             {
+                tankShooting.shock = false;
             }
         }
 
@@ -431,29 +439,6 @@ public class TankPowerups : NetworkBehaviour
             {
 
             }
-        }
-        else if (poweruptype.Contains("Decoy_Building"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
-        else if (poweruptype.Contains("Infiltration"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-            
         }
         else if (poweruptype.Contains("Omniwall"))
         {

@@ -251,9 +251,9 @@ MonoBehaviour:
       m_GuidLow: 5551121676375624219
       m_GuidHigh: 5477499025799780498
     m_SerializedTextureGuid:
-      m_GuidLow: 3072786908363647358
-      m_GuidHigh: 6412339438729150411
-    m_Size: {x: 0.0615, y: 0.10118412}
+      m_GuidLow: 1014717168907498448
+      m_GuidHigh: 9615467934555769849
+    m_Size: {x: 0.0615, y: 0.10203409}
     m_SpecifySize: 1
     m_Name: PhantomRounds_Powerup
     m_Texture: {fileID: 0}

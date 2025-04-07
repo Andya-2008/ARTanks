@@ -24,6 +24,7 @@ public class TankMovement : NetworkBehaviour
     TextMeshProUGUI debugText;
     float timeSinceMoved;
     public bool hydraulic;
+    public bool canMove = true;
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -129,8 +130,11 @@ public class TankMovement : NetworkBehaviour
                 if (Time.time - timeSinceMoved > .01f)
                 {
                     timeSinceMoved = Time.time;*/
+                if (canMove)
+                {
                     Move();
-                //}
+                }
+                    //}
                 Turn();
             }
         }

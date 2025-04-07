@@ -20,6 +20,9 @@ namespace Complete
         public bool explosive;
         public bool vampire;
         public bool molotov;
+        public bool shock;
+
+        public float shockForce = 10f;
 
         TextMeshProUGUI debugText;
 
@@ -91,6 +94,11 @@ namespace Complete
                     {
                         other.GetComponent<FireDamage>().startTime = Time.time;
                         other.GetComponent<FireDamage>().takingFire = true;
+                    }
+                    if(shock)
+                    {
+                        Vector3 shockVector = new Vector3(transform.forward.x, 1, transform.forward.z);
+                        other.GetComponent<Rigidbody>().AddForce(shockVector * shockForce);
                     }
                 }
                 else if(NetworkManager.Singleton.IsServer && other.gameObject.tag == "Wall")

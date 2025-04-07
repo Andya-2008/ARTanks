@@ -97,9 +97,6 @@ namespace Complete
             gameObject.SetActive(false);
             */
             Debug.Log("Wall dead");
-            deathWallParent.SetActive(true);
-            realWallParent.SetActive(false);
-            deathTimer = Time.time;
         }
         public NetworkObject FindNetworkObject(ulong networkObjectId)
         {
@@ -113,7 +110,7 @@ namespace Complete
 
         public void FixedUpdate()
         {
-            if(m_Dead && Time.time - deathTimer > timeToDeath)
+            if(m_Dead)
             {
                 GetComponent<NetworkObject>().Despawn();
                 Destroy(this.gameObject);
