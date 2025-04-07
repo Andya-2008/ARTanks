@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Autodesk_Cache_File>
+  <cacheType Type="OneFile" Format="mcc"/>
+  <time Range="0-24000"/>
+  <cacheTimePerFrame TimePerFrame="240"/>
+  <cacheVersion Version="2.0"/>
+  <Channels>
+    <channel0 ChannelName="Belt" ChannelType="FloatVectorArray" ChannelInterpretation="Points" SamplingType="Regular" SamplingRate="240" StartTime="0" EndTime="24000"/>
+  </Channels>
+</Autodesk_Cache_File>

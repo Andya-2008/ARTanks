@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 989dd3942a40b9347ac87001403bed32
+timeCreated: 1481032561
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77770
+  packageName: Oil Pump Animated
+  packageVersion: 2.0
+  assetPath: Assets/Oil-Pump-Animated/Content/Animator-Controller/Oil-Pump-Work_Comb.controller
+  uploadId: 209328

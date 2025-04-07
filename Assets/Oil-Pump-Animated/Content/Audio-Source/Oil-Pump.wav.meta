@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 5686ae7a821b381448ccdb20b4c220bd
+timeCreated: 1480997625
+licenseType: Store
+AudioImporter:
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77770
+  packageName: Oil Pump Animated
+  packageVersion: 2.0
+  assetPath: Assets/Oil-Pump-Animated/Content/Audio-Source/Oil-Pump.wav
+  uploadId: 209328
