@@ -58,6 +58,11 @@ public class TankPowerups : NetworkBehaviour
             ActivateOrDeactivateOtherTankPowerupRPC(poweruptype, activate);
              
         }
+        else if(poweruptype.Contains("EMPBlast"))
+        {
+            Debug.Log("EMPBlast");
+            ActivateOrDeactivateOtherTankPowerupRPC(poweruptype, activate);
+        }
         else
         {
             ActivateOrDeactivateTankPowerupRPC(poweruptype, activate);
@@ -66,14 +71,28 @@ public class TankPowerups : NetworkBehaviour
     [Rpc(SendTo.NotMe)]
     void ActivateOrDeactivateOtherTankPowerupRPC(string poweruptype, bool activate)
     {
-        if (activate)
+        if (poweruptype == "OilSpill")
         {
-            Debug.Log("2");
-            GameObject.Find("DisruptionCanvas").GetComponent<OilSpillManager>().StartOilSpill();
+            if (activate)
+            {
+                Debug.Log("2");
+                GameObject.Find("DisruptionCanvas").GetComponent<OilSpillManager>().StartOilSpill();
+            }
+            else
+            {
+                GameObject.Find("DisruptionCanvas").GetComponent<OilSpillManager>().StopOilSpill();
+            }
         }
-        else
+        else if (poweruptype == "EMPBlast")
         {
-            GameObject.Find("DisruptionCanvas").GetComponent<OilSpillManager>().StopOilSpill();
+            if (activate)
+            {
+                tankShooting.canShoot = false;
+            }
+            else
+            {
+                tankShooting.canShoot = true;
+            }
         }
     }
 
@@ -81,11 +100,6 @@ public class TankPowerups : NetworkBehaviour
     public void ActivateOrDeactivateTankPowerupRPC(string poweruptype, bool activate)
     {
         Debug.Log("1");
-        enemyTanks.Clear();
-        foreach (GameObject enemyTank in GameObject.FindGameObjectsWithTag("Tank"))
-        {
-            enemyTanks.Add(enemyTank);
-        }
         if (poweruptype.Contains("BulletReload"))
         {
             if (activate)
@@ -213,24 +227,6 @@ public class TankPowerups : NetworkBehaviour
                 if (gameObject.tag != "MyTank")
                 {
                     tankPlayer.ToggleInvisibility(false);
-                }
-            }
-        }
-        else if (poweruptype.Contains("EMPBlast"))
-        {
-            if (activate)
-            {
-                foreach (GameObject enemyTank in enemyTanks)
-                {
-                    enemyTank.GetComponent<TankShooting>().canShoot = false;
-                }
-
-            }
-            else
-            {
-                foreach (GameObject enemyTank in enemyTanks)
-                {
-                    enemyTank.GetComponent<TankShooting>().canShoot = true;
                 }
             }
         }

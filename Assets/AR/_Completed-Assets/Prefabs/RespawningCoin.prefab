@@ -233,6 +233,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8270415597717553853, guid: 04f114b65050b954cb3b88a02e0917d8,
+        type: 3}
+      propertyPath: m_Height
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270415597717553853, guid: 04f114b65050b954cb3b88a02e0917d8,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -1.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270415597717553853, guid: 04f114b65050b954cb3b88a02e0917d8,
+        type: 3}
+      propertyPath: m_Direction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8305499056318076211, guid: 04f114b65050b954cb3b88a02e0917d8,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -362,6 +377,7 @@ MonoBehaviour:
   MoveAfterSeconds: 30
   Coin: {fileID: 7109622558937072348}
   Stack: {fileID: 5832770224329745815}
+  coinValue: 0
 --- !u!114 &-6771944639574563281
 MonoBehaviour:
   m_ObjectHideFlags: 0
