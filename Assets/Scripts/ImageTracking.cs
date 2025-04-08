@@ -73,7 +73,7 @@ public class ImageTracking : NetworkBehaviour
         {
             Debug.Log("B");
             ARTrackedImagePlus artip = new ARTrackedImagePlus();
-            artip.name = "Battlefield1";
+            artip.name = "Battlefield2";
             GameObject go = new GameObject();
             artip.transform = go.transform;
             artip.transform.position = new Vector3(0, 0, 0);
@@ -220,6 +220,7 @@ public class ImageTracking : NetworkBehaviour
                 spawnedPrefabs.Add(name, prefab);
                 prefab.SetActive(true);
 
+                prefab.name = "Battlefield1";
                 NetworkObject netObj = prefab.GetComponent<NetworkObject>();
                 netObj.Spawn();
             }
