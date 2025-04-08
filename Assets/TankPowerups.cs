@@ -55,6 +55,7 @@ public class TankPowerups : NetworkBehaviour
     {
         if (poweruptype.Contains("OilSpill"))
         {
+            Debug.Log("OilSpill");
             ActivateOrDeactivateOtherTankPowerupRPC(poweruptype, activate);
              
         }
@@ -75,7 +76,7 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                Debug.Log("2");
+                Debug.Log("Spilled");
                 GameObject.Find("DisruptionCanvas").GetComponent<OilSpillManager>().StartOilSpill();
             }
             else
@@ -87,11 +88,12 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                tankShooting.canShoot = false;
+                Debug.Log("Blasted");
+                GameObject.Find("MyTank").GetComponent<TankShooting>().canShoot = false;
             }
             else
             {
-                tankShooting.canShoot = true;
+                GameObject.Find("MyTank").GetComponent<TankShooting>().canShoot = true;
             }
         }
     }

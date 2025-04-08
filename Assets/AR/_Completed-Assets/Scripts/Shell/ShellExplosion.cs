@@ -78,6 +78,16 @@ namespace Complete
             }
             else
             {
+                if(other.gameObject.tag == "Tank" || other.gameObject.tag == "MyTank")
+                {
+                    if (shock)
+                    {
+                        Debug.Log("Shock");
+                        Vector3 shockVector = new Vector3(transform.forward.x, 1, transform.forward.z);
+                        other.GetComponent<Rigidbody>().AddForce(shockVector * shockForce);
+                    }
+                }
+
                 if (NetworkManager.Singleton.IsServer && other.gameObject.tag == "Shield")
                 {
                     Debug.Log("Added damage to shield");
@@ -94,11 +104,6 @@ namespace Complete
                     {
                         other.GetComponent<FireDamage>().startTime = Time.time;
                         other.GetComponent<FireDamage>().takingFire = true;
-                    }
-                    if(shock)
-                    {
-                        Vector3 shockVector = new Vector3(transform.forward.x, 1, transform.forward.z);
-                        other.GetComponent<Rigidbody>().AddForce(shockVector * shockForce);
                     }
                 }
                 else if(NetworkManager.Singleton.IsServer && other.gameObject.tag == "Wall")
