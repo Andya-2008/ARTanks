@@ -101,6 +101,10 @@ namespace Complete
                 // Set the fired flag so only Fire is only called once.
                 m_Fired = true;
                 startTime = Time.time;
+                if(homing || explosive || vampire || phantom || molotov || shock)
+                    GameObject.Find("SFXManager").GetComponent<SFXManager>().PlaySFXRPC("SpecialShoot");
+                else
+                    GameObject.Find("SFXManager").GetComponent<SFXManager>().PlaySFXRPC("Shoot");
                 ShootRpc(this.GetComponent<NetworkObject>().NetworkObjectId, NetworkObject.OwnerClientId);
                 foreach (GameObject powerupSlider in GameObject.FindGameObjectsWithTag("PowerupSlider"))
                 {

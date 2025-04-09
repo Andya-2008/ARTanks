@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
@@ -47,8 +48,7 @@ public class CoinSpawner : NetworkBehaviour
 
     private void Update()
     {
-
-        if (!IsServer) { return; }
+        if (!NetworkManager.Singleton.IsServer) { return; }
         if (coinCount < maxCoins)
         {
             if (Time.time - lastSpawn > spawningInterval)

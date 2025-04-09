@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -53,7 +54,6 @@ public class TankPowerups : NetworkBehaviour
     }
     public void ActivateOrDeactivateTankPowerup(string poweruptype, bool activate)
     {
-        Debug.Log("AOD: Type: " + poweruptype + " : " + activate);
         if (poweruptype.Contains("OilSpill"))
         {
             ActivateOrDeactivateOtherTankPowerupRPC(poweruptype, activate);
@@ -61,11 +61,16 @@ public class TankPowerups : NetworkBehaviour
         }
         else if(poweruptype.Contains("EMPBlast"))
         {
-            Debug.Log("EMPBlast");
             ActivateOrDeactivateOtherTankPowerupRPC(poweruptype, activate);
         }
         else
         {
+            GameObject.Find("SFXManager").GetComponent<SFXManager>().PlaySFXRPC("UsePowerup");
+            if(poweruptype.Contains("TankSpeed") && activate)
+            {
+                GameObject.Find("SFXManager").GetComponent<SFXManager>().PlaySFXRPC("Turbo");
+
+            }
             ActivateOrDeactivateTankPowerupRPC(poweruptype, activate);
         }
     }

@@ -291,7 +291,7 @@ public class ApplicationController : MonoBehaviour
         while (true)
         {
             LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
-            Debug.Log("Send Heart Beat:" + lobbyId + ":" + Time.time);
+            //Debug.Log("Send Heart Beat:" + lobbyId + ":" + Time.time);
             yield return new WaitForSeconds(waitTimeSeconds);
         }
     }
