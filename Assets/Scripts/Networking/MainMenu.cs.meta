@@ -3,7 +3,14 @@ guid: 35668d08cf8d7f0408bf0ee28797c6c0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - joinCodeField: {instanceID: 0}
+  - joinCodeDropDown: {instanceID: 0}
+  - txtUsername: {instanceID: 0}
+  - txtError: {instanceID: 0}
+  - mainPanel: {instanceID: 0}
+  - friendsPanel: {instanceID: 0}
+  - clientMan: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

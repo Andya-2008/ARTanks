@@ -20,6 +20,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject friendsPanel;
 
+    [SerializeField] private GameObject clientMan;
+
     
     private float lastCheck = 0;
 
@@ -37,8 +39,13 @@ public class MainMenu : MonoBehaviour
         string lobbyId = await HostSingleton.Instance.GameManager.StartHostAsync();
         GameObject appcontroller = GameObject.Find("ApplicationController");
         appcontroller.GetComponent<ApplicationController>().startHeartBeat(lobbyId);
+        Debug.Log("StartHost StartClient: Client Singleton Check");
+        if (ClientSingleton.Instance == null)
+        {
+            Instantiate(clientMan);
+            await ClientSingleton.Instance.CreateClient(txtUsername.text);
+        }
 
-        
         //StartCoroutine(HeartbeatLobbyCoroutine(lobbyId, 15));
     }
 
@@ -46,6 +53,14 @@ public class MainMenu : MonoBehaviour
 
     public async void StartClient()
     {
+
+        Debug.Log("Main Menu StartClient: Client Singleton Check");
+        if (ClientSingleton.Instance == null)
+        {
+            Instantiate(clientMan);
+            await ClientSingleton.Instance.CreateClient(txtUsername.text);
+        }
+
         string joincode;
         if (joinCodeField.text != "")
         {
@@ -77,6 +92,14 @@ public class MainMenu : MonoBehaviour
 
 
 	public async void UpdateLobbies() {
+        /*
+        Debug.Log("UpdateLobbies: Client Singleton Check");
+        if (ClientSingleton.Instance == null) {
+            Instantiate(clientMan);
+            await ClientSingleton.Instance.CreateClient(txtUsername.text);
+        }
+        */
+
         Debug.Log("UpdateLobbies");
         try
         {

@@ -5829,6 +5829,8 @@ MonoBehaviour:
   txtError: {fileID: 151108843}
   mainPanel: {fileID: 1218798796}
   friendsPanel: {fileID: 2090587632}
+  clientMan: {fileID: 7614157560392514761, guid: 78776380e28a4f94cbaf937fc7eda974,
+    type: 3}
 --- !u!1 &1506095331
 GameObject:
   m_ObjectHideFlags: 0
