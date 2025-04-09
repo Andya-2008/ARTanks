@@ -31,7 +31,7 @@ public class RepairBot : MonoBehaviour
     public void FollowTank()
     {
         transform.LookAt(targetTank.transform);
-        transform.Translate(Vector3.Normalize(targetTank.transform.position - this.transform.position) * moveSpeed);
+        transform.Translate((targetTank.transform.position - this.transform.position) * moveSpeed);
     }
     void OnTriggerEnter(Collider other)
     {
