@@ -36,6 +36,7 @@ public class ImageTracking : NetworkBehaviour
 
     ARTrackedImage trackImage;
     public GameObject battleField;
+    public bool canSpawnTank;
     private void Awake()
     {
         trackedImageManager = FindFirstObjectByType<ARTrackedImageManager>();
@@ -221,8 +222,7 @@ public class ImageTracking : NetworkBehaviour
                 prefab.SetActive(true);
 
                 prefab.name = "Battlefield1";
-                NetworkObject netObj = prefab.GetComponent<NetworkObject>();
-                netObj.Spawn();
+                SendBattleFieldStatRpc();
             }
         }
         if (pf.tag == "Tank" || pf.tag == "MyTank")
@@ -281,6 +281,7 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
     {
         if (!IsServer) { return; }
         if (battleField == null) { return; }
+        if(!TankApproval()) { return; }
         var clientId = serverRpcParams.Receive.SenderClientId;
         GameObject pf = placeablePrefabs[prefabId];
         Vector3 newPos = new Vector3(localpos.x, 0, localpos.z);
@@ -303,10 +304,20 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
         //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
         //Vector3 pos = trackedImagePos - battleField.transform.position;
     }
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Everyone)]
     public void SendBattleFieldStatRpc()
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().battlefieldReadyNum += 1;
+        Debug.Log("Added readynum. Connectedclients.count: " + NetworkManager.Singleton.ConnectedClientsList.Count);
+    }
+    public bool TankApproval()
+    {
+        Debug.Log("Approving tanks: " + GameObject.Find("GameManager").GetComponent<GameManager>().battlefieldReadyNum + " : " + NetworkManager.Singleton.ConnectedClientsList.Count);
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().battlefieldReadyNum == NetworkManager.Singleton.ConnectedClientsList.Count)
+        {
+            return true;
+        }
+        else { return false; }
     }
     private Vector3 worldToLocal(Vector3 worldpos, Transform battlefield) {
         return battleField.transform.InverseTransformPoint(worldpos);

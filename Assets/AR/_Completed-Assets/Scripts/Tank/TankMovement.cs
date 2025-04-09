@@ -21,7 +21,7 @@ public class TankMovement : NetworkBehaviour
     private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
     private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
     FixedJoystick joystick;
-    TextMeshProUGUI debugText;
+    //TextMeshProUGUI debugText;
     float timeSinceMoved;
     public bool hydraulic;
     public bool canMove = true;
@@ -30,7 +30,7 @@ public class TankMovement : NetworkBehaviour
     {
         respawnPos = GameObject.Find("RespawnPos").transform;
         m_Rigidbody = GetComponent<Rigidbody>();
-        debugText = GameObject.Find("DebugText").GetComponent<TextMeshProUGUI>();
+        //debugText = GameObject.Find("DebugText").GetComponent<TextMeshProUGUI>();
         timeSinceMoved = Time.time;
     }
 
