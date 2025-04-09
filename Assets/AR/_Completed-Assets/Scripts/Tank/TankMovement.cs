@@ -25,8 +25,10 @@ public class TankMovement : NetworkBehaviour
     float timeSinceMoved;
     public bool hydraulic;
     public bool canMove = true;
+    Transform respawnPos;
     private void Awake()
     {
+        respawnPos = GameObject.Find("RespawnPos").transform;
         m_Rigidbody = GetComponent<Rigidbody>();
         debugText = GameObject.Find("DebugText").GetComponent<TextMeshProUGUI>();
         timeSinceMoved = Time.time;
@@ -188,6 +190,11 @@ public class TankMovement : NetworkBehaviour
                 {
                     collision.gameObject.GetComponent<TankHealth>().TakeDamage(40);
                 }
+            }
+            if(collision.gameObject.tag == "BoundaryFloor")
+            {
+                Debug.Log("Boundaryfloor hit");
+                transform.position = respawnPos.position;
             }
         }
     }

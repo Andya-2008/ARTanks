@@ -1,0 +1,329 @@
+diff a/Assets/TankPowerups.cs b/Assets/TankPowerups.cs	(rejected hunks)
+@@ -213,321 +213,298 @@
+             }
+         }
+         else if (poweruptype.Contains("EMPBlast"))
+         {
+             if (activate)
+             {
+                 foreach (GameObject enemyTank in enemyTanks)
+                 {
+                     enemyTank.GetComponent<TankShooting>().canShoot = false;
+                 }
+ 
+             }
+             else
+             {
+                 foreach (GameObject enemyTank in enemyTanks)
+                 {
+                     enemyTank.GetComponent<TankShooting>().canShoot = true;
+                 }
+             }
+         }
+         else if (poweruptype.Contains("Tanksformation"))
+         {
+             if (activate)
+             {
+                 transform.localScale = new Vector3(.6f, .6f, .6f);
+                 tankMovement.m_Speed += .05f;
+             }
+             else
+             {
+                 transform.localScale = new Vector3(1f, 1f, 1f);
+                 tankMovement.m_Speed -= .05f;
+             }
+         }
+         else if (poweruptype.Contains("PhaseShift"))
+         {
+             if (activate)
+             {
+                 this.gameObject.layer = 12;
+             }
+             else
+             {
+ 
+                 if (NetworkObject.IsOwner)
+                 {
+                     this.gameObject.layer = 6;
+                 }
+                 else
+                 {
+                     this.gameObject.layer = 3;
+                 }
+             }
+         }
+         else if (poweruptype.Contains("Basic_Shield"))
+         {
+             if (activate)
+             {
+                 shields[0].SetActive(true);
+             }
+             else
+             {
+ 
+                 shields[0].SetActive(false);
+             }
+         }
+         else if (poweruptype.Contains("VampireBullets"))
+         {
+             if(activate)
+             {
+                 tankShooting.vampire = true;
+             }
+             else
+             {
+                 tankShooting.vampire = false;
+             }
+         }
+         else if (poweruptype.Contains("PhantomRounds"))
+         {
+             if (activate)
+             {
+                 tankShooting.phantom = true;
+             }
+             else
+             {
+                 tankShooting.phantom = false;
+             }
+         }
+         else if (poweruptype.Contains("Golden_Shield"))
+         {
+             if (activate)
+             {
+                 shields[1].SetActive(true);
+             }
+             else
+             {
+ 
+                 shields[1].SetActive(false);
+             }
+         }
+         else if (poweruptype.Contains("Absorption_Shield"))
+         {
+-            if(activate)
++            if (activate)
+             {
+-
++                shields[2].SetActive(true);
+             }
+             else
+             {
+-
++                shields[2].GetComponent<ShieldController>().ShieldHealth = 100f;
++                shields[2].SetActive(false);
+             }
+         }
+ 
+         else if (poweruptype.Contains("Annihilaser"))
+         {
+             if (activate)
+             {
+-
+             }
+             else
+             {
+-
+             }
+         }
+         else if (poweruptype.Contains("Molotov"))
+         {
+             if (activate)
+             {
+ 
++                tankShooting.molotov = true;
+             }
+             else
+             {
++                tankShooting.molotov = false;
+ 
+             }
+         }
+         else if (poweruptype.Contains("Shock"))
+         {
+             if (activate)
+             {
+-
+             }
+             else
+             {
+-
+             }
+         }
+ 
+         else if (poweruptype.Contains("EMPNet"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+-        else if (poweruptype.Contains("Absorption_Shield"))
+-        {
+-            if(activate)
+-            {
+-
+-            }
+-            else
+-            {
+-                
+-            }
+-        }
+         else if (poweruptype.Contains("Hydraulic"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("Flame_Turret"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("Lightning_Turret"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("Sniper_Turret"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+-        else if (poweruptype.Contains("Absorption_Shield"))
+-        {
+-            if(activate)
+-            {
+-
+-            }
+-            else
+-            {
+-                
+-            }
+-        }
+         else if (poweruptype.Contains("CoinFactory"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("MiniTank"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("RepairBot"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("RepairBot"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("Artillery"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("Decoy_Building"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("Infiltration"))
+         {
+             if (activate)
+             {
+ 
+             }
+             else
+             {
+ 
+             }
+         }
+         else if (poweruptype.Contains("Omniwall"))
+         {
+             if (activate)
+             {
+                 if (NetworkManager.IsServer)
+                     SpawnWallServerRPC(false, worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+             }
+         }
+         else if (poweruptype.Contains("Allowall"))
+         {
+             if (activate)
+             {
+                 if (NetworkManager.IsServer)
+                     SpawnWallServerRPC(true, worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+             }
+         }
+     }
+     
+ 
+     public void PassiveAddHealth()
+     {
+         tankHealth.m_CurrentHealth += healthAdditionTime * tankHealth.m_StartingHealth / 12;
+         if(tankHealth.m_CurrentHealth >= tankHealth.m_StartingHealth)

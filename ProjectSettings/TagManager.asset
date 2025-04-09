@@ -18,6 +18,7 @@ TagManager:
   - Allowall
   - Shield
   - phantombullet
+  - BoundaryFloor
   layers:
   - Default
   - TransparentFX

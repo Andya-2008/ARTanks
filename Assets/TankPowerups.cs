@@ -53,9 +53,9 @@ public class TankPowerups : NetworkBehaviour
     }
     public void ActivateOrDeactivateTankPowerup(string poweruptype, bool activate)
     {
+        Debug.Log("AOD: Type: " + poweruptype + " : " + activate);
         if (poweruptype.Contains("OilSpill"))
         {
-            Debug.Log("OilSpill");
             ActivateOrDeactivateOtherTankPowerupRPC(poweruptype, activate);
              
         }
@@ -70,13 +70,12 @@ public class TankPowerups : NetworkBehaviour
         }
     }
     [Rpc(SendTo.NotMe)]
-    void ActivateOrDeactivateOtherTankPowerupRPC(string poweruptype, bool activate)
+    public void ActivateOrDeactivateOtherTankPowerupRPC(string poweruptype, bool activate)
     {
-        if (poweruptype == "OilSpill")
+        if (poweruptype.Contains("OilSpill"))
         {
             if (activate)
             {
-                Debug.Log("Spilled");
                 GameObject.Find("DisruptionCanvas").GetComponent<OilSpillManager>().StartOilSpill();
             }
             else
@@ -84,16 +83,15 @@ public class TankPowerups : NetworkBehaviour
                 GameObject.Find("DisruptionCanvas").GetComponent<OilSpillManager>().StopOilSpill();
             }
         }
-        else if (poweruptype == "EMPBlast")
+        else if (poweruptype.Contains("EMPBlast"))
         {
             if (activate)
             {
-                Debug.Log("Blasted");
-                GameObject.Find("MyTank").GetComponent<TankShooting>().canShoot = false;
+                GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankShooting>().canShoot = false;
             }
             else
             {
-                GameObject.Find("MyTank").GetComponent<TankShooting>().canShoot = true;
+                GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankShooting>().canShoot = true;
             }
         }
     }
