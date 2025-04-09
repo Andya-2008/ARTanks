@@ -73,7 +73,7 @@ public class ImageTracking : NetworkBehaviour
         {
             Debug.Log("B");
             ARTrackedImagePlus artip = new ARTrackedImagePlus();
-            artip.name = "Battlefield2";
+            artip.name = "Battlefield3";
             GameObject go = new GameObject();
             artip.transform = go.transform;
             artip.transform.position = new Vector3(0, 0, 0);
