@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
 	{
         //txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
         txtUsername.text = GameObject.Find("ApplicationController").GetComponent<ApplicationController>().currentUser.Username;
-        StartCoroutine(UpdateLobbyCoroutine(5.0f));
+        StartCoroutine(UpdateLobbyCoroutine(10.0f));
     }
 	public async void StartHost()
     {
@@ -100,9 +100,10 @@ public class MainMenu : MonoBehaviour
         joinCodeDropDown.options.Clear();
         QueryLobbiesOptions options = new QueryLobbiesOptions();
         options.Count = 25;
-
+        Debug.Log("friends:" + friends.Count);
         foreach (FriendInfo fi in friends)
         {
+
             QueryFilter qf = new QueryFilter(
                     field: QueryFilter.FieldOptions.Name,
                     op: QueryFilter.OpOptions.EQ,
@@ -119,7 +120,7 @@ public class MainMenu : MonoBehaviour
                     asc: false,
                     field: QueryOrder.FieldOptions.Name)
             };
-
+            Debug.Log("Query Lobbies");
             QueryResponse lobbies = await LobbyService.Instance.QueryLobbiesAsync(options);
             Debug.Log("Got Lobbies:" + lobbies.Results.Count);
 
@@ -136,7 +137,7 @@ public class MainMenu : MonoBehaviour
 
             }
             joinCodeDropDown.AddOptions(rooms);
-
+            System.Threading.Thread.Sleep(1000);
         }
 
     }
