@@ -317,10 +317,11 @@ MonoBehaviour:
   bulletSpawnPos: {fileID: 0}
   shootInterval: 3
   enemyTanks: []
-  damage: 50
+  damage: 35
   lightning: 1
   fire: 0
   sniper: 0
+  rotatingHead: {fileID: 0}
 --- !u!1 &6503785780423935647
 GameObject:
   m_ObjectHideFlags: 0

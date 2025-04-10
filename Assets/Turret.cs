@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Turret : NetworkBehaviour
 {
@@ -33,6 +34,10 @@ public class Turret : NetworkBehaviour
     [SerializeField] bool lightning;
     [SerializeField] bool fire;
     [SerializeField] bool sniper;
+    [SerializeField] Transform rotatingHead;
+    [SerializeField] GameObject FireFX;
+    public bool fireRange;
+    public List<string> hitTanks = new List<string>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -104,7 +109,7 @@ public class Turret : NetworkBehaviour
         
             if (GetComponent<NetworkObject>().IsOwner)
         {
-            if (sniper)
+            if (sniper || fire)
             {
                 enemyTanks.Clear();
                 foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
@@ -113,6 +118,14 @@ public class Turret : NetworkBehaviour
                     enemyTanks.Add(tank.transform);
                 }
                 LookAtTankRPC(FindEnemyTank().name);
+            }
+            if(fireRange)
+            {
+                FireAwayRPC(FindEnemyTank().name);
+            }
+            else
+            {
+                StopFiringRPC();
             }
             if (Time.time - powerStartTime > shootInterval)
             {
@@ -179,5 +192,17 @@ public class Turret : NetworkBehaviour
             }
         }
         return nearestEnemy;
+    }
+    [Rpc(SendTo.Everyone)]
+    public void FireAwayRPC(string hitTank)
+    {
+        FireFX.SetActive(true);
+            GameObject.Find(hitTank).GetComponent<FireDamage>().takingFire = true;
+            GameObject.Find(hitTank).GetComponent<FireDamage>().startTime = Time.time;
+    }
+    [Rpc(SendTo.Everyone)]
+    public void StopFiringRPC()
+    {
+        FireFX.SetActive(false);
     }
 }

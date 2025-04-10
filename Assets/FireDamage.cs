@@ -34,7 +34,7 @@ public class FireDamage : MonoBehaviour
             {
                 Debug.Log("Not active");
                 FireEffect.SetActive(true);
-                FireEffect.GetComponent<PlayableDirector>().Play();
+                //FireEffect.GetComponent<PlayableDirector>().Play();
                 FireEffect.GetComponent<ParticleSystem>().Play();
                 initScale = FireEffect.transform.localScale.x;
             }
