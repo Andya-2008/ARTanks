@@ -123,6 +123,11 @@ namespace Complete
                         Debug.Log("Dealt damage to" + other.gameObject.name);
                         other.GetComponent<TankFactory>().TakeDamage(m_damage);
                     }
+                    if (other.gameObject.tag == "Turret")
+                    {
+                        Debug.Log("Dealt damage to" + other.gameObject.name);
+                        other.GetComponent<Turret>().TakeDamage(m_damage);
+                    }
                 }
                 if (other.gameObject.tag == "Allowall")
                 {

@@ -1125,6 +1125,8 @@ MonoBehaviour:
     type: 3}
   tankFactory: {fileID: 5879128814780562814, guid: e9c492e7c72c02e47aa241a56fc0b18a,
     type: 3}
+  lightningTurret: {fileID: 5879128814780562814, guid: c6611ca8815d34a409b57b061b1e5969,
+    type: 3}
   shields:
   - {fileID: 487814423576678341}
   - {fileID: 2121652698338261337}

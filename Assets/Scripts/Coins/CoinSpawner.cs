@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class CoinSpawner : NetworkBehaviour
 {

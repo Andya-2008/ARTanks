@@ -1,13 +1,7 @@
 using Complete;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class TankPowerups : NetworkBehaviour
 {
@@ -28,6 +22,7 @@ public class TankPowerups : NetworkBehaviour
     [SerializeField] GameObject CoinFactory;
     [SerializeField] GameObject repairFactory;
     [SerializeField] GameObject tankFactory;
+    [SerializeField] GameObject lightningTurret;
     [SerializeField] List<GameObject> shields = new List<GameObject>();
     [SerializeField] GameObject shieldParent;
 
@@ -398,17 +393,6 @@ public class TankPowerups : NetworkBehaviour
 
             }
         }
-        else if (poweruptype.Contains("Lightning_Turret"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         else if (poweruptype.Contains("Sniper_Turret"))
         {
             if (activate)
@@ -458,6 +442,14 @@ public class TankPowerups : NetworkBehaviour
             {
                 if (NetworkManager.IsServer)
                     SpawnBuildingServerRPC("tankfactory", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+            }
+        }
+        else if (poweruptype.Contains("Lightning_Turret"))
+        {
+            if (activate)
+            {
+                if (NetworkManager.IsServer)
+                    SpawnBuildingServerRPC("lightningturret", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
     }
@@ -512,6 +504,10 @@ public class TankPowerups : NetworkBehaviour
         else if (building == "tankfactory")
         {
             instantiateWall = tankFactory;
+        }
+        else if (building == "lightningturret")
+        {
+            instantiateWall = lightningTurret;
         }
         else
         {

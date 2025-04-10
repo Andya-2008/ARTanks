@@ -1,16 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 using TMPro;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 using Unity.Netcode;
-using UnityEngine.InputSystem.LowLevel;
-using Unity.XR.CoreUtils;
 using UnityEngine.XR.ARSubsystems;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(ARTrackedImageManager))]
