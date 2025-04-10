@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RepairFactory : MonoBehaviour
+public class RepairFactory : NetworkBehaviour
 {
     public float m_StartingHealth = 100f;               // The amount of health each tank starts with.
     public Slider m_Slider;                             // The slider to represent how much health the tank currently has.

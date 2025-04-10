@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 
-public class Turret : MonoBehaviour
+public class Turret : NetworkBehaviour
 {
     public float m_StartingHealth = 100f;               // The amount of health each tank starts with.
     public Slider m_Slider;                             // The slider to represent how much health the tank currently has.
@@ -78,25 +78,6 @@ public class Turret : MonoBehaviour
         m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (GetComponent<NetworkObject>().IsOwner)
-        {
-            if (Time.time - lightningStartTime > shootInterval)
-            {
-                foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
-                {
-                    Debug.Log("Added tank: " + tank.name);
-                    enemyTanks.Add(tank.transform);
-                }
-                FireAnimationRPC();
-                StartCoroutine(LockOnRPC(FindEnemyTank().name));
-                lightningStartTime = Time.time;
-            }
-        }
-    }
-
     private void FixedUpdate()
     {
         if (m_Dead && Time.time - deathTimer > timeToDeath)
@@ -114,17 +95,37 @@ public class Turret : MonoBehaviour
             }
             startTime = Time.time;
         }
-    }
+        if (GetComponent<NetworkObject>().IsOwner)
+        {
+            if (Time.time - lightningStartTime > shootInterval)
+            {
+                enemyTanks.Clear();
+                foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+                {
+                    Debug.Log("Added tank: " + tank.name);
+                    enemyTanks.Add(tank.transform);
+                }
+                FireAnimationRPC();
+                StartCoroutine(StartLockOn());
 
+                lightningStartTime = Time.time;
+            }
+        }
+    }
+    public IEnumerator StartLockOn()
+    {
+        yield return new WaitForSeconds(3);
+        LockOnRPC(FindEnemyTank().name);
+    }
     [Rpc(SendTo.Everyone)]
     public void FireAnimationRPC()
     {
         turretAnimation.Play();
     }
     [Rpc(SendTo.Everyone)]
-    public IEnumerator LockOnRPC(string enemy)
+    public void LockOnRPC(string enemy)
     {
-        yield return new WaitForSeconds(3);
+        Debug.Log("Locking on");
         GameObject newHitZone = Instantiate(LightningHitZone, new Vector3(GameObject.Find(enemy).transform.position.x, 0, GameObject.Find(enemy).transform.position.z), Quaternion.identity, GameObject.Find("Battlefield1").transform);
         newHitZone.GetComponent<HitArea>().damage = damage;
     }

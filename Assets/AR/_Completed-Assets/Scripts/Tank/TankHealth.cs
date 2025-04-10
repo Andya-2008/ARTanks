@@ -62,6 +62,7 @@ namespace Complete
             // If the current health is at or below zero and it has not yet been registered, call OnDeath.
             if (FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().m_CurrentHealth <= 0f && !FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().m_Dead)
             {
+                Debug.Log("On Death");
                 FindNetworkObject(objectId).gameObject.GetComponent<TankHealth>().OnDeath();
             }
         }

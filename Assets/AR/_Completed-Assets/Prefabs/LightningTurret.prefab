@@ -184,7 +184,6 @@ GameObject:
   - component: {fileID: 7736471424520485033}
   - component: {fileID: 8605734906499105019}
   - component: {fileID: 6670907350820569060}
-  - component: {fileID: 2601822390710605726}
   - component: {fileID: 4874135544894538237}
   m_Layer: 9
   m_Name: LightningTurret
@@ -291,21 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5957fa9df444534489cb5e88a4d114b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2601822390710605726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5879128814780562814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7cbda2dbec7ae54fb8310600070faa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  repairObj: {fileID: 8630890333667105030, guid: f07f53e1d2dcb664e9f15fc42e144e79,
-    type: 3}
-  tankObj: {fileID: 0}
 --- !u!114 &4874135544894538237
 MonoBehaviour:
   m_ObjectHideFlags: 0

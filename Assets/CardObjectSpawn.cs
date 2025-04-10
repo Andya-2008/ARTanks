@@ -38,7 +38,7 @@ public class CardObjectSpawn : NetworkBehaviour
         SetLocalPosClientRPC(transform.localPosition, rpcParams);
         if (GetComponent<ClientNetworkTransform>() != null)
         {
-            GetComponent<ClientNetworkTransform>().enabled = true;
+            GetComponent<ClientNetworkTransform>().enabled = true;  
         }
     }
     [ClientRpc]

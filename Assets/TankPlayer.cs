@@ -15,7 +15,23 @@ public class TankPlayer : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(gameObject.name == "Looter(Clone)")
+        {
+            this.gameObject.name = "Looter";
+        }
+
+        if (gameObject.name == "IronFortress(Clone)")
+        {
+            this.gameObject.name = "IronFortress";
+        }
+        if (gameObject.name == "Cheetah(Clone)")
+        {
+            this.gameObject.name = "Cheetah";
+        }
+        if (gameObject.name == "Firestorm(Clone)")
+        {
+            this.gameObject.name = "Firestorm";
+        }
     }
 
     // Update is called once per frame

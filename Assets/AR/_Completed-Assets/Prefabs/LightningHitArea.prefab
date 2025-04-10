@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925e1ea22e88e4849b5d295d00e30096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tank: {fileID: 0}
   damage: 50
+  hitTanks: []
 --- !u!136 &3298627403444122565
 CapsuleCollider:
   m_ObjectHideFlags: 0

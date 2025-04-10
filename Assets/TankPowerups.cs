@@ -408,7 +408,7 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                if (NetworkManager.IsServer)
+                if (NetworkObject.IsOwner)
                     SpawnBuildingServerRPC("omniwall", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
@@ -416,7 +416,7 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                if (NetworkManager.IsServer)
+                if (NetworkObject.IsOwner)
                     SpawnBuildingServerRPC("allowall", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
@@ -424,7 +424,7 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                if (NetworkManager.IsServer)
+                if (NetworkObject.IsOwner)
                     SpawnBuildingServerRPC("coinfactory", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
@@ -432,7 +432,7 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                if (NetworkManager.IsServer)
+                if (NetworkObject.IsOwner)
                     SpawnBuildingServerRPC("repairfactory", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
@@ -440,7 +440,7 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                if (NetworkManager.IsServer)
+                if (NetworkObject.IsOwner)
                     SpawnBuildingServerRPC("tankfactory", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
@@ -448,7 +448,7 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                if (NetworkManager.IsServer)
+                if (NetworkObject.IsOwner)
                     SpawnBuildingServerRPC("lightningturret", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
