@@ -47,10 +47,13 @@ public class CoinWallet : NetworkBehaviour
     }
     private void FixedUpdate()
     {
-        if(looter && Time.time - looterStartTime >= looterInterval)
+        if (GetComponent<NetworkObject>().IsOwner)
         {
-            looterStartTime = Time.time;
-            LooterAdded();
+            if (looter && Time.time - looterStartTime >= looterInterval)
+            {
+                looterStartTime = Time.time;
+                LooterAdded();
+            }
         }
     }
     public void LooterAdded()
