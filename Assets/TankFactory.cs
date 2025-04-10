@@ -6,7 +6,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RepairFactory : MonoBehaviour
+public class TankFactory : MonoBehaviour
 {
     public float m_StartingHealth = 100f;               // The amount of health each tank starts with.
     public Slider m_Slider;                             // The slider to represent how much health the tank currently has.
@@ -18,7 +18,7 @@ public class RepairFactory : MonoBehaviour
     private bool m_Dead;                                // Has the tank been reduced beyond zero health yet?
     [SerializeField] float timedHealthReduction = 0.01f;
     float startTime;
-    float botStartTime; 
+    float botStartTime;
     [SerializeField] float botInterval = .5f;
     [SerializeField] GameObject realWallParent;
     [SerializeField] float timeToDeath;
@@ -53,13 +53,13 @@ public class RepairFactory : MonoBehaviour
     public void TakeDamageRPC(ulong objectId, float damage)
     {
         // Reduce current health by the amount of damage done.
-        GetComponent<RepairFactory>().m_CurrentHealth -= damage;
+        GetComponent<TankFactory>().m_CurrentHealth -= damage;
 
         // Change the UI elements appropriately.
         SetHealthUI();
 
         // If the current health is at or below zero and it has not yet been registered, call OnDeath.
-        if (GetComponent<RepairFactory>().m_CurrentHealth <= 0f && !m_Dead)
+        if (GetComponent<TankFactory>().m_CurrentHealth <= 0f && !m_Dead)
         {
             OnDeath();
         }
@@ -131,7 +131,7 @@ public class RepairFactory : MonoBehaviour
         if (Time.time - botStartTime > botInterval)
         {
             botStartTime = Time.time;
-            GetComponent<NetworkObjectSpawner>().AddNewObject("RepairBot");
+            GetComponent<NetworkObjectSpawner>().AddNewObject("MiniTank");
         }
     }
 }

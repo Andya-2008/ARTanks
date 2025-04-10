@@ -41,5 +41,9 @@ public class RepairBot : MonoBehaviour
             targetTank.GetComponent<TankHealth>().AddHealth(repairHealth);
             Destroy(this.gameObject);
         }
+        if(other.gameObject.tag == "MyBullet")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

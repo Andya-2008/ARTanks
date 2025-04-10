@@ -19,6 +19,8 @@ TagManager:
   - Shield
   - phantombullet
   - BoundaryFloor
+  - Repair
+  - TankFactory
   layers:
   - Default
   - TransparentFX

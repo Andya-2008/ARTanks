@@ -25,7 +25,7 @@ namespace Complete
         [SerializeField] public float m_ReloadTime = 1.5f; // Time to reload
         [SerializeField] public float m_BulletPower = 50f; // Bullet damage
         [SerializeField] public float m_BulletSpeed = .005f; // Bullet speed
-        [SerializeField] public float m_BulletRange = 2f; // Bullet range time
+        [SerializeField] public float m_BulletRange = 1f; // Bullet range time
         public float startTime;
         public bool homing;
         public bool explosive;

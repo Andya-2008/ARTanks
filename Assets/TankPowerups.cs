@@ -27,6 +27,7 @@ public class TankPowerups : NetworkBehaviour
     [SerializeField] GameObject alloWall;
     [SerializeField] GameObject CoinFactory;
     [SerializeField] GameObject repairFactory;
+    [SerializeField] GameObject tankFactory;
     [SerializeField] List<GameObject> shields = new List<GameObject>();
     [SerializeField] GameObject shieldParent;
 
@@ -120,11 +121,11 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                tankShooting.m_BulletRange -= 1.5f;
+                tankShooting.m_BulletRange += 1.5f;
             }
             else
             {
-                tankShooting.m_BulletRange += 1.5f;
+                tankShooting.m_BulletRange -= 1.5f;
             }
         }
         else if (poweruptype.Contains("BulletSpeed"))
@@ -419,28 +420,6 @@ public class TankPowerups : NetworkBehaviour
 
             }
         }
-        else if (poweruptype.Contains("MiniTank"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
-        else if (poweruptype.Contains("Artillery"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         else if (poweruptype.Contains("Omniwall"))
         {
             if (activate)
@@ -471,6 +450,14 @@ public class TankPowerups : NetworkBehaviour
             {
                 if (NetworkManager.IsServer)
                     SpawnBuildingServerRPC("repairfactory", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+            }
+        }
+        else if (poweruptype.Contains("MiniTankFactory"))
+        {
+            if (activate)
+            {
+                if (NetworkManager.IsServer)
+                    SpawnBuildingServerRPC("tankfactory", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
     }
@@ -521,6 +508,10 @@ public class TankPowerups : NetworkBehaviour
         else if (building == "repairfactory")
         {
             instantiateWall = repairFactory;
+        }
+        else if (building == "tankfactory")
+        {
+            instantiateWall = tankFactory;
         }
         else
         {

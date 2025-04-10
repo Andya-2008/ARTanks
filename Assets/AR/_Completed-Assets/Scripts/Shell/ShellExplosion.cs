@@ -106,9 +106,23 @@ namespace Complete
                         other.GetComponent<FireDamage>().takingFire = true;
                     }
                 }
-                else if(NetworkManager.Singleton.IsServer && other.gameObject.tag == "Wall")
+                else if(NetworkManager.Singleton.IsServer)
                 {
-                    other.GetComponent<Wall_Health>().TakeDamage(m_damage);
+                    if (other.gameObject.tag == "Wall")
+                    {
+                        Debug.Log("Dealt damage to" + other.gameObject.name);
+                        other.GetComponent<Wall_Health>().TakeDamage(m_damage);
+                    }
+                    if (other.gameObject.tag == "Repair")
+                    {
+                        Debug.Log("Dealt damage to" + other.gameObject.name);
+                        other.GetComponent<RepairFactory>().TakeDamage(m_damage);
+                    }
+                    if (other.gameObject.tag == "TankFactory")
+                    {
+                        Debug.Log("Dealt damage to" + other.gameObject.name);
+                        other.GetComponent<TankFactory>().TakeDamage(m_damage);
+                    }
                 }
                 if (other.gameObject.tag == "Allowall")
                 {
