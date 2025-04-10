@@ -23,6 +23,7 @@ public class TankPowerups : NetworkBehaviour
     [SerializeField] GameObject repairFactory;
     [SerializeField] GameObject tankFactory;
     [SerializeField] GameObject lightningTurret;
+    [SerializeField] GameObject sniperTurret;
     [SerializeField] List<GameObject> shields = new List<GameObject>();
     [SerializeField] GameObject shieldParent;
 
@@ -393,17 +394,6 @@ public class TankPowerups : NetworkBehaviour
 
             }
         }
-        else if (poweruptype.Contains("Sniper_Turret"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         else if (poweruptype.Contains("Omniwall"))
         {
             if (activate)
@@ -450,6 +440,14 @@ public class TankPowerups : NetworkBehaviour
             {
                 if (NetworkObject.IsOwner)
                     SpawnBuildingServerRPC("lightningturret", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+            }
+        }
+        else if (poweruptype.Contains("Sniper_Turret"))
+        {
+            if (activate)
+            {
+                if (NetworkObject.IsOwner)
+                    SpawnBuildingServerRPC("sniperturret", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
     }
@@ -508,6 +506,10 @@ public class TankPowerups : NetworkBehaviour
         else if (building == "lightningturret")
         {
             instantiateWall = lightningTurret;
+        }
+        else if (building == "sniperturret")
+        {
+            instantiateWall = sniperTurret;
         }
         else
         {

@@ -313,9 +313,14 @@ MonoBehaviour:
   turretAnimation: {fileID: 2969973204445563726}
   LightningHitZone: {fileID: 5939249983002028728, guid: afcfafcacc3fae545a4fca3bf1af87df,
     type: 3}
+  Bullet: {fileID: 0}
+  bulletSpawnPos: {fileID: 0}
   shootInterval: 3
   enemyTanks: []
   damage: 50
+  lightning: 1
+  fire: 0
+  sniper: 0
 --- !u!1 &6503785780423935647
 GameObject:
   m_ObjectHideFlags: 0

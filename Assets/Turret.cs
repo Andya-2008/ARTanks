@@ -17,16 +17,22 @@ public class Turret : NetworkBehaviour
     public float m_CurrentHealth;                      // How much health the tank currently has.
     private bool m_Dead;                                // Has the tank been reduced beyond zero health yet?
     [SerializeField] float timedHealthReduction = 0.01f;
-    float lightningStartTime;
+    float powerStartTime;
     [SerializeField] float timeToDeath;
     float deathTimer;
 
     [SerializeField] PlayableDirector turretAnimation;
     [SerializeField] GameObject LightningHitZone;
+    [SerializeField] GameObject Bullet;
+    [SerializeField] Transform bulletSpawnPos;
     [SerializeField] float shootInterval = 15;
     float startTime;
     public List<Transform> enemyTanks = new List<Transform>();
     [SerializeField] float damage;
+
+    [SerializeField] bool lightning;
+    [SerializeField] bool fire;
+    [SerializeField] bool sniper;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -95,9 +101,10 @@ public class Turret : NetworkBehaviour
             }
             startTime = Time.time;
         }
-        if (GetComponent<NetworkObject>().IsOwner)
+        
+            if (GetComponent<NetworkObject>().IsOwner)
         {
-            if (Time.time - lightningStartTime > shootInterval)
+            if (sniper)
             {
                 enemyTanks.Clear();
                 foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
@@ -105,10 +112,29 @@ public class Turret : NetworkBehaviour
                     Debug.Log("Added tank: " + tank.name);
                     enemyTanks.Add(tank.transform);
                 }
-                FireAnimationRPC();
-                StartCoroutine(StartLockOn());
+                LookAtTankRPC(FindEnemyTank().name);
+            }
+            if (Time.time - powerStartTime > shootInterval)
+            {
+                
+                if (lightning)
+                {
+                    enemyTanks.Clear();
+                    foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+                    {
+                        Debug.Log("Added tank: " + tank.name);
+                        enemyTanks.Add(tank.transform);
+                    }
+                    FireAnimationRPC();
+                    StartCoroutine(StartLockOn());
+                }
 
-                lightningStartTime = Time.time;
+                if (sniper)
+                {
+                    ShootBulletRPC();
+                }
+
+                powerStartTime = Time.time;
             }
         }
     }
@@ -129,8 +155,16 @@ public class Turret : NetworkBehaviour
         GameObject newHitZone = Instantiate(LightningHitZone, new Vector3(GameObject.Find(enemy).transform.position.x, 0, GameObject.Find(enemy).transform.position.z), Quaternion.identity, GameObject.Find("Battlefield1").transform);
         newHitZone.GetComponent<HitArea>().damage = damage;
     }
-
-
+    [Rpc(SendTo.Everyone)]
+    public void ShootBulletRPC()
+    {
+        GameObject newBullet = Instantiate(Bullet, bulletSpawnPos.position, bulletSpawnPos.rotation, GameObject.Find("Battlefield1").transform);
+    }
+    [Rpc(SendTo.Everyone)]
+    public void LookAtTankRPC(string enemy)
+    {
+        transform.LookAt(GameObject.Find(enemy).transform);
+    }
     public Transform FindEnemyTank()
     {
         float minEnemyDistance = 100000000f;

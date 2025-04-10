@@ -15,14 +15,17 @@ public class BulletMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.FindGameObjectWithTag("MyTank") != null)
+        if (homing)
         {
-            foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+            if (GameObject.FindGameObjectWithTag("MyTank") != null)
             {
-                Enemies.Add(tank.transform);
+                foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+                {
+                    Enemies.Add(tank.transform);
+                }
+                Enemies.Add(GameObject.FindGameObjectWithTag("MyTank").transform);
+                Enemies.Remove(myTank.transform);
             }
-            Enemies.Add(GameObject.FindGameObjectWithTag("MyTank").transform);
-            Enemies.Remove(myTank.transform);
         }
         if(phantom)
         {
@@ -33,24 +36,27 @@ public class BulletMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Enemies.Count != 0)
+        if (homing)
         {
-            if (firstEnemy)
+            if (Enemies.Count != 0)
             {
-                firstEnemy = false;
-                EnemyTarget = FindNearestEnemy();
-            }
-            EnemyTarget = FindNearestEnemy();
-            if (EnemyTarget != null)
-            {
-                if (homing)
+                if (firstEnemy)
                 {
-                    HomingTurn();
+                    firstEnemy = false;
+                    EnemyTarget = FindNearestEnemy();
                 }
-            }
-            else
-            {
-                Debug.Log("There is no enemy target!");
+                EnemyTarget = FindNearestEnemy();
+                if (EnemyTarget != null)
+                {
+                    if (homing)
+                    {
+                        HomingTurn();
+                    }
+                }
+                else
+                {
+                    Debug.Log("There is no enemy target!");
+                }
             }
         }
         MoveBullet();

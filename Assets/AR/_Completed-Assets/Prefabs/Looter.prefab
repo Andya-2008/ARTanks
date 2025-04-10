@@ -1127,6 +1127,8 @@ MonoBehaviour:
     type: 3}
   lightningTurret: {fileID: 5879128814780562814, guid: c6611ca8815d34a409b57b061b1e5969,
     type: 3}
+  sniperTurret: {fileID: 5879128814780562814, guid: 6aa10a034bfcc4f4bae954961f21f3f9,
+    type: 3}
   shields:
   - {fileID: 487814423576678341}
   - {fileID: 2121652698338261337}
