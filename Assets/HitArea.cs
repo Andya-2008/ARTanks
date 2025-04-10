@@ -26,7 +26,7 @@ public class HitArea : MonoBehaviour
             {
                 foreach (GameObject tank in hitTanks)
                 {
-                    tank.GetComponent<TankHealth>().AddHealth(-damage);
+                    tank.GetComponent<TankHealth>().TakeDamage(damage);
                 }
             }
         }

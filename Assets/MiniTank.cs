@@ -44,7 +44,7 @@ public class MiniTank : MonoBehaviour
         }
         if (other.gameObject.name == targetTank.name)
         {
-            targetTank.GetComponent<TankHealth>().AddHealth(-damage);
+            targetTank.GetComponent<TankHealth>().TakeDamage(damage);
             Destroy(this.gameObject);
         }
         if (other.gameObject.tag == "MyBullet")
