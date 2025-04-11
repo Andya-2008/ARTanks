@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Playables;
 public class MaterializeScript : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +15,7 @@ public class MaterializeScript : MonoBehaviour
     private float rot;
     private float depthOrig;
     private float rotOrig;
+    [SerializeField] bool playAudio;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,9 +46,11 @@ public class MaterializeScript : MonoBehaviour
         matGO = GameObject.Instantiate(Resources.Load<GameObject>("MaterializePF"), this.transform.parent);
         matGO.transform.position = new Vector3(this.transform.position.x, depthOrig + depth, this.transform.position.z);
         matGO.transform.localScale = scaleSize * new Vector3(.3f, .3f, .3f);
-        AudioClip ac = Resources.Load<AudioClip>("thunder");
-        matGO.GetComponent<AudioSource>().PlayOneShot(ac);
-
+        if (playAudio)
+        {
+            AudioClip ac = Resources.Load<AudioClip>("thunder");
+            matGO.GetComponent<AudioSource>().PlayOneShot(ac);
+        }
     }
 	// Update is called once per frame
 	void Update()
@@ -74,7 +78,10 @@ public class MaterializeScript : MonoBehaviour
                 this.gameObject.GetComponent<MeshRenderer>().materials = oldMat;
                 Destroy(matGO, 0.5f);
                 done = true;
-                matGO.GetComponent<AudioSource>().Stop();
+                if (playAudio)
+                {
+                    matGO.GetComponent<AudioSource>().Stop();
+                }
             }
         }
 
