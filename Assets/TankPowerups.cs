@@ -25,6 +25,7 @@ public class TankPowerups : NetworkBehaviour
     [SerializeField] GameObject lightningTurret;
     [SerializeField] GameObject sniperTurret;
     [SerializeField] GameObject flameTurret;
+    [SerializeField] GameObject empNet;
     [SerializeField] List<GameObject> shields = new List<GameObject>();
     [SerializeField] GameObject shieldParent;
 
@@ -362,17 +363,6 @@ public class TankPowerups : NetworkBehaviour
             }
         }
 
-        else if (poweruptype.Contains("EMPNet"))
-        {
-            if (activate)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         else if (poweruptype.Contains("Hydraulic"))
         {
             if (activate)
@@ -448,6 +438,14 @@ public class TankPowerups : NetworkBehaviour
                     SpawnBuildingServerRPC("flameturret", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
             }
         }
+        else if (poweruptype.Contains("EMPNet"))
+        {
+            if (activate)
+            {
+                if (NetworkObject.IsOwner)
+                    SpawnBuildingServerRPC("empnet", worldToLocal(tacticalSpawnPos.position, battleField.transform), tacticalSpawnPos.rotation);
+            }
+        }
     }
     
 
@@ -512,6 +510,10 @@ public class TankPowerups : NetworkBehaviour
         else if (building == "flameturret")
         {
             instantiateWall = flameTurret;
+        }
+        else if (building == "empnet")
+        {
+            instantiateWall = empNet;
         }
         else
         {

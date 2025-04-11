@@ -10140,7 +10140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4072294713
+  GlobalObjectIdHash: 1274547100
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -10600,6 +10600,7 @@ MonoBehaviour:
     type: 3}
   flameTurret: {fileID: 5879128814780562814, guid: 008803dabaa6e924b936c2af75861637,
     type: 3}
+  empNet: {fileID: 5879128814780562814, guid: 7b6ebb1319d4a444daa4bef8bc5f44ad, type: 3}
   shields:
   - {fileID: 3786080536928126008}
   shieldParent: {fileID: 1860135857675059891}

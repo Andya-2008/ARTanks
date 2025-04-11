@@ -21,13 +21,14 @@ public class EMPNet : NetworkBehaviour
     [SerializeField] float timeToDeath;
     float deathTimer;
 
-    [SerializeField] PlayableDirector turretAnimation;
-    [SerializeField] GameObject Bullet;
-    [SerializeField] Transform bulletSpawnPos;
+    [SerializeField] ParticleSystem turretAnimation;
     [SerializeField] float shootInterval = 15;
+    [SerializeField] float freezeTime = 3;
     float startTime;
+    float freezeStartTime;
     public List<Transform> enemyTanks = new List<Transform>();
     [SerializeField] float damage;
+    bool freeze = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -100,19 +101,33 @@ public class EMPNet : NetworkBehaviour
 
         if (GetComponent<NetworkObject>().IsOwner)
         {
+            enemyTanks.Clear();
+            foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+            {
+                Debug.Log("Added tank: " + tank.name);
+                enemyTanks.Add(tank.transform);
+            }
+            string t1 = enemyTanks[0].name;
+            string t2 = "";
+            string t3 = "";
+            if (enemyTanks.Count > 1)
+                t2 = enemyTanks[1].name;
+            if (enemyTanks.Count > 2)
+                t3 = enemyTanks[2].name;
             if (Time.time - powerStartTime > shootInterval)
             {
+                Debug.Log("Shot pulse: " + t1 + ", " + t2 + ", and " + t3);
+                FreezeMovementRPC(t1, t2, t3);
+                FireAnimationRPC();
 
-                    enemyTanks.Clear();
-                    foreach (GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
-                    {
-                        Debug.Log("Added tank: " + tank.name);
-                        enemyTanks.Add(tank.transform);
-                    }
-                    FireAnimationRPC();
-                
-
+                freezeStartTime = Time.time;
+                freeze = true;
                 powerStartTime = Time.time;
+            }
+            if(Time.time - freezeStartTime > freezeTime && freeze)
+            {
+                freeze = false;
+                UnfreezeMovementRPC(t1, t2, t3);
             }
         }
     }
@@ -120,5 +135,37 @@ public class EMPNet : NetworkBehaviour
     public void FireAnimationRPC()
     {
         turretAnimation.Play();
+    }
+    [Rpc(SendTo.Everyone)]
+    public void FreezeMovementRPC(string tank1, string tank2, string tank3)
+    {
+        if(tank1 != "")
+        {
+            GameObject.Find(tank1).GetComponent<TankMovement>().enabled = false;
+        }
+        if (tank2 != "")
+        {
+            GameObject.Find(tank2).GetComponent<TankMovement>().enabled = false;
+        }
+        if (tank3 != "")
+        {
+            GameObject.Find(tank3).GetComponent<TankMovement>().enabled = false;
+        }
+    }
+    [Rpc(SendTo.Everyone)]
+    public void UnfreezeMovementRPC(string tank1, string tank2, string tank3)
+    {
+        if (tank1 != "")
+        {
+            GameObject.Find(tank1).GetComponent<TankMovement>().enabled = true;
+        }
+        if (tank2 != "")
+        {
+            GameObject.Find(tank2).GetComponent<TankMovement>().enabled = true;
+        }
+        if (tank3 != "")
+        {
+            GameObject.Find(tank3).GetComponent<TankMovement>().enabled = true;
+        }
     }
 }
