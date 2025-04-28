@@ -322,6 +322,9 @@ MonoBehaviour:
   fire: 0
   sniper: 0
   rotatingHead: {fileID: 0}
+  FireFX: {fileID: 5712219488875869251, guid: 29f4c72f9a1d9d446945740c2819895b, type: 3}
+  fireRange: 0
+  hitTanks: []
 --- !u!1 &6503785780423935647
 GameObject:
   m_ObjectHideFlags: 0

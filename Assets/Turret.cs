@@ -119,13 +119,16 @@ public class Turret : NetworkBehaviour
                 }
                 LookAtTankRPC(FindEnemyTank().name);
             }
-            if(fireRange)
+            if (fire)
             {
-                FireAwayRPC(FindEnemyTank().name);
-            }
-            else
-            {
-                StopFiringRPC();
+                if (fireRange)
+                {
+                    FireAwayRPC(FindEnemyTank().name);
+                }
+                else
+                {
+                    StopFiringRPC();
+                }
             }
             if (Time.time - powerStartTime > shootInterval)
             {
