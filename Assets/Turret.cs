@@ -168,7 +168,7 @@ public class Turret : NetworkBehaviour
     public void LockOnRPC(string enemy)
     {
         Debug.Log("Locking on");
-        GameObject newHitZone = Instantiate(LightningHitZone, new Vector3(GameObject.Find(enemy).transform.position.x, 0, GameObject.Find(enemy).transform.position.z), Quaternion.identity, GameObject.Find("Battlefield1").transform);
+        GameObject newHitZone = Instantiate(LightningHitZone, new Vector3(GameObject.Find(enemy).transform.position.x, GameObject.Find("Battlefield1").transform.position.y, GameObject.Find(enemy).transform.position.z), Quaternion.identity, GameObject.Find("Battlefield1").transform);
         newHitZone.GetComponent<HitArea>().damage = damage;
     }
     [Rpc(SendTo.Everyone)]
