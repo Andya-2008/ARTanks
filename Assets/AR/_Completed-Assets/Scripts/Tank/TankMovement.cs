@@ -191,7 +191,10 @@ public class TankMovement : NetworkBehaviour
                     collision.gameObject.GetComponent<TankHealth>().TakeDamage(40);
                 }
             }
-            if(collision.gameObject.tag == "BoundaryFloor")
+        }
+        if (IsOwner)
+        {
+            if (collision.gameObject.tag == "BoundaryFloor")
             {
                 Debug.Log("Boundaryfloor hit");
                 transform.position = respawnPos.position;
