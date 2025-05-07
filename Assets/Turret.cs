@@ -200,8 +200,7 @@ public class Turret : NetworkBehaviour
     public void FireAwayRPC(string hitTank)
     {
         FireFX.SetActive(true);
-            GameObject.Find(hitTank).GetComponent<FireDamage>().takingFire = true;
-            GameObject.Find(hitTank).GetComponent<FireDamage>().startTime = Time.time;
+        GameObject.Find(hitTank).GetComponent<FireDamage>().SetFireTrueRpc();
     }
     [Rpc(SendTo.Everyone)]
     public void StopFiringRPC()

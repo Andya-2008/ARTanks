@@ -7345,9 +7345,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 880667427}
-        m_TargetAssemblyTypeName: PowerupManager, Assembly-CSharp
-        m_MethodName: ClosePowerupCanvas
+      - m_Target: {fileID: 1809286836}
+        m_TargetAssemblyTypeName: ImageTracking, Assembly-CSharp
+        m_MethodName: DoneWithPowerups
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7641,6 +7641,7 @@ MonoBehaviour:
   - {fileID: 2797972962527746261, guid: 90266e0eff6fd8a45b017df7f1bc95ba, type: 3}
   - {fileID: 2797972962527746261, guid: e146c491307a3a843adf4ae365a411a5, type: 3}
   - {fileID: 2797972962527746261, guid: f233f1ac2f9e83b48aca50ae5dde38e7, type: 3}
+  doneWithPowerups: 0
   battleField: {fileID: 0}
   canSpawnTank: 0
 --- !u!114 &1809286837

@@ -25,6 +25,7 @@ public class ImageTracking : NetworkBehaviour
     GameObject prefab;
     private string strDebug = "";
     private string tiDebug = "";
+    public bool doneWithPowerups;
     //public NetworkVariable<Vector3> localpos = new NetworkVariable<Vector3>();
     //public Vector3 localpos;
 
@@ -202,7 +203,7 @@ public class ImageTracking : NetworkBehaviour
                 prefabId = placeablePrefabs.IndexOf(go);
             }
         }
-        if (pf.tag == "Battlefield")
+        if (pf.tag == "Battlefield"/* && doneWithPowerups*/)
         {
             if (!GameObject.FindGameObjectWithTag("Battlefield"))
             {
@@ -336,8 +337,12 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
         Destroy(GameObject.FindGameObjectWithTag("Battlefield"));
         NetworkManager.SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
+    public void DoneWithPowerups()
+    {
+        doneWithPowerups = true;
+        GameObject.Find("PowerupManager").GetComponent<PowerupManager>().ClosePowerupCanvas();
+    }
 }
-
 
 public class ARTrackedImagePlus
 {

@@ -100,10 +100,10 @@ namespace Complete
                     {
                         myTank.GetComponent<TankHealth>().AddHealth(m_damage);
                     }
+                    Debug.Log("Molotov: " + molotov);
                     if (molotov)
                     {
-                        other.GetComponent<FireDamage>().startTime = Time.time;
-                        other.GetComponent<FireDamage>().takingFire = true;
+                        other.GetComponent<FireDamage>().SetFireTrueRpc();
                     }
                 }
                 else if(NetworkManager.Singleton.IsServer)

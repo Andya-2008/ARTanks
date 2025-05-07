@@ -1,9 +1,8 @@
 using Complete;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Playables;
 
-public class FireDamage : MonoBehaviour
+public class FireDamage : NetworkBehaviour
 {
     public bool takingFire;
     public float fireTime;
@@ -20,6 +19,17 @@ public class FireDamage : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        ShowFire();
+    }
+    [Rpc(SendTo.Everyone)]
+    public void SetFireTrueRpc()
+    {
+        Debug.Log("SetFireTrueRPC");
+        startTime = Time.time;
+        takingFire = true;
+    }
+    public void ShowFire()
+    {
         if (takingFire && Time.time - startTime >= fireTime)
         {
             takingFire = false;
@@ -28,7 +38,7 @@ public class FireDamage : MonoBehaviour
             fireTime = 20;
             //FireEffect.transform.localScale = new Vector3(initScale * ((fireTime - (Time.time - startTime)) / fireTime), initScale * (Time.time - startTime) / fireTime, initScale * (Time.time - startTime) / fireTime);
         }
-        if(takingFire)
+        if (takingFire)
         {
             if (!FireEffect.activeSelf)
             {
@@ -41,7 +51,6 @@ public class FireDamage : MonoBehaviour
             TakeFireDamage();
         }
     }
-
     public void TakeFireDamage()
     {
         if (NetworkManager.Singleton.IsServer)

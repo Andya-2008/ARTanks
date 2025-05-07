@@ -183,8 +183,7 @@ public class TankMovement : NetworkBehaviour
             {
                 if (m_PlayerNumber == 4)
                 {
-                    collision.gameObject.GetComponent<FireDamage>().startTime = Time.time;
-                    collision.gameObject.GetComponent<FireDamage>().takingFire = true;
+                    collision.gameObject.GetComponent<FireDamage>().SetFireTrueRpc();
                 }
                 if (hydraulic)
                 {
