@@ -89,15 +89,17 @@ public class CoinSpawner : NetworkBehaviour
         int stackChance = Random.Range(0, 7);
         GameObject coinInstance;
         coinInstance = Instantiate(goCoin, GetRandomPoint(), Quaternion.identity, transform.parent);
-        if (stackChance == 0)
+        if (IsServer)
         {
-            coinInstance.GetComponent<RespawningCoin>().SetStack();
+            if (stackChance == 0)
+            {
+                coinInstance.GetComponent<RespawningCoin>().SetStackRpc();
+            }
+            else
+            {
+                coinInstance.GetComponent<RespawningCoin>().SetCoinRpc();
+            }
         }
-        else
-        {
-            coinInstance.GetComponent<RespawningCoin>().SetCoin();
-        }
-
         coinInstance.GetComponent<NetworkObject>().Spawn();
     }
 

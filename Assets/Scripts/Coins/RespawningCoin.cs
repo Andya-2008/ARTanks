@@ -1,4 +1,5 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
 public class RespawningCoin : Coin
@@ -62,25 +63,30 @@ public class RespawningCoin : Coin
     public override void moveCoin()
     { 
         Vector3 newpos = cs.GetRandomPoint();
-        int randomRoll = UnityEngine.Random.Range(0,7);
-        if(randomRoll == 0)
+        if (IsServer)
         {
-            SetStack();
-        }
-        else
-        {
-            SetCoin();
+            int randomRoll = UnityEngine.Random.Range(0, 7);
+            if (randomRoll == 0)
+            {
+                SetStackRpc();
+            }
+            else
+            {
+                SetCoinRpc();
+            }
         }
         this.transform.position = newpos;
         alreadyCollected = false;
     }
-    public void SetStack()
+    [Rpc(SendTo.Everyone)]
+    public void SetStackRpc()
     {
         Stack.SetActive(true);
         Coin.SetActive(false);
         coinValue = 25;
     }
-    public void SetCoin()
+    [Rpc(SendTo.Everyone)]
+    public void SetCoinRpc()
     {
         Stack.SetActive(false);
         Coin.SetActive(true);
