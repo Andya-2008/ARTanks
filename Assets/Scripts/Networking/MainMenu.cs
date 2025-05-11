@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using PlayFab;
 using PlayFab.ClientModels;
+using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown joinCodeDropDown;
     [SerializeField] private TMP_Text txtUsername;
     [SerializeField] private TMP_Text txtError;
-    
+    [SerializeField] private TMP_Text txtVersion;
 
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject friendsPanel;
@@ -33,6 +34,8 @@ public class MainMenu : MonoBehaviour
         //txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
         txtUsername.text = GameObject.Find("ApplicationController").GetComponent<ApplicationController>().currentUser.Username;
         StartCoroutine(UpdateLobbyCoroutine(10.0f));
+        Debug.Log(Application.version);
+        txtVersion.text = "Version:" + Application.version;
     }
 	public async void StartHost()
     {
