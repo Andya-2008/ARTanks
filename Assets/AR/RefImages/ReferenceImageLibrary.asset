@@ -297,7 +297,7 @@ MonoBehaviour:
       m_GuidHigh: 14328753753375136601
     m_Size: {x: 0.0615, y: 0.10149812}
     m_SpecifySize: 1
-    m_Name: EMPNet_Building
+    m_Name: EMPNet_Powerup
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5060810516397378155
