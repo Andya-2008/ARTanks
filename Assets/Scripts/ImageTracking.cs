@@ -35,6 +35,7 @@ public class ImageTracking : NetworkBehaviour
     private void Awake()
     {
         trackedImageManager = FindFirstObjectByType<ARTrackedImageManager>();
+        trackedImageManager.enabled = true;
     }
     private void Update()
     {
@@ -323,10 +324,41 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
         return battleField.transform.TransformPoint(localpos);
     }
 
+    public void RestartScene()
+    {
+        RestartSceneRpc();
+    }
+
+    public void ExitScene() {
+        ExitSceneRpc();
+    }
+    [Rpc(SendTo.Everyone)]
+    public void ExitSceneRpc()
+    {
+        ARSession arSession = GameObject.Find("AR Session").GetComponent<ARSession>();
+        arSession.Reset();
+
+        //GameObject.Find("AR Session").GetComponent<ResetSessionManager>().ResetARSession();
+        /*GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPlayer>().OnDespawnTank();
+        foreach(GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
+        {
+            tank.GetComponent<TankPlayer>().OnDespawnTank();
+        }*/
+        hasSpawnedTank = false;
+        spawnedPrefabs.Clear();
+        Destroy(GameObject.FindGameObjectWithTag("Battlefield"));
+        NetworkManager.SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+    }
+    
+    
     [Rpc(SendTo.Everyone)]
     public void RestartSceneRpc()
     {
-        GameObject.Find("AR Session").GetComponent<ResetSessionManager>().ResetARSession();
+
+        ARSession arSession = GameObject.Find("AR Session").GetComponent<ARSession>();
+        arSession.Reset();
+
+        //GameObject.Find("AR Session").GetComponent<ResetSessionManager>().ResetARSession();
         /*GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPlayer>().OnDespawnTank();
         foreach(GameObject tank in GameObject.FindGameObjectsWithTag("Tank"))
         {
