@@ -81,7 +81,7 @@ public class TankMovement : NetworkBehaviour
         if (NetworkObject.IsOwner)
         {
             GameObject.Find("PlayerText").GetComponent<TextMeshProUGUI>().enabled = true;
-            GameObject.Find("PlayerText").GetComponent<TextMeshProUGUI>().text = "Player " + m_PlayerNumber.ToString();
+            GameObject.Find("PlayerText").GetComponent<TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("MyTank").gameObject.name;
         }
     }
 
