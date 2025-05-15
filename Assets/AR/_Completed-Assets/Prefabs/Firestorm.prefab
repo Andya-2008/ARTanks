@@ -10172,7 +10172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1142632088
+  GlobalObjectIdHash: 1246815416
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -10543,10 +10543,9 @@ MonoBehaviour:
   TankID: 0
   invisible: 0
   tankParts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3769616900544005669}
+  - {fileID: 681031190026412766}
+  - {fileID: 2639932108206977243}
   tankCanvas: {fileID: 6883436872338814011}
 --- !u!320 &3586529660380658265
 PlayableDirector:
@@ -11264,6 +11263,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e530507135de9a4b8f09f5624db2d32, type: 3}
+--- !u!23 &681031190026412766 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6141955118090142054, guid: 6e530507135de9a4b8f09f5624db2d32,
+    type: 3}
+  m_PrefabInstance: {fileID: 6651563629384278968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2639932108206977243 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8713890933764559715, guid: 6e530507135de9a4b8f09f5624db2d32,
+    type: 3}
+  m_PrefabInstance: {fileID: 6651563629384278968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3769616900544005669 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7502794086729360797, guid: 6e530507135de9a4b8f09f5624db2d32,
+    type: 3}
+  m_PrefabInstance: {fileID: 6651563629384278968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3812790350167985076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7540953763324323852, guid: 6e530507135de9a4b8f09f5624db2d32,

@@ -10171,7 +10171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 822914375
+  GlobalObjectIdHash: 427589406
   InScenePlacedSourceGlobalObjectIdHash: 822914375
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -10542,10 +10542,12 @@ MonoBehaviour:
   TankID: 0
   invisible: 0
   tankParts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1522896096653437577}
+  - {fileID: 8254936666754120743}
+  - {fileID: 3446807670394073145}
+  - {fileID: 6590653077444810183}
+  - {fileID: 8840410378185478148}
+  - {fileID: 1651861674585186297}
   tankCanvas: {fileID: 6883436872338814011}
 --- !u!320 &3586529660380658265
 PlayableDirector:
@@ -11168,6 +11170,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8942185978984367052}
     m_Modifications:
+    - target: {fileID: 372704529236965594, guid: 29a402391373a024496a89aee03f0089,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1728520103028723509, guid: 29a402391373a024496a89aee03f0089,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663275152398875929, guid: 29a402391373a024496a89aee03f0089,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239445265698304740, guid: 29a402391373a024496a89aee03f0089,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6035802451912022763, guid: 29a402391373a024496a89aee03f0089,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -11243,14 +11265,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: IronFortressModel
       objectReference: {fileID: 0}
+    - target: {fileID: 7182894547661899015, guid: 29a402391373a024496a89aee03f0089,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8182809165985078564, guid: 29a402391373a024496a89aee03f0089,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a402391373a024496a89aee03f0089, type: 3}
+--- !u!23 &1522896096653437577 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5798451981857269313, guid: 29a402391373a024496a89aee03f0089,
+    type: 3}
+  m_PrefabInstance: {fileID: 4997399874079575240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1628384334098306595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6035802451912022763, guid: 29a402391373a024496a89aee03f0089,
+    type: 3}
+  m_PrefabInstance: {fileID: 4997399874079575240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1651861674585186297 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6032224004681700145, guid: 29a402391373a024496a89aee03f0089,
+    type: 3}
+  m_PrefabInstance: {fileID: 4997399874079575240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3446807670394073145 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7678586672073047281, guid: 29a402391373a024496a89aee03f0089,
+    type: 3}
+  m_PrefabInstance: {fileID: 4997399874079575240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6590653077444810183 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2174359815385946383, guid: 29a402391373a024496a89aee03f0089,
+    type: 3}
+  m_PrefabInstance: {fileID: 4997399874079575240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8254936666754120743 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4023185185211265263, guid: 29a402391373a024496a89aee03f0089,
+    type: 3}
+  m_PrefabInstance: {fileID: 4997399874079575240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8840410378185478148 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4608632484642708684, guid: 29a402391373a024496a89aee03f0089,
     type: 3}
   m_PrefabInstance: {fileID: 4997399874079575240}
   m_PrefabAsset: {fileID: 0}
