@@ -14,7 +14,8 @@ public class ImageTracking : NetworkBehaviour
     [SerializeField] TextMeshProUGUI DebugText;
     [SerializeField] private Dictionary<string, GameObject> placePrefabs = new Dictionary<string, GameObject>();
     [SerializeField] private List<GameObject> placeablePrefabs = new List<GameObject>();
-    
+    [SerializeField] private XRReferenceImageLibrary refLib;
+
     private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
     //private List<ARTrackedImage> newImages = new List<ARTrackedImage>();
     private ARTrackedImageManager trackedImageManager;
@@ -35,6 +36,7 @@ public class ImageTracking : NetworkBehaviour
     private void Awake()
     {
         trackedImageManager = FindFirstObjectByType<ARTrackedImageManager>();
+        trackedImageManager.referenceLibrary = refLib;
         trackedImageManager.enabled = true;
     }
     private void Update()
@@ -347,7 +349,8 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
         hasSpawnedTank = false;
         spawnedPrefabs.Clear();
         Destroy(GameObject.FindGameObjectWithTag("Battlefield"));
-        NetworkManager.SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        NetworkManager.Singleton.Shutdown();
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
     
     

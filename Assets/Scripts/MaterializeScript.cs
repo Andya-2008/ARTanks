@@ -26,7 +26,7 @@ public class MaterializeScript : MonoBehaviour
         depth = Random.Range(.2f, .6f);
         transTime = Random.Range(3.0f, 6.0f);
         rot = Random.Range(180f, 360f);
-        Debug.Log("Rot:" + rot);
+        //Debug.Log("Rot:" + rot);
         depthOrig = this.transform.position.y - depth;
         rotOrig = this.transform.rotation.eulerAngles.x - rot;
         ResetObject();        
@@ -69,11 +69,11 @@ public class MaterializeScript : MonoBehaviour
                 {
                     mat.SetFloat("_Clip", dissolve);
                 }
-                Debug.Log("dissolve: " +dissolve);
+                //Debug.Log("dissolve: " +dissolve);
             }
             else
             {
-                Debug.Log("Material changed");
+                //Debug.Log("Material changed");
              
                 this.gameObject.GetComponent<MeshRenderer>().materials = oldMat;
                 Destroy(matGO, 0.5f);
