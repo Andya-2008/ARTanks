@@ -7812,8 +7812,7 @@ MonoBehaviour:
   <trackablesChanged>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  m_SerializedLibrary: {fileID: 11400000, guid: 3687b00c71433764cb1bb5cc93bdeb8a,
-    type: 2}
+  m_SerializedLibrary: {fileID: 0}
   m_MaxNumberOfMovingImages: 0
   m_TrackedImagePrefab: {fileID: 8119476488468196653, guid: 0a581d50cb381ee4b8befba4836cf7ff,
     type: 3}
@@ -7913,6 +7912,7 @@ MonoBehaviour:
   - {fileID: 2797972962527746261, guid: 90266e0eff6fd8a45b017df7f1bc95ba, type: 3}
   - {fileID: 2797972962527746261, guid: e146c491307a3a843adf4ae365a411a5, type: 3}
   - {fileID: 2797972962527746261, guid: f233f1ac2f9e83b48aca50ae5dde38e7, type: 3}
+  refLib: {fileID: 11400000, guid: 3687b00c71433764cb1bb5cc93bdeb8a, type: 2}
   doneWithPowerups: 0
   battleField: {fileID: 0}
   canSpawnTank: 0
