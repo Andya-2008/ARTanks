@@ -41,33 +41,6 @@ public class ImageTracking : NetworkBehaviour
     }
     private void Update()
     {
-        /*
-        string strDebug = "";
-        if ( battleField!=null)
-        {
-            strDebug += "battlefield:" + battleField.transform.position + "\n";
-        }
-
-        GameObject mytank = GameObject.FindGameObjectWithTag("MyTank");
-        if ( mytank!=null)
-        {
-            strDebug += "MyTank:" + mytank.transform.localPosition + "\n";
-        }
-
-        GameObject[] gotanks = GameObject.FindGameObjectsWithTag("Tank");
-        foreach (GameObject go in gotanks) {
-            strDebug += "Tank:" + go.transform.localPosition + "\n";
-        }
-
-        GameObject[] goturrets = GameObject.FindGameObjectsWithTag("Turret");
-        foreach (GameObject go in goturrets)
-        {
-            strDebug += "Turret:" + go.transform.localPosition + "\n";
-        }
-
-        DebugTxt(strDebug);
-
-        */
         if (Input.GetKeyDown(KeyCode.B))
         {
             Debug.Log("B");
@@ -151,12 +124,30 @@ public class ImageTracking : NetworkBehaviour
             {
                 updateObject(trackedImage, "Battlefield");
             }
+            else if (!hasSpawnedTank && trackedImage.trackingState == TrackingState.Tracking && TankApproval())
+            {
+                ARTrackedImagePlus artip = new ARTrackedImagePlus();
+                artip.trackedImage = trackedImage;
+                StartCoroutine(CreateObject(artip));
+            }
         }
     }
     
     public void DebugTxt(string txt)
     {
-        DebugText.text = txt;
+        string oldDebug;
+        if (DebugText != null)
+        {
+            if (DebugText.text.Length > 200)
+            {
+                oldDebug = DebugText.text.Substring(0, 200);
+            }
+            else
+            {
+                oldDebug = DebugText.text;
+            }
+            DebugText.text = txt + "\n" + oldDebug;
+        }
     }
 
     private void updateObject(ARTrackedImage trackedImage, string updatedImg) {
@@ -173,7 +164,6 @@ public class ImageTracking : NetworkBehaviour
         }
     IEnumerator CreateObject(ARTrackedImagePlus trackedImage)
     {
-        Debug.Log("2");
         string name = "";
 
         if (trackedImage.trackedImage != null)
@@ -225,7 +215,8 @@ public class ImageTracking : NetworkBehaviour
         }
         if (pf.tag == "Tank" || pf.tag == "MyTank")
         {
-            if (!hasSpawnedTank) {
+
+            if (!hasSpawnedTank && TankApproval()) {
                 hasSpawnedTank = true;
                 Vector3 localpos = worldToLocal(trackedImage.transform.position, battleField.transform);
                 SpawnPlayerServerRpc(name, localpos, prefabId);
@@ -233,32 +224,13 @@ public class ImageTracking : NetworkBehaviour
         }
         if(pf.tag == "Powerup" || pf.tag == "UIPowerup")
         {
-            Debug.Log("0");
-            GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(pf.name);
-            /*
-            if (battleField != null)
+            if (!spawnedPrefabs.ContainsKey(name))
             {
-
-                Debug.Log("1");
-                Quaternion worldRotation = new Quaternion(trackedImage.transform.localRotation.x, trackedImage.transform.localRotation.y, trackedImage.transform.localRotation.z, trackedImage.transform.localRotation.w);
-                //worldRotation *= Quaternion.Euler(90, 0, 0);
-                prefab = Instantiate(pf, trackedImage.transform.position, worldRotation);
-                if(pf.name == "BulletSpeed_Powerup")
-                {
-                    BSP = prefab;
-                }
-                if(pf.name == "BulletPower_Powerup")
-                {
-                    BPP = prefab;
-                }
-                if(pf.name == "BulletReload_Powerup")
-                {
-                    BRP = prefab;
-                }
-                //GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name);
-                
-        }*/
-    }
+                Debug.Log("0");
+                GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(pf.name);
+                spawnedPrefabs.Add(name, prefab);
+            }
+        }
         
 
         yield return null;
@@ -284,23 +256,17 @@ public void SetLocalPosServerRPC(Vector3 p_LocalPos)
         GameObject pf = placeablePrefabs[prefabId];
         Vector3 newPos = new Vector3(localpos.x, 0, localpos.z);
         prefab = Instantiate(pf, newPos, Quaternion.identity);
-        
-        //Vector3 prefabLocalPos = trackedImagePos - battleField.transform.position;
         prefab.name = pf.name;
         
 
         NetworkObject netObj = prefab.GetComponent<NetworkObject>();
         prefab.SetActive(true);
         
-        // netObj.SpawnAsPlayerObject(clientId, true);
-        
         spawnedPrefabs.Add(name, prefab);
         prefab.transform.parent = battleField.transform;
         prefab.transform.localPosition = newPos;
         netObj.SpawnWithOwnership(clientId, false);
-        //prefab.transform.localPosition = prefabLocalPos;
-        //strDebug = "Prefab Local Pos: " + prefab.transform.localPosition.ToString();
-        //Vector3 pos = trackedImagePos - battleField.transform.position;
+
     }
     [Rpc(SendTo.Everyone)]
     public void SendBattleFieldStatRpc()
