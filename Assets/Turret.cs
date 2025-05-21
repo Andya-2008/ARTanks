@@ -38,6 +38,7 @@ public class Turret : NetworkBehaviour
     [SerializeField] GameObject FireFX;
     public bool fireRange;
     public List<string> hitTanks = new List<string>();
+    [SerializeField] List<ParticleSystem> lightningParticles = new List<ParticleSystem>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -162,6 +163,7 @@ public class Turret : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     public void FireAnimationRPC()
     {
+        FireLightningStrike();
         turretAnimation.Play();
     }
     [Rpc(SendTo.Everyone)]
@@ -206,5 +208,12 @@ public class Turret : NetworkBehaviour
     public void StopFiringRPC()
     {
         FireFX.SetActive(false);
+    }
+    public void FireLightningStrike()
+    {
+        foreach(ParticleSystem strike in lightningParticles)
+        {
+            strike.Play();
+        }
     }
 }

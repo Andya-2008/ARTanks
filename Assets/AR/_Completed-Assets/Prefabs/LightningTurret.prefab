@@ -315,7 +315,7 @@ MonoBehaviour:
     type: 3}
   Bullet: {fileID: 0}
   bulletSpawnPos: {fileID: 0}
-  shootInterval: 3
+  shootInterval: 6
   enemyTanks: []
   damage: 35
   lightning: 1
@@ -325,6 +325,17 @@ MonoBehaviour:
   FireFX: {fileID: 5712219488875869251, guid: 29f4c72f9a1d9d446945740c2819895b, type: 3}
   fireRange: 0
   hitTanks: []
+  lightningParticles:
+  - {fileID: 4340081051446554448}
+  - {fileID: 4340081052224098281}
+  - {fileID: 4340081052515133658}
+  - {fileID: 4340081051283897495}
+  - {fileID: 4340081050648973822}
+  - {fileID: 4340081051887552949}
+  - {fileID: 4340081052332654371}
+  - {fileID: 8841477017535691134}
+  - {fileID: 4319903737528104858}
+  - {fileID: 8841477017917329151}
 --- !u!1 &6503785780423935647
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +611,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2480252065146579314, guid: ae6522e7e18512f498f54d0b8f51eb90,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7196972643961153772, guid: ae6522e7e18512f498f54d0b8f51eb90,
         type: 3}
       propertyPath: m_InitialState
@@ -694,6 +710,66 @@ Transform:
 --- !u!320 &2969973204445563726 stripped
 PlayableDirector:
   m_CorrespondingSourceObject: {fileID: 7196972643961153772, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4319903737528104858 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8152886512738145336, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4340081050648973822 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8569415649191539292, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4340081051283897495 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8569415649628266293, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4340081051446554448 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8569415649498631410, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4340081051887552949 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8569415647950498327, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4340081052224098281 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8569415648689695819, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4340081052332654371 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8569415648581180545, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4340081052515133658 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8569415648432311160, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8841477017535691134 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3487055055529745116, guid: ae6522e7e18512f498f54d0b8f51eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392988646878618530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8841477017917329151 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3487055056188222813, guid: ae6522e7e18512f498f54d0b8f51eb90,
     type: 3}
   m_PrefabInstance: {fileID: 5392988646878618530}
   m_PrefabAsset: {fileID: 0}
