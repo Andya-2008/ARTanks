@@ -6,6 +6,8 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.SceneManagement;
+using System;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class ImageTracking : NetworkBehaviour
@@ -16,6 +18,7 @@ public class ImageTracking : NetworkBehaviour
     [SerializeField] private List<GameObject> placeablePrefabs = new List<GameObject>();
     [SerializeField] private XRReferenceImageLibrary refLib;
 
+    private ARAnchorManager m_AnchorManager;
     private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
     //private List<ARTrackedImage> newImages = new List<ARTrackedImage>();
     private ARTrackedImageManager trackedImageManager;
@@ -35,6 +38,7 @@ public class ImageTracking : NetworkBehaviour
     public bool canSpawnTank;
     private void Awake()
     {
+        m_AnchorManager = this.GetComponent<ARAnchorManager>();
         trackedImageManager = FindFirstObjectByType<ARTrackedImageManager>();
         trackedImageManager.referenceLibrary = refLib;
         trackedImageManager.enabled = true;
@@ -202,7 +206,19 @@ public class ImageTracking : NetworkBehaviour
             {
                 Quaternion worldRotation = new Quaternion(trackedImage.transform.localRotation.x, trackedImage.transform.localRotation.y, trackedImage.transform.localRotation.z, trackedImage.transform.localRotation.w);
                 //worldRotation *= Quaternion.Euler(90, 0, 0);
-                prefab = Instantiate(pf, trackedImage.transform.position, worldRotation);
+                
+                Pose pose = new Pose(trackedImage.transform.position, trackedImage.transform.rotation);
+                Task<ARAnchor> myTask = SetAnchor(pose); // async Task method
+                yield return new WaitUntil(() => myTask.IsCompleted);
+                ARAnchor anchor = myTask.Result;
+                if (anchor != null)
+                {
+                    prefab = Instantiate(pf, anchor.transform);
+                }
+                else
+                {
+                    prefab = Instantiate(pf, trackedImage.transform.position, worldRotation);
+                }
                 battleField = prefab;
 
                 prefab.name = pf.name;
@@ -238,15 +254,39 @@ public class ImageTracking : NetworkBehaviour
 
     }
 
-/*
-[ServerRpc(RequireOwnership = false)]
-public void SetLocalPosServerRPC(Vector3 p_LocalPos)
-{
-    localpos = p_LocalPos;
-}*/
+    /*
+    [ServerRpc(RequireOwnership = false)]
+    public void SetLocalPosServerRPC(Vector3 p_LocalPos)
+    {
+        localpos = p_LocalPos;
+    }*/
 
+    private async Task<ARAnchor> SetAnchor(Pose pose)
+    {
+        try
+        {
 
-[ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
+            var result = await m_AnchorManager.TryAddAnchorAsync(pose);
+
+            if (result.status.IsSuccess())
+            {
+                ARAnchor newAnchor = result.value;
+                return newAnchor;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+        catch (Exception ex)
+        {
+            //DebugTxt("SetAnchor:" + ex.Message);
+            return null;
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
     public void SpawnPlayerServerRpc(string name, Vector3 localpos, int prefabId, ServerRpcParams serverRpcParams = default)
     {
         if (!IsServer) { return; }
