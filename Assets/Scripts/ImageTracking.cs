@@ -36,6 +36,7 @@ public class ImageTracking : NetworkBehaviour
     ARTrackedImage trackImage;
     public GameObject battleField;
     public bool canSpawnTank;
+    public bool tankApproved;
     private void Awake()
     {
         m_AnchorManager = this.GetComponent<ARAnchorManager>();
@@ -128,7 +129,7 @@ public class ImageTracking : NetworkBehaviour
             {
                 updateObject(trackedImage, "Battlefield");
             }
-            else if (!hasSpawnedTank && trackedImage.trackingState == TrackingState.Tracking && TankApproval())
+            else if (!hasSpawnedTank && trackedImage.trackingState == TrackingState.Tracking && tankApproved)
             {
                 ARTrackedImagePlus artip = new ARTrackedImagePlus();
                 artip.trackedImage = trackedImage;
@@ -232,7 +233,7 @@ public class ImageTracking : NetworkBehaviour
         if (pf.tag == "Tank" || pf.tag == "MyTank")
         {
 
-            if (!hasSpawnedTank && TankApproval()) {
+            if (!hasSpawnedTank && tankApproved) {
                 hasSpawnedTank = true;
                 Vector3 localpos = worldToLocal(trackedImage.transform.position, battleField.transform);
                 SpawnPlayerServerRpc(name, localpos, prefabId);
@@ -291,7 +292,7 @@ public class ImageTracking : NetworkBehaviour
     {
         if (!IsServer) { return; }
         if (battleField == null) { return; }
-        if(!TankApproval()) { return; }
+        if(!tankApproved) { return; }
         var clientId = serverRpcParams.Receive.SenderClientId;
         GameObject pf = placeablePrefabs[prefabId];
         Vector3 newPos = new Vector3(localpos.x, 0, localpos.z);
@@ -308,20 +309,22 @@ public class ImageTracking : NetworkBehaviour
         netObj.SpawnWithOwnership(clientId, false);
 
     }
-    [Rpc(SendTo.Everyone)]
+    [Rpc(SendTo.Server)]
     public void SendBattleFieldStatRpc()
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().battlefieldReadyNum += 1;
         Debug.Log("Added readynum. Connectedclients.count: " + NetworkManager.Singleton.ConnectedClientsList.Count);
-    }
-    public bool TankApproval()
-    {
+
         Debug.Log("Approving tanks: " + GameObject.Find("GameManager").GetComponent<GameManager>().battlefieldReadyNum + " : " + NetworkManager.Singleton.ConnectedClientsList.Count);
         if (GameObject.Find("GameManager").GetComponent<GameManager>().battlefieldReadyNum == NetworkManager.Singleton.ConnectedClientsList.Count)
         {
-            return true;
+            TankApprovalRpc();
         }
-        else { return false; }
+    }
+    [Rpc(SendTo.Everyone)]
+    public void TankApprovalRpc()
+    {
+        tankApproved = true;
     }
     private Vector3 worldToLocal(Vector3 worldpos, Transform battlefield) {
         return battleField.transform.InverseTransformPoint(worldpos);
