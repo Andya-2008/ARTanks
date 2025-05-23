@@ -140,7 +140,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 2.19
+  bundleVersion: 2.23
   preloadedAssets:
   - {fileID: -6495428931073193065, guid: 1904c0618eeb42e41a55a547f3c4b433, type: 2}
   - {fileID: -8955238868087039471, guid: 7e75fe868831ad249b88d2425534941a, type: 2}
@@ -188,7 +188,7 @@ PlayerSettings:
   ForceInternetPermission: 0
   ForceSDCardPermission: 0
   CreateWallpaper: 0
-  androidSplitApplicationBinary: 1
+  androidSplitApplicationBinary: 0
   keepLoadedShadersAlive: 0
   StripUnusedMeshComponents: 0
   strictShaderVariantMatching: 0

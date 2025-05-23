@@ -321,9 +321,11 @@ public class ImageTracking : NetworkBehaviour
             TankApprovalRpc();
         }
     }
+
     [Rpc(SendTo.Everyone)]
     public void TankApprovalRpc()
     {
+        Debug.Log("Tank approved");
         tankApproved = true;
     }
     private Vector3 worldToLocal(Vector3 worldpos, Transform battlefield) {
