@@ -8,6 +8,7 @@ using UnityEngine.XR.ARSubsystems;
 using UnityEngine.SceneManagement;
 using System;
 using System.Threading.Tasks;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class ImageTracking : NetworkBehaviour
@@ -19,6 +20,7 @@ public class ImageTracking : NetworkBehaviour
     [SerializeField] private XRReferenceImageLibrary refLib;
 
     private ARAnchorManager m_AnchorManager;
+    private ARAnchor anchor;
     private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
     //private List<ARTrackedImage> newImages = new List<ARTrackedImage>();
     private ARTrackedImageManager trackedImageManager;
@@ -155,18 +157,30 @@ public class ImageTracking : NetworkBehaviour
         }
     }
 
-    private void updateObject(ARTrackedImage trackedImage, string updatedImg) {
+    private void updateObject(ARTrackedImage trackedImage, string updatedImg)
+    {
         if (updatedImg == "Battlefield")
         {
             if (GameObject.FindGameObjectWithTag("Battlefield"))
             {
                 battleField = GameObject.FindGameObjectWithTag("Battlefield");
-                battleField.transform.position = trackedImage.transform.position;
-                battleField.transform.rotation = trackedImage.transform.rotation;
+                if (anchor == null)
+                {
+                    battleField.transform.position = trackedImage.transform.position;
+                    battleField.transform.rotation = trackedImage.transform.rotation;
+                }
+                else
+                {
+                    Vector3 localpos = worldToLocal(trackedImage.transform.position, anchor.transform);
+                    battleField.transform.position = localpos;
 
+                    Quaternion localRotation = Quaternion.Inverse(anchor.transform.rotation) * trackedImage.transform.rotation;
+
+                    battleField.transform.rotation = localRotation;
+                }
             }
         }
-        }
+    }
     IEnumerator CreateObject(ARTrackedImagePlus trackedImage)
     {
         string name = "";
@@ -211,7 +225,7 @@ public class ImageTracking : NetworkBehaviour
                 Pose pose = new Pose(trackedImage.transform.position, trackedImage.transform.rotation);
                 Task<ARAnchor> myTask = SetAnchor(pose); // async Task method
                 yield return new WaitUntil(() => myTask.IsCompleted);
-                ARAnchor anchor = myTask.Result;
+                anchor = myTask.Result;
                 if (anchor != null)
                 {
                     prefab = Instantiate(pf, anchor.transform);
