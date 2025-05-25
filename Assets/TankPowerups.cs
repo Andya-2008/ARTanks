@@ -108,44 +108,44 @@ public class TankPowerups : NetworkBehaviour
         {
             if (activate)
             {
-                tankShooting.m_ReloadTime -= .75f;
+                tankShooting.m_ReloadTime *= .5f;
             }
             else
             {
-                tankShooting.m_ReloadTime += .75f;
+                //tankShooting.m_ReloadTime += .75f;
             }
         }
         if (poweruptype.Contains("BulletRange"))
         {
             if (activate)
             {
-                tankShooting.m_BulletRange += 1.5f;
+                tankShooting.m_BulletRange *= 1.25f;
             }
             else
             {
-                tankShooting.m_BulletRange -= 1.5f;
+                //tankShooting.m_BulletRange -= 1.5f;
             }
         }
         else if (poweruptype.Contains("BulletSpeed"))
         {
             if (activate)
             {
-                tankShooting.m_BulletSpeed += .005f;
+                tankShooting.m_BulletSpeed *= 1.5f;
             }
             else
             {
-                tankShooting.m_BulletSpeed -= .005f;
+                //tankShooting.m_BulletSpeed -= .005f;
             }
         }
         else if (poweruptype.Contains("BulletPower"))
         {
             if (activate)
             {
-                tankShooting.m_BulletPower += 50;
+                tankShooting.m_BulletPower *= 1.25f;
             }
             else
             {
-                tankShooting.m_BulletPower -= 50;
+                //tankShooting.m_BulletPower -= 50;
             }
         }
         else if (poweruptype.Contains("TankSpeed"))
