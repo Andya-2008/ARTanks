@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Canvas startCanvas;
 
+    [SerializeField] Canvas deathCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +80,7 @@ Debug.Log("Unity Standalone Win");
 
     public void GameOverInitiate(int winner)
     {
+        deathCanvas.enabled = false;
         GameOverCanvas.enabled = true;
         if (winner == 1)
         {
@@ -137,6 +140,10 @@ Debug.Log("Unity Standalone Win");
                     Debug.Log("Winner: " + aliveTanks[0].m_PlayerNumber.ToString());
                     GameOverInitiate(aliveTanks[0].m_PlayerNumber);
                 }
+                else
+                {
+                    deathCanvas.enabled = true;
+                }
             }
             else
             {
@@ -152,5 +159,10 @@ Debug.Log("Unity Standalone Win");
     {
         tanks.Add(Tank);
         aliveTanks.Add(Tank);
+    }
+
+    public void SpectateAfterDeath()
+    {
+        deathCanvas.enabled = false;
     }
 }
