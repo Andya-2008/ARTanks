@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
-
+using System.IO;
 public class AutoIncrementBuildOnBuild : IPreprocessBuildWithReport
 {
     private const string BuildNumberKey = "BuildNumber";
@@ -15,12 +15,16 @@ public class AutoIncrementBuildOnBuild : IPreprocessBuildWithReport
         int buildNumber = EditorPrefs.GetInt(BuildNumberKey, 0);
         buildNumber++;
         EditorPrefs.SetInt(BuildNumberKey, buildNumber);
-        string[] versionAry = Application.version.Split(".");
-        string version = versionAry[0];
-        string buildVersion = $"{version}.{buildNumber}";
+        //string[] versionAry = Application.version.Split(".");
+        //string version = versionAry[0];
+        //string buildVersion = $"{version}.{buildNumber}";
 
-        PlayerSettings.bundleVersion = buildVersion;
-        Debug.Log($"Auto-incremented build version to: {buildVersion}");
+        //PlayerSettings.bundleVersion = buildVersion;
+        PlayerSettings.Android.bundleVersionCode = buildNumber;
+        PlayerSettings.iOS.buildNumber = buildNumber.ToString();
+        string path = Path.Combine(Application.persistentDataPath, "build_number.txt");
+        File.WriteAllText(path, buildNumber.ToString());
+        Debug.Log($"Auto-incremented build version to: {buildNumber}");
     }
 
     [MenuItem("Build/Reset Auto Build Number")]

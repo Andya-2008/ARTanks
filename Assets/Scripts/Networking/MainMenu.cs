@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEditor;
+using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject clientMan;
 
-    
+    private int buildNumber;
     private float lastCheck = 0;
 
     private List<FriendInfo> friendlist = null;
@@ -31,11 +32,24 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
 	{
+        string path = Path.Combine(Application.persistentDataPath, "build_number.txt");
+
+        if (File.Exists(path))
+        {
+            string buildNumberStr = File.ReadAllText(path);
+            buildNumber = int.Parse(buildNumberStr);
+            Debug.Log($"Build number: {buildNumber}");
+        }
+        else
+        {
+            Debug.LogWarning("Build number file not found!");
+            buildNumber = 0;
+        }
         //txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
         txtUsername.text = GameObject.Find("ApplicationController").GetComponent<ApplicationController>().currentUser.Username;
         StartCoroutine(UpdateLobbyCoroutine(10.0f));
         Debug.Log(Application.version);
-        txtVersion.text = "Version:" + Application.version;
+        txtVersion.text = "Build:" + buildNumber.ToString();
     }
 	public async void StartHost()
     {
