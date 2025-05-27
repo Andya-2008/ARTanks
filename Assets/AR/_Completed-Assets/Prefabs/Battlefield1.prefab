@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7893115199635453452}
   - component: {fileID: 6265506031258210714}
   - component: {fileID: 3588968487033053809}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 8397492111838475557}
   - component: {fileID: 2281523157556362020}
   - component: {fileID: 8313545836877158775}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BoundaryFloor
   m_TagString: BoundaryFloor
   m_Icon: {fileID: 0}
