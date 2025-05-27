@@ -10,6 +10,7 @@ using System;
 using System.Threading.Tasks;
 using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
+
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class ImageTracking : NetworkBehaviour
 
@@ -86,6 +87,8 @@ public class ImageTracking : NetworkBehaviour
             artip.transform.rotation = Quaternion.identity;
             StartCoroutine(CreateObject(artip));
         }
+
+
 
         if (Input.GetKeyDown(KeyCode.U))
         {
