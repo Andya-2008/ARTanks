@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Inspector
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 503, y: 271}
   m_MaxSize: {x: 16192, y: 12117}
   vertical: 0
-  controlID: 7666
+  controlID: 127
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -121,14 +121,14 @@ MonoBehaviour:
     y: 556
     width: 1466
     height: 383
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
   - {fileID: 17}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 271}
   m_MaxSize: {x: 8096, y: 12117}
   vertical: 1
-  controlID: 7667
+  controlID: 81
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 7658
+  controlID: 82
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 629
+    y: 575
     width: 1465
     height: 362
   m_SerializedDataModeController:
@@ -327,7 +327,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/AR/_Completed-Assets/Prefabs
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -337,16 +337,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/AR/_Completed-Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\andre\source\repos\ARTanks2
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: c8180100
-    m_LastClickedID: 71880
-    m_ExpandedIDs: 000000008e1a0100901a0100921a0100941a0100961a0100981a01009a1a01009c1a01009e1a0100a01a0100a21a0100a41a0100a61a0100a81a0100aa1a0100ac1a0100ae1a0100
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 260f0100
+    m_LastClickedID: 69414
+    m_ExpandedIDs: 00000000000f0100020f0100040f0100060f0100080f01000a0f01000c0f01000e0f0100100f0100120f0100140f0100160f0100180f01001a0f01001c0f01001e0f0100200f0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -363,7 +363,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 5}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -375,7 +375,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008e1a0100901a0100921a0100941a0100961a0100981a01009a1a01009c1a01009e1a0100a01a0100a21a0100a41a0100a61a0100a81a0100aa1a0100ac1a0100ae1a0100
+    m_ExpandedIDs: 00000000000f0100020f0100040f0100060f0100080f01000a0f01000c0f01000e0f0100100f0100120f0100140f0100160f0100180f01001a0f01001c0f01001e0f0100200f0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -429,7 +429,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 178.5}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
@@ -525,7 +525,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 380dfcff5e0efcffb21dfcff2a1ffcff0428fcff5e28fcff8e28fcffd228fcff780cfdfff00dfdffca16fdff2417fdff5417fdff9817fdff3426fdff9e27fdff7830fdffd230fdff0231fdff4631fdff7443fdffde44fdffb84dfdff124efdff424efdff864efdff186ffdff8270fdffa479fdfffe79fdff2e7afdff727afdffccc4fdff36c6fdff58cffdffb2cffdffe2cffdff26d0fdffc6e6fdffecf6fdff56f8fdff7801feffd201feff0202feff4602feff1024feffd624feffbe33feff8a34feff5035feff42fbffff409701006c9701008e9701002e9801000a990100129901003a990100a41f0200402002000a300200
+      m_ExpandedIDs: 4adcffff6ef7ffffc6faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1201,6 +1201,20 @@ MonoBehaviour:
       layout: 4
       size: {x: 0, y: 0}
       sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      displayed: 0
+      id: unity-spline-inspector
+      index: 17
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":24.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 24, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
     m_ContainerData:
     - containerId: overlay-toolbar__top
       scrollOffset: 0
@@ -1280,9 +1294,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.19452651, y: 0.2957615, z: -0.061642487, w: -0.9332233}
   m_Size:
-    m_Target: 253.18076
+    m_Target: 276.4797
     speed: 2
-    m_Value: 253.18076
+    m_Value: 276.4797
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1437,7 +1451,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 575
+    y: 629
     width: 1465
     height: 362
   m_SerializedDataModeController:
