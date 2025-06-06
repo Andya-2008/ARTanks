@@ -10,6 +10,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEditor;
 using System.IO;
+using System.Linq;
 
 public class MainMenu : MonoBehaviour
 {
@@ -93,8 +94,19 @@ public class MainMenu : MonoBehaviour
 
 	private void Update()
 	{
-
+        
 	}
+
+    public void checkJoinCode() {
+        if (joinCodeField.text == "")
+        {
+            joinCodeDropDown.gameObject.SetActive(true);
+        }
+        else {
+            joinCodeDropDown.gameObject.SetActive(false);
+        }
+    }
+
 
     public void LogOut() {
         PlayerPrefs.DeleteKey("username");
@@ -141,6 +153,34 @@ public class MainMenu : MonoBehaviour
         QueryLobbiesOptions options = new QueryLobbiesOptions();
         options.Count = 25;
         Debug.Log("friends:" + friends.Count);
+
+        // Order by newest lobbies first
+        options.Order = new List<QueryOrder>()
+        {
+            new QueryOrder(
+                asc: false,
+                field: QueryOrder.FieldOptions.Name)
+        };
+
+        Debug.Log("Query Lobbies");
+        QueryResponse lobbies = await LobbyService.Instance.QueryLobbiesAsync(options);
+        Debug.Log("Got Lobbies:" + lobbies.Results.Count);
+
+        joinCodeDropDown.options.Clear();
+        List<string> rooms = new List<string>();
+        foreach (var l in lobbies.Results)
+        {
+            Debug.Log(l.Name + ":" + l.Data["relayJoinCode"].Value);
+            if (l.AvailableSlots > 0 && friends.Any(f => f.Username==l.Name))
+            {
+                rooms.Add(l.Name);
+            }
+        }
+        joinCodeDropDown.AddOptions(rooms);
+
+
+
+        /*
         foreach (FriendInfo fi in friends)
         {
 
@@ -179,6 +219,7 @@ public class MainMenu : MonoBehaviour
             joinCodeDropDown.AddOptions(rooms);
             System.Threading.Thread.Sleep(1000);
         }
+        */
 
     }
 
