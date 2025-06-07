@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.Netcode;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     [SerializeField] GameObject Player1UI;
     [SerializeField] GameObject Player2UI;
@@ -142,6 +143,7 @@ Debug.Log("Unity Standalone Win");
                 }
                 else
                 {
+                    if(tank.GetComponent<NetworkObject>().IsOwner)
                     deathCanvas.enabled = true;
                 }
             }
