@@ -4,7 +4,12 @@ using UnityEngine.UI;
 
 public class PowerupSliderController : MonoBehaviour
 {
-    public bool bulletBased;
+    //public bool bulletBased;
+    public int powerUpType;
+    // 0 = bullet based
+    // 1 = time based
+    // 2 = permanent multiplier
+    // 3 = other
 
     public int bulletsFired;
 
@@ -19,6 +24,9 @@ public class PowerupSliderController : MonoBehaviour
     public float startPowerupTime;
 
     public bool endPowerup;
+
+    public int multiplier;
+    public int maxMultiplier = 5;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,17 +44,20 @@ public class PowerupSliderController : MonoBehaviour
             PowerupParent.GetComponent<UIPowerup>().thisPowerupActive = false;
             powerupCoverUp.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 211);
             bulletsFired = 0;
-            bulletBased = false;
+            // bulletBased = false;
             powerup = "";
             gameObject.SetActive(false);
         }
-        if(bulletBased)
+        if (powerUpType == 0)
         {
             powerupCoverUp.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 211 - 211 * bulletsFired / totalBulletsOrTime);
         }
-        if (!bulletBased)
+        else if (powerUpType == 1)
         {
             powerupCoverUp.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 211 - 211 * (Time.time - startPowerupTime) / totalBulletsOrTime);
+        }
+        else if (powerUpType == 2) {
+            powerupCoverUp.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 211 * multiplier / maxMultiplier);
         }
     }
 

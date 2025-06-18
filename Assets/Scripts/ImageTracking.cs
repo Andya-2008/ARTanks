@@ -102,6 +102,122 @@ public class ImageTracking : NetworkBehaviour
             StartCoroutine(CreateObject(artip));
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            string name = "BulletReload_Powerup";
+            GameObject pf= null;
+            GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(name);
+            foreach (GameObject go in placeablePrefabs)
+            {
+
+                if (go.name == name)
+                {
+                    pf = go;
+                }
+            }
+            spawnedPrefabs.Add(name, pf);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            string name = "BulletPower_Powerup";
+            GameObject pf = null;
+            GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(name);
+            foreach (GameObject go in placeablePrefabs)
+            {
+
+                if (go.name == name)
+                {
+                    pf = go;
+                }
+            }
+            spawnedPrefabs.Add(name, pf);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            string name = "BulletRange_Powerup";
+            GameObject pf = null;
+            GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(name);
+            foreach (GameObject go in placeablePrefabs)
+            {
+
+                if (go.name == name)
+                {
+                    pf = go;
+                }
+            }
+            spawnedPrefabs.Add(name, pf);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            string name = "BulletSpeed_Powerup";
+            GameObject pf = null;
+            GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(name);
+            foreach (GameObject go in placeablePrefabs)
+            {
+
+                if (go.name == name)
+                {
+                    pf = go;
+                }
+            }
+            spawnedPrefabs.Add(name, pf);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            string name = "ExplosiveBullet_Powerup";
+            GameObject pf = null;
+            GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(name);
+            foreach (GameObject go in placeablePrefabs)
+            {
+
+                if (go.name == name)
+                {
+                    pf = go;
+                }
+            }
+            spawnedPrefabs.Add(name, pf);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            string name = "HomingMissile_Powerup";
+            GameObject pf = null;
+            GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(name);
+            foreach (GameObject go in placeablePrefabs)
+            {
+
+                if (go.name == name)
+                {
+                    pf = go;
+                }
+            }
+            spawnedPrefabs.Add(name, pf);
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            string name = "Health_Powerup";
+            GameObject pf = null;
+            GameObject.Find("PowerupManager").GetComponent<PowerupManager>().AddPowerup(name);
+            foreach (GameObject go in placeablePrefabs)
+            {
+
+                if (go.name == name)
+                {
+                    pf = go;
+                }
+            }
+            spawnedPrefabs.Add(name, pf);
+
+        }
 
 
 

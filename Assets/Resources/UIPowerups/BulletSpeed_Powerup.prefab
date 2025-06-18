@@ -99,7 +99,7 @@ MonoBehaviour:
   numOfBulletsOrTime: 8
   PowerupSlider: {fileID: 6912582832094223911}
   thisPowerupActive: 0
-  bulletBased: 1
+  powerUpType: 2
   noTiming: 0
 --- !u!1 &4634753144073536189
 GameObject:

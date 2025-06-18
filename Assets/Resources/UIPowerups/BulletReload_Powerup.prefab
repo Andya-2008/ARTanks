@@ -99,7 +99,7 @@ MonoBehaviour:
   numOfBulletsOrTime: 4
   PowerupSlider: {fileID: 6912582832094223911}
   thisPowerupActive: 0
-  bulletBased: 1
+  powerUpType: 2
   noTiming: 0
 --- !u!1 &4634753144073536189
 GameObject:
@@ -549,6 +549,11 @@ PrefabInstance:
       propertyPath: PowerupParent
       value: 
       objectReference: {fileID: 2797972962527746261}
+    - target: {fileID: 1343621032691153755, guid: 0bbdda5ab3cd0374d98568d479e82a25,
+        type: 3}
+      propertyPath: maxMultiplier
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4131116367812504614, guid: 0bbdda5ab3cd0374d98568d479e82a25,
         type: 3}
       propertyPath: m_Name

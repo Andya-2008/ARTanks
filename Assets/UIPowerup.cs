@@ -16,7 +16,11 @@ public class UIPowerup : MonoBehaviour
     [SerializeField] public GameObject PowerupSlider;
     [SerializeField] public bool thisPowerupActive = false;
 
-    [SerializeField] public bool bulletBased;
+    //[SerializeField] public bool bulletBased;
+    [SerializeField] public int powerUpType;
+    // 0 = bullet based
+    // 1 = time based
+    // 2 = permanent multiplier
 
     [SerializeField] bool noTiming = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,25 +48,38 @@ public class UIPowerup : MonoBehaviour
             {
                 if (GameObject.FindGameObjectWithTag("MyTank").GetComponent<CoinWallet>().TotalCoins.Value >= cost)
                 {
-                    
+                    // If it's multiplier type and already maxed out, then you can't activate any more.
+                    if (powerUpType==2 && PowerupSlider.GetComponent<PowerupSliderController>().multiplier >= PowerupSlider.GetComponent<PowerupSliderController>().maxMultiplier) {
+                        return;
+                    }
                     Debug.Log("Pressed powerup button");
                     GameObject.FindGameObjectWithTag("MyTank").GetComponent<CoinWallet>().UpdateCoinsServerRPC(-1 * cost);
-                    GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name, powerupDisplayName, numOfBulletsOrTime, bulletBased);
+                    GameObject.Find("PowerupManager").GetComponent<PowerupManager>().SpawnPowerup(name, powerupDisplayName, numOfBulletsOrTime, powerUpType);
                     Debug.Log("2");
 
                     if (!noTiming)
                     {
                         thisPowerupActive = true;
                         PowerupSlider.SetActive(true);
-
                         PowerupSlider.GetComponent<PowerupSliderController>().powerup = name;
-                        PowerupSlider.GetComponent<PowerupSliderController>().bulletBased = bulletBased;
+                        PowerupSlider.GetComponent<PowerupSliderController>().powerUpType = powerUpType;
                         PowerupSlider.GetComponent<PowerupSliderController>().totalBulletsOrTime = numOfBulletsOrTime;
                         PowerupSlider.GetComponent<PowerupSliderController>().bulletsFired = 0;
                         PowerupSlider.GetComponent<PowerupSliderController>().powerupCoverUp.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 211);
-                        if (!bulletBased)
+                        if (powerUpType == 0) {
+                            
+                        }
+                        // Timer based
+                        else if (powerUpType == 1)
                         {
+                      
                             PowerupSlider.GetComponent<PowerupSliderController>().startPowerupTime = Time.time;
+                        }
+                        // Multiplier Based
+                        else if (powerUpType == 2)
+                        {
+                            thisPowerupActive = false;
+                            PowerupSlider.GetComponent<PowerupSliderController>().multiplier += 1;
                         }
                     }
                 }

@@ -25,7 +25,7 @@ public class PowerupManager : MonoBehaviour
         
     }
 
-    public void SpawnPowerup(string powerup, string powerupDisplayName, int numOfBullets, bool bulletbased)
+    public void SpawnPowerup(string powerup, string powerupDisplayName, int numOfBullets, int powerUpType)
     {
         GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankPowerups>().ActivateOrDeactivateTankPowerup(powerup, true);
 
