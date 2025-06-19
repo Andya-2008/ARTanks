@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ee507445a554340b0821a41d0df4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 20
+  cost: 30
   initCoverupHeight: 200
   initCoverupWidth: 133.3333
   myCoverup: {fileID: 3981028048589849751}
@@ -101,6 +101,7 @@ MonoBehaviour:
   thisPowerupActive: 0
   powerUpType: 2
   noTiming: 0
+  dedupTime: 0.25
 --- !u!1 &4634753144073536189
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,6 +550,11 @@ PrefabInstance:
       propertyPath: PowerupParent
       value: 
       objectReference: {fileID: 2797972962527746261}
+    - target: {fileID: 1343621032691153755, guid: 0bbdda5ab3cd0374d98568d479e82a25,
+        type: 3}
+      propertyPath: maxMultiplier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4131116367812504614, guid: 0bbdda5ab3cd0374d98568d479e82a25,
         type: 3}
       propertyPath: m_Name
