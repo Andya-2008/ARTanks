@@ -169,10 +169,17 @@ PlayerSettings:
   buildNumber:
     Standalone: 0
     VisionOS: 0
+<<<<<<< HEAD
     iPhone: 36
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 36
+=======
+    iPhone: 81
+    tvOS: 0
+  overrideDefaultApplicationIdentifier: 1
+  AndroidBundleVersionCode: 81
+>>>>>>> 2e7afabf327eb9deb5d6a76ef905813ba316c35d
   AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
