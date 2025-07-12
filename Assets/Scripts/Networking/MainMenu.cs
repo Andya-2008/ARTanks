@@ -21,8 +21,15 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TMP_Text txtVersion;
     [SerializeField] private TMP_Text txtRating;
 
+    [SerializeField] private TMP_Text txtLeaderboardError;
+    [SerializeField] private GameObject leaderboardItem;
+    [SerializeField] private Transform contentContainer;
+
+    public List<PlayerLeaderboardEntry> leaderboardList = null;
+
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject friendsPanel;
+    [SerializeField] private GameObject leaderboardPanel;
 
     [SerializeField] private GameObject clientMan;
 
@@ -50,7 +57,7 @@ public class MainMenu : MonoBehaviour
         }
         //txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
         getRating();
-        GetLeaderboard();
+        
         txtUsername.text = GameObject.Find("ApplicationController").GetComponent<ApplicationController>().currentUser.Username;
         StartCoroutine(UpdateLobbyCoroutine(10.0f));
         Debug.Log(Application.version);
@@ -236,9 +243,22 @@ public class MainMenu : MonoBehaviour
         mainPanel.SetActive(false);
     }
 
+    public void GoToLeaderboard()
+    {
+        leaderboardPanel.SetActive(true);
+        mainPanel.SetActive(false);
+        GetLeaderboard();
+    }
+
+
     public void ManageGame()
     {
         friendsPanel.SetActive(false);
+        mainPanel.SetActive(true);
+    }
+    
+    public void ManageGameFromLeaderboard() {
+        leaderboardPanel.SetActive(false);
         mainPanel.SetActive(true);
     }
 
@@ -315,6 +335,8 @@ public class MainMenu : MonoBehaviour
         PlayFabClientAPI.GetLeaderboard(request,
             result =>
             {
+                leaderboardList = result.Leaderboard;
+                DisplayLeaderboard(leaderboardList);
                 foreach (var entry in result.Leaderboard)
                 {
                     Debug.Log($"{entry.Position + 1}. {entry.DisplayName ?? entry.PlayFabId} - {entry.StatValue}");
@@ -322,6 +344,33 @@ public class MainMenu : MonoBehaviour
             },
             error => UnityEngine.Debug.LogError(error.GenerateErrorReport()));
     }
+
+
+    void DisplayLeaderboard(List<PlayerLeaderboardEntry> lbItems)
+    {
+        ClearLeaderboardDisplay();
+        foreach (PlayerLeaderboardEntry plb in lbItems)
+        {
+            Debug.Log("LeaderboardItem:" + ((int)(plb.Position+1)).ToString() +":"+ plb.DisplayName + ":" + plb.StatValue);
+            GameObject goLB = Instantiate(leaderboardItem, contentContainer);
+            goLB.transform.Find("NameText").GetComponent<TMP_Text>().text = ((int)(plb.Position + 1)).ToString() + ". " + plb.DisplayName;
+            goLB.transform.Find("ScoreText").GetComponent<TMP_Text>().text = plb.StatValue.ToString();
+ 
+        }
+
+    }
+
+    void ClearLeaderboardDisplay()
+    {
+
+        foreach (Transform child in contentContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+    }
+
+
 
 
 }
