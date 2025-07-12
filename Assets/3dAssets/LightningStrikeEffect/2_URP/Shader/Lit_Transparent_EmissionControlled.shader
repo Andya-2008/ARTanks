@@ -383,7 +383,7 @@ Shader "LightningStrikeEffect/URP/Lit_Transparent_EmissionControlled"
 					Varyings ShadowPassVertex(Attributes input)
 					{
 						Varyings output;
-						UNITY_SETUP_INSTANCE_ID(input);
+						//UNITY_SETUP_INSTANCE_ID(input);
 
 						output.uv = input.texcoord;
 						output.positionCS = GetShadowPositionHClip(input);

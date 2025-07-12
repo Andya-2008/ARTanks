@@ -13,6 +13,8 @@ public class GameManager : NetworkBehaviour
     [SerializeField] Canvas GameOverCanvas;
     [SerializeField] public List<TankMovement> tanks = new List<TankMovement>();
     [SerializeField] public List<TankMovement> aliveTanks = new List<TankMovement>();
+    [SerializeField] public Dictionary<ulong, int> playerRatings = new Dictionary<ulong, int>();
+
 
     [SerializeField] GameObject ARCamera;
     [SerializeField] GameObject MainCamera;
@@ -79,8 +81,13 @@ Debug.Log("Unity Standalone Win");
         
     }
 
-    public void GameOverInitiate(int winner)
+    public void GameOverInitiate(TankMovement aliveTank)
     {
+        if(aliveTank.GetComponent<NetworkObject>().IsOwner)
+		{
+            aliveTank.GetComponent<RatingScript>().recordStats(true);
+        }
+        int winner = aliveTank.m_PlayerNumber;
         deathCanvas.enabled = false;
         GameOverCanvas.enabled = true;
         if (winner == 1)
@@ -139,7 +146,7 @@ Debug.Log("Unity Standalone Win");
                 {
                     Debug.Log("4");
                     Debug.Log("Winner: " + aliveTanks[0].m_PlayerNumber.ToString());
-                    GameOverInitiate(aliveTanks[0].m_PlayerNumber);
+                    GameOverInitiate(aliveTanks[0]);
                 }
                 else
                 {
@@ -161,6 +168,10 @@ Debug.Log("Unity Standalone Win");
     {
         tanks.Add(Tank);
         aliveTanks.Add(Tank);
+    }
+
+    public void AddPlayerRating(ulong networkId, int myRating) {
+        playerRatings.Add(networkId, myRating);
     }
 
     public void SpectateAfterDeath()

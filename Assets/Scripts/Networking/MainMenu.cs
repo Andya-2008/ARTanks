@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TMP_Text txtUsername;
     [SerializeField] private TMP_Text txtError;
     [SerializeField] private TMP_Text txtVersion;
+    [SerializeField] private TMP_Text txtRating;
 
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject friendsPanel;
@@ -27,6 +28,7 @@ public class MainMenu : MonoBehaviour
 
     private int buildNumber;
     private float lastCheck = 0;
+    private int rating = 0;
 
     private List<FriendInfo> friendlist = null;
 
@@ -47,6 +49,8 @@ public class MainMenu : MonoBehaviour
             buildNumber = 0;
         }
         //txtUsername.text = Crypto.DecryptString(PlayerPrefs.GetString("username"));
+        getRating();
+        GetLeaderboard();
         txtUsername.text = GameObject.Find("ApplicationController").GetComponent<ApplicationController>().currentUser.Username;
         StartCoroutine(UpdateLobbyCoroutine(10.0f));
         Debug.Log(Application.version);
@@ -249,6 +253,75 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    private void getRating() {
+        PlayFabClientAPI.GetPlayerStatistics(new GetPlayerStatisticsRequest(),
+        result => {
+            foreach (var stat in result.Statistics)
+            {
+                if (stat.StatisticName == "Rating")
+                {
+                    Debug.Log("High score: " + stat.Value);
+                    rating = stat.Value;
+                }
+
+            }
+
+
+            if (rating > 0)
+            {
+                txtRating.text = "Rating: " + rating;
+            }
+            else {
+                rating = 400;
+                setRating("Rating", rating);
+                txtRating.text = "Rating: " + rating;
+            
+            }
+            PlayerPrefs.SetInt("Rating", rating);
+            PlayerPrefs.Save();
+        },
+        error => Debug.LogError(error.GenerateErrorReport()));
+
+    }
+
+    private void setRating(string statName, int newRating) {
+        var request = new UpdatePlayerStatisticsRequest
+        {
+            Statistics = new List<StatisticUpdate>
+        {
+            new StatisticUpdate
+            {
+                StatisticName = statName,
+                Value = newRating
+            }
+        }
+        };
+
+        PlayFabClientAPI.UpdatePlayerStatistics(request,
+            result => UnityEngine.Debug.Log("Stat updated"),
+            error => UnityEngine.Debug.LogError(error.GenerateErrorReport()));
+
+    }
+
+    public void GetLeaderboard()
+    {
+        var request = new GetLeaderboardRequest
+        {
+            StatisticName = "Rating",
+            StartPosition = 0,
+            MaxResultsCount = 50
+        };
+
+        PlayFabClientAPI.GetLeaderboard(request,
+            result =>
+            {
+                foreach (var entry in result.Leaderboard)
+                {
+                    Debug.Log($"{entry.Position + 1}. {entry.DisplayName ?? entry.PlayFabId} - {entry.StatValue}");
+                }
+            },
+            error => UnityEngine.Debug.LogError(error.GenerateErrorReport()));
+    }
 
 
 }

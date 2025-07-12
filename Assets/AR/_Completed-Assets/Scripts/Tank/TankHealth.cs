@@ -106,7 +106,9 @@ namespace Complete
 
             // Play the tank explosion sound effect.
             m_ExplosionAudio.Play();
-
+            if (IsOwner) {
+                gameObject.GetComponent<RatingScript>().recordStats(false);
+            }
             // Turn the tank off.
             gameObject.SetActive (false);
         }

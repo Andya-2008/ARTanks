@@ -10106,6 +10106,7 @@ GameObject:
   - component: {fileID: 9016122015150866745}
   - component: {fileID: 8190325863699738948}
   - component: {fileID: -4164102354735970057}
+  - component: {fileID: 3302090974896257706}
   m_Layer: 3
   m_Name: Firestorm
   m_TagString: Tank
@@ -10686,6 +10687,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser: {fileID: 5233283623134979704}
+--- !u!114 &3302090974896257706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407763058290175562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ea442557f151a47bdf7f930764045f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rating:
+    m_InternalValue: 0
+  lstRatings: 
 --- !u!1 &5600364973711933267
 GameObject:
   m_ObjectHideFlags: 0

@@ -604,6 +604,7 @@ GameObject:
   - component: {fileID: 5735429349159303551}
   - component: {fileID: 6937431575053694240}
   - component: {fileID: 3994577960138524120}
+  - component: {fileID: 7474152527914432995}
   m_Layer: 3
   m_Name: Looter
   m_TagString: Tank
@@ -1191,6 +1192,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser: {fileID: 6560253125626880152}
+--- !u!114 &7474152527914432995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7895307928699674912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ea442557f151a47bdf7f930764045f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rating:
+    m_InternalValue: 0
+  lstRatings: 
 --- !u!1 &8276714050858833255
 GameObject:
   m_ObjectHideFlags: 0

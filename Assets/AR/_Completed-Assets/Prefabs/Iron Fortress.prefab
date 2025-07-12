@@ -10105,6 +10105,7 @@ GameObject:
   - component: {fileID: -7605562719663097875}
   - component: {fileID: 6539112793547434988}
   - component: {fileID: -6595848117030077104}
+  - component: {fileID: 8916880069471308436}
   m_Layer: 3
   m_Name: Iron Fortress
   m_TagString: Tank
@@ -10687,6 +10688,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser: {fileID: 6861059094657827287}
+--- !u!114 &8916880069471308436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407763058290175562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ea442557f151a47bdf7f930764045f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rating:
+    m_InternalValue: 0
+  lstRatings: 
 --- !u!1 &6000130663760585358
 GameObject:
   m_ObjectHideFlags: 0
