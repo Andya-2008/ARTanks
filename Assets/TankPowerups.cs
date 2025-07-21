@@ -92,10 +92,12 @@ public class TankPowerups : NetworkBehaviour
             if (activate)
             {
                 GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankShooting>().canShoot = false;
+                GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankMovement>().canMove = false;
             }
             else
             {
                 GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankShooting>().canShoot = true;
+                GameObject.FindGameObjectWithTag("MyTank").GetComponent<TankMovement>().canMove = true;
             }
         }
     }

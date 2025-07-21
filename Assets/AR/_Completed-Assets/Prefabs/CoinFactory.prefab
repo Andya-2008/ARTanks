@@ -302,13 +302,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc101ecf185619479ad4c7b04cf02cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 60
+  m_StartingHealth: 100
   m_Slider: {fileID: 2556847637037696613}
   m_FillImage: {fileID: 1234543130253749780}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_CurrentHealth: 0
-  timedHealthReduction: 0.02
+  timedHealthReduction: 0
   coinInterval: 0.5
   realWallParent: {fileID: 5759687357834719406}
   timeToDeath: 2
@@ -635,7 +635,7 @@ PrefabInstance:
     - target: {fileID: 82611533773853122, guid: cde89eb16f034ba4ba1d0844e79666e9,
         type: 3}
       propertyPath: m_Volume
-      value: 0.06
+      value: 0.024
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 64799298480908732, guid: cde89eb16f034ba4ba1d0844e79666e9, type: 3}
